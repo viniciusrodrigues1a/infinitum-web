@@ -1,0 +1,202 @@
+header {
+  background-color: var(--dark);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  position: relative;
+}
+
+header #logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header #logoIcon {
+  background-color: var(--primary);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header #logoText {
+  margin-left: 1rem;
+  color: var(--light);
+}
+
+header #hamburgerDropdown {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+header svg {
+  stroke: var(--light);
+}
+
+header #dropdownMenu {
+  position: absolute;
+  background-color: var(--dark);
+  background-color: #424242;
+  bottom: 0;
+  left: 0;
+  transform: translateY(100%);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 0;
+}
+
+.authButton {
+  border: none;
+  border-radius: 4px;
+  width: 10rem;
+  height: 3.125rem;
+  font-size: 1.375rem;
+  font-family: "Comfortaa", sans-serif;
+  font-weight: bold;
+  letter-spacing: 0.05rem;
+  cursor: pointer;
+}
+
+.signInButton {
+  background-color: rgba(198, 161, 234, 0.7);
+  color: var(--light);
+  text-transform: uppercase;
+}
+
+.signUpButton {
+  background-color: var(--primary);
+  color: var(--dark);
+  text-transform: uppercase;
+}
+
+.authButton + .authButton {
+  margin-top: 1rem;
+}
+
+.languageButton {
+  margin-top: 1rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.languageButton svg {
+  stroke: var(--light);
+}
+
+.languageButton strong {
+  margin-left: 0.5rem;
+  font-family: "Comfortaa", sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  display: block;
+  color: var(--light);
+}
+
+main {
+  margin-top: 5rem;
+  margin-left: 1.4rem;
+  margin-right: 1.4rem;
+}
+
+.introductionTitle {
+  font-family: "DM Serif Display", serif;
+}
+
+.introductionTitle h1 {
+  font-size: 3.2rem;
+  color: var(--dark);
+  line-height: 3rem;
+}
+
+.introductionText {
+  margin-top: 38px;
+  font-family: "Comfortaa", sans-serif;
+}
+
+.introductionText span {
+  font-size: 1rem;
+  color: var(--dark);
+}
+
+.introductionButton {
+  margin-top: 3.4375rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signUp {
+  font-family: "Comfortaa", cursive;
+  position: relative;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.signUp:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0.45rem;
+  left: 0.45rem;
+  background-color: transparent;
+  border: 1px solid var(--dark);
+  border-radius: 4px;
+  z-index: -1;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Comfortaa", sans-serif;
+}
+
+.language {
+  display: flex;
+  align-items: center;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+}
+
+#linguage-icon {
+  height: 30px;
+  width: 30px;
+  margin-right: 0.3rem;
+  margin-bottom: 0.2rem;
+}
+
+#contact-icon {
+  height: 30px;
+  width: 30px;
+  margin-right: 0.3rem;
+  margin-top: 0.2rem;
+}
+
+#language-text {
+  color: #eeeeee;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+#contact-text {
+  color: #eeeeee;
+  text-decoration: none;
+  font-size: 1rem;
+}
