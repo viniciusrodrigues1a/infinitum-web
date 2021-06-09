@@ -3,9 +3,12 @@
   padding: 0;
 }
 
+body {
+  background-color: #f5f5f5;
+}
+
 :root {
   --dark: #303030;
   --light: #eeeeee;
-  --primary: #9DE258;
+  --primary: #9de258;
 }
-
