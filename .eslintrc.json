@@ -24,7 +24,8 @@
     "react",
     "react-hooks",
     "@typescript-eslint",
-    "prettier"
+    "prettier",
+    "only-warn"
   ],
   "rules": {
     "prettier/prettier": "error",
