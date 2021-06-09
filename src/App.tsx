@@ -15,6 +15,7 @@ import googleLogoImg from "./assets/google-logo.png";
 
 export default function App(): ReactElement {
   const [dropdownShown, setDropdownShown] = useState(false);
+  const [viewOptionIndex, setViewOptionIndex] = useState(0);
 
   function toggleDropdownMenu() {
     setDropdownShown(!dropdownShown);
@@ -108,18 +109,65 @@ export default function App(): ReactElement {
         </div>
       </main>
 
-      <main>
-        <div>
-          <h1>Visualize work with views</h1>
-          <p>View data as a map, calendar, timeline, kanban, and more</p>
-        </div>
+      <section id={styles.viewsSection}>
+        <h1>
+          Visualize work with <strong>views</strong>
+        </h1>
+        <p>View data as a map, calendar, timeline, kanban, and more</p>
+
         <div className={styles.options}>
-          <FiList size={28} color="var(--dark)" />
-          <FiLayout size={28} color="var(--dark)" />
-          <FiPieChart size={28} color="var(--dark)" />
-          <FiActivity size={28} color="var(--dark)" />
+          <button
+            type="button"
+            onClick={() => setViewOptionIndex(0)}
+            className={`${styles.option} ${
+              viewOptionIndex === 0 ? styles.selectedOption : ""
+            }`}
+          >
+            <FiList
+              size={28}
+              color={viewOptionIndex === 0 ? "var(--dark)" : "#a6a6a6"}
+            />
+          </button>
+          <button
+            type="button"
+            onClick={() => setViewOptionIndex(1)}
+            className={`${styles.option} ${
+              viewOptionIndex === 1 ? styles.selectedOption : ""
+            }`}
+          >
+            <FiLayout
+              size={28}
+              color={viewOptionIndex === 1 ? "var(--dark)" : "#a6a6a6"}
+            />
+          </button>
+          <button
+            type="button"
+            onClick={() => setViewOptionIndex(2)}
+            className={`${styles.option} ${
+              viewOptionIndex === 2 ? styles.selectedOption : ""
+            }`}
+          >
+            <FiPieChart
+              size={28}
+              color={viewOptionIndex === 2 ? "var(--dark)" : "#a6a6a6"}
+            />
+          </button>
+          <button
+            type="button"
+            onClick={() => setViewOptionIndex(3)}
+            className={`${styles.option} ${
+              viewOptionIndex === 3 ? styles.selectedOption : ""
+            }`}
+          >
+            <FiActivity
+              size={28}
+              color={viewOptionIndex === 3 ? "var(--dark)" : "#a6a6a6"}
+            />
+          </button>
         </div>
-      </main>
+
+        <div />
+      </section>
 
       <section id={styles.authSection}>
         <div id={styles.loginOptions}>
