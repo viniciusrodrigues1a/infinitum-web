@@ -10,6 +10,9 @@ import {
 } from "react-icons/fi";
 import styles from "./app.module.css";
 
+import landImg from "./assets/land.png";
+import googleLogoImg from "./assets/google-logo.png";
+
 export default function App(): ReactElement {
   const [dropdownShown, setDropdownShown] = useState(false);
 
@@ -118,27 +121,39 @@ export default function App(): ReactElement {
         </div>
       </main>
 
-      <main>
-        <div>
-          <img src="assets/google-logo.svg" alt="google-logo" />
-          <button type="submit">Sign Up with Google</button>
-          <FiMail size={28} color="var(--light)" />
-          <button type="submit">Sign Up with Email</button>
+      <section id={styles.authSection}>
+        <div id={styles.loginOptions}>
+          <button type="button">
+            <img src={googleLogoImg} alt="Login with google" />
+            <span>Sign Up with Google</span>
+          </button>
+
+          <button type="button">
+            <FiMail size={48} color="var(--light)" />
+            <span>Sign Up with Email</span>
+          </button>
         </div>
-      </main>
+
+        <div>
+          <div className={styles.star} />
+          <div className={styles.star} />
+          <div className={styles.star} />
+          <div className={styles.star} />
+        </div>
+
+        <div id={styles.authSectionSeparator}>
+          <img src={landImg} alt="" />
+        </div>
+      </section>
 
       <footer>
-        <div className={styles.language}>
-          <FiGlobe size={28} color="var(--light)" />
-          <a id="language-text" href="">
-            Language
-          </a>
+        <div className={styles.footerInfo}>
+          <FiMail size={32} color="var(--light)" />
+          <a href="">Contact us</a>
         </div>
-        <div className={styles.contact}>
-          <FiMail size={28} color="var(--light)" />
-          <a id="contact-text" href="">
-            Contact us
-          </a>
+        <div className={styles.footerInfo}>
+          <FiGlobe size={32} color="var(--light)" />
+          <a href="">Language</a>
         </div>
       </footer>
     </>
