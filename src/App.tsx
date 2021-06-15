@@ -83,31 +83,45 @@ export default function App(): ReactElement {
         </div>
       </main>
 
-      <main>
-        <div>
-          <h1>Learn more about our work</h1>
-        </div>
-      </main>
 
-      <main>
+      <section id={styles.pitchSection}>
+        <div id={styles.star} className={styles.star1} />
+        <div id={styles.star} className={styles.star2} />
+        <div id={styles.star} className={styles.star3} />
+        <div id={styles.star} className={styles.star4} />
+
         <div>
-          <img
-            src="https://http2.mlstatic.com/D_NQ_NP_721511-MLB20567637142_012016-O.jpg"
-            width="40px"
-            height="40px"
-          />
-          <h2>Manage everything in one workspace</h2>
-          <p>
-            Planning, tracking, and delivering your team’s best work has never
-            been easier
-          </p>
-          <img
-            src="https://http2.mlstatic.com/D_NQ_NP_721511-MLB20567637142_012016-O.jpg"
-            width="40px"
-            height="40px"
-          />
+          <h1>Learn more about our <span>work</span></h1>
+          <div id={styles.pitch} />
         </div>
-      </main>
+      </section>
+
+      <section id={styles.thirdSection}>
+        <h2 id={styles.titleThirdsection} className={styles.titleThirdSection}>
+          Manage everything in one workspace
+        </h2>
+        <p className={styles.descriptionThirdSection}>
+          Planning, tracking, and delivering your team’s best work has never
+          been easier
+        </p>
+        <img
+          className={styles.imgThirdSection}
+          src="https://http2.mlstatic.com/D_NQ_NP_721511-MLB20567637142_012016-O.jpg"
+          width="300px"
+          height="200px"
+        />
+        <h2 className={styles.titleThirdSection}>Set up in minutes</h2>
+        <p className={styles.descriptionThirdSection}>
+          Get started fast with hundreds of visual and customizable templates -
+          or create your own
+        </p>
+        <img
+          className={styles.imgThirdSection}
+          src="https://http2.mlstatic.com/D_NQ_NP_721511-MLB20567637142_012016-O.jpg"
+          width="300px"
+          height="200px"
+        />
+      </section>
 
       <section id={styles.viewsSection}>
         <h1>
