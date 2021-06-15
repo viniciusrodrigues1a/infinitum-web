@@ -157,6 +157,89 @@ main {
   z-index: -1;
 }
 
+#pitchSection {
+  background: linear-gradient(180deg, #3B2188, #780FDB);
+  margin-top: 5rem;
+  height: 60vh;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#pitchSection > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#pitchSection h1 {
+  font-family: "DM Serif Display", serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 50px;
+
+  text-align: center;
+  letter-spacing: -1.5px;
+  color: rgba(238, 238, 238, 0.6);
+}
+
+#pitchSection h1 > span {
+  color: var(--light);
+}
+
+#pitch {
+  background-color: #272334;
+  background-image: url("./assets/play-circle.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 90%;
+  height: 12rem;
+  margin-top: 3rem;
+}
+
+#star {
+  background-color: var(--light);
+  width: 8px;
+  height: 8px;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+  filter: blur(2px);
+  border-radius: 100px;
+  position: absolute;
+}
+
+.star1 {
+  width: 6px;
+  height: 6px;
+  background-color: rgba(238, 238, 238, 0.8);
+  top: 3rem;
+  left: 66%;
+}
+
+.star2 {
+  width: 4px;
+  height: 4px;
+  background-color: rgba(238, 238, 238, 1);
+  filter: blur(1.45px) !important;
+  top: 1.7rem;
+  left: 15%;
+}
+
+.star3 {
+  background-color: rgba(238, 238, 238, 0.75);
+  bottom: 2rem;
+  right: 40%;
+}
+
+.star4 {
+  background-color: rgba(238, 238, 238, 1);
+  bottom: 1.75rem;
+  left: 1rem;
+}
+
 #viewsSection {
   display: flex;
   flex-direction: column;
@@ -363,4 +446,24 @@ footer {
 
 .footerInfo + .footerInfo {
   margin-top: 1.625rem;
+}
+
+#thirdSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top:12rem;
+}
+
+
+.titleThirdSection,
+.descriptionThirdSection {
+  text-align: center;
+  font-family:"DM Serif Display", serif;
+  margin: 1rem;
+}
+
+.imgThirdSection {
+  margin: auto 0;
 }
