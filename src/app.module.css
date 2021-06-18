@@ -1,10 +1,19 @@
 header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#navigation {
   background-color: var(--dark);
+  padding: 1rem 1.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.25rem;
+  width: 100%;
   position: relative;
+  z-index: 4;
 }
 
 header #logo {
@@ -51,6 +60,19 @@ header #dropdownMenu {
   justify-content: center;
   align-items: center;
   padding: 1.5rem 0;
+  animation-name: dropdown-anim;
+  animation-timing-function: ease;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  z-index: 3;
+}
+
+@keyframes dropdown-anim {
+  from {
+    transform: translateY(-200%);
+  } to {
+    transform: translateY(100%);
+  }
 }
 
 .authButton {
