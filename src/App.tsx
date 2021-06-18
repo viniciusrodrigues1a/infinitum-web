@@ -24,18 +24,20 @@ export default function App(): ReactElement {
   return (
     <>
       <header>
-        <div id={styles.logo}>
-          <div id={styles.logoIcon}>LOGO</div>
-          <span id={styles.logoText}>Bug Tracker</span>
-        </div>
+        <div id={styles.navigation}>
+          <div id={styles.logo}>
+            <div id={styles.logoIcon}>LOGO</div>
+            <span id={styles.logoText}>Bug Tracker</span>
+          </div>
 
-        <button
-          id={styles.hamburgerDropdown}
-          type="button"
-          onClick={toggleDropdownMenu}
-        >
-          <FiMenu size={32} color="var(--light)" />
-        </button>
+          <button
+            id={styles.hamburgerDropdown}
+            type="button"
+            onClick={toggleDropdownMenu}
+          >
+            <FiMenu size={32} color="var(--light)" />
+          </button>
+        </div>
 
         {dropdownShown && (
           <div id={styles.dropdownMenu}>
