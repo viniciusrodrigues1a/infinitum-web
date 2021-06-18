@@ -10,8 +10,11 @@ import {
 } from "react-icons/fi";
 import styles from "./app.module.css";
 
+import Star from "./components/Star";
+
 import landImg from "./assets/land.png";
 import googleLogoImg from "./assets/google-logo.png";
+import estrelaImg from "./assets/estrela.png";
 
 export default function App(): ReactElement {
   const [dropdownShown, setDropdownShown] = useState(false);
@@ -85,44 +88,51 @@ export default function App(): ReactElement {
         </div>
       </main>
 
-
       <section id={styles.pitchSection}>
-        <div id={styles.star} className={styles.star1} />
-        <div id={styles.star} className={styles.star2} />
-        <div id={styles.star} className={styles.star3} />
-        <div id={styles.star} className={styles.star4} />
+        <Star top={0} left={0} />
+        <Star top={0} left={0} />
+        <Star top={0} left={0} />
 
         <div>
-          <h1>Learn more about our <span>work</span></h1>
+          <h1>
+            Learn more about our <span>work</span>
+          </h1>
           <div id={styles.pitch} />
         </div>
       </section>
 
       <section id={styles.thirdSection}>
-        <h2 id={styles.titleThirdsection} className={styles.titleThirdSection}>
-          Manage everything in one workspace
-        </h2>
-        <p className={styles.descriptionThirdSection}>
-          Planning, tracking, and delivering your team’s best work has never
-          been easier
-        </p>
-        <img
-          className={styles.imgThirdSection}
-          src="https://http2.mlstatic.com/D_NQ_NP_721511-MLB20567637142_012016-O.jpg"
-          width="300px"
-          height="200px"
-        />
-        <h2 className={styles.titleThirdSection}>Set up in minutes</h2>
-        <p className={styles.descriptionThirdSection}>
-          Get started fast with hundreds of visual and customizable templates -
-          or create your own
-        </p>
-        <img
-          className={styles.imgThirdSection}
-          src="https://http2.mlstatic.com/D_NQ_NP_721511-MLB20567637142_012016-O.jpg"
-          width="300px"
-          height="200px"
-        />
+        <div className={styles.showcase}>
+          <h2
+            id={styles.titleThirdsection}
+            className={styles.titleThirdSection}
+          >
+            Manage everything in one workspace
+          </h2>
+          <p className={styles.descriptionThirdSection}>
+            Planning, tracking, and delivering your team’s best work has never
+            been easier
+          </p>
+          <img
+            className={styles.imgThirdSection}
+            src="https://http2.mlstatic.com/D_NQ_NP_721511-MLB20567637142_012016-O.jpg"
+            width="300px"
+            height="200px"
+          />
+        </div>
+        <div className={styles.showcase}>
+          <h2 className={styles.titleThirdSection}>Set up in minutes</h2>
+          <p className={styles.descriptionThirdSection}>
+            Get started fast with hundreds of visual and customizable templates
+            - or create your own
+          </p>
+          <img
+            className={styles.imgThirdSection}
+            src="https://http2.mlstatic.com/D_NQ_NP_721511-MLB20567637142_012016-O.jpg"
+            width="300px"
+            height="200px"
+          />
+        </div>
       </section>
 
       <section id={styles.viewsSection}>
@@ -199,10 +209,9 @@ export default function App(): ReactElement {
         </div>
 
         <div>
-          <div className={styles.star} />
-          <div className={styles.star} />
-          <div className={styles.star} />
-          <div className={styles.star} />
+          <Star top={0} left={0} />
+          <Star top={0} left={0} />
+          <Star top={0} left={0} />
         </div>
 
         <div id={styles.authSectionSeparator}>
