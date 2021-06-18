@@ -1,3 +1,9 @@
+  /*
+  Titulo: font-family: 'Open Sans', sans-serif; (Open Sans) 
+  Texto: font-family: 'B612', sans-serif; (B612); 
+  */
+
+
 header {
   display: flex;
   justify-content: center;
@@ -81,7 +87,7 @@ header #dropdownMenu {
   width: 10rem;
   height: 3.125rem;
   font-size: 1.375rem;
-  font-family: "Comfortaa", sans-serif;
+  font-family: var(--text);
   font-weight: bold;
   letter-spacing: 0.05rem;
   cursor: pointer;
@@ -119,7 +125,7 @@ header #dropdownMenu {
 
 .languageButton strong {
   margin-left: 0.5rem;
-  font-family: "Comfortaa", sans-serif;
+  font-family: var(--text);
   font-weight: 500;
   font-size: 22px;
   letter-spacing: 0.5px;
@@ -134,7 +140,7 @@ main {
 }
 
 .introductionTitle {
-  font-family: "DM Serif Display", serif;
+  font-family: var(--title);
 }
 
 .introductionTitle h1 {
@@ -145,7 +151,7 @@ main {
 
 .introductionText {
   margin-top: 38px;
-  font-family: "Comfortaa", sans-serif;
+  font-family: var(--text);
 }
 
 .introductionText span {
@@ -161,7 +167,7 @@ main {
 }
 
 .signUp {
-  font-family: "Comfortaa", cursive;
+  font-family: var(--text);
   position: relative;
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
 }
@@ -198,7 +204,7 @@ main {
 }
 
 #pitchSection h1 {
-  font-family: "DM Serif Display", serif;
+  font-family: var(--title);
   font-style: normal;
   font-weight: normal;
   font-size: 50px;
@@ -271,7 +277,7 @@ main {
 }
 
 #viewsSection > h1 {
-  font-family: "DM Serif Display", serif;
+  font-family: var(--title);
   font-weight: bold;
   font-size: 3.375rem;
   line-height: 3.5rem;
@@ -289,7 +295,7 @@ main {
 }
 
 #viewsSection > p {
-  font-family: "Comfortaa", sans-serif;
+  font-family: var(--text);
   font-weight: normal;
   font-size: 1.125rem;
   line-height: 1.375rem;
@@ -448,7 +454,7 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: "Comfortaa", sans-serif;
+  font-family: var(--text);
 }
 
 .footerInfo {
@@ -460,7 +466,7 @@ footer {
   color: var(--light);
   text-decoration: none;
   text-transform: uppercase;
-  font-family: "Comfortaa", sans-serif;
+  font-family: var(--text);
   font-size: 1rem;
   letter-spacing: 1.25px;
   margin-left: 1rem;
@@ -482,7 +488,7 @@ footer {
 .titleThirdSection,
 .descriptionThirdSection {
   text-align: center;
-  font-family:"DM Serif Display", serif;
+  font-family: var(--title);
   margin: 1rem;
 }
 
