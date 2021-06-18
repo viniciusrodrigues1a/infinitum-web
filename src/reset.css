@@ -11,4 +11,6 @@ body {
   --dark: #303030;
   --light: #eeeeee;
   --primary: #9de258;
+  --title: 'Open Sans', sans-serif;
+  --text: 'B612', sans-serif;
 }
