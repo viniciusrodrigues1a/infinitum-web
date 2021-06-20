@@ -3,6 +3,10 @@
   Texto: font-family: 'B612', sans-serif; (B612); 
   */
 
+.sectionMargin {
+  margin-top: 6rem;
+  padding: 0 1rem;
+}
 
 header {
   display: flex;
@@ -134,9 +138,8 @@ header #dropdownMenu {
 }
 
 main {
-  margin-top: 5rem;
-  margin-left: 1.4rem;
-  margin-right: 1.4rem;
+  margin-top: 3rem;
+  padding: 0 1.4rem;
 }
 
 .introductionTitle {
@@ -156,7 +159,7 @@ main {
 
 .introductionText span {
   font-size: 1rem;
-  color: var(--dark);
+  color: #565656;
 }
 
 .introductionButton {
@@ -187,7 +190,6 @@ main {
 
 #pitchSection {
   background: linear-gradient(180deg, #3B2188, #780FDB);
-  margin-top: 5rem;
   padding: 6rem 1rem;
   display: flex;
   justify-content: center;
@@ -233,7 +235,6 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 8rem 0;
 }
 
 #viewsSection > h1 {
@@ -398,15 +399,25 @@ footer {
 }
 
 #thirdSection {
-  margin-top:12rem;
 }
 
 
 .titleThirdSection,
 .descriptionThirdSection {
   text-align: center;
+  color: var(--dark);
+}
+
+.titleThirdSection {
+  font-size: 2.625rem;
+  line-height: 2.8rem;
   font-family: var(--title);
-  margin: 1rem;
+}
+
+.descriptionThirdSection {
+  font-family: var(--text);
+  margin-top: 1.25rem;
+  margin-bottom: 3rem;
 }
 
 .imgThirdSection {
