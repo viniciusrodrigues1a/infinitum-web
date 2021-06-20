@@ -89,9 +89,9 @@ export default function App(): ReactElement {
       </main>
 
       <section id={styles.pitchSection}>
-        <Star top={0} left={0} />
-        <Star top={0} left={0} />
-        <Star top={0} left={0} />
+        <Star top="2rem" left="36%" />
+        <Star top="50%" left="1rem" />
+        <Star top="3rem" left="94%" />
 
         <div>
           <h1>
