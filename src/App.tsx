@@ -66,29 +66,27 @@ export default function App(): ReactElement {
       </header>
 
       <main>
-        <div className={styles.introductionContainer}>
-          <div className={styles.introductionTitle}>
-            <h1>Work on big ideas, without the busywork.</h1>
-          </div>
-          <div className={styles.introductionText}>
-            <span>
-              Collaborate, manage projects, and reach new productivity peaks.
-              From high rises to the home office, the way your team works is
-              unique accomplish it all with Trello.
-            </span>
-          </div>
-          <div className={styles.introductionButton}>
-            <button
-              className={`${styles.signUp} ${styles.authButton} ${styles.signUpButton}`}
-              type="button"
-            >
-              SIGN UP
-            </button>
-          </div>
+        <div className={styles.introductionTitle}>
+          <h1>Work on big ideas, without the busywork.</h1>
+        </div>
+        <div className={styles.introductionText}>
+          <span>
+            Collaborate, manage projects, and reach new productivity peaks. From
+            high rises to the home office, the way your team works is unique
+            accomplish it all with Trello.
+          </span>
+        </div>
+        <div className={styles.introductionButton}>
+          <button
+            className={`${styles.signUp} ${styles.authButton} ${styles.signUpButton}`}
+            type="button"
+          >
+            SIGN UP
+          </button>
         </div>
       </main>
 
-      <section id={styles.pitchSection}>
+      <section id={styles.pitchSection} className={styles.sectionMargin}>
         <Star top="2rem" left="36%" />
         <Star top="50%" left="1rem" />
         <Star top="3rem" left="94%" />
@@ -101,7 +99,7 @@ export default function App(): ReactElement {
         </div>
       </section>
 
-      <section id={styles.thirdSection}>
+      <section id={styles.thirdSection} className={styles.sectionMargin}>
         <div className={styles.showcase}>
           <h2
             id={styles.titleThirdsection}
@@ -135,7 +133,7 @@ export default function App(): ReactElement {
         </div>
       </section>
 
-      <section id={styles.viewsSection}>
+      <section id={styles.viewsSection} className={styles.sectionMargin}>
         <h1>
           Visualize work with <strong>views</strong>
         </h1>
@@ -195,7 +193,7 @@ export default function App(): ReactElement {
         <div />
       </section>
 
-      <section id={styles.authSection}>
+      <section id={styles.authSection} className={styles.sectionMargin}>
         <div id={styles.loginOptions}>
           <button type="button">
             <img src={googleLogoImg} alt="Login with google" />
