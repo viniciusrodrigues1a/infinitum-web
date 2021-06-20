@@ -188,8 +188,7 @@ main {
 #pitchSection {
   background: linear-gradient(180deg, #3B2188, #780FDB);
   margin-top: 5rem;
-  height: 60vh;
-  padding: 0 1rem;
+  padding: 6rem 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
