@@ -14,3 +14,7 @@ body {
   --title: 'Open Sans', sans-serif;
   --text: 'B612', sans-serif;
 }
+
+.noHorizontalScroll {
+  overflow-y: hidden;
+}
