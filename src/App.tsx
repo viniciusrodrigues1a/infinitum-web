@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import {
   FiMenu,
   FiGlobe,
@@ -20,6 +20,14 @@ export default function App(): ReactElement {
   const [dropdownShown, setDropdownShown] = useState(false);
   const [viewOptionIndex, setViewOptionIndex] = useState(0);
 
+  useEffect(() => {
+    if (dropdownShown) {
+      document.querySelector("body")!.classList.add("noHorizontalScroll");
+    } else {
+      document.querySelector("body")!.classList.remove("noHorizontalScroll");
+    }
+  }, [dropdownShown]);
+
   function toggleDropdownMenu() {
     setDropdownShown(!dropdownShown);
   }
@@ -33,35 +41,49 @@ export default function App(): ReactElement {
             <span id={styles.logoText}>Bug Tracker</span>
           </div>
 
-          <button
-            id={styles.hamburgerDropdown}
-            type="button"
-            onClick={toggleDropdownMenu}
-          >
-            <FiMenu size={32} color="var(--light)" />
-          </button>
+          <div id={styles.hamburgerDropdownWrapper}>
+            <button
+              id={styles.hamburgerDropdown}
+              type="button"
+              onClick={toggleDropdownMenu}
+            >
+              <FiMenu
+                size={32}
+                color="var(--light)"
+                className={
+                  dropdownShown
+                    ? styles.hamburgerAnimatedSvg
+                    : styles.reverseAnimSvg
+                }
+              />
+            </button>
+          </div>
         </div>
 
         {dropdownShown && (
-          <div id={styles.dropdownMenu}>
-            <button
-              type="button"
-              className={`${styles.authButton} ${styles.signInButton}`}
-            >
-              Sign In
-            </button>
-            <button
-              type="button"
-              className={`${styles.authButton} ${styles.signUpButton}`}
-            >
-              Sign Up
-            </button>
-            <button type="button" className={styles.languageButton}>
-              <FiGlobe size={28} color="var(--light)" />
+          <>
+            <div id={styles.dropdownMenuOutside}>
+              <div id={styles.dropdownMenu}>
+                <button
+                  type="button"
+                  className={`${styles.authButton} ${styles.signInButton}`}
+                >
+                  Sign In
+                </button>
+                <button
+                  type="button"
+                  className={`${styles.authButton} ${styles.signUpButton}`}
+                >
+                  Sign Up
+                </button>
+                <button type="button" className={styles.languageButton}>
+                  <FiGlobe size={28} color="var(--light)" />
 
-              <strong>Idioma</strong>
-            </button>
-          </div>
+                  <strong>Idioma</strong>
+                </button>
+              </div>
+            </div>
+          </>
         )}
       </header>
 
