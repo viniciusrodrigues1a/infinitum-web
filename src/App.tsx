@@ -277,11 +277,15 @@ export default function App(): ReactElement {
       <footer>
         <div className={styles.footerInfo}>
           <FiMail size={32} color="var(--light)" />
-          <a href="">Contact us</a>
+          <a href="">
+            <strong>Contact us</strong>
+          </a>
         </div>
         <div className={styles.footerInfo}>
-          <FiGlobe size={32} color="var(--light)" />
-          <a href="">Language</a>
+          <button type="button" className={styles.languageButton}>
+            <FiGlobe size={32} color="var(--light)" />
+            <strong> Idioma </strong>
+          </button>
         </div>
       </footer>
     </>
