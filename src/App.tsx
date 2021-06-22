@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useState, useRef } from "react";
 import {
   FiMenu,
   FiGlobe,
@@ -20,11 +20,35 @@ export default function App(): ReactElement {
   const [dropdownShown, setDropdownShown] = useState(false);
   const [viewOptionIndex, setViewOptionIndex] = useState(0);
 
+  const dropdownOutside = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
+    function onClick(event: MouseEvent) {
+      if (dropdownOutside.current === event.target) {
+        setDropdownShown(false);
+      }
+    }
+
+    const body = document.querySelector("body");
+
+    if (!body) {
+      return;
+    }
+
+    body.addEventListener("click", onClick);
+
+    return () => body.removeEventListener("click", onClick);
+  }, []);
+
+  useEffect(() => {
+    const body = document.querySelector("body");
+
+    if (!body) return;
+
     if (dropdownShown) {
-      document.querySelector("body")!.classList.add("noHorizontalScroll");
+      body.classList.add("noVerticalScroll");
     } else {
-      document.querySelector("body")!.classList.remove("noHorizontalScroll");
+      body.classList.remove("noVerticalScroll");
     }
   }, [dropdownShown]);
 
@@ -44,6 +68,7 @@ export default function App(): ReactElement {
           <div id={styles.hamburgerDropdownWrapper}>
             <button
               id={styles.hamburgerDropdown}
+              className={dropdownShown ? styles.fixed : ""}
               type="button"
               onClick={toggleDropdownMenu}
             >
@@ -62,7 +87,7 @@ export default function App(): ReactElement {
 
         {dropdownShown && (
           <>
-            <div id={styles.dropdownMenuOutside}>
+            <div id={styles.dropdownMenuOutside} ref={dropdownOutside}>
               <div id={styles.dropdownMenu}>
                 <button
                   type="button"
