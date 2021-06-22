@@ -1,4 +1,4 @@
-  /*
+/*
   Titulo: font-family: 'Open Sans', sans-serif; (Open Sans) 
   Texto: font-family: 'B612', sans-serif; (B612); 
   */
@@ -58,92 +58,43 @@ header #hamburgerDropdown {
   cursor: pointer;
   position: absolute;
   z-index: 10;
+  outline: 0;
 }
 
 .fixed {
   position: fixed !important;
 }
 
-#hamburgerDropdown svg {
-  transition: 0.2s;
+#hamburgerDropdown svg line {
+  transition: all 0.25s;
+}
+
+#hamburgerDropdown svg line:nth-child(1) {
+  transition: all 0.05s;
 }
 
 .reverseAnimSvg > line:nth-child(1) {
-  opacity: 0;
-  animation: reverse-anim-1 0.1s ease-in-out forwards;
+  opacity: 1;
 }
 
 .reverseAnimSvg > line:nth-child(2) {
-  transform: rotate(48deg) translateX(4px) translateY(-6px);
-  animation: reverse-anim-2 0.1s ease-in-out forwards;
+  transform: rotate(0) translateX(0) translateY(0);
 }
 
 .reverseAnimSvg > line:nth-child(3) {
-  transform: rotate(-48deg) translateX(-14px) translateY(-2px);
-  animation: reverse-anim-3 0.1s ease-in-out forwards;
+  transform: rotate(0) translateX(0) translateY(0);
 }
 
 .hamburgerAnimatedSvg > line:nth-child(1) {
-  opacity: 1;
-  animation: hamburger-anim-1 0.1s ease-in-out forwards;
+  opacity: 0;
 }
 
 .hamburgerAnimatedSvg > line:nth-child(2) {
-  transform: rotate(0) translateX(0) translateY(0);
-  animation: hamburger-anim-2 0.1s ease-in-out forwards;
+  transform: rotate(48deg) translateX(4px) translateY(-6px);
 }
 
 .hamburgerAnimatedSvg > line:nth-child(3) {
-  transform: rotate(0) translateX(0) translateY(0);
-  animation: hamburger-anim-3 0.1s ease-in-out forwards;
-}
-
-@keyframes hamburger-anim-1 {
-  from {
-    opacity: 1;
-  } to {
-    opacity: 0;
-  }
-}
-
-@keyframes hamburger-anim-2 {
-  from {
-    transform: rotate(0) translateX(0) translateY(0);
-  } to {
-    transform: rotate(48deg) translateX(4px) translateY(-6px);
-  }
-}
-
-@keyframes hamburger-anim-3 {
-  from {
-    transform: rotate(0) translateX(0) translateY(0);
-  } to {
-    transform: rotate(-48deg) translateX(-14px) translateY(-2px);
-  }
-}
-
-@keyframes reverse-anim-1 {
-  from {
-    opacity: 0;
-  } to {
-    opacity: 1;
-  }
-}
-
-@keyframes reverse-anim-2 {
-  from {
-    transform: rotate(48deg) translateX(4px) translateY(-6px);
-  } to {
-    transform: rotate(0) translateX(0) translateY(0);
-  }
-}
-
-@keyframes reverse-anim-3 {
-  from {
-    transform: rotate(-48deg) translateX(-14px) translateY(-2px);
-  } to {
-    transform: rotate(0) translateX(0) translateY(0);
-  }
+  transform: rotate(-48deg) translateX(-14px) translateY(-2px);
 }
 
 header #dropdownMenu {
@@ -164,7 +115,8 @@ header #dropdownMenu {
 @keyframes dropdown-anim {
   from {
     transform: translateX(100%);
-  } to {
+  }
+  to {
     transform: translateX(0);
   }
 }
@@ -285,7 +237,7 @@ main {
 }
 
 #pitchSection {
-  background: linear-gradient(180deg, #3B2188, #780FDB);
+  background: linear-gradient(180deg, #3b2188, #780fdb);
   padding: 6rem 1rem;
   display: flex;
   justify-content: center;
@@ -529,15 +481,16 @@ footer {
   margin-top: 2rem;
 }
 
-
 @keyframes star {
   0% {
     opacity: 0.2;
     transform: scale(1.1);
-  } 50% {
+  }
+  50% {
     opacity: 0.7;
-    transform: scale(0.9 );
-  } 100% {
+    transform: scale(0.9);
+  }
+  100% {
     opacity: 0.2;
   }
 }
