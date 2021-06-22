@@ -134,9 +134,13 @@ export default function App(): ReactElement {
       </main>
 
       <section id={styles.pitchSection} className={styles.sectionMargin}>
-        <Star top="2rem" left="36%" />
-        <Star top="50%" left="1rem" />
-        <Star top="3rem" left="94%" />
+        <Star top="1rem" left="36%" delay={0.1} />
+        <Star top="90%" left="10rem" delay={0.4} />
+        <Star top="3rem" left="85%" delay={0.9} />
+        <Star top="4rem" left="33%" delay={0.56} />
+        <Star top="85%" left="80%" delay={0.45} />
+        <Star top="86%" left="10%" />
+        <Star top="14rem" left="33%" delay={0.33} />
 
         <div>
           <h1>
@@ -254,9 +258,15 @@ export default function App(): ReactElement {
         </div>
 
         <div>
-          <Star top={0} left={0} />
-          <Star top={0} left={0} />
-          <Star top={0} left={0} />
+          <Star top="90%" left="20%" delay={0.1} />
+          <Star top="51%" left="20%" delay={0.2} />
+          <Star top="51%" left="60%" delay={0.8} />
+          <Star top="20%" left="20%" delay={0.1} />
+          <Star top="15%" left="90%" delay={0.7} />
+          <Star top="15%" left="50%" delay={0.9} />
+          <Star top="1rem" left="20%" delay={0.4} />
+          <Star top="1rem" left="10%" delay={0.5} />
+          <Star top="80%" left="50%" delay={0.3} />
         </div>
 
         <div id={styles.authSectionSeparator}>
