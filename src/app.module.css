@@ -3,11 +3,7 @@
   Texto: font-family: 'B612', sans-serif; (B612); 
   */
 
-.sectionMargin {
-  margin-top: 6rem;
-  padding: 0 1rem;
-}
-
+/* Header Styles */
 header {
   display: flex;
   justify-content: center;
@@ -15,7 +11,7 @@ header {
   position: relative;
 }
 
-#navigation {
+header #navigation {
   background-color: var(--dark);
   padding: 1rem 1.25rem;
   display: flex;
@@ -45,14 +41,14 @@ header #logoText {
   color: var(--light);
 }
 
-#hamburgerDropdownWrapper {
+header #hamburgerButtonWrapper {
   width: 2rem;
   height: 2rem;
   position: relative;
   z-index: 999;
 }
 
-header #hamburgerDropdown {
+header #hamburgerButton {
   border: none;
   background: none;
   cursor: pointer;
@@ -61,67 +57,36 @@ header #hamburgerDropdown {
   outline: 0;
 }
 
-.fixed {
-  position: fixed !important;
-}
-
-#hamburgerDropdown svg line {
+#hamburgerButton svg line {
   transition: all 0.25s;
 }
 
-#hamburgerDropdown svg line:nth-child(1) {
+#hamburgerButton svg line:nth-child(1) {
   transition: all 0.05s;
 }
 
-.reverseAnimSvg > line:nth-child(1) {
+header .fixed {
+  position: fixed !important;
+}
+
+header .hamburgerNormal > line {
   opacity: 1;
-}
-
-.reverseAnimSvg > line:nth-child(2) {
   transform: rotate(0) translateX(0) translateY(0);
 }
 
-.reverseAnimSvg > line:nth-child(3) {
-  transform: rotate(0) translateX(0) translateY(0);
-}
-
-.hamburgerAnimatedSvg > line:nth-child(1) {
+.hamburgerClose > line:nth-child(1) {
   opacity: 0;
 }
 
-.hamburgerAnimatedSvg > line:nth-child(2) {
+.hamburgerClose > line:nth-child(2) {
   transform: rotate(48deg) translateX(4px) translateY(-6px);
 }
 
-.hamburgerAnimatedSvg > line:nth-child(3) {
+.hamburgerClose > line:nth-child(3) {
   transform: rotate(-48deg) translateX(-14px) translateY(-2px);
 }
 
-header #dropdownMenu {
-  width: 70%;
-  background-color: #424242;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding-top: 8.5rem;
-  animation-name: dropdown-anim;
-  animation-timing-function: ease-in;
-  animation-duration: 0.15s;
-  animation-fill-mode: forwards;
-  z-index: 5;
-}
-
-@keyframes dropdown-anim {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-#dropdownMenuOutside {
+header #drawerMenuOutside {
   position: fixed;
   top: 0;
   left: 0;
@@ -133,97 +98,69 @@ header #dropdownMenu {
   justify-content: flex-end;
 }
 
-.authButton {
-  border: none;
-  border-radius: 4px;
-  width: 10rem;
-  height: 3.125rem;
-  font-size: 1.375rem;
-  font-family: var(--text);
-  font-weight: bold;
-  letter-spacing: 0.05rem;
-  cursor: pointer;
-}
-
-.signInButton {
-  background-color: rgba(198, 161, 234, 0.7);
-  color: var(--light);
-  text-transform: uppercase;
-}
-
-.signUpButton {
-  background-color: var(--primary);
-  color: var(--dark);
-  text-transform: uppercase;
-}
-
-.authButton + .authButton {
-  margin-top: 1rem;
-}
-
-.languageButton {
-  margin-top: 1rem;
-  border: none;
-  background: none;
-  cursor: pointer;
+header #drawerMenu {
+  width: 70%;
+  background-color: #424242;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
+  padding-top: 8.5rem;
+  animation-name: drawerMenuEntering;
+  animation-timing-function: ease-in;
+  animation-duration: 0.15s;
+  animation-fill-mode: forwards;
+  z-index: 5;
 }
 
-.languageButton svg {
-  stroke: var(--light);
+@keyframes drawerMenuEntering {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
-.languageButton strong {
-  margin-left: 0.5rem;
-  font-family: var(--text);
-  font-weight: 500;
-  font-size: 22px;
-  letter-spacing: 0.5px;
-  display: block;
-  color: var(--light);
+.drawerItem + .drawerItem {
+  margin-top: 1rem;
 }
 
+/* Main Section Styles */
 main {
   margin-top: 3rem;
   padding: 0 1.4rem;
 }
 
-.introductionTitle {
+#introductionTitle {
   font-family: var(--title);
-}
-
-.introductionTitle h1 {
   font-size: 3.2rem;
   color: var(--dark);
   line-height: 3rem;
 }
 
-.introductionText {
-  margin-top: 38px;
+#introductionDescription {
+  display: block;
+  margin-top: 2.375rem;
   font-family: var(--text);
-}
-
-.introductionText span {
   font-size: 1rem;
   color: #565656;
 }
 
-.introductionButton {
+#introductionButtonContainer {
   margin-top: 3.4375rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.signUp {
+#introductionButton {
   font-family: var(--text);
   position: relative;
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
 }
 
-.signUp:after {
+#introductionButton:after {
   content: "";
   width: 100%;
   height: 100%;
@@ -236,6 +173,7 @@ main {
   z-index: -1;
 }
 
+/* Pitch Section Styles */
 #pitchSection {
   background: linear-gradient(180deg, #3b2188, #780fdb);
   padding: 6rem 1rem;
@@ -252,7 +190,7 @@ main {
   flex-direction: column;
 }
 
-#pitchSection h1 {
+#pitchSection > div > h1 {
   font-family: var(--title);
   font-style: normal;
   font-weight: normal;
@@ -260,7 +198,6 @@ main {
   line-height: 50px;
   position: relative;
   z-index: 1;
-
   text-align: center;
   letter-spacing: -1.5px;
   color: rgba(238, 238, 238, 0.6);
@@ -280,6 +217,41 @@ main {
   margin-top: 3rem;
 }
 
+/* Showcase Section Styles */
+.showcase {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.showcase + .showcase {
+  margin-top: 2rem;
+}
+
+.showcaseTitle,
+.showcaseDescription {
+  text-align: center;
+  color: var(--dark);
+}
+
+.showcaseTitle {
+  font-size: 2.625rem;
+  line-height: 2.8rem;
+  font-family: var(--title);
+}
+
+.showcaseDescription {
+  font-family: var(--text);
+  margin-top: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.showcaseImg {
+  margin: auto 0;
+}
+
+/* Views Section Styles */
 #viewsSection {
   display: flex;
   flex-direction: column;
@@ -313,7 +285,6 @@ main {
   text-align: center;
   letter-spacing: 0.5px;
   margin-top: 3rem;
-
   color: var(--dark);
 }
 
@@ -324,13 +295,17 @@ main {
   align-items: center;
 }
 
-#viewsSection .option {
+.option {
   border: 2px solid #a6a6a6;
   border-radius: 4px;
   background: none;
   padding: 0.5rem 0.75rem;
   cursor: pointer;
   transition: 0.1s all;
+}
+
+.option + .option {
+  margin-left: 1.125rem;
 }
 
 #viewsSection .selectedOption {
@@ -340,10 +315,6 @@ main {
   transform: scale(1.15);
 }
 
-.option + .option {
-  margin-left: 1.125rem;
-}
-
 #viewsSection > div:last-child {
   width: 90%;
   height: 280px;
@@ -351,6 +322,7 @@ main {
   margin-top: 1.25rem;
 }
 
+/* Auth Section Styles */
 #authSection {
   background-image: url("./assets/mobile-rectangle-stars.png");
   background-position: center;
@@ -418,6 +390,7 @@ main {
   min-height: 4.125rem;
 }
 
+/* Footer Styles */
 footer {
   background: #301446;
   background: linear-gradient(180deg, #6a4487, #301446);
@@ -448,49 +421,62 @@ footer {
   margin-top: 1.625rem;
 }
 
-.titleThirdSection,
-.descriptionThirdSection {
-  text-align: center;
-  color: var(--dark);
-}
-
-.titleThirdSection {
-  font-size: 2.625rem;
-  line-height: 2.8rem;
-  font-family: var(--title);
-}
-
-.descriptionThirdSection {
+/* Classes */
+.signInButton {
+  background-color: rgba(198, 161, 234, 0.7);
+  color: var(--light);
+  text-transform: uppercase;
+  border: none;
+  border-radius: 4px;
+  width: 10rem;
+  height: 3.125rem;
+  font-size: 1.375rem;
   font-family: var(--text);
-  margin-top: 1.25rem;
-  margin-bottom: 3rem;
+  font-weight: bold;
+  letter-spacing: 0.05rem;
+  cursor: pointer;
 }
 
-.imgThirdSection {
-  margin: auto 0;
+.signUpButton {
+  background-color: var(--primary);
+  color: var(--dark);
+  text-transform: uppercase;
+  border: none;
+  border-radius: 4px;
+  width: 10rem;
+  height: 3.125rem;
+  font-size: 1.375rem;
+  font-family: var(--text);
+  font-weight: bold;
+  letter-spacing: 0.05rem;
+  cursor: pointer;
 }
 
-.showcase {
+.languageButton {
+  margin-top: 1rem;
+  border: none;
+  background: none;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 }
 
-.showcase + .showcase {
-  margin-top: 2rem;
+.languageButton svg {
+  stroke: var(--light);
 }
 
-@keyframes star {
-  0% {
-    opacity: 0.2;
-    transform: scale(1.1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(0.9);
-  }
-  100% {
-    opacity: 0.2;
-  }
+.languageButton strong {
+  margin-left: 0.5rem;
+  font-family: var(--text);
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  display: block;
+  color: var(--light);
+}
+
+.sectionMargin {
+  margin-top: 6rem;
+  padding: 0 1rem;
 }

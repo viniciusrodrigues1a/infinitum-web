@@ -16,15 +16,15 @@ import landImg from "./assets/land.png";
 import googleLogoImg from "./assets/google-logo.png";
 
 export default function App(): ReactElement {
-  const [dropdownShown, setDropdownShown] = useState(false);
+  const [drawerMenuShown, setDrawerMenuShown] = useState(false);
   const [viewOptionIndex, setViewOptionIndex] = useState(0);
 
-  const dropdownOutside = useRef<HTMLDivElement>(null);
+  const drawerMenuOutsideRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function onClick(event: MouseEvent) {
-      if (dropdownOutside.current === event.target) {
-        setDropdownShown(false);
+      if (drawerMenuOutsideRef.current === event.target) {
+        setDrawerMenuShown(false);
       }
     }
 
@@ -40,7 +40,7 @@ export default function App(): ReactElement {
   }, []);
 
   function toggleDropdownMenu() {
-    setDropdownShown(!dropdownShown);
+    setDrawerMenuShown(!drawerMenuShown);
   }
 
   return (
@@ -52,10 +52,10 @@ export default function App(): ReactElement {
             <span id={styles.logoText}>Bug Tracker</span>
           </div>
 
-          <div id={styles.hamburgerDropdownWrapper}>
+          <div id={styles.hamburgerButtonWrapper}>
             <button
-              id={styles.hamburgerDropdown}
-              className={dropdownShown ? styles.fixed : ""}
+              id={styles.hamburgerButton}
+              className={drawerMenuShown ? styles.fixed : ""}
               type="button"
               onClick={toggleDropdownMenu}
             >
@@ -63,36 +63,36 @@ export default function App(): ReactElement {
                 size={32}
                 color="var(--light)"
                 className={
-                  dropdownShown
-                    ? styles.hamburgerAnimatedSvg
-                    : styles.reverseAnimSvg
+                  drawerMenuShown
+                    ? styles.hamburgerClose
+                    : styles.hamburgerNormal
                 }
               />
             </button>
           </div>
         </div>
 
-        {dropdownShown && (
+        {drawerMenuShown && (
           <>
-            <div id={styles.dropdownMenuOutside} ref={dropdownOutside}>
-              <div id={styles.dropdownMenu}>
-                <button
-                  type="button"
-                  className={`${styles.authButton} ${styles.signInButton}`}
-                >
-                  Sign In
-                </button>
-                <button
-                  type="button"
-                  className={`${styles.authButton} ${styles.signUpButton}`}
-                >
-                  Sign Up
-                </button>
-                <button type="button" className={styles.languageButton}>
-                  <FiGlobe size={28} color="var(--light)" />
+            <div id={styles.drawerMenuOutside} ref={drawerMenuOutsideRef}>
+              <div id={styles.drawerMenu}>
+                <div className={styles.drawerItem}>
+                  <button type="button" className={styles.signInButton}>
+                    Sign In
+                  </button>
+                </div>
+                <div className={styles.drawerItem}>
+                  <button type="button" className={styles.signUpButton}>
+                    Sign Up
+                  </button>
+                </div>
+                <div className={styles.drawerItem}>
+                  <button type="button" className={styles.languageButton}>
+                    <FiGlobe size={28} color="var(--light)" />
 
-                  <strong>Idioma</strong>
-                </button>
+                    <strong>Idioma</strong>
+                  </button>
+                </div>
               </div>
             </div>
           </>
@@ -100,19 +100,18 @@ export default function App(): ReactElement {
       </header>
 
       <main>
-        <div className={styles.introductionTitle}>
-          <h1>Work on big ideas, without the busywork.</h1>
-        </div>
-        <div className={styles.introductionText}>
-          <span>
-            Collaborate, manage projects, and reach new productivity peaks. From
-            high rises to the home office, the way your team works is unique
-            accomplish it all with Trello.
-          </span>
-        </div>
-        <div className={styles.introductionButton}>
+        <h1 id={styles.introductionTitle}>
+          Work on big ideas, without the busywork.
+        </h1>
+        <span id={styles.introductionDescription}>
+          Collaborate, manage projects, and reach new productivity peaks. From
+          high rises to the home office, the way your team works is unique
+          accomplish it all with Trello.
+        </span>
+        <div id={styles.introductionButtonContainer}>
           <button
-            className={`${styles.signUp} ${styles.authButton} ${styles.signUpButton}`}
+            id={styles.introductionButton}
+            className={styles.signUpButton}
             type="button"
           >
             SIGN UP
@@ -137,33 +136,30 @@ export default function App(): ReactElement {
         </div>
       </section>
 
-      <section id={styles.thirdSection} className={styles.sectionMargin}>
+      <section className={styles.sectionMargin}>
         <div className={styles.showcase}>
-          <h2
-            id={styles.titleThirdsection}
-            className={styles.titleThirdSection}
-          >
+          <h2 className={styles.showcaseTitle}>
             Manage everything in one workspace
           </h2>
-          <p className={styles.descriptionThirdSection}>
+          <p className={styles.showcaseDescription}>
             Planning, tracking, and delivering your team’s best work has never
             been easier
           </p>
           <img
-            className={styles.imgThirdSection}
+            className={styles.showcaseImg}
             src="https://http2.mlstatic.com/D_NQ_NP_721511-MLB20567637142_012016-O.jpg"
             width="300px"
             height="200px"
           />
         </div>
         <div className={styles.showcase}>
-          <h2 className={styles.titleThirdSection}>Set up in minutes</h2>
-          <p className={styles.descriptionThirdSection}>
+          <h2 className={styles.showcaseTitle}>Set up in minutes</h2>
+          <p className={styles.showcaseDescription}>
             Get started fast with hundreds of visual and customizable templates
             - or create your own
           </p>
           <img
-            className={styles.imgThirdSection}
+            className={styles.showcaseImg}
             src="https://http2.mlstatic.com/D_NQ_NP_721511-MLB20567637142_012016-O.jpg"
             width="300px"
             height="200px"
@@ -244,21 +240,19 @@ export default function App(): ReactElement {
           </button>
         </div>
 
-        <div>
-          <Star top="90%" left="20%" delay={0.1} />
-          <Star top="51%" left="20%" delay={0.2} />
-          <Star top="51%" left="60%" delay={0.8} />
-          <Star top="20%" left="20%" delay={0.1} />
-          <Star top="15%" left="90%" delay={0.7} />
-          <Star top="15%" left="50%" delay={0.9} />
-          <Star top="1rem" left="20%" delay={0.4} />
-          <Star top="1rem" left="10%" delay={0.5} />
-          <Star top="80%" left="50%" delay={0.3} />
-        </div>
-
         <div id={styles.authSectionSeparator}>
           <img src={landImg} alt="" />
         </div>
+
+        <Star top="90%" left="20%" delay={0.1} />
+        <Star top="51%" left="20%" delay={0.2} />
+        <Star top="51%" left="60%" delay={0.8} />
+        <Star top="20%" left="20%" delay={0.1} />
+        <Star top="15%" left="90%" delay={0.7} />
+        <Star top="15%" left="50%" delay={0.9} />
+        <Star top="1rem" left="20%" delay={0.4} />
+        <Star top="1rem" left="10%" delay={0.5} />
+        <Star top="80%" left="50%" delay={0.3} />
       </section>
 
       <footer>
