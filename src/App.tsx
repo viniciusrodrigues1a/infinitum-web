@@ -14,7 +14,6 @@ import Star from "./components/Star";
 
 import landImg from "./assets/land.png";
 import googleLogoImg from "./assets/google-logo.png";
-import estrelaImg from "./assets/estrela.png";
 
 export default function App(): ReactElement {
   const [dropdownShown, setDropdownShown] = useState(false);
