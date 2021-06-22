@@ -215,6 +215,8 @@ main {
   width: 90%;
   height: 12rem;
   margin-top: 3rem;
+  position: relative;
+  z-index: 1;
 }
 
 /* Showcase Section Styles */
@@ -339,6 +341,7 @@ main {
   align-items: center;
   position: relative;
   z-index: 2;
+  margin-bottom: 2rem;
 }
 
 #loginOptions > button {
@@ -382,6 +385,7 @@ main {
   width: 100%;
   overflow-x: hidden;
   transform: translateY(30%);
+  z-index: 1;
 }
 
 #authSectionSeparator > img {
@@ -479,4 +483,19 @@ footer {
 .sectionMargin {
   margin-top: 6rem;
   padding: 0 1rem;
+}
+
+/* Media queries */
+@media (min-width: 48.5rem) {
+  header #drawerMenu {
+    width: 60%;
+  }
+
+  main {
+    margin-top: 6rem;
+  }
+
+  #pitch {
+    height: 19rem;
+  }
 }
