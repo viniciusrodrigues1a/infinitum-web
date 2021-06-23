@@ -8,16 +8,16 @@ import {
   FiActivity,
   FiMail,
 } from "react-icons/fi";
-import styles from "./app.module.css";
+import styles from "./styles.module.css";
 
-import Star from "./components/Star";
+import Star from "../../components/Star";
 
-import moonImg from "./assets/moon.png";
-import landImg from "./assets/land.png";
-import googleLogoImg from "./assets/google-logo.png";
+import moonImg from "../../assets/moon.png";
+import landImg from "../../assets/land.png";
+import googleLogoImg from "../../assets/google-logo.png";
 
-import HeroSvg from "./components/HeroSvg";
-import Points from "./components/Points";
+import HeroSvg from "../../components/HeroSvg";
+import Points from "../../components/Points";
 
 export default function App(): ReactElement {
   const [drawerMenuShown, setDrawerMenuShown] = useState(false);

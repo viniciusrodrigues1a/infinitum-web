@@ -244,7 +244,7 @@ main {
 
 #pitch {
   background-color: #272334;
-  background-image: url("./assets/play-circle.svg");
+  background-image: url("../../assets/play-circle.svg");
   background-repeat: no-repeat;
   background-position: center;
   width: 90%;
@@ -308,7 +308,7 @@ main {
 
 #viewsSection > h1 > strong {
   color: #529915;
-  background-image: url("./assets/text-underline.svg");
+  background-image: url("../../assets/text-underline.svg");
   background-repeat: no-repeat;
   background-position: center bottom;
   background-size: contain;
@@ -361,7 +361,7 @@ main {
 
 /* Auth Section Styles */
 #authSection {
-  background-image: url("./assets/mobile-rectangle-stars.png");
+  background-image: url("../../assets/mobile-rectangle-stars.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -590,7 +590,7 @@ footer {
 
   #pitchSection {
     background: none;
-    background-image: url("./assets/pitch-background.png");
+    background-image: url("../../assets/pitch-background.png");
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
