@@ -86,6 +86,27 @@ header .hamburgerNormal > line {
   transform: rotate(-48deg) translateX(-14px) translateY(-2px);
 }
 
+#navbar {
+  display: none;
+}
+
+.navitem:first-child {
+  border-right: 2px solid #595959;
+  padding-right: 2rem;
+}
+
+.navitem:nth-child(2) {
+  margin-left: 2rem !important;
+}
+
+.navitem + .navitem {
+  margin-left: 1rem;
+}
+
+#navbar button + #navbar button {
+  margin-left: 1rem;
+}
+
 header #drawerMenuOutside {
   position: fixed;
   top: 0;
@@ -128,8 +149,7 @@ header #drawerMenu {
 
 /* Main Section Styles */
 main {
-  margin-top: 3rem;
-  padding: 0 1.4rem;
+  padding: 3rem 1.4rem 6rem;
 }
 
 #introductionTitle {
@@ -155,6 +175,7 @@ main {
 }
 
 #introductionButton {
+  transition: all 0.2s;
   font-family: var(--text);
   position: relative;
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
@@ -173,6 +194,15 @@ main {
   z-index: -1;
 }
 
+#introductionImgContainer {
+  display: none;
+}
+
+#introductionImgContainer > img {
+  width: 24rem;
+  height: 24rem;
+}
+
 /* Pitch Section Styles */
 #pitchSection {
   background: linear-gradient(180deg, #3b2188, #780fdb);
@@ -181,6 +211,11 @@ main {
   justify-content: center;
   align-items: center;
   position: relative;
+  margin-top: 0;
+}
+
+#pitchSection #moon {
+  display: none;
 }
 
 #pitchSection > div {
@@ -426,9 +461,8 @@ footer {
 }
 
 /* Classes */
-.signInButton {
-  background-color: rgba(198, 161, 234, 0.7);
-  color: var(--light);
+.signInButton,
+.signUpButton {
   text-transform: uppercase;
   border: none;
   border-radius: 4px;
@@ -439,25 +473,28 @@ footer {
   font-weight: bold;
   letter-spacing: 0.05rem;
   cursor: pointer;
+  transition: all 0.2s;
+}
+
+.signInButton {
+  background-color: #997fb2;
+  color: var(--light);
+}
+
+.signInButton:hover {
+  background-color: #a892be;
 }
 
 .signUpButton {
   background-color: var(--primary);
   color: var(--dark);
-  text-transform: uppercase;
-  border: none;
-  border-radius: 4px;
-  width: 10rem;
-  height: 3.125rem;
-  font-size: 1.375rem;
-  font-family: var(--text);
-  font-weight: bold;
-  letter-spacing: 0.05rem;
-  cursor: pointer;
+}
+
+.signUpButton:hover {
+  background-color: #ace671;
 }
 
 .languageButton {
-  margin-top: 1rem;
   border: none;
   background: none;
   cursor: pointer;
@@ -492,10 +529,157 @@ footer {
   }
 
   main {
-    margin-top: 6rem;
+    padding-top: 6rem;
   }
 
   #pitch {
     height: 19rem;
+  }
+}
+
+@media (min-width: 62.25rem) {
+  header #hamburgerButtonWrapper,
+  header #drawerMenuOutside {
+    display: none;
+  }
+
+  #navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  header #navbar .signInButton,
+  header #navbar .signUpButton {
+    width: 8rem;
+    height: 2.5rem;
+    border-radius: 2px;
+    font-size: 1.2rem;
+  }
+
+  #navbar .languageButton strong {
+    display: none;
+  }
+
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  #introductionButtonContainer {
+    display: block;
+    position: relative;
+  }
+
+  #introductionButton:hover {
+    transform: scale(1.2);
+  }
+
+  #introductionButton:after {
+    border: none;
+    border-radius: none;
+  }
+
+  #introductionImgContainer {
+    display: block;
+    margin-left: 1rem;
+  }
+
+  #pitchSection {
+    background: none;
+    background-image: url("./assets/pitch-background.png");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  #pitchSection > div {
+    padding-top: 6rem;
+    position: relative;
+  }
+
+  #pitchSection #moon {
+    display: block;
+    width: 28rem;
+    height: 28rem;
+    position: absolute;
+    z-index: 1;
+    top: -5rem;
+    right: -13rem;
+  }
+
+  #showcaseSection {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+
+  .showcase {
+    flex-direction: row;
+  }
+
+  .showcase:nth-child(odd) {
+    flex-direction: row-reverse;
+  }
+
+  .showcase:nth-child(odd) > .showcaseTextContainer {
+    margin-left: 4rem;
+  }
+
+  .showcaseDescription {
+    margin-bottom: 0;
+  }
+
+  .showcaseTitle,
+  .showcaseDescription {
+    text-align: left;
+  }
+
+  #viewsSection > div:last-child {
+    width: 70%;
+    height: 28rem;
+  }
+
+  #authSection {
+    padding: 14rem 0 12rem;
+  }
+
+  #loginOptions {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 2rem;
+  }
+
+  #loginOptions > button {
+    width: 20rem;
+    font-size: 1.2rem;
+    padding: 0.8rem 1rem;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  #loginOptions > button:hover {
+    transform: scale(1.1);
+  }
+
+  #loginOptions > button:nth-child(2) {
+    margin-top: 0;
+    margin-left: 4rem;
+  }
+
+  .sectionMargin {
+    margin-top: 10rem;
+  }
+}
+
+@media (min-width: 62.25rem) and (min-height: 38rem) {
+  #fitScreen {
+    min-height: 100vh;
   }
 }
