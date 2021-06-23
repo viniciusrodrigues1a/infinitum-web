@@ -1,0 +1,33 @@
+#container {
+  position: absolute;
+  top: -16px;
+  left: -24px;
+  display: none;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.row + .row {
+  margin-top: 6px;
+}
+
+.point {
+  width: 3px;
+  height: 3px;
+  background-color: #38620f;
+  opacity: 0.7;
+  border-radius: 50%;
+}
+
+.point + .point {
+  margin-left: 6px;
+}
+
+@media (min-width: 62.25rem) {
+  #container {
+    display: block;
+  }
+}
