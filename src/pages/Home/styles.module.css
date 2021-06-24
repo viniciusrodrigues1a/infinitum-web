@@ -649,6 +649,8 @@ footer {
 
   #authSection {
     padding: 14rem 0 12rem;
+    background-image: url("../../assets/rectangle-stars.png");
+    padding-top: 18rem;
   }
 
   #loginOptions {
