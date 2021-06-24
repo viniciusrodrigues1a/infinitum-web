@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-import styles from "./styles.module.css";
+import styles from "./points.module.css";
 
 export default function Points(): React.ReactElement {
   const containerRef = useRef<HTMLDivElement>(null);
