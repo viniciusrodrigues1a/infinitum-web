@@ -481,7 +481,7 @@ footer {
   height: 3.125rem;
   font-size: 1.375rem;
   font-family: var(--text);
-  font-weight: bold;
+  font-weight: normal;
   letter-spacing: 0.05rem;
   cursor: pointer;
   transition: all 0.2s;
@@ -634,7 +634,7 @@ footer {
 
   #introductionImgContainer {
     display: block;
-    margin-left: 1rem;
+    margin-left: 3rem;
   }
 
   #pitchSection {
@@ -750,10 +750,6 @@ footer {
 
   #introductionButtonContainer {
     margin-top: 7.25rem;
-  }
-
-  #introductionImgContainer {
-    margin-left: 3rem;
   }
 
   #pitch {
