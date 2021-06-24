@@ -12,17 +12,6 @@ html {
   font-size: 87.5%;
 }
 
-@media (min-width: 67.5rem) {
-  html {
-    font-size: 100%;
-  }
-}
-@media (min-width: 48.5rem) {
-  html {
-    font-size: 93.75%;
-  }
-}
-
 #root {
   overflow-y: hidden;
 }
@@ -33,4 +22,22 @@ html {
   --primary: #9de258;
   --title: "Open Sans", sans-serif;
   --text: "B612", sans-serif;
+}
+
+@media (min-width: 48.5rem) {
+  html {
+    font-size: 93.75%;
+  }
+}
+
+@media (min-width: 67.5rem) {
+  html {
+    font-size: 100%;
+  }
+}
+
+@media (min-width: 120rem) {
+  html {
+    font-size: 107%;
+  }
 }
