@@ -127,29 +127,31 @@ export default function App(): ReactElement {
         </header>
 
         <main>
-          <div>
-            <h1 id={styles.introductionTitle}>
-              Work on big ideas, without the busywork.
-            </h1>
-            <span id={styles.introductionDescription}>
-              Collaborate, manage projects, and reach new productivity peaks.
-              From high rises to the home office, the way your team works is
-              unique accomplish it all with Trello.
-            </span>
-            <div id={styles.introductionButtonContainer}>
-              <Points />
+          <div id={styles.mainFlex}>
+            <div id={styles.introductionContainer}>
+              <h1 id={styles.introductionTitle}>
+                Work on big ideas, without the busywork.
+              </h1>
+              <span id={styles.introductionDescription}>
+                Collaborate, manage projects, and reach new productivity peaks.
+                From high rises to the home office, the way your team works is
+                unique accomplish it all with Trello.
+              </span>
+              <div id={styles.introductionButtonContainer}>
+                <Points />
 
-              <button
-                id={styles.introductionButton}
-                className={styles.signUpButton}
-                type="button"
-              >
-                SIGN UP
-              </button>
+                <button
+                  id={styles.introductionButton}
+                  className={styles.signUpButton}
+                  type="button"
+                >
+                  SIGN UP
+                </button>
+              </div>
             </div>
-          </div>
-          <div id={styles.introductionImgContainer}>
-            <HeroSvg />
+            <div id={styles.introductionImgContainer}>
+              <HeroSvg />
+            </div>
           </div>
         </main>
       </div>

@@ -152,6 +152,12 @@ main {
   padding: 3rem 1.4rem 6rem;
 }
 
+#mainFlex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #introductionTitle {
   font-family: var(--title);
   font-size: 3.2rem;
@@ -566,8 +572,12 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 3rem;
-    padding-right: 3rem;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #introductionContainer {
+    width: 28rem;
   }
 
   #introductionButtonContainer {
@@ -692,9 +702,8 @@ footer {
 }
 
 @media (min-width: 75rem) {
-  main {
-    padding-left: 6rem;
-    padding-right: 6rem;
+  #introductionContainer {
+    width: 36rem;
   }
 
   #introductionDescription {
