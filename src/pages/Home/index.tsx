@@ -7,6 +7,7 @@ import {
   FiLayout,
   FiActivity,
   FiMail,
+  FiArrowDown,
 } from "react-icons/fi";
 import styles from "./styles.module.css";
 
@@ -24,6 +25,7 @@ export default function App(): ReactElement {
   const [viewOptionIndex, setViewOptionIndex] = useState(0);
 
   const drawerMenuOutsideRef = useRef<HTMLDivElement>(null);
+  const pitchSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function onClick(event: MouseEvent) {
@@ -45,6 +47,14 @@ export default function App(): ReactElement {
 
   function toggleDropdownMenu() {
     setDrawerMenuShown(!drawerMenuShown);
+  }
+
+  function scrollToSectionBelowIntroduction() {
+    if (!pitchSectionRef.current) {
+      return;
+    }
+
+    pitchSectionRef.current.scrollIntoView({ behavior: "smooth" });
   }
 
   return (
@@ -153,10 +163,22 @@ export default function App(): ReactElement {
               <HeroSvg />
             </div>
           </div>
+
+          <button
+            type="button"
+            id={styles.scrollArrow}
+            onClick={scrollToSectionBelowIntroduction}
+          >
+            <FiArrowDown color="var(--dark)" size={40} />
+          </button>
         </main>
       </div>
 
-      <section id={styles.pitchSection} className={styles.sectionMargin}>
+      <section
+        id={styles.pitchSection}
+        className={styles.sectionMargin}
+        ref={pitchSectionRef}
+      >
         <Star top="1rem" left="36%" delay={0.1} />
         <Star top="90%" left="10rem" delay={1.3} />
         <Star top="3rem" left="75%" delay={0.9} />

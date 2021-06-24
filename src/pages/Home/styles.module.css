@@ -152,6 +152,10 @@ main {
   padding: 3rem 1.4rem 6rem;
 }
 
+main #scrollArrow {
+  display: none;
+}
+
 #mainFlex {
   display: flex;
   justify-content: center;
@@ -574,6 +578,39 @@ footer {
     align-items: center;
     padding-left: 0;
     padding-right: 0;
+    padding-bottom: 9rem;
+    padding-top: 3rem;
+    position: relative;
+  }
+
+  main #scrollArrow {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-name: scrollArrowAnim;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes scrollArrowAnim {
+    0% {
+      opacity: 0.8;
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      opacity: 0.6;
+      transform: translateX(-50%) translateY(-40%);
+    }
+    100% {
+      opacity: 0.8;
+      transform: translateX(-50%) translateY(0);
+    }
   }
 
   #introductionContainer {
@@ -583,6 +620,7 @@ footer {
   #introductionButtonContainer {
     display: block;
     position: relative;
+    margin-top: 5rem;
   }
 
   #introductionButton:hover {
