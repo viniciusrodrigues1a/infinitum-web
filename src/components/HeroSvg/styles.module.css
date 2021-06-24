@@ -32,3 +32,17 @@
     transform: translateX(-2px) translateY(2px);
   }
 }
+
+@media (min-width: 75rem) {
+  #hero {
+    width: 28rem;
+    height: 28rem;
+  }
+}
+
+@media (min-width: 93.75rem) {
+  #hero {
+    width: 32rem;
+    height: 32rem;
+  }
+}
