@@ -33,6 +33,7 @@
   }
 }
 
+/* 1200px */
 @media (min-width: 75rem) {
   #hero {
     width: 28rem;
@@ -40,6 +41,7 @@
   }
 }
 
+/* 1500px */
 @media (min-width: 93.75rem) {
   #hero {
     width: 32rem;

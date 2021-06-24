@@ -545,6 +545,7 @@ footer {
 }
 
 /* Media queries */
+/* 776px */
 @media (min-width: 48.5rem) {
   header #drawerMenu {
     width: 60%;
@@ -559,6 +560,7 @@ footer {
   }
 }
 
+/* 996px */
 @media (min-width: 62.25rem) {
   header #headerContentWrapper {
     padding: 0 4rem;
@@ -746,6 +748,8 @@ footer {
   }
 }
 
+/* width: 996px */
+/* height: 608px */
 @media (min-width: 62.25rem) and (min-height: 38rem) {
   #introductionSection {
     padding-top: 0;
@@ -754,12 +758,15 @@ footer {
   }
 }
 
+/* width: 996px */
+/* height: 1088px */
 @media (min-width: 62.25rem) and (min-height: 68rem) {
   #introductionSection {
     min-height: initial;
   }
 }
 
+/* 1200px */
 @media (min-width: 75rem) {
   #introductionContainer {
     width: 40rem;
@@ -785,6 +792,7 @@ footer {
   }
 }
 
+/* 1500px */
 @media (min-width: 93.75rem) {
   header #headerContentWrapper {
     padding: 0 6rem;

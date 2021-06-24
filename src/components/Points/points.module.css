@@ -26,6 +26,7 @@
   margin-left: 6px;
 }
 
+/* 996px */
 @media (min-width: 62.25rem) {
   #container {
     display: block;
