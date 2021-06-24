@@ -59,9 +59,9 @@ export default function App(): ReactElement {
 
   return (
     <>
-      <div id={styles.fitScreen} className="noCssModule_fitScreen">
-        <header>
-          <div id={styles.navigation}>
+      <header>
+        <div id={styles.headerContentWrapper}>
+          <div id={styles.headerContent}>
             <div id={styles.logo}>
               <div id={styles.logoIcon}>LOGO</div>
               <span id={styles.logoText}>Bug Tracker</span>
@@ -108,71 +108,71 @@ export default function App(): ReactElement {
               </div>
             </div>
           </div>
+        </div>
 
-          {drawerMenuShown && (
-            <>
-              <div id={styles.drawerMenuOutside} ref={drawerMenuOutsideRef}>
-                <div id={styles.drawerMenu}>
-                  <div className={styles.drawerItem}>
-                    <button type="button" className={styles.signInButton}>
-                      Sign In
-                    </button>
-                  </div>
-                  <div className={styles.drawerItem}>
-                    <button type="button" className={styles.signUpButton}>
-                      Sign Up
-                    </button>
-                  </div>
-                  <div className={styles.drawerItem}>
-                    <button type="button" className={styles.languageButton}>
-                      <FiGlobe size={28} color="var(--light)" />
+        {drawerMenuShown && (
+          <>
+            <div id={styles.drawerMenuOutside} ref={drawerMenuOutsideRef}>
+              <div id={styles.drawerMenu}>
+                <div className={styles.drawerItem}>
+                  <button type="button" className={styles.signInButton}>
+                    Sign In
+                  </button>
+                </div>
+                <div className={styles.drawerItem}>
+                  <button type="button" className={styles.signUpButton}>
+                    Sign Up
+                  </button>
+                </div>
+                <div className={styles.drawerItem}>
+                  <button type="button" className={styles.languageButton}>
+                    <FiGlobe size={28} color="var(--light)" />
 
-                      <strong>Idioma</strong>
-                    </button>
-                  </div>
+                    <strong>Idioma</strong>
+                  </button>
                 </div>
               </div>
-            </>
-          )}
-        </header>
-
-        <main>
-          <div id={styles.mainFlex}>
-            <div id={styles.introductionContainer}>
-              <h1 id={styles.introductionTitle}>
-                Work on big ideas, without the busywork.
-              </h1>
-              <span id={styles.introductionDescription}>
-                Collaborate, manage projects, and reach new productivity peaks.
-                From high rises to the home office, the way your team works is
-                unique accomplish it all with Trello.
-              </span>
-              <div id={styles.introductionButtonContainer}>
-                <Points />
-
-                <button
-                  id={styles.introductionButton}
-                  className={styles.signUpButton}
-                  type="button"
-                >
-                  SIGN UP
-                </button>
-              </div>
             </div>
-            <div id={styles.introductionImgContainer}>
-              <HeroSvg />
+          </>
+        )}
+      </header>
+
+      <main id={styles.introductionSection} className="noCssModule_main">
+        <div id={styles.mainFlex}>
+          <div id={styles.introductionContainer}>
+            <h1 id={styles.introductionTitle}>
+              Work on big ideas, without the busywork.
+            </h1>
+            <span id={styles.introductionDescription}>
+              Collaborate, manage projects, and reach new productivity peaks.
+              From high rises to the home office, the way your team works is
+              unique accomplish it all with Trello.
+            </span>
+            <div id={styles.introductionButtonContainer}>
+              <Points />
+
+              <button
+                id={styles.introductionButton}
+                className={styles.signUpButton}
+                type="button"
+              >
+                SIGN UP
+              </button>
             </div>
           </div>
+          <div id={styles.introductionImgContainer}>
+            <HeroSvg />
+          </div>
+        </div>
 
-          <button
-            type="button"
-            id={styles.scrollArrow}
-            onClick={scrollToSectionBelowIntroduction}
-          >
-            <FiArrowDown color="var(--dark)" size={40} />
-          </button>
-        </main>
-      </div>
+        <button
+          type="button"
+          id={styles.scrollArrow}
+          onClick={scrollToSectionBelowIntroduction}
+        >
+          <FiArrowDown color="var(--dark)" size={40} />
+        </button>
+      </main>
 
       <section
         id={styles.pitchSection}

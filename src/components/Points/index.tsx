@@ -7,7 +7,7 @@ export default function Points(): React.ReactElement {
 
   useEffect(() => {
     const fitScreenElement: HTMLDivElement | null = document.querySelector(
-      "div.noCssModule_fitScreen"
+      "main.noCssModule_main"
     );
 
     if (!fitScreenElement) {

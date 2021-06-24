@@ -11,13 +11,22 @@ header {
   position: relative;
 }
 
-header #navigation {
+header #headerContentWrapper {
   background-color: var(--dark);
-  padding: 1rem 1.25rem;
+  padding: 0 1.25rem;
+  height: 6rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header #headerContent {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  max-width: 120rem;
 }
 
 header #logo {
@@ -148,18 +157,20 @@ header #drawerMenu {
 }
 
 /* Main Section Styles */
-main {
+#introductionSection {
   padding: 3rem 1.4rem 6rem;
 }
 
-main #scrollArrow {
+#introductionSection #scrollArrow {
   display: none;
 }
 
 #mainFlex {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
+  max-width: 120rem;
 }
 
 #introductionTitle {
@@ -539,7 +550,7 @@ footer {
     width: 60%;
   }
 
-  main {
+  #introductionSection {
     padding-top: 6rem;
   }
 
@@ -549,6 +560,10 @@ footer {
 }
 
 @media (min-width: 62.25rem) {
+  header #headerContentWrapper {
+    padding: 0 4rem;
+  }
+
   header #hamburgerButtonWrapper,
   header #drawerMenuOutside {
     display: none;
@@ -572,26 +587,25 @@ footer {
     display: none;
   }
 
-  main {
+  #introductionSection {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 4rem;
+    padding-right: 4rem;
     padding-bottom: 9rem;
     padding-top: 3rem;
     position: relative;
   }
 
-  main #scrollArrow {
+  #introductionSection #scrollArrow {
     cursor: pointer;
     background: transparent;
     border: none;
+    margin-top: 5rem;
+    margin-bottom: 3rem;
     display: block;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
     animation-name: scrollArrowAnim;
     animation-duration: 1s;
     animation-timing-function: cubic-bezier(0.45, 0.05, 0.55, 0.95);
@@ -634,7 +648,6 @@ footer {
 
   #introductionImgContainer {
     display: block;
-    margin-left: 3rem;
   }
 
   #pitchSection {
@@ -734,14 +747,22 @@ footer {
 }
 
 @media (min-width: 62.25rem) and (min-height: 38rem) {
-  #fitScreen {
-    min-height: 100vh;
+  #introductionSection {
+    padding-top: 0;
+    padding-bottom: 0;
+    min-height: calc(100vh - 6rem);
+  }
+}
+
+@media (min-width: 62.25rem) and (min-height: 68rem) {
+  #introductionSection {
+    min-height: initial;
   }
 }
 
 @media (min-width: 75rem) {
   #introductionContainer {
-    width: 36rem;
+    width: 40rem;
   }
 
   #introductionDescription {
@@ -761,5 +782,20 @@ footer {
   #showcaseSection {
     padding-left: 12rem;
     padding-right: 12rem;
+  }
+}
+
+@media (min-width: 93.75rem) {
+  header #headerContentWrapper {
+    padding: 0 6rem;
+  }
+
+  #introductionSection {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+
+  #introductionContainer {
+    width: 46rem;
   }
 }
