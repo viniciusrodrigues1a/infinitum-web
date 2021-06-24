@@ -9,7 +9,7 @@ import {
   FiMail,
   FiArrowDown,
 } from "react-icons/fi";
-import styles from "./styles.module.css";
+import styles from "./home.module.css";
 
 import Star from "../../components/Star";
 
