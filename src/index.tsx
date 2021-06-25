@@ -5,9 +5,13 @@ import "./reset.css";
 
 import Home from "./pages/Home";
 
+import { LanguageProvider } from "./contexts/LanguageContext";
+
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+    <LanguageProvider>
+      <Home />
+    </LanguageProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
