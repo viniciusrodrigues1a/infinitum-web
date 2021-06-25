@@ -41,7 +41,8 @@
     ],
     "react/react-in-jsx-scope": "off",
     "import/extensions": "off",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "import/prefer-default-export": "off"
   },
   "settings": {
     "import/resolver": {

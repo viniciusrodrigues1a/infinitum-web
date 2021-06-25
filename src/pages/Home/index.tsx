@@ -1,4 +1,10 @@
-import React, { ReactElement, useEffect, useState, useRef } from "react";
+import React, {
+  ReactElement,
+  useEffect,
+  useState,
+  useRef,
+  useContext,
+} from "react";
 import {
   FiMenu,
   FiGlobe,
@@ -20,7 +26,11 @@ import googleLogoImg from "../../assets/google-logo.png";
 import HeroSvg from "../../components/HeroSvg";
 import Points from "../../components/Points";
 
+import { LanguageContext } from "../../contexts/LanguageContext";
+
 export default function App(): ReactElement {
+  const { language } = useContext(LanguageContext);
+
   const [drawerMenuShown, setDrawerMenuShown] = useState(false);
   const [viewOptionIndex, setViewOptionIndex] = useState(0);
 
@@ -91,19 +101,19 @@ export default function App(): ReactElement {
                 <button type="button" className={styles.languageButton}>
                   <FiGlobe size={28} color="var(--light)" />
 
-                  <strong>Idioma</strong>
+                  <strong>{language.home.languageButtonText}</strong>
                 </button>
               </div>
 
               <div className={styles.navitem}>
                 <button type="button" className={styles.signInButton}>
-                  Sign In
+                  {language.home.signInText}
                 </button>
               </div>
 
               <div className={styles.navitem}>
                 <button type="button" className={styles.signUpButton}>
-                  Sign Up
+                  {language.home.signUpText}
                 </button>
               </div>
             </div>
@@ -116,19 +126,19 @@ export default function App(): ReactElement {
               <div id={styles.drawerMenu}>
                 <div className={styles.drawerItem}>
                   <button type="button" className={styles.signInButton}>
-                    Sign In
+                    {language.home.signInText}
                   </button>
                 </div>
                 <div className={styles.drawerItem}>
                   <button type="button" className={styles.signUpButton}>
-                    Sign Up
+                    {language.home.signUpText}
                   </button>
                 </div>
                 <div className={styles.drawerItem}>
                   <button type="button" className={styles.languageButton}>
                     <FiGlobe size={28} color="var(--light)" />
 
-                    <strong>Idioma</strong>
+                    <strong>{language.home.languageButtonText}</strong>
                   </button>
                 </div>
               </div>
@@ -141,12 +151,10 @@ export default function App(): ReactElement {
         <div id={styles.mainFlex}>
           <div id={styles.introductionContainer}>
             <h1 id={styles.introductionTitle}>
-              Work on big ideas, without the busywork.
+              {language.home.introduction.title}
             </h1>
             <span id={styles.introductionDescription}>
-              Collaborate, manage projects, and reach new productivity peaks.
-              From high rises to the home office, the way your team works is
-              unique accomplish it all with Trello.
+              {language.home.introduction.description}
             </span>
             <div id={styles.introductionButtonContainer}>
               <Points />
@@ -156,7 +164,7 @@ export default function App(): ReactElement {
                 className={styles.signUpButton}
                 type="button"
               >
-                SIGN UP
+                {language.home.signUpText}
               </button>
             </div>
           </div>
@@ -190,7 +198,8 @@ export default function App(): ReactElement {
         <div>
           <img src={moonImg} id={styles.moon} />
           <h1>
-            Learn more about our <span>work</span>
+            {language.home.pitch.title[0]}{" "}
+            <span>{language.home.pitch.title[1]}</span>
           </h1>
           <div id={styles.pitch} />
         </div>
@@ -200,11 +209,10 @@ export default function App(): ReactElement {
         <div className={styles.showcase}>
           <div className={styles.showcaseTextContainer}>
             <h2 className={styles.showcaseTitle}>
-              Manage everything in one workspace
+              {language.home.showcase.title1}
             </h2>
             <p className={styles.showcaseDescription}>
-              Planning, tracking, and delivering your team’s best work has never
-              been easier
+              {language.home.showcase.description1}
             </p>
           </div>
           <img
@@ -216,10 +224,12 @@ export default function App(): ReactElement {
         </div>
         <div className={styles.showcase}>
           <div className={styles.showcaseTextContainer}>
-            <h2 className={styles.showcaseTitle}>Set up in minutes</h2>
+            <h2 className={styles.showcaseTitle}>
+              {language.home.showcase.title2}
+            </h2>
+
             <p className={styles.showcaseDescription}>
-              Get started fast with hundreds of visual and customizable
-              templates - or create your own
+              {language.home.showcase.description2}
             </p>
           </div>
           <img
@@ -233,9 +243,10 @@ export default function App(): ReactElement {
 
       <section id={styles.viewsSection} className={styles.sectionMargin}>
         <h1>
-          Visualize work with <strong>views</strong>
+          {language.home.views.title[0]}{" "}
+          <strong>{language.home.views.title[1]}</strong>
         </h1>
-        <p>View data as a map, calendar, timeline, kanban, and more</p>
+        <p>{language.home.views.description}</p>
 
         <div className={styles.options}>
           <button
@@ -295,12 +306,12 @@ export default function App(): ReactElement {
         <div id={styles.loginOptions}>
           <button type="button">
             <img src={googleLogoImg} alt="Login with google" />
-            <span>Sign Up with Google</span>
+            <span>{language.home.signUpGoogleText}</span>
           </button>
 
           <button type="button">
             <FiMail size={48} color="var(--light)" />
-            <span>Sign Up with Email</span>
+            <span>{language.home.signUpEmailText}</span>
           </button>
         </div>
 
@@ -324,13 +335,13 @@ export default function App(): ReactElement {
         <div className={styles.footerInfo}>
           <FiMail size={32} color="var(--light)" />
           <a href="">
-            <strong>Contact us</strong>
+            <strong>{language.home.footer.contactUs}</strong>
           </a>
         </div>
         <div className={styles.footerInfo}>
           <button type="button" className={styles.languageButton}>
             <FiGlobe size={32} color="var(--light)" />
-            <strong> Idioma </strong>
+            <strong>{language.home.languageButtonText}</strong>
           </button>
         </div>
       </footer>
