@@ -4,6 +4,7 @@ import React, {
   useState,
   useRef,
   useContext,
+  useCallback,
 } from "react";
 import {
   FiMenu,
@@ -22,6 +23,8 @@ import Star from "../../components/Star";
 import moonImg from "../../assets/moon.png";
 import landImg from "../../assets/land.png";
 import googleLogoImg from "../../assets/google-logo.png";
+import flagBR from "../../assets/flag-br.svg";
+import flagUS from "../../assets/flag-us.svg";
 
 import HeroSvg from "../../components/HeroSvg";
 import Points from "../../components/Points";
@@ -33,14 +36,19 @@ export default function App(): ReactElement {
 
   const [drawerMenuShown, setDrawerMenuShown] = useState(false);
   const [viewOptionIndex, setViewOptionIndex] = useState(0);
+  const [languageMenuShown, setLanguageMenuShown] = useState(false);
 
   const drawerMenuOutsideRef = useRef<HTMLDivElement>(null);
   const pitchSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function onClick(event: MouseEvent) {
-      if (drawerMenuOutsideRef.current === event.target) {
+      if (drawerMenuShown && drawerMenuOutsideRef.current === event.target) {
         setDrawerMenuShown(false);
+      }
+
+      if (languageMenuShown) {
+        setLanguageMenuShown(false);
       }
     }
 
@@ -53,10 +61,14 @@ export default function App(): ReactElement {
     body.addEventListener("click", onClick);
 
     return () => body.removeEventListener("click", onClick);
-  }, []);
+  }, [drawerMenuShown, languageMenuShown]);
 
   function toggleDropdownMenu() {
     setDrawerMenuShown(!drawerMenuShown);
+  }
+
+  function toggleLanguageMenu() {
+    setLanguageMenuShown(!languageMenuShown);
   }
 
   function scrollToSectionBelowIntroduction() {
@@ -98,11 +110,32 @@ export default function App(): ReactElement {
 
             <div id={styles.navbar}>
               <div className={styles.navitem}>
-                <button type="button" className={styles.languageButton}>
-                  <FiGlobe size={28} color="var(--light)" />
+                <div id={styles.languageWrapper}>
+                  <button
+                    type="button"
+                    className={styles.languageButton}
+                    onClick={toggleLanguageMenu}
+                  >
+                    <FiGlobe size={28} color="var(--light)" />
+                  </button>
 
-                  <strong>{language.home.languageButtonText}</strong>
-                </button>
+                  {languageMenuShown && (
+                    <div id={styles.languageMenu}>
+                      <a href="?lang=pt-BR" className={styles.languageItem}>
+                        <div>
+                          <img src={flagBR} alt="Bandeira do Brasil" />
+                          <span>Português (Brasil)</span>
+                        </div>
+                      </a>
+                      <a href="?lang=en-US" className={styles.languageItem}>
+                        <div>
+                          <img src={flagUS} alt="US Flag" />
+                          <span>English (United States)</span>
+                        </div>
+                      </a>
+                    </div>
+                  )}
+                </div>
               </div>
 
               <div className={styles.navitem}>

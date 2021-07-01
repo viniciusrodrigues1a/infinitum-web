@@ -116,6 +116,49 @@ header .hamburgerNormal > line {
   margin-left: 1rem;
 }
 
+#languageWrapper {
+  position: relative;
+}
+
+#languageMenu {
+  position: absolute;
+  top: 130%;
+  left: 0;
+  background-color: #ffffff;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+}
+
+.languageItem {
+  display: block;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.languageItem:hover {
+  background-color: #dddddd;
+}
+
+.languageItem > div {
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.languageItem img {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  border: 1px solid #999999;
+}
+
+.languageItem span {
+  white-space: nowrap;
+  color: #444444;
+}
+
 header #drawerMenuOutside {
   position: fixed;
   top: 0;
