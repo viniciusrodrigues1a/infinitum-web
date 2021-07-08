@@ -1,14 +1,14 @@
 import Language from "./types";
 
-export const enUS: Language = {
+export const esEs: Language = {
   home: {
     introduction: {
-      title: "Have no limits, be Infinitum.",
+      title: "No tengas límites, sé Infinitum",
       description:
-        "Expand your horizon amid the cosmos. Manage projects with the highest productivity wherever you are.",
+        "Expande tu horizonte en medio al cosmos. Gestiona proyectos con la mayor productividad esté donde esté.",
     },
     pitch: {
-      title: ["Check out more about our", "work"],
+      title: ["Conozca más sobre nuestro", "trabajo"],
     },
     showcase: {
       title1: "Manage everything in one workspace",
@@ -25,8 +25,8 @@ export const enUS: Language = {
     footer: {
       contactUs: "Contact Us",
     },
-    signInText: "Sign In",
-    signUpText: "Sign Up",
+    signInText: "Iniciar sesión",
+    signUpText: "Inscribirse",
     signUpGoogleText: "Sign Up with Google",
     signUpEmailText: "Sign Up with Email",
     languageButtonText: "Language",

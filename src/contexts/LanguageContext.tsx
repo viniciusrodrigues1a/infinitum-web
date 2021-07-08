@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { Language, ptBR, enUS } from "../languages";
+import { Language, ptBR, enUS, esEs } from "../languages";
 
 type LanguageContextData = {
   language: Language;
@@ -12,6 +12,7 @@ type LanguageProviderProps = {
 const languages = {
   "pt-BR": ptBR,
   "en-US": enUS,
+  "es-ES": esEs,
 };
 
 export const LanguageContext = createContext({} as LanguageContextData);
