@@ -3,12 +3,12 @@ import Language from "./types";
 export const ptBR: Language = {
   home: {
     introduction: {
-      title: "Lorem ipsum dolor sit amet",
+      title: "Não tenha limites, seja Infinitum",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Expanda seu horizonte em meio ao cosmos. Gerencie projetos com a maior produtividade aonde você estiver.",
     },
     pitch: {
-      title: ["Lorem ipsum dolor sit", "amet"],
+      title: ["Confira mais sobre nosso", "trabalho"],
     },
     showcase: {
       title1: "Lorem ipsum dolor sit amet",
@@ -25,10 +25,10 @@ export const ptBR: Language = {
     footer: {
       contactUs: "Contate-nos",
     },
-    signInText: "Lorem ipsum",
-    signUpText: "Lorem ipsum",
-    signUpGoogleText: "Lorem ipsum dolor sit amet",
-    signUpEmailText: "Lorem ipsum dolor sit amet",
+    signInText: "Entrar",
+    signUpText: "Cadastre-se",
+    signUpGoogleText: "Entre com Google",
+    signUpEmailText: "Contate-nos",
     languageButtonText: "Idioma",
   },
 };
