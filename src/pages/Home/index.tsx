@@ -25,6 +25,7 @@ import landImg from "../../assets/land.png";
 import googleLogoImg from "../../assets/google-logo.png";
 import flagBR from "../../assets/flag-br.svg";
 import flagUS from "../../assets/flag-us.svg";
+import flagES from "../../assets/flag-es.svg";
 
 import HeroSvg from "../../components/HeroSvg";
 import Points from "../../components/Points";
@@ -131,6 +132,12 @@ export default function App(): ReactElement {
                         <div>
                           <img src={flagUS} alt="US Flag" />
                           <span>English (United States)</span>
+                        </div>
+                      </a>
+                      <a href="?lang=es-ES" className={styles.languageItem}>
+                        <div>
+                          <img src={flagES} alt="Bandera española" />
+                          <span>Español (Espanha)</span>
                         </div>
                       </a>
                     </div>

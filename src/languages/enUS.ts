@@ -13,22 +13,22 @@ export const enUS: Language = {
     showcase: {
       title1: "Manage everything in one workspace",
       description1:
-        "Planning, tracking, and delivering your team’s best work has never been easier",
+        "Planning, tracking, and delivering your team’s best work has never been easier.",
       title2: "Set up in minutes",
       description2:
-        "Get started fast with hundreds of visual and customizable templates - or create your own",
+        "Get started fast with hundreds of visual and customizable templates - or create your own.",
     },
     views: {
-      title: ["Visualize work with", "views"],
-      description: "View data as a map, calendar, timeline, kanban, and more",
+      title: ["Track your effort with different", "views"],
+      description: "View data as a map, calendar, timeline, kanban, and more.",
     },
     footer: {
       contactUs: "Contact Us",
     },
     signInText: "Sign In",
     signUpText: "Sign Up",
-    signUpGoogleText: "Sign Up with Google",
-    signUpEmailText: "Sign Up with Email",
+    signUpGoogleText: "Sign In with Google",
+    signUpEmailText: "Sign In with Email",
     languageButtonText: "Language",
   },
 };
