@@ -11,16 +11,17 @@ export const ptBR: Language = {
       title: ["Confira mais sobre nosso", "trabalho"],
     },
     showcase: {
-      title1: "Lorem ipsum dolor sit amet",
+      title1: "Gerencie tudo em um espaço de trabalho",
       description1:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      title2: "Lorem ipsum dolor sit amet",
+        "Planejar, acompanhar e entregar o melhor trabalho de sua equipe nunca foi tão fácil.",
+      title2: "Configuração em minutos",
       description2:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Comece rapidamente com centenas de modelos visuais e personalizáveis - ou crie o seu próprio.",
     },
     views: {
       title: ["Acompanhe seu esforço com diferentes", "visualizações"],
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      description:
+        "Visualize os dados como mapa, calendário, linha do tempo, kanban e muito mais.",
     },
     footer: {
       contactUs: "Contate-nos",
@@ -28,7 +29,7 @@ export const ptBR: Language = {
     signInText: "Entrar",
     signUpText: "Cadastre-se",
     signUpGoogleText: "Entre com Google",
-    signUpEmailText: "Contate-nos",
+    signUpEmailText: "Entre com Email",
     languageButtonText: "Idioma",
   },
 };

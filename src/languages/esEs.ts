@@ -11,24 +11,25 @@ export const esEs: Language = {
       title: ["Conozca más sobre nuestro", "trabajo"],
     },
     showcase: {
-      title1: "Manage everything in one workspace",
+      title1: "Administre todo en un solo espacio de trabajo",
       description1:
-        "Planning, tracking, and delivering your team’s best work has never been easier",
-      title2: "Set up in minutes",
+        "Planificar, rastrear y entregar el mejor trabajo de su equipo nunca ha sido tan fácil.",
+      title2: "Configurar en minutos",
       description2:
-        "Get started fast with hundreds of visual and customizable templates - or create your own",
+        "Comience rápidamente con cientos de plantillas visuales y personalizables, o cree las suyas propias.",
     },
     views: {
-      title: ["Visualize work with", "views"],
-      description: "View data as a map, calendar, timeline, kanban, and more",
+      title: ["Realice un seguimiento de su esfuerzo con diferentes", "vistas"],
+      description:
+        "Ver datos como mapa, calendario, línea de tiempo, kanban y más.",
     },
     footer: {
-      contactUs: "Contact Us",
+      contactUs: "Contacta con nosotros",
     },
     signInText: "Iniciar sesión",
     signUpText: "Inscribirse",
-    signUpGoogleText: "Sign Up with Google",
-    signUpEmailText: "Sign Up with Email",
-    languageButtonText: "Language",
+    signUpGoogleText: "Iniciar Sesión con Google",
+    signUpEmailText: "Iniciar Sesión con Email",
+    languageButtonText: "Idioma",
   },
 };
