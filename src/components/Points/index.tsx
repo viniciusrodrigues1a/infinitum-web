@@ -18,12 +18,22 @@ export default function Points(): React.ReactElement {
     const defaultLeft = -24;
 
     function changeStylesOnMouseMove(event: MouseEvent) {
-      if (!containerRef.current) {
+      if (!containerRef.current || !fitScreenElement) {
         return;
       }
 
-      const xOffset = (window.innerWidth / 2 - event.pageX) / 24;
-      const yOffset = (Math.floor(window.innerHeight / 1.5) - event.pageY) / 24;
+      let headerHeight = 0;
+      const header: HTMLElement | null = document.querySelector("header");
+
+      if (header) {
+        headerHeight = header.offsetHeight;
+      }
+
+      const xOffset = (window.innerWidth / 2 - event.pageX) / 34;
+      const yOffset =
+        (window.innerHeight / 2 -
+          (event.pageY % (headerHeight + fitScreenElement.offsetHeight))) /
+        34;
 
       const left = defaultLeft - xOffset;
       const top = defaultTop - yOffset;
