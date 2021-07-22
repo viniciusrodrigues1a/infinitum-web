@@ -21,15 +21,13 @@ import styles from "./home.module.css";
 import moonImg from "../../assets/moon.png";
 import landImg from "../../assets/land.png";
 import googleLogoImg from "../../assets/google-logo.png";
-import flagBR from "../../assets/flag-br.svg";
-import flagUS from "../../assets/flag-us.svg";
-import flagES from "../../assets/flag-es.svg";
 
 import HeroSvg from "./components/HeroSvg";
 import Points from "./components/Points";
 import Star from "./components/Star";
 
 import { LanguageContext } from "../../contexts/LanguageContext";
+import LanguagePicker from "./components/LanguagePicker";
 
 export default function App(): ReactElement {
   const { language } = useContext(LanguageContext);
@@ -119,28 +117,7 @@ export default function App(): ReactElement {
                     <FiGlobe size={28} color="var(--light)" />
                   </button>
 
-                  {languageMenuShown && (
-                    <div id={styles.languageMenu}>
-                      <a href="?lang=pt-BR" className={styles.languageItem}>
-                        <div>
-                          <img src={flagBR} alt="Bandeira do Brasil" />
-                          <span>Português (Brasil)</span>
-                        </div>
-                      </a>
-                      <a href="?lang=en-US" className={styles.languageItem}>
-                        <div>
-                          <img src={flagUS} alt="US Flag" />
-                          <span>English (United States)</span>
-                        </div>
-                      </a>
-                      <a href="?lang=es-ES" className={styles.languageItem}>
-                        <div>
-                          <img src={flagES} alt="Bandera española" />
-                          <span>Español (Espanha)</span>
-                        </div>
-                      </a>
-                    </div>
-                  )}
+                  <LanguagePicker shown={languageMenuShown} />
                 </div>
               </div>
 
@@ -174,11 +151,19 @@ export default function App(): ReactElement {
                   </button>
                 </div>
                 <div className={styles.drawerItem}>
-                  <button type="button" className={styles.languageButton}>
-                    <FiGlobe size={28} color="var(--light)" />
+                  <div id={styles.languageWrapper}>
+                    <button
+                      type="button"
+                      className={styles.languageButton}
+                      onClick={toggleLanguageMenu}
+                    >
+                      <FiGlobe size={28} color="var(--light)" />
 
-                    <strong>{language.home.languageButtonText}</strong>
-                  </button>
+                      <strong>{language.home.languageButtonText}</strong>
+                    </button>
+
+                    <LanguagePicker shown={languageMenuShown} />
+                  </div>
                 </div>
               </div>
             </div>
