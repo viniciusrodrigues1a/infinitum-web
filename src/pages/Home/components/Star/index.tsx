@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./star.module.css";
-import StarImg from "../../assets/estrela.png";
+import StarImg from "../../../../assets/estrela.png";
 
 type StarProps = {
   top: number | string;

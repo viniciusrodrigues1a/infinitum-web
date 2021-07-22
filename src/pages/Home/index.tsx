@@ -18,8 +18,6 @@ import {
 } from "react-icons/fi";
 import styles from "./home.module.css";
 
-import Star from "../../components/Star";
-
 import moonImg from "../../assets/moon.png";
 import landImg from "../../assets/land.png";
 import googleLogoImg from "../../assets/google-logo.png";
@@ -27,8 +25,9 @@ import flagBR from "../../assets/flag-br.svg";
 import flagUS from "../../assets/flag-us.svg";
 import flagES from "../../assets/flag-es.svg";
 
-import HeroSvg from "../../components/HeroSvg";
-import Points from "../../components/Points";
+import HeroSvg from "./components/HeroSvg";
+import Points from "./components/Points";
+import Star from "./components/Star";
 
 import { LanguageContext } from "../../contexts/LanguageContext";
 
