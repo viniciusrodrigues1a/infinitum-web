@@ -26,6 +26,8 @@ import HeroSvg from "./components/HeroSvg";
 import Points from "./components/Points";
 import Star from "./components/Star";
 
+import logoImg from "../../assets/logo.png";
+
 import { LanguageContext } from "../../contexts/LanguageContext";
 import LanguagePicker from "./components/LanguagePicker";
 
@@ -83,8 +85,10 @@ export default function App(): ReactElement {
         <div id={styles.headerContentWrapper}>
           <div id={styles.headerContent}>
             <div id={styles.logo}>
-              <div id={styles.logoIcon}>LOGO</div>
-              <span id={styles.logoText}>Bug Tracker</span>
+              <div id={styles.logoIcon}>
+                <img src={logoImg} alt="LOGO" />
+              </div>
+              <span id={styles.logoText}>Infinitum</span>
             </div>
 
             <div id={styles.hamburgerButtonWrapper}>
@@ -363,8 +367,8 @@ export default function App(): ReactElement {
           </a>
         </div>
         <div className={styles.footerInfo}>
-          <button type="button" className={styles.languageButton}>
-            <FiGlobe size={32} color="var(--light)" />
+          <FiGlobe size={32} color="var(--light)" />
+          <button type="button">
             <strong>{language.home.languageButtonText}</strong>
           </button>
         </div>
