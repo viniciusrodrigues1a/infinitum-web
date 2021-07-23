@@ -85,9 +85,9 @@ export default function App(): ReactElement {
         <div id={styles.headerContentWrapper}>
           <div id={styles.headerContent}>
             <div id={styles.logo}>
-              <div id={styles.logoIcon}>
+              <a id={styles.logoIcon} href="/">
                 <img src={logoImg} alt="LOGO" />
-              </div>
+              </a>
               <span id={styles.logoText}>Infinitum</span>
             </div>
 
