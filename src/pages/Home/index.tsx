@@ -30,6 +30,7 @@ import logoImg from "../../assets/logo.png";
 
 import { LanguageContext } from "../../contexts/LanguageContext";
 import LanguagePicker from "./components/LanguagePicker";
+import LanguageModal from "./components/LanguageModal";
 
 export default function App(): ReactElement {
   const { language } = useContext(LanguageContext);
@@ -37,6 +38,7 @@ export default function App(): ReactElement {
   const [drawerMenuShown, setDrawerMenuShown] = useState(false);
   const [viewOptionIndex, setViewOptionIndex] = useState(0);
   const [languageMenuShown, setLanguageMenuShown] = useState(false);
+  const [languageModalShown, setLanguageModalShown] = useState(false);
 
   const drawerMenuOutsideRef = useRef<HTMLDivElement>(null);
   const pitchSectionRef = useRef<HTMLDivElement>(null);
@@ -69,6 +71,10 @@ export default function App(): ReactElement {
 
   function toggleLanguageMenu() {
     setLanguageMenuShown(!languageMenuShown);
+  }
+
+  function toggleLanguageModal() {
+    setLanguageModalShown(!languageModalShown);
   }
 
   function scrollToSectionBelowIntroduction() {
@@ -368,11 +374,13 @@ export default function App(): ReactElement {
         </div>
         <div className={styles.footerInfo}>
           <FiGlobe size={32} color="var(--light)" />
-          <button type="button">
+          <button type="button" onClick={toggleLanguageModal}>
             <strong>{language.home.languageButtonText}</strong>
           </button>
         </div>
       </footer>
+
+      <LanguageModal shown={languageModalShown} />
     </>
   );
 }
