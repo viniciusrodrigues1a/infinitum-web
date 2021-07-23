@@ -373,8 +373,8 @@ export default function App(): ReactElement {
           </a>
         </div>
         <div className={styles.footerInfo}>
-          <FiGlobe size={32} color="var(--light)" />
           <button type="button" onClick={toggleLanguageModal}>
+            <FiGlobe size={32} color="var(--light)" />
             <strong>{language.home.languageButtonText}</strong>
           </button>
         </div>
