@@ -506,9 +506,17 @@ footer {
   font-family: var(--text);
   font-size: 1rem;
   letter-spacing: 1.25px;
-  margin-left: 1rem;
   border: 0;
   background: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.footerInfo svg,
+.footerInfo img {
+  margin-right: 1rem;
 }
 
 .footerInfo + .footerInfo {
