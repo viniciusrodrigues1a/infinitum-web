@@ -24,6 +24,9 @@ export const enUS: Language = {
     },
     footer: {
       contactUs: "Contact Us",
+      modal: {
+        title: "Choose a language",
+      },
     },
     signInText: "Sign In",
     signUpText: "Sign Up",

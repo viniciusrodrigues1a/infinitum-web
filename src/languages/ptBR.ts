@@ -25,6 +25,9 @@ export const ptBR: Language = {
     },
     footer: {
       contactUs: "Contate-nos",
+      modal: {
+        title: "Escolha um idioma",
+      },
     },
     signInText: "Entrar",
     signUpText: "Cadastre-se",
