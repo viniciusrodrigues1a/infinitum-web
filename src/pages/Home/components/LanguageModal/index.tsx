@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useContext, useEffect, useMemo, useRef } from "react";
 import { FiX } from "react-icons/fi";
 import styles from "./languageModal.module.css";
 import "./languageModal.css";
@@ -6,6 +6,7 @@ import "./languageModal.css";
 import { languages } from "../../../../languages";
 
 import { ReactComponent as LanguageModalSvg } from "../../../../assets/language-modal.svg";
+import { LanguageContext } from "../../../../contexts/LanguageContext";
 
 type LanguageModalProps = {
   shown: boolean;
@@ -30,6 +31,8 @@ export default function LanguageModal({
   shown,
   closeModal,
 }: LanguageModalProps): React.ReactElement {
+  const { language } = useContext(LanguageContext);
+
   const outsideModalContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -162,7 +165,7 @@ export default function LanguageModal({
           <LanguageModalSvg width="24rem" height="20rem" />
         </div>
 
-        <h1 id={styles.titleHeading}>Escolha um idioma</h1>
+        <h1 id={styles.titleHeading}>{language.home.footer.modal.title}</h1>
 
         <div id={styles.languagesWrapper}>
           <div id={styles.languagesContainer}>

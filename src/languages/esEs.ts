@@ -25,6 +25,9 @@ export const esEs: Language = {
     },
     footer: {
       contactUs: "Contacta con nosotros",
+      modal: {
+        title: "Elige un idioma",
+      },
     },
     signInText: "Iniciar sesión",
     signUpText: "Inscribirse",
