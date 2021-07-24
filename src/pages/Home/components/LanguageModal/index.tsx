@@ -37,7 +37,14 @@ export default function LanguageModal({
       }
     }
 
+    function onKeyup(event: KeyboardEvent) {
+      if (shown && event.key === "Escape") {
+        closeModal();
+      }
+    }
+
     body.addEventListener("click", onClick);
+    body.addEventListener("keyup", onKeyup);
 
     if (shown) {
       body.classList.add("noVerticalScroll");
@@ -45,7 +52,10 @@ export default function LanguageModal({
       body.classList.remove("noVerticalScroll");
     }
 
-    return () => body.removeEventListener("click", onClick);
+    return () => {
+      body.removeEventListener("click", onClick);
+      body.removeEventListener("keyup", onKeyup);
+    };
   }, [shown, closeModal]);
 
   useEffect(() => {
