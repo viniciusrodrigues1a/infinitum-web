@@ -35,4 +35,5 @@
 .languageItem span {
   white-space: nowrap;
   color: #444444;
+  font-family: var(--text);
 }
