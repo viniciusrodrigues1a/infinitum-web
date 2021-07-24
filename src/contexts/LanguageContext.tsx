@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { Language, ptBR, enUS, esEs } from "../languages";
+import { languages, Language } from "../languages";
 
 type LanguageContextData = {
   language: Language;
@@ -9,18 +9,14 @@ type LanguageProviderProps = {
   children: React.ReactElement;
 };
 
-const languages = {
-  "pt-BR": ptBR,
-  "en-US": enUS,
-  "es-ES": esEs,
-};
-
 export const LanguageContext = createContext({} as LanguageContextData);
 
 export const LanguageProvider = ({
   children,
 }: LanguageProviderProps): React.ReactElement => {
-  const [language, setLanguage] = useState<Language>(enUS);
+  const [language, setLanguage] = useState<Language>(
+    languages["en-US"].content
+  );
 
   function getBrowserDefaultLanguage() {
     const browserLanguage = window.navigator.language;
@@ -41,7 +37,7 @@ export const LanguageProvider = ({
     }
 
     if (lang in languages) {
-      setLanguage(languages[lang as keyof typeof languages]);
+      setLanguage(languages[lang].content);
     }
   }
 
