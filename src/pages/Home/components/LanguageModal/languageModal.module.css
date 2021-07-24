@@ -46,10 +46,14 @@
   align-items: center;
 }
 
+#languagesContainer {
+  display: flex;
+  flex-direction: column;
+}
+
 .languageContainer {
   display: inline-flex;
   align-items: center;
-  margin: 0 auto;
 }
 
 .languageContainer + .languageContainer {
