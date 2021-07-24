@@ -5,8 +5,6 @@ import "./languageModal.css";
 
 import { languages } from "../../../../languages";
 
-import flagBR from "../../../../assets/flag-br.svg";
-
 import { ReactComponent as LanguageModalSvg } from "../../../../assets/language-modal.svg";
 
 type LanguageModalProps = {
