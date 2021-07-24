@@ -31,6 +31,19 @@ export default function LanguageModal({
       return;
     }
 
+    if (shown) {
+      body.classList.add("noVerticalScroll");
+    } else {
+      body.classList.remove("noVerticalScroll");
+    }
+  }, [shown]);
+
+  useEffect(() => {
+    const body = document.querySelector("body");
+    if (!body) {
+      return;
+    }
+
     function onClick(event: MouseEvent) {
       if (shown && outsideModalContainerRef.current === event.target) {
         closeModal();
@@ -45,12 +58,6 @@ export default function LanguageModal({
 
     body.addEventListener("click", onClick);
     body.addEventListener("keyup", onKeyup);
-
-    if (shown) {
-      body.classList.add("noVerticalScroll");
-    } else {
-      body.classList.remove("noVerticalScroll");
-    }
 
     return () => {
       body.removeEventListener("click", onClick);
