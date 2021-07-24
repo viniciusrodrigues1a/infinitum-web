@@ -23,20 +23,20 @@ export const languages: LanguageInfo = {
     name: "Português (Brasil)",
     flagAlt: "Bandeira do Brasil",
     flagSvg: flagBR,
-    path: "?lang/pt-BR",
+    path: "?lang=pt-BR",
   },
   "en-US": {
     content: enUS,
     name: "English (United States)",
     flagAlt: "US Flag",
     flagSvg: flagUS,
-    path: "?lang/en-US",
+    path: "?lang=en-US",
   },
   "es-ES": {
     content: esEs,
     name: "Español (Espanha)",
     flagAlt: "Bandera española",
     flagSvg: flagES,
-    path: "?lang/es-ES",
+    path: "?lang=es-ES",
   },
 };
