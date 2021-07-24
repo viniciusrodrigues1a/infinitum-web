@@ -12,8 +12,13 @@ html {
   font-size: 87.5%;
 }
 
+.noVerticalScroll {
+  overflow-y: hidden;
+}
+
 #root {
   overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 :root {
