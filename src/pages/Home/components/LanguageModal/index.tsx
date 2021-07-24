@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { FiX } from "react-icons/fi";
 import styles from "./languageModal.module.css";
 import "./languageModal.css";
@@ -23,17 +23,29 @@ export default function LanguageModal({
   shown,
   closeModal,
 }: LanguageModalProps): React.ReactElement {
+  const outsideModalContainerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const body = document.querySelector("body");
     if (!body) {
       return;
     }
 
+    function onClick(event: MouseEvent) {
+      if (shown && outsideModalContainerRef.current === event.target) {
+        closeModal();
+      }
+    }
+
+    body.addEventListener("click", onClick);
+
     if (shown) {
       body.classList.add("noVerticalScroll");
     } else {
       body.classList.remove("noVerticalScroll");
     }
+
+    return () => body.removeEventListener("click", onClick);
   }, [shown]);
 
   useEffect(() => {
@@ -111,7 +123,7 @@ export default function LanguageModal({
   }
 
   return (
-    <div id={styles.overlay}>
+    <div id={styles.overlay} ref={outsideModalContainerRef}>
       <div id={styles.content}>
         <button id={styles.closeButton} type="button" onClick={closeModal}>
           <FiX color="#777777" size={48} />
