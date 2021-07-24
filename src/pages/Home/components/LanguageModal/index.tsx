@@ -46,7 +46,7 @@ export default function LanguageModal({
     }
 
     return () => body.removeEventListener("click", onClick);
-  }, [shown]);
+  }, [shown, closeModal]);
 
   useEffect(() => {
     if (!shown) {
