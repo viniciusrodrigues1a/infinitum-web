@@ -3,6 +3,8 @@ import { FiX } from "react-icons/fi";
 import styles from "./languageModal.module.css";
 import "./languageModal.css";
 
+import { languages } from "../../../../languages";
+
 import flagBR from "../../../../assets/flag-br.svg";
 
 import { ReactComponent as LanguageModalSvg } from "../../../../assets/language-modal.svg";
@@ -165,78 +167,25 @@ export default function LanguageModal({
         <h1 id={styles.titleHeading}>Escolha um idioma</h1>
 
         <div id={styles.languagesWrapper}>
-          <div className={styles.languageContainer}>
-            <img
-              className={styles.languageImg}
-              src={flagBR}
-              alt="Bandeira do Brasil"
-            />
-            <div className={styles.languageAnchorContainer}>
-              <a href="?lang=pt-BR" className={styles.languageAnchor}>
-                Português (Brasil)
-              </a>
-            </div>
-          </div>
+          <div id={styles.languagesContainer}>
+            {Object.keys(languages).map((langKey) => {
+              const lang = languages[langKey];
 
-          <div className={styles.languageContainer}>
-            <img
-              className={styles.languageImg}
-              src={flagBR}
-              alt="Bandeira do Brasil"
-            />
-            <div className={styles.languageAnchorContainer}>
-              <a href="?lang=pt-BR" className={styles.languageAnchor}>
-                Português (Brasil)
-              </a>
-            </div>
-          </div>
-          <div className={styles.languageContainer}>
-            <img
-              className={styles.languageImg}
-              src={flagBR}
-              alt="Bandeira do Brasil"
-            />
-            <div className={styles.languageAnchorContainer}>
-              <a href="?lang=pt-BR" className={styles.languageAnchor}>
-                Português (Brasil)
-              </a>
-            </div>
-          </div>
-          <div className={styles.languageContainer}>
-            <img
-              className={styles.languageImg}
-              src={flagBR}
-              alt="Bandeira do Brasil"
-            />
-            <div className={styles.languageAnchorContainer}>
-              <a href="?lang=pt-BR" className={styles.languageAnchor}>
-                Português (Brasil)
-              </a>
-            </div>
-          </div>
-          <div className={styles.languageContainer}>
-            <img
-              className={styles.languageImg}
-              src={flagBR}
-              alt="Bandeira do Brasil"
-            />
-            <div className={styles.languageAnchorContainer}>
-              <a href="?lang=pt-BR" className={styles.languageAnchor}>
-                Português (Brasil)
-              </a>
-            </div>
-          </div>
-          <div className={styles.languageContainer}>
-            <img
-              className={styles.languageImg}
-              src={flagBR}
-              alt="Bandeira do Brasil"
-            />
-            <div className={styles.languageAnchorContainer}>
-              <a href="?lang=pt-BR" className={styles.languageAnchor}>
-                Português (Brasil)
-              </a>
-            </div>
+              return (
+                <div className={styles.languageContainer} key={langKey}>
+                  <img
+                    className={styles.languageImg}
+                    src={lang.flagSvg}
+                    alt={lang.flagAlt}
+                  />
+                  <div className={styles.languageAnchorContainer}>
+                    <a href={lang.path} className={styles.languageAnchor}>
+                      {lang.name}
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
