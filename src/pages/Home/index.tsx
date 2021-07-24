@@ -380,7 +380,10 @@ export default function App(): ReactElement {
         </div>
       </footer>
 
-      <LanguageModal shown={languageModalShown} />
+      <LanguageModal
+        shown={languageModalShown}
+        closeModal={() => setLanguageModalShown(false)}
+      />
     </>
   );
 }

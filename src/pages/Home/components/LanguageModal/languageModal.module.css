@@ -1,0 +1,156 @@
+#overlay {
+  background-color: rgba(0, 0, 0, 0.35);
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+#content {
+  background-color: #f5f5f5;
+  margin: 4rem 2rem 2rem;
+  padding: 6rem 2rem 4rem;
+  position: relative;
+  border-radius: 0.25rem;
+  max-width: 64rem;
+}
+
+#closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+#heroSvgContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#titleHeading {
+  margin-bottom: 2.5rem;
+  text-align: center;
+  font-family: var(--title);
+}
+
+#languagesWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.languageContainer {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.languageContainer + .languageContainer {
+  margin-top: 1.5rem;
+}
+
+.languageImg {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+}
+
+.languageAnchor {
+  color: #6770c2;
+  text-decoration: none;
+  position: relative;
+  font-family: var(--text);
+}
+
+.languageAnchor:hover {
+  color: #4a5089;
+}
+
+.languageAnchorContainer {
+  overflow-x: hidden;
+  padding-bottom: 4px;
+  animation: ease-in;
+}
+
+.languageAnchor:hover:after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  animation: underlineEntering 0.2s cubic-bezier(0.63, 0, 0.97, 0.66);
+  background-color: #4a5089;
+  width: 100%;
+  height: 2px;
+}
+
+@keyframes underlineEntering {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* 360px */
+@media (min-width: 22.5rem) {
+  #titleHeading {
+    margin-top: 2rem;
+  }
+}
+
+/* 400px */
+@media (min-width: 25rem) {
+  #titleHeading {
+    margin-top: 4rem;
+  }
+}
+
+/* 600px */
+@media (min-width: 37.5rem) {
+  #titleHeading {
+    margin-top: 5rem;
+  }
+
+  #content {
+    margin-left: 4rem;
+    margin-right: 4rem;
+  }
+}
+
+/* 800px */
+@media (min-width: 50rem) {
+  #titleHeading {
+    margin-top: 6rem;
+  }
+
+  #content {
+    margin-left: 6rem;
+    margin-right: 6rem;
+  }
+}
+
+/* 1024px */
+@media (min-width: 64rem) {
+  #content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
+}
+
+/* 1152px */
+@media (min-width: 72rem) {
+  #content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+}
