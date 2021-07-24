@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { FiX } from "react-icons/fi";
 import styles from "./languageModal.module.css";
 import "./languageModal.css";
@@ -17,6 +17,13 @@ type SVGLanguage = {
   text2: string;
 };
 
+type LanguageRoulette = {
+  currentIndex: number;
+  nextIndex: () => void;
+  languages: SVGLanguage[];
+  currentLanguage: SVGLanguage;
+};
+
 let svgInterval: any = null;
 
 export default function LanguageModal({
@@ -24,19 +31,6 @@ export default function LanguageModal({
   closeModal,
 }: LanguageModalProps): React.ReactElement {
   const outsideModalContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const body = document.querySelector("body");
-    if (!body) {
-      return;
-    }
-
-    if (shown) {
-      body.classList.add("noVerticalScroll");
-    } else {
-      body.classList.remove("noVerticalScroll");
-    }
-  }, [shown]);
 
   useEffect(() => {
     const body = document.querySelector("body");
@@ -66,6 +60,49 @@ export default function LanguageModal({
   }, [shown, closeModal]);
 
   useEffect(() => {
+    const body = document.querySelector("body");
+    if (!body) {
+      return;
+    }
+
+    if (shown) {
+      body.classList.add("noVerticalScroll");
+    } else {
+      body.classList.remove("noVerticalScroll");
+    }
+  }, [shown]);
+
+  const languageRoulette: LanguageRoulette = useMemo(
+    () => ({
+      currentIndex: 0,
+      nextIndex() {
+        this.currentIndex += 1;
+        if (this.currentIndex > this.languages.length - 1) {
+          this.currentIndex = 0;
+        }
+      },
+      get currentLanguage() {
+        return this.languages[this.currentIndex];
+      },
+      languages: [
+        {
+          text1: "Bem vindo",
+          text2: "Use o Infinitum onde estiver!",
+        },
+        {
+          text1: "Welcome",
+          text2: "Use Infinitum wherever you are!",
+        },
+        {
+          text1: "Bienvenido",
+          text2: "¡Usa Infinitum dondequiera que estés! ",
+        },
+      ],
+    }),
+    []
+  );
+
+  useEffect(() => {
     if (!shown) {
       return;
     }
@@ -78,25 +115,7 @@ export default function LanguageModal({
     const svgTspan1 = document.querySelector("#textCloud1 tspan");
     const svgTspan2 = document.querySelector("#textCloud2 tspan");
 
-    const languageRoulette: SVGLanguage[] = [
-      {
-        text1: "Bem vindo",
-        text2: "Use o Infinitum onde estiver!",
-      },
-      {
-        text1: "Welcome",
-        text2: "Use Infinitum wherever you are!",
-      },
-      {
-        text1: "Bienvenido",
-        text2: "¡Usa Infinitum dondequiera que estés! ",
-      },
-    ];
-
-    let index = 0;
-
-    (async () => await animate())();
-
+    animate(); // começa a animação uma vez antes do interval chamar o callback pra não ficar sem texto no balão
     svgInterval = setInterval(async () => {
       await animate();
     }, 3600);
@@ -106,10 +125,10 @@ export default function LanguageModal({
         return;
       }
 
-      nextIndex();
+      languageRoulette.nextIndex();
 
-      svgTspan1.innerHTML = languageRoulette[index].text1;
-      svgTspan2.innerHTML = languageRoulette[index].text2;
+      svgTspan1.innerHTML = languageRoulette.currentLanguage.text1;
+      svgTspan2.innerHTML = languageRoulette.currentLanguage.text2;
 
       await Promise.all([
         runAnimationOnElement(svgTspan1.parentElement! as HTMLElement),
@@ -126,14 +145,7 @@ export default function LanguageModal({
       element.classList.add("svgLeavingAnimation");
       await new Promise((resolve) => setTimeout(resolve, 600));
     }
-
-    function nextIndex() {
-      index += 1;
-      if (index > languageRoulette.length - 1) {
-        index = 0;
-      }
-    }
-  }, [shown]);
+  }, [shown, languageRoulette]);
 
   if (!shown) {
     return <></>;

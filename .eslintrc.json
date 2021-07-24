@@ -33,7 +33,7 @@
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx"] }],
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["warn"],
+    "@typescript-eslint/no-use-before-define": ["off"],
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
@@ -42,7 +42,8 @@
     "react/react-in-jsx-scope": "off",
     "import/extensions": "off",
     "consistent-return": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "react/no-this-in-sfc": "off"
   },
   "settings": {
     "import/resolver": {
