@@ -392,7 +392,10 @@ export default function App(): ReactElement {
         closeModal={() => setLanguageModalShown(false)}
       />
 
-      <SignUpModal shown={signUpModalShown} />
+      <SignUpModal
+        shown={signUpModalShown}
+        closeModal={() => setSignUpModalShown(false)}
+      />
     </>
   );
 }

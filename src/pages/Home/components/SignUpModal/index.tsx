@@ -3,22 +3,25 @@ import React from "react";
 import styles from "./signUpModal.module.css";
 
 import asideImage from "../../../../assets/signup-modal.png";
+import { Modal } from "../../../../components/Modal";
 
 type SignUpModalProps = {
   shown: boolean;
+  closeModal: () => void;
 };
 
 export default function SignUpModal({
   shown,
+  closeModal,
 }: SignUpModalProps): React.ReactElement {
-  if (!shown) {
-    return <></>;
-  }
-
   return (
-    <div id={styles.container}>
+    <Modal.Container shown={shown} closeModal={closeModal}>
       <div id={styles.wrapper}>
         <div id={styles.content}>
+          <div id={styles.closeButtonWrapper}>
+            <Modal.CloseButton closeModal={closeModal} size={40} />
+          </div>
+
           <h1 id={styles.title}>Crie sua conta</h1>
 
           <div id={styles.formAndButtonsWrapper}>
@@ -74,6 +77,6 @@ export default function SignUpModal({
         </div>
         <img id={styles.signUpImg} src={asideImage} alt="Foguete no espaço" />
       </div>
-    </div>
+    </Modal.Container>
   );
 }
