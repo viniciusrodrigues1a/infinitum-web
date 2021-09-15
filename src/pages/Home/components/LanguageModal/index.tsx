@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useMemo, useRef } from "react";
-import { FiX } from "react-icons/fi";
+import React, { useContext, useEffect, useMemo } from "react";
 import styles from "./languageModal.module.css";
 import "./languageModal.css";
 
@@ -7,6 +6,7 @@ import { languages } from "../../../../languages";
 
 import { ReactComponent as LanguageModalSvg } from "../../../../assets/language-modal.svg";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { Modal } from "../../../../components/Modal";
 
 type LanguageModalProps = {
   shown: boolean;
@@ -32,48 +32,6 @@ export default function LanguageModal({
   closeModal,
 }: LanguageModalProps): React.ReactElement {
   const { language } = useContext(LanguageContext);
-
-  const outsideModalContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const body = document.querySelector("body");
-    if (!body) {
-      return;
-    }
-
-    function onClick(event: MouseEvent) {
-      if (shown && outsideModalContainerRef.current === event.target) {
-        closeModal();
-      }
-    }
-
-    function onKeyup(event: KeyboardEvent) {
-      if (shown && event.key === "Escape") {
-        closeModal();
-      }
-    }
-
-    body.addEventListener("click", onClick);
-    body.addEventListener("keyup", onKeyup);
-
-    return () => {
-      body.removeEventListener("click", onClick);
-      body.removeEventListener("keyup", onKeyup);
-    };
-  }, [shown, closeModal]);
-
-  useEffect(() => {
-    const body = document.querySelector("body");
-    if (!body) {
-      return;
-    }
-
-    if (shown) {
-      body.classList.add("noVerticalScroll");
-    } else {
-      body.classList.remove("noVerticalScroll");
-    }
-  }, [shown]);
 
   const languageRoulette: LanguageRoulette = useMemo(
     () => ({
@@ -150,16 +108,12 @@ export default function LanguageModal({
     }
   }, [shown, languageRoulette]);
 
-  if (!shown) {
-    return <></>;
-  }
-
   return (
-    <div id={styles.overlay} ref={outsideModalContainerRef}>
+    <Modal.Container shown={shown} closeModal={closeModal}>
       <div id={styles.content}>
-        <button id={styles.closeButton} type="button" onClick={closeModal}>
-          <FiX color="#777777" size={48} />
-        </button>
+        <div id={styles.closeButtonWrapper}>
+          <Modal.CloseButton closeModal={closeModal} />
+        </div>
 
         <div id={styles.heroSvgContainer}>
           <LanguageModalSvg width="24rem" height="20rem" />
@@ -190,6 +144,6 @@ export default function LanguageModal({
           </div>
         </div>
       </div>
-    </div>
+    </Modal.Container>
   );
 }

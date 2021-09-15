@@ -18,13 +18,10 @@
   max-width: 64rem;
 }
 
-#closeButton {
+#closeButtonWrapper {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  border: none;
-  background: none;
-  cursor: pointer;
 }
 
 #heroSvgContainer {
