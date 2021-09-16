@@ -1,13 +1,11 @@
 import React from "react";
-import Modal from "../../../../../components/Modal";
+import Modal, { ModalProps } from "../../../../../components/Modal";
 
 import styles from "./AuthModalLayout.module.css";
 
 import asideImage from "../../../../../assets/signup-modal.png";
 
-type AuthModalLayoutProps = {
-  shown: boolean;
-  closeModal: () => void;
+type AuthModalLayoutProps = ModalProps & {
   title: string;
   buttonTitle: string;
   onButtonClick: () => void;
