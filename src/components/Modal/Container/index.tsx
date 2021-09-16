@@ -7,7 +7,7 @@ type ContainerProps = {
   children: React.ReactElement;
 };
 
-export function Container({
+export default function Container({
   shown,
   closeModal,
   children,
