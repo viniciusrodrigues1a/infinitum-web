@@ -6,12 +6,9 @@ import { languages } from "../../../../languages";
 
 import { ReactComponent as LanguageModalSvg } from "../../../../assets/language-modal.svg";
 import { LanguageContext } from "../../../../contexts/LanguageContext";
-import Modal from "../../../../components/Modal";
+import Modal, { ModalProps } from "../../../../components/Modal";
 
-type LanguageModalProps = {
-  shown: boolean;
-  closeModal: () => void;
-};
+type LanguageModalProps = ModalProps;
 
 type SVGLanguage = {
   text1: string;

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styles from "./modalContainer.module.css";
 
-type ContainerProps = {
+export type ContainerProps = {
   shown: boolean;
   closeModal: () => void;
   children: React.ReactElement;

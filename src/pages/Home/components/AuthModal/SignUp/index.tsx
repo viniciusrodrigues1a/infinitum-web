@@ -1,10 +1,8 @@
 import React from "react";
+import { ModalProps } from "../../../../../components/Modal";
 import AuthModalLayout from "../Layout";
 
-type SignUpProps = {
-  shown: boolean;
-  closeModal: () => void;
-};
+type SignUpProps = ModalProps;
 
 export default function SignUp({
   shown,
