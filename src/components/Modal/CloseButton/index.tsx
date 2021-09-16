@@ -12,7 +12,7 @@ CloseButton.defaultProps = {
   size: 48,
 };
 
-export function CloseButton({
+export default function CloseButton({
   closeModal,
   size,
 }: CloseButtonProps): React.ReactElement {

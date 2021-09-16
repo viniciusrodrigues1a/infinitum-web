@@ -1,4 +1,6 @@
-import { Container } from "./Container";
-import { CloseButton } from "./CloseButton";
+import Container from "./Container";
+import CloseButton from "./CloseButton";
 
-export const Modal = { Container, CloseButton };
+const Modal = { Container, CloseButton };
+
+export default Modal;
