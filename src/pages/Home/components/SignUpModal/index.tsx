@@ -60,10 +60,18 @@ export default function SignUpModal({
             </form>
 
             <div id={styles.buttonContainer}>
-              <button type="button" id={styles.signInWithGoogleButton}>
+              <button
+                type="button"
+                id={styles.signInWithGoogleButton}
+                className={styles.button}
+              >
                 Google
               </button>
-              <button type="button" id={styles.signUpButton}>
+              <button
+                type="button"
+                id={styles.signUpButton}
+                className={styles.button}
+              >
                 Cadastrar-se
               </button>
             </div>
