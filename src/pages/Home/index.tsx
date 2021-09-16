@@ -31,12 +31,14 @@ import logoImg from "../../assets/logo.png";
 import { LanguageContext } from "../../contexts/LanguageContext";
 import LanguagePicker from "./components/LanguagePicker";
 import LanguageModal from "./components/LanguageModal";
-import SignUpModal from "./components/SignUpModal";
+import AuthModal from "./components/AuthModal";
 
 export default function App(): ReactElement {
   const { language } = useContext(LanguageContext);
 
-  const [signUpModalShown, setSignUpModalShown] = useState(false);
+  const [authModalShownName, setAuthModalShownName] = useState<
+    "signup" | "signin" | null
+  >(null);
   const [drawerMenuShown, setDrawerMenuShown] = useState(false);
   const [viewOptionIndex, setViewOptionIndex] = useState(0);
   const [languageMenuShown, setLanguageMenuShown] = useState(false);
@@ -134,7 +136,11 @@ export default function App(): ReactElement {
               </div>
 
               <div className={styles.navitem}>
-                <button type="button" className={styles.signInButton}>
+                <button
+                  type="button"
+                  className={styles.signInButton}
+                  onClick={() => setAuthModalShownName("signin")}
+                >
                   {language.home.signInText}
                 </button>
               </div>
@@ -143,7 +149,7 @@ export default function App(): ReactElement {
                 <button
                   type="button"
                   className={styles.signUpButton}
-                  onClick={() => setSignUpModalShown(true)}
+                  onClick={() => setAuthModalShownName("signup")}
                 >
                   {language.home.signUpText}
                 </button>
@@ -203,7 +209,7 @@ export default function App(): ReactElement {
                 id={styles.introductionButton}
                 className={styles.signUpButton}
                 type="button"
-                onClick={() => setSignUpModalShown(true)}
+                onClick={() => setAuthModalShownName("signup")}
               >
                 {language.home.signUpText}
               </button>
@@ -392,9 +398,14 @@ export default function App(): ReactElement {
         closeModal={() => setLanguageModalShown(false)}
       />
 
-      <SignUpModal
-        shown={signUpModalShown}
-        closeModal={() => setSignUpModalShown(false)}
+      <AuthModal.SignUp
+        shown={authModalShownName === "signup"}
+        closeModal={() => setAuthModalShownName(null)}
+      />
+
+      <AuthModal.SignIn
+        shown={authModalShownName === "signin"}
+        closeModal={() => setAuthModalShownName(null)}
       />
     </>
   );
