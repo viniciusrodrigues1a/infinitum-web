@@ -3,15 +3,18 @@ import ReactDOM from "react-dom";
 
 import "./reset.css";
 
-import Home from "./pages/Home";
+import Routes from "./routes";
 
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { SessionProvider } from "./contexts/SessionContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <LanguageProvider>
-      <Home />
-    </LanguageProvider>
+    <SessionProvider>
+      <LanguageProvider>
+        <Routes />
+      </LanguageProvider>
+    </SessionProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
