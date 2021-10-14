@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { Redirect, Route, RouteProps } from "react-router-dom";
 import { SessionContext } from "../contexts/SessionContext";
 

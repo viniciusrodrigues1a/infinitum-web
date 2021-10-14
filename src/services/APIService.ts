@@ -5,10 +5,13 @@ interface IToastLibrary {
   error(msg: string): void;
 }
 
-type RegisterAccountDTO = {
-  name: string;
+type AccountDTO = {
   email: string;
   password: string;
+};
+
+type RegisterAccountDTO = AccountDTO & {
+  name: string;
 };
 
 export default class APIService {
@@ -35,6 +38,27 @@ export default class APIService {
 
       this.toastLibrary.success("Conta criada com sucesso");
     } catch (err) {
+      if (err.response.status === 500) {
+        this.toastLibrary.error("Erro");
+      }
+
+      this.toastLibrary.error(err.response.data.error.message);
+    }
+  }
+
+  async login({ email, password }: AccountDTO): Promise<string | undefined> {
+    try {
+      const response = await this.axiosInstance.post("/auth/login", {
+        email,
+        password,
+      });
+
+      return (response.data as any).token;
+    } catch (err) {
+      if (err.response.status === 500) {
+        this.toastLibrary.error("Erro");
+      }
+
       this.toastLibrary.error(err.response.data.error.message);
     }
   }

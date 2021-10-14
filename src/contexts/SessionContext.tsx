@@ -1,13 +1,10 @@
-import React, { createContext, useState } from "react";
-
-type Session = null | {
-  token: string;
-  tokenHeader: string;
-};
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 type SessionContextData = {
   isSignedIn: () => boolean;
-  signout: () => void;
+  clearSession: () => void;
+  storeSession: (token: string) => void;
+  sessionToken: string | null;
 };
 
 type SessionProviderProps = {
@@ -19,19 +16,29 @@ export const SessionContext = createContext({} as SessionContextData);
 export function SessionProvider({
   children,
 }: SessionProviderProps): React.ReactElement {
-  const [session, setSession] = useState<Session>();
+  const [sessionToken, setSessionToken] = useState<string | null>(null);
 
   function isSignedIn() {
-    return session === null;
+    return sessionToken !== null;
   }
 
-  function signout() {
-    setSession(null);
+  function clearSession() {
+    setSessionToken(null);
+  }
+
+  function storeSession(token: string) {
+    setSessionToken(token);
   }
 
   return (
-    <SessionContext.Provider value={{ isSignedIn, signout }}>
+    <SessionContext.Provider
+      value={{ isSignedIn, storeSession, clearSession, sessionToken }}
+    >
       {children}
     </SessionContext.Provider>
   );
+}
+
+export function useSession(): SessionContextData {
+  return useContext(SessionContext);
 }

@@ -35,7 +35,7 @@ export default function SignUp({
       return;
     }
 
-    apiService.registerAccount({ name, email, password });
+    await apiService.registerAccount({ name, email, password });
   }
 
   return (
@@ -60,13 +60,13 @@ export default function SignUp({
             ref={emailInputRef}
             type="text"
             placeholder={language.home.signUpModal.emailInputPlaceholder}
-            name="email_usuario"
+            name="email"
           />
           <input
             ref={passwordInputRef}
             type="password"
             placeholder={language.home.signUpModal.passwordInputPlaceholder}
-            name="email_usuario"
+            name="password"
           />
           <input
             ref={passwordConfirmationInputRef}
