@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { languages, Language } from "../languages";
 
 type LanguageContextData = {
@@ -55,3 +55,8 @@ export const LanguageProvider = ({
     </LanguageContext.Provider>
   );
 };
+
+export function useLanguage(): Language {
+  const { language } = useContext(LanguageContext);
+  return language;
+}

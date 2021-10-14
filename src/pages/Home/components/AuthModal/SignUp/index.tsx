@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { toast } from "react-toastify";
 import { ModalProps } from "../../../../../components/Modal";
 import { useAPIService } from "../../../../../contexts/APIServiceContext";
+import { useLanguage } from "../../../../../contexts/LanguageContext";
 import AuthModalLayout from "../Layout";
 
 type SignUpProps = ModalProps;
@@ -11,6 +12,7 @@ export default function SignUp({
   closeModal,
 }: SignUpProps): React.ReactElement {
   const apiService = useAPIService();
+  const language = useLanguage();
 
   const nameInputRef = useRef<HTMLInputElement>(null);
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -38,9 +40,9 @@ export default function SignUp({
 
   return (
     <AuthModalLayout
-      title="Crie sua conta"
-      buttonTitle="Cadastre-se"
-      alternativeTitle={["Já tem uma conta?", "Faça login"]}
+      title={language.home.signUpModal.title}
+      buttonTitle={language.home.signUpModal.buttonTitle}
+      alternativeTitle={language.home.signUpModal.alternativeTitle}
       onButtonClick={handleButtonClick}
       onGoogleButtonClick={() => {}}
       onAlternativeClick={() => {}}
@@ -51,25 +53,27 @@ export default function SignUp({
           <input
             ref={nameInputRef}
             type="text"
-            placeholder="Nome"
+            placeholder={language.home.signUpModal.nameInputPlaceholder}
             name="name"
           />
           <input
             ref={emailInputRef}
             type="text"
-            placeholder="Email"
+            placeholder={language.home.signUpModal.emailInputPlaceholder}
             name="email_usuario"
           />
           <input
             ref={passwordInputRef}
             type="password"
-            placeholder="Password"
+            placeholder={language.home.signUpModal.passwordInputPlaceholder}
             name="email_usuario"
           />
           <input
             ref={passwordConfirmationInputRef}
             type="password"
-            placeholder="Confirmação de senha"
+            placeholder={
+              language.home.signUpModal.passwordConfirmationInputPlaceholder
+            }
             name="password-confirmation"
           />
         </>

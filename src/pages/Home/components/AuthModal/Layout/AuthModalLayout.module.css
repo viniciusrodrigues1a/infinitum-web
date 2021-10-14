@@ -19,6 +19,7 @@
 }
 
 #title {
+  text-align: center;
   font-family: "Open Sans", sans-serif;
   color: var(--primary);
   filter: brightness(0.7);

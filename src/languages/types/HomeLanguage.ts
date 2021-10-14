@@ -26,6 +26,21 @@ type HomeFooterLanguage = {
   };
 };
 
+type HomeBaseModalLanguage = {
+  title: string;
+  buttonTitle: string;
+  alternativeTitle: string[];
+  emailInputPlaceholder: string;
+  passwordInputPlaceholder: string;
+};
+
+type SignUpModalLanguage = HomeBaseModalLanguage & {
+  nameInputPlaceholder: string;
+  passwordConfirmationInputPlaceholder: string;
+};
+
+type SignInModalLanguage = HomeBaseModalLanguage;
+
 export type HomeLanguage = {
   introduction: HomeIntroductionLanguage;
   pitch: HomePitchLanguage;
@@ -38,4 +53,7 @@ export type HomeLanguage = {
   signUpGoogleText: string;
   signUpEmailText: string;
   languageButtonText: string;
+
+  signUpModal: SignUpModalLanguage;
+  signInModal: SignInModalLanguage;
 };

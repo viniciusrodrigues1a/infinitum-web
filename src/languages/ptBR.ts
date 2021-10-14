@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import Language from "./types";
 
 export const ptBR: Language = {
@@ -34,5 +35,21 @@ export const ptBR: Language = {
     signUpGoogleText: "Entre com Google",
     signUpEmailText: "Entre com Email",
     languageButtonText: "Idioma",
+    signUpModal: {
+      title: "Crie sua conta",
+      buttonTitle: "Cadastre-se",
+      alternativeTitle: ["Já tem uma conta?", "Faça login"],
+      nameInputPlaceholder: "Nome",
+      emailInputPlaceholder: "Email",
+      passwordInputPlaceholder: "Senha",
+      passwordConfirmationInputPlaceholder: "Confirmação de senha",
+    },
+    signInModal: {
+      title: "Entre com sua conta",
+      buttonTitle: "Entrar",
+      alternativeTitle: ["Não possui uma conta?", "Faça seu cadastro"],
+      emailInputPlaceholder: "Email",
+      passwordInputPlaceholder: "Senha",
+    },
   },
 };

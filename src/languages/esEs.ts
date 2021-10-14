@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import Language from "./types";
 
 export const esEs: Language = {
@@ -34,5 +35,21 @@ export const esEs: Language = {
     signUpGoogleText: "Iniciar Sesión con Google",
     signUpEmailText: "Iniciar Sesión con Email",
     languageButtonText: "Idioma",
+    signUpModal: {
+      title: "Create your account",
+      buttonTitle: "Sign up",
+      alternativeTitle: ["Already have an account?", "Sign in"],
+      nameInputPlaceholder: "Name",
+      emailInputPlaceholder: "Email",
+      passwordInputPlaceholder: "Password",
+      passwordConfirmationInputPlaceholder: "Password confirmation",
+    },
+    signInModal: {
+      title: "Sign in with your account",
+      buttonTitle: "Sign in",
+      alternativeTitle: ["Don't have an account?", "Sign up"],
+      emailInputPlaceholder: "Email",
+      passwordInputPlaceholder: "Password",
+    },
   },
 };
