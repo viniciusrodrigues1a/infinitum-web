@@ -4,7 +4,6 @@ import React, {
   useState,
   useRef,
   useContext,
-  useCallback,
 } from "react";
 import {
   FiMenu,
@@ -32,8 +31,9 @@ import { LanguageContext } from "../../contexts/LanguageContext";
 import LanguagePicker from "./components/LanguagePicker";
 import LanguageModal from "./components/LanguageModal";
 import AuthModal from "./components/AuthModal";
+import Modal from "../../components/Modal";
 
-export default function App(): ReactElement {
+export default function Home(): ReactElement {
   const { language } = useContext(LanguageContext);
 
   const [authModalShownName, setAuthModalShownName] = useState<
@@ -398,15 +398,32 @@ export default function App(): ReactElement {
         closeModal={() => setLanguageModalShown(false)}
       />
 
-      <AuthModal.SignUp
-        shown={authModalShownName === "signup"}
+      <Modal.Container
+        shown={authModalShownName !== null}
         closeModal={() => setAuthModalShownName(null)}
-      />
+      >
+        <>
+          {authModalShownName === "signup" && (
+            <AuthModal.SignUp
+              shown={authModalShownName === "signup"}
+              closeModal={() => setAuthModalShownName(null)}
+              openAlternativeModal={() => {
+                setAuthModalShownName("signin");
+              }}
+            />
+          )}
 
-      <AuthModal.SignIn
-        shown={authModalShownName === "signin"}
-        closeModal={() => setAuthModalShownName(null)}
-      />
+          {authModalShownName === "signin" && (
+            <AuthModal.SignIn
+              shown={authModalShownName === "signin"}
+              closeModal={() => setAuthModalShownName(null)}
+              openAlternativeModal={() => {
+                setAuthModalShownName("signup");
+              }}
+            />
+          )}
+        </>
+      </Modal.Container>
     </>
   );
 }

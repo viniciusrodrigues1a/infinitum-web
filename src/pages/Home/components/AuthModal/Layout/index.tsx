@@ -32,7 +32,7 @@ function AlternativeAuthSpan({ title, onClick }: AlternativeAuthSpanProps) {
   return (
     <span>
       {title[0]}{" "}
-      <button type="button">
+      <button type="button" onClick={onClick}>
         <strong>{title[1]}</strong>
       </button>
     </span>

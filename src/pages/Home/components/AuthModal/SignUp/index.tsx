@@ -5,11 +5,14 @@ import { useAPIService } from "../../../../../contexts/APIServiceContext";
 import { useLanguage } from "../../../../../contexts/LanguageContext";
 import AuthModalLayout from "../Layout";
 
-type SignUpProps = ModalProps;
+type SignUpProps = ModalProps & {
+  openAlternativeModal: () => void;
+};
 
 export default function SignUp({
   shown,
   closeModal,
+  openAlternativeModal,
 }: SignUpProps): React.ReactElement {
   const apiService = useAPIService();
   const language = useLanguage();
@@ -45,7 +48,7 @@ export default function SignUp({
       alternativeTitle={language.home.signUpModal.alternativeTitle}
       onButtonClick={handleButtonClick}
       onGoogleButtonClick={() => {}}
-      onAlternativeClick={() => {}}
+      onAlternativeClick={openAlternativeModal}
       shown={shown}
       closeModal={closeModal}
       formComponent={() => (

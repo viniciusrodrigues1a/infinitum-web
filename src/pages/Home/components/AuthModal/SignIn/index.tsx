@@ -6,11 +6,14 @@ import { useLanguage } from "../../../../../contexts/LanguageContext";
 import { useSession } from "../../../../../contexts/SessionContext";
 import AuthModalLayout from "../Layout";
 
-type SignInProps = ModalProps;
+type SignInProps = ModalProps & {
+  openAlternativeModal: () => void;
+};
 
 export default function SignIn({
   shown,
   closeModal,
+  openAlternativeModal,
 }: SignInProps): React.ReactElement {
   const apiService = useAPIService();
   const language = useLanguage();
@@ -42,7 +45,7 @@ export default function SignIn({
       alternativeTitle={language.home.signInModal.alternativeTitle}
       onButtonClick={handleButtonClick}
       onGoogleButtonClick={() => {}}
-      onAlternativeClick={() => {}}
+      onAlternativeClick={openAlternativeModal}
       shown={shown}
       closeModal={closeModal}
       formComponent={() => (
