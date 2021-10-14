@@ -22,9 +22,9 @@ html {
 }
 
 :root {
-  --dark: #303030;
-  --light: #eeeeee;
-  --primary: #9de258;
+  --dark: #2B2B2B;
+  --light: #E5E5E5;
+  --primary: #28CCC7;
   --title: "Open Sans", sans-serif;
   --text: "B612", sans-serif;
 }

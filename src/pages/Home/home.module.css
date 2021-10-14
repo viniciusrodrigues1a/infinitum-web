@@ -149,7 +149,7 @@ header #drawerMenuOutside {
 
 header #drawerMenu {
   width: 70%;
-  background-color: #424242;
+  background-color: #2B2B2B;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -348,7 +348,7 @@ header #drawerMenu {
 }
 
 #viewsSection > h1 > strong {
-  color: #529915;
+  color: #28CCC7;
   position: relative;
 }
 
@@ -400,7 +400,7 @@ header #drawerMenu {
 #viewsSection .selectedOption {
   background-color: #fff;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  border: 2px solid #a8cc8a;
+  border: 2px solid #28CCC7;
   transform: scale(1.15);
 }
 
@@ -457,7 +457,7 @@ header #drawerMenu {
 
 #loginOptions > button:nth-child(2) {
   margin-top: 1.75rem;
-  background-color: #ae85d9;
+  background-color: #F86825;
   color: var(--light);
 }
 
@@ -540,12 +540,12 @@ footer {
 }
 
 .signInButton {
-  background-color: #997fb2;
-  color: var(--light);
+  background-color: #F86825;
+  color: var(--dark);
 }
 
 .signInButton:hover {
-  background-color: #a892be;
+  background-color: #ff8e59;
 }
 
 .signUpButton {
@@ -554,7 +554,7 @@ footer {
 }
 
 .signUpButton:hover {
-  background-color: #ace671;
+  background-color: #04ccc5;
 }
 
 .languageButton {
