@@ -61,28 +61,33 @@ export default function AuthModalLayout({
           <h1 id={styles.title}>{title}</h1>
 
           <div id={styles.formAndButtonsWrapper}>
-            <form id={styles.form}>
+            <form
+              id={styles.form}
+              onSubmit={(e) => {
+                e.preventDefault();
+                onButtonClick();
+              }}
+            >
               <FormComponent />
-            </form>
 
-            <div id={styles.buttonContainer}>
-              <button
-                type="button"
-                id={styles.signInWithGoogleButton}
-                className={styles.button}
-                onClick={onGoogleButtonClick}
-              >
-                Google
-              </button>
-              <button
-                type="button"
-                id={styles.signUpButton}
-                className={styles.button}
-                onClick={onButtonClick}
-              >
-                {buttonTitle}
-              </button>
-            </div>
+              <div id={styles.buttonContainer}>
+                <button
+                  type="button"
+                  id={styles.signInWithGoogleButton}
+                  className={styles.button}
+                  onClick={onGoogleButtonClick}
+                >
+                  Google
+                </button>
+                <button
+                  type="submit"
+                  id={styles.signUpButton}
+                  className={styles.button}
+                >
+                  {buttonTitle}
+                </button>
+              </div>
+            </form>
           </div>
 
           <div id={styles.hasAnAccount}>
