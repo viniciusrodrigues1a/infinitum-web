@@ -32,6 +32,7 @@ import LanguagePicker from "./components/LanguagePicker";
 import LanguageModal from "./components/LanguageModal";
 import AuthModal from "./components/AuthModal";
 import Modal from "../../components/Modal";
+import DrawerMenu from "../../components/DrawerMenu";
 
 export default function Home(): ReactElement {
   const { language } = useContext(LanguageContext);
@@ -44,24 +45,19 @@ export default function Home(): ReactElement {
   const [languageMenuShown, setLanguageMenuShown] = useState(false);
   const [languageModalShown, setLanguageModalShown] = useState(false);
 
-  const drawerMenuOutsideRef = useRef<HTMLDivElement>(null);
   const pitchSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    function onClick(event: MouseEvent) {
-      if (drawerMenuShown && drawerMenuOutsideRef.current === event.target) {
-        setDrawerMenuShown(false);
-      }
-
-      if (languageMenuShown) {
-        setLanguageMenuShown(false);
-      }
-    }
-
     const body = document.querySelector("body");
 
     if (!body) {
       return;
+    }
+
+    function onClick() {
+      if (languageMenuShown) {
+        setLanguageMenuShown(false);
+      }
     }
 
     body.addEventListener("click", onClick);
@@ -69,7 +65,7 @@ export default function Home(): ReactElement {
     return () => body.removeEventListener("click", onClick);
   }, [drawerMenuShown, languageMenuShown]);
 
-  function toggleDropdownMenu() {
+  function toggleDrawerMenu() {
     setDrawerMenuShown(!drawerMenuShown);
   }
 
@@ -106,7 +102,7 @@ export default function Home(): ReactElement {
                 id={styles.hamburgerButton}
                 className={drawerMenuShown ? styles.fixed : ""}
                 type="button"
-                onClick={toggleDropdownMenu}
+                onClick={toggleDrawerMenu}
               >
                 <FiMenu
                   size={32}
@@ -158,39 +154,36 @@ export default function Home(): ReactElement {
           </div>
         </div>
 
-        {drawerMenuShown && (
-          <>
-            <div id={styles.drawerMenuOutside} ref={drawerMenuOutsideRef}>
-              <div id={styles.drawerMenu}>
-                <div className={styles.drawerItem}>
-                  <button type="button" className={styles.signInButton}>
-                    {language.home.signInText}
-                  </button>
-                </div>
-                <div className={styles.drawerItem}>
-                  <button type="button" className={styles.signUpButton}>
-                    {language.home.signUpText}
-                  </button>
-                </div>
-                <div className={styles.drawerItem}>
-                  <div id={styles.languageWrapper}>
-                    <button
-                      type="button"
-                      className={styles.languageButton}
-                      onClick={toggleLanguageMenu}
-                    >
-                      <FiGlobe size={28} color="var(--light)" />
+        <DrawerMenu.Container
+          shown={drawerMenuShown}
+          closeMenu={toggleDrawerMenu}
+        >
+          <DrawerMenu.Item>
+            <button type="button" className={styles.signInButton}>
+              {language.home.signInText}
+            </button>
+          </DrawerMenu.Item>
+          <DrawerMenu.Item>
+            <button type="button" className={styles.signUpButton}>
+              {language.home.signUpText}
+            </button>
+          </DrawerMenu.Item>
+          <DrawerMenu.Item>
+            <div id={styles.languageWrapper}>
+              <button
+                type="button"
+                className={styles.languageButton}
+                onClick={toggleLanguageMenu}
+              >
+                <FiGlobe size={28} color="var(--light)" />
 
-                      <strong>{language.home.languageButtonText}</strong>
-                    </button>
+                <strong>{language.home.languageButtonText}</strong>
+              </button>
 
-                    <LanguagePicker shown={languageMenuShown} />
-                  </div>
-                </div>
-              </div>
+              <LanguagePicker shown={languageMenuShown} />
             </div>
-          </>
-        )}
+          </DrawerMenu.Item>
+        </DrawerMenu.Container>
       </header>
 
       <main id={styles.introductionSection} className="noCssModule_main">
