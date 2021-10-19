@@ -36,6 +36,7 @@ export default function Container({
     body.addEventListener("keyup", onKeyup);
 
     return () => {
+      body.classList.remove("noVerticalScroll");
       body.removeEventListener("click", onClick);
       body.removeEventListener("keyup", onKeyup);
     };

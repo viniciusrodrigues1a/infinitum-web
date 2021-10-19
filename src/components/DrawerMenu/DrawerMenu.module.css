@@ -7,6 +7,13 @@
   height: 150vh;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
+}
+
+.flexStart {
+  justify-content: flex-start;
+}
+
+.flexEnd {
   justify-content: flex-end;
 }
 
@@ -18,16 +25,35 @@
   justify-content: flex-start;
   align-items: center;
   padding-top: 8.5rem;
+  z-index: 5;
+}
+
+.animateEnteringFromRight {
   animation-name: drawerMenuEntering;
   animation-timing-function: ease-in;
   animation-duration: 0.15s;
   animation-fill-mode: forwards;
-  z-index: 5;
 }
 
-@keyframes drawerMenuEntering {
+@keyframes drawerMenuEnteringFromRight {
   from {
     transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animateEnteringFromLeft {
+  animation-name: drawerMenuEnteringFromLeft;
+  animation-timing-function: ease-in;
+  animation-duration: 0.15s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes drawerMenuEnteringFromLeft {
+  from {
+    transform: translateX(-100%);
   }
   to {
     transform: translateX(0);

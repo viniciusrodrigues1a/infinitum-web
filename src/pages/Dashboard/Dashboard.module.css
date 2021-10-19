@@ -1,0 +1,447 @@
+#main {
+  background-color: #ebebeb;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#cardsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.875rem 1.25rem 2rem;
+  width: 100%;
+  max-width: 120rem;
+}
+
+/* CARD CLASSES */
+.card {
+  width: 100%;
+  background-color: #eeeeee;
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  padding: 1.375rem;
+}
+
+.card + .card {
+  margin-top: 3rem;
+}
+
+.cardTitle {
+  font-family: var(--title);
+  font-weight: bold;
+  font-size: 1.375rem;
+}
+
+.cardSubtitle {
+  width: 80%;
+  font-family: var(--text);
+  font-weight: 500;
+  font-size: 1rem;
+  color: #999999;
+  margin-top: 1rem;
+}
+
+.cardDateInfo {
+  font-family: var(--text);
+  color: #999999;
+  font-size: 0.875rem;
+}
+
+.cardBody {
+  margin-top: 4.5rem;
+  font-family: var(--text);
+}
+
+.cardTicket {
+  background-color: #e6e6e6;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  padding: 0.375rem;
+  width: calc(100% - 75px);
+}
+
+.cardTicket + .cardTicket {
+  margin-top: 0.875rem;
+}
+
+.cardTicketInfo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.cardTicketInfo + .cardTicketInfo {
+  margin-top: 0.5rem;
+}
+
+.cardTicketInfo strong,
+.cardTicketInfo span {
+  font-family: var(--text);
+  margin-left: 0.375rem;
+}
+
+.cardTicketInfo strong {
+  color: var(--dark);
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+.cardTicketInfo span {
+  color: #888888;
+  font-size: 0.75rem;
+}
+
+.cardMoreInfoContainer {
+  margin-top: 2.875rem;
+  overflow: hidden;
+  padding-bottom: 4px;
+}
+
+.cardMoreInfo {
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: inline-block;
+  color: #4376d8;
+  position: relative;
+  font-size: 1rem;
+}
+
+.cardMoreInfo:before {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: #aaaaaa;
+  position: absolute;
+  bottom: -4px;
+  left: 0%;
+}
+
+.cardMoreInfo:after {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: #4376d8;
+  position: absolute;
+  bottom: -4px;
+  left: -100%;
+  transition: left 0.25s;
+  transition-timing-function: ease-in;
+}
+
+.cardMoreInfo:hover:after {
+  content: "";
+  left: 0%;
+  transition-timing-function: ease-out;
+}
+
+.cardPercentualEllipsisWrapper {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.cardPercentualEllipsisWrapper,
+.cardPercentualEllipsisWrapper * {
+  transition: all 0.15s;
+}
+
+.cardPercentualEllipsisBackground {
+  width: 135px;
+  height: 135px;
+  border-radius: 50%;
+  background-color: #eeeeee;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 1;
+}
+
+.cardTotalPercentualEllipsis {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #eeeeee;
+  background: linear-gradient(45deg, #d4d4d4 0%, rgba(212, 212, 212, 0.4) 100%);
+  position: absolute;
+  top: 0%;
+  left: 0%;
+}
+
+.cardActualPercentualEllipsis {
+  border-bottom-left-radius: 300px;
+  border-bottom-right-radius: 300px;
+  width: 150px;
+  height: 75px;
+  background-color: #eeeeee;
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  background: linear-gradient(270deg, rgba(67, 118, 216, 0.4) 0%, #4376d8 100%);
+}
+
+.cardEllipsisPercentText {
+  font-family: var(--text);
+  font-size: 2rem;
+  text-align: center;
+  color: #4376d8;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 2;
+}
+
+.cardTicketsPercentageWrapper {
+  position: relative;
+}
+
+.alignSpaceBetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* CARD 1 */
+#chartOptions {
+  margin-top: 1rem;
+}
+
+.chartOption {
+  border: none;
+  background: none;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+.chartOption + .chartOption {
+  margin-left: 1.25rem;
+  color: #bbbbbb;
+  cursor: pointer;
+}
+
+.chartActiveOption {
+  cursor: pointer;
+  color: #666666;
+  position: relative;
+}
+
+.chartActiveOption:after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 20px;
+  background-color: #4376d8;
+}
+
+#chartWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+/* CARD 2 */
+#allTicketsCard #percentSpan {
+  font-weight: bold;
+  color: #4376d8;
+}
+
+#allTicketsCard .cardBody p {
+  color: #b0b0b0;
+  font-size: 1rem;
+}
+
+#allTicketsCard .cardBar {
+  margin-top: 0.75rem;
+  width: 100%;
+  height: 1rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(
+    90deg,
+    rgba(212, 212, 212, 0.4) 48.59%,
+    #d4d4d4 100%
+  );
+  position: relative;
+}
+
+#allTicketsCard .cardBar:after {
+  content: "";
+  width: 50%;
+  height: 100%;
+  border-radius: 1.25rem;
+  background: linear-gradient(
+    90deg,
+    #4376d8 0%,
+    rgba(67, 118, 216, 0.4) 100.19%
+  );
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* CARD 4 */
+#expiredTicketsCard .cardTotalPercentualEllipsis {
+  background: linear-gradient(270deg, rgba(216, 92, 67, 0.4) 0%, #d85c43 100%);
+}
+
+#expiredTicketsCard .cardEllipsisPercentText {
+  color: #d85c43;
+}
+
+#expiredTicketsCard .cardEllipsisPercentText span {
+  font-weight: normal;
+  letter-spacing: -0.1rem;
+}
+
+/* MEDIA QUERIES */
+
+/* 776px */
+@media (min-width: 48.5rem) {
+  #cardsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: gap 0.2s;
+  }
+
+  .card + .card {
+    margin-top: 0;
+  }
+
+  .card:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .card:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .card:nth-child(3) {
+    grid-column: 2;
+    grid-row: 2 / span 3;
+  }
+
+  .card:nth-child(4) {
+    grid-column: 1;
+    grid-row: 3;
+  }
+}
+
+/* 832px */
+@media (min-width: 52rem) {
+  #cardsContainer {
+    gap: 1.875rem;
+  }
+}
+
+/* 996px */
+@media (min-width: 62.25rem) {
+  #cardsContainer {
+    grid-row-gap: 2rem;
+    grid-column-gap: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .card:nth-child(1) {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+  }
+
+  .card:nth-child(2) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+}
+
+/* 1200px */
+@media (min-width: 75rem) {
+  .cardTitle {
+    font-size: 1.5rem;
+  }
+
+  .cardSubtitle,
+  .chartOption,
+  #allTicketsCard .cardBody p,
+  .cardMoreInfo {
+    font-size: 1.125rem;
+  }
+
+  .cardDateInfo {
+    font-size: 0.9375rem;
+  }
+
+  #cardsContainer {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+/* 1500px */
+@media (min-width: 93.75rem) {
+  #cardsContainer {
+    padding-left: 4rem;
+    padding-right: 4rem;
+    gap: 1.875rem;
+  }
+
+  .card:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .card:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .cardTicketInfo strong {
+    font-size: 1rem;
+  }
+
+  .cardTicketInfo span {
+    font-size: 0.875rem;
+  }
+
+  .cardPercentualEllipsisWrapper {
+    width: 180px;
+    height: 180px;
+  }
+
+  .cardPercentualEllipsisBackground {
+    width: 162px;
+    height: 162px;
+  }
+
+  .cardTotalPercentualEllipsis {
+    width: 180px;
+    height: 180px;
+  }
+
+  .cardActualPercentualEllipsis {
+    border-bottom-left-radius: 360px;
+    border-bottom-right-radius: 360px;
+    width: 180px;
+    height: 90px;
+  }
+}
+
+/* 1920px */
+@media (min-width: 120rem) {
+  #cardsContainer {
+    gap: 3rem;
+  }
+}

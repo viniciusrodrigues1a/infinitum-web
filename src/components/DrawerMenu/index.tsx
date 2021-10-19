@@ -6,12 +6,18 @@ type ContainerProps = {
   shown: boolean;
   closeMenu: () => void;
   children: React.ReactNode;
+  openFromRight?: boolean;
+};
+
+Container.defaultProps = {
+  openFromRight: true,
 };
 
 function Container({
   shown,
   closeMenu,
   children,
+  openFromRight,
 }: ContainerProps): React.ReactElement {
   const drawerMenuOutsideRef = useRef<HTMLDivElement>(null);
 
@@ -30,8 +36,18 @@ function Container({
       id={styles.drawerMenuOutside}
       ref={drawerMenuOutsideRef}
       onClick={handleClickOutsideMenu}
+      className={openFromRight ? styles.flexEnd : styles.flexStart}
     >
-      <div id={styles.drawerMenu}>{children}</div>
+      <div
+        id={styles.drawerMenu}
+        className={
+          openFromRight
+            ? styles.animateEnteringFromRight
+            : styles.animateEnteringFromLeft
+        }
+      >
+        {children}
+      </div>
     </div>
   );
 }

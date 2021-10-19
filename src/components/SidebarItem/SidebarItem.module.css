@@ -1,0 +1,203 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.container:not(.collapsed) * {
+  transition-timing-function: ease-in;
+}
+
+.container.collapsed * {
+  transition-timing-function: ease-out;
+}
+
+.container + .container {
+  margin-top: 3.375rem;
+}
+
+.itemContainer {
+  width: 100%;
+}
+
+.buttonWrapper {
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.active.collapsed .itemContainer:before {
+  content: "";
+  background-color: #0d0d0d;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.collapsed:not(.active) .itemContainer:hover:before {
+  content: "";
+  background-color: #1b1b1b;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.icon {
+  transition-property: all, left, position, transform, color;
+  transition-duration: 0.05s, 0s;
+}
+
+.container:not(.collapsed) .icon {
+  transition-delay: 0.19s, 0s;
+}
+
+.container.collapsed .icon {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition-delay: 0.09s, 0s;
+}
+
+.button span {
+  font-size: 1.25rem;
+  color: var(--light);
+  margin-left: 0.625rem;
+  font-family: var(--text);
+  transform: translateX(220%);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.container.active .button span {
+  transition-property: transform;
+  transition-duration: 0.1s;
+  transition-delay: 0.1s;
+}
+
+.container:not(.active) .button span {
+  transition-property: opacity;
+  transition-duration: 0.1s;
+}
+
+.container:not(.collapsed) .button span {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.button span.activeText {
+  color: var(--dark) !important;
+}
+
+.sidebarActiveItemOverlayContainer {
+  position: absolute;
+  width: 100%;
+  height: 10rem;
+  overflow: hidden;
+}
+
+.sidebarActiveItemOverlayIndicator {
+  width: 4px;
+  height: 3rem;
+  background-color: #ebebeb;
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  border-top-right-radius: 60px;
+  border-bottom-right-radius: 60px;
+  transform: translateY(-50%) translateX(0%);
+  transition: transform 0.15s;
+}
+
+.collapsed .sidebarActiveItemOverlayIndicator {
+  transform: translateY(-50%) translateX(-100%);
+}
+
+.sidebarActiveItemOverlaySvgWrapper {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  right: -180px;
+  transform: translateY(-50%);
+}
+
+.container.collapsed .sidebarActiveItemOverlaySvgWrapper {
+  transition-property: right, visibility, opacity;
+  transition-delay: 0s, 0.05s, 0.05s;
+  transition-duration: 0.05s;
+}
+
+.container:not(.collapsed) .sidebarActiveItemOverlaySvgWrapper {
+  transition-property: right, visibility, opacity;
+  transition-delay: 0.1s, 0s, 0s;
+  transition-duration: 0.1s;
+}
+
+.active:not(.collapsed) .sidebarActiveItemOverlaySvgWrapper {
+  right: -1px;
+  visibility: visible;
+  opacity: 1;
+}
+
+.sidebarActiveItemOverlaySvg {
+  width: 100%;
+  height: 7.85rem;
+}
+
+/* MEDIA QUERIES */
+
+/* 1920px */
+@media (min-width: 120rem) {
+  .sidebarActiveItemOverlaySvg {
+    height: 10rem;
+  }
+
+  .button span {
+    font-size: 1.75rem;
+    margin-left: 0.625rem;
+  }
+
+  .icon {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .sidebarActiveItemOverlayIndicator {
+    width: 5px;
+    height: 3.5rem;
+  }
+
+  .active.collapsed .itemContainer:before {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .collapsed:not(.active) .itemContainer:hover:before {
+    width: 4rem;
+    height: 4rem;
+  }
+}

@@ -1,10 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useContext, useMemo } from "react";
+import React, { useContext } from "react";
 import { Redirect, Route, RouteProps } from "react-router-dom";
 import { SessionContext } from "../contexts/SessionContext";
+import AuthenticatedLayout from "../layouts/AuthenticatedLayout";
 
 type AuthorizedRouteProps = {
   isPrivate?: boolean;
+  component: () => React.ReactElement;
 };
 
 AuthorizedRoute.defaultProps = {
@@ -13,6 +15,7 @@ AuthorizedRoute.defaultProps = {
 
 export default function AuthorizedRoute({
   isPrivate,
+  component: Component,
   ...rest
 }: RouteProps & AuthorizedRouteProps): React.ReactElement {
   const session = useContext(SessionContext);
@@ -25,5 +28,18 @@ export default function AuthorizedRoute({
     return <Redirect to="/" />;
   }
 
-  return <Route {...rest} />;
+  return (
+    <Route
+      {...rest}
+      render={() =>
+        isPrivate ? (
+          <AuthenticatedLayout>
+            <Component />
+          </AuthenticatedLayout>
+        ) : (
+          <Component />
+        )
+      }
+    />
+  );
 }

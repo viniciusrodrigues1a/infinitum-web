@@ -1,0 +1,16 @@
+#container {
+  display: table;
+  width: 100%;
+}
+
+#sidebar {
+  display: table-cell;
+  vertical-align: top;
+  background-color: #242424;
+}
+
+#contentWrapper {
+  display: table-cell;
+  width: 100%;
+  vertical-align: top;
+}

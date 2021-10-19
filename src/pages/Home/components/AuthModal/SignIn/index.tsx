@@ -58,7 +58,7 @@ export default function SignIn({
           />
           <input
             ref={passwordInputRef}
-            type="text"
+            type="password"
             placeholder={language.home.signInModal.passwordInputPlaceholder}
             name="password"
           />

@@ -1,10 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 type SessionContextData = {
   isSignedIn: () => boolean;
   clearSession: () => void;
   storeSession: (token: string) => void;
-  sessionToken: string | null;
+  sessionToken: string | null | undefined;
 };
 
 type SessionProviderProps = {

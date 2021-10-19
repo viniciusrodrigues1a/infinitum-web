@@ -1,0 +1,87 @@
+#container {
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.expanded {
+  flex-direction: row-reverse;
+}
+
+#iconContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.collapsed #iconContainer {
+  margin-right: -1.3125rem;
+  margin-right: calc(-1.3125rem + 6px);
+}
+
+.icon {
+  position: relative;
+  z-index: 1;
+}
+
+#container:not(.collapsed) #iconContainer {
+  flex-direction: row-reverse;
+}
+
+.chevronContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chevron {
+  width: 1.3125rem;
+  height: 1.3125rem;
+}
+
+.expanded .chevronContainer {
+  margin-right: -6px;
+}
+
+.collapsed .chevronContainer {
+  margin-left: -6px;
+}
+
+/* MEDIA QUERIES */
+
+/* 1920px */
+@media (min-width: 120rem) {
+  .icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .chevron {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .expanded .chevronContainer {
+    margin-right: -9px;
+  }
+
+  .collapsed .chevronContainer {
+    margin-left: -9px;
+  }
+
+  .collapsed #iconContainer {
+    margin-right: -1.6rem;
+    margin-right: calc(-1.6rem + 9px);
+  }
+
+  .collapsed .chevron {
+    right: -18px;
+  }
+
+  .expanded .chevron {
+    left: -18px;
+  }
+}
