@@ -16,7 +16,7 @@ export default function SignIn({
   openAlternativeModal,
 }: SignInProps): React.ReactElement {
   const apiService = useAPIService();
-  const language = useLanguage();
+  const { language } = useLanguage();
   const session = useSession();
 
   const emailInputRef = useRef<HTMLInputElement>(null);

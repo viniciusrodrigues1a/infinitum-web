@@ -15,7 +15,7 @@ export default function SignUp({
   openAlternativeModal,
 }: SignUpProps): React.ReactElement {
   const apiService = useAPIService();
-  const language = useLanguage();
+  const { language } = useLanguage();
 
   const nameInputRef = useRef<HTMLInputElement>(null);
   const emailInputRef = useRef<HTMLInputElement>(null);

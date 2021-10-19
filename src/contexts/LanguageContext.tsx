@@ -3,6 +3,7 @@ import { languages, Language } from "../languages";
 
 type LanguageContextData = {
   language: Language;
+  isoCode: string;
 };
 
 type LanguageProviderProps = {
@@ -17,6 +18,7 @@ export const LanguageProvider = ({
   const [language, setLanguage] = useState<Language>(
     languages["en-US"].content
   );
+  const [isoCode, setIsoCode] = useState("en-US");
 
   function getBrowserDefaultLanguage() {
     const browserLanguage = window.navigator.language;
@@ -37,6 +39,7 @@ export const LanguageProvider = ({
     }
 
     if (lang in languages) {
+      setIsoCode(lang);
       setLanguage(languages[lang].content);
     }
   }
@@ -50,13 +53,12 @@ export const LanguageProvider = ({
   }, []);
 
   return (
-    <LanguageContext.Provider value={{ language }}>
+    <LanguageContext.Provider value={{ language, isoCode }}>
       {children}
     </LanguageContext.Provider>
   );
 };
 
-export function useLanguage(): Language {
-  const { language } = useContext(LanguageContext);
-  return language;
+export function useLanguage(): LanguageContextData {
+  return useContext(LanguageContext);
 }
