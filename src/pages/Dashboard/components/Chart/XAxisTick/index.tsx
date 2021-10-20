@@ -16,9 +16,9 @@ export default function XAxisTick({
   dataLength,
 }: XAxisTickProps): React.ReactElement {
   const textAnchor = useMemo(() => {
-    if (index === 0) return "start";
+    if (index === 0) return "middle";
     if (index === dataLength - 1) return "end";
-    return "middle";
+    return "end";
   }, [index, dataLength]);
 
   if (payload.value === "") {

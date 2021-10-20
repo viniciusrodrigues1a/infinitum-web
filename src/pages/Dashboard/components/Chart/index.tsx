@@ -1,3 +1,4 @@
+import { url } from "inspector";
 import React, { useEffect, useState } from "react";
 import {
   Area,
@@ -99,7 +100,7 @@ export default function Chart(): React.ReactElement {
             <rect
               x={YAXIS_WIDTH}
               y={5}
-              width="calc(100% - 28px)"
+              width="10000px"
               height={CONTAINER_HEIGHT - XAXIS_HEIGHT - 5}
             />
           </clipPath>

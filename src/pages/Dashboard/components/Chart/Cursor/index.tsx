@@ -16,9 +16,11 @@ export default function Cursor({
   maximumYPositionForTooltip,
 }: CursorProps): React.ReactElement {
   const points = useMemo(() => {
-    let startingYPositionForTooltip = centerY - pixelsNeededForTooltipAboveDot;
+    const padding = 10;
+    let startingYPositionForTooltip =
+      centerY - pixelsNeededForTooltipAboveDot + padding;
     if (startingYPositionForTooltip > maximumYPositionForTooltip) {
-      startingYPositionForTooltip = maximumYPositionForTooltip;
+      startingYPositionForTooltip = maximumYPositionForTooltip + padding;
     }
 
     return [
