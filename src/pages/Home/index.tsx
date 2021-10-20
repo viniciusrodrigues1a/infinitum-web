@@ -159,12 +159,26 @@ export default function Home(): ReactElement {
           closeMenu={toggleDrawerMenu}
         >
           <DrawerMenu.Item>
-            <button type="button" className={styles.signInButton}>
+            <button
+              type="button"
+              className={styles.signInButton}
+              onClick={() => {
+                setDrawerMenuShown(false);
+                setAuthModalShownName("signin");
+              }}
+            >
               {language.home.signInText}
             </button>
           </DrawerMenu.Item>
           <DrawerMenu.Item>
-            <button type="button" className={styles.signUpButton}>
+            <button
+              type="button"
+              className={styles.signUpButton}
+              onClick={() => {
+                setDrawerMenuShown(false);
+                setAuthModalShownName("signup");
+              }}
+            >
               {language.home.signUpText}
             </button>
           </DrawerMenu.Item>
