@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { Redirect, Route, RouteProps } from "react-router-dom";
 import { SessionContext } from "../contexts/SessionContext";
 import AuthenticatedLayout from "../layouts/AuthenticatedLayout";
+import RoutesEnum from "./type-defs/RoutesEnum";
 
 type AuthorizedRouteProps = {
   isPrivate?: boolean;
@@ -21,11 +22,11 @@ export default function AuthorizedRoute({
   const session = useContext(SessionContext);
 
   if (session.isSignedIn() && !isPrivate) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to={RoutesEnum.DASHBOARD} />;
   }
 
   if (!session.isSignedIn() && isPrivate) {
-    return <Redirect to="/" />;
+    return <Redirect to={RoutesEnum.HOME} />;
   }
 
   return (
