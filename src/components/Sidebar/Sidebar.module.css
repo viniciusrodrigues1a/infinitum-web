@@ -1,33 +1,58 @@
+#containerWrapper {
+  display: none;
+  min-height: 100vh;
+  position: relative;
+}
+
 #container {
   display: none;
+  min-height: 100vh;
+  position: fixed;
+}
+
+#logoText {
+  color: var(--light);
+  font-family: "Fredoka One", "Righteous", "Arial", sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+  background: linear-gradient(to right, #1acfb2, #3a308b);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+  opacity: 1;
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  transition-property: opacity;
+  transition-duration: 0.1s;
+  transition-delay: 0.1s;
+}
+
+.collapsed #logoText {
+  opacity: 0;
+  transition: none;
+}
+
+#containerWrapper,
+#container {
   width: 11.25rem;
-  background-color: #242424;
-  position: relative;
   transition: all 0.15s;
 }
 
-#container:not(.collapsed) * {
+#containerWrapper:not(.collapsed) * {
   transition-timing-function: ease-in;
 }
 
-#container.collapsed * {
+#containerWrapper.collapsed * {
   transition-timing-function: ease-out;
 }
 
-#sidebarFillerImgWrapper {
-  position: absolute;
-  width: 11.25rem;
-  overflow: hidden;
-  top: 360px;
-  transition: all 0.15s;
-}
-
-#sidebarFillerImg {
-  width: 140px;
-}
-
-#container.collapsed,
-#container.collapsed #sidebarFillerImgWrapper {
+#containerWrapper.collapsed,
+#containerWrapper.collapsed #container {
   width: 4.85rem;
 }
 
@@ -39,10 +64,10 @@
 #sidebarHeader {
   display: flex;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 2rem 2rem 1rem;
 }
 
-#container.collapsed #sidebarHeader {
+#containerWrapper.collapsed #sidebarHeader {
   justify-content: center;
 }
 
@@ -51,7 +76,7 @@
   height: 3.5rem;
 }
 
-#container.collapsed #logo {
+#containerWrapper.collapsed #logo {
   width: 0rem;
 }
 
@@ -63,6 +88,7 @@
 
 /* 996px */
 @media (min-width: 62.25rem) {
+  #containerWrapper,
   #container {
     display: block;
   }
@@ -70,17 +96,22 @@
 
 /* 1920px */
 @media (min-width: 120rem) {
-  #container,
-  #sidebarFillerImgWrapper {
+  #containerWrapper,
+  #container {
     width: 14.5rem;
   }
 
-  #container.collapsed,
-  #container.collapsed #sidebarFillerImgWrapper {
+  #containerWrapper.collapsed,
+  #containerWrapper.collapsed #container {
     width: 6.25rem;
   }
 
-  #sidebarFillerImg {
-    width: 180px;
+  #logo {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  #logoText {
+    font-size: 1.75rem;
   }
 }

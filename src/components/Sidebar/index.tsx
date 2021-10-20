@@ -9,7 +9,6 @@ import SidebarItem from "../SidebarItem";
 
 import { useSidebar } from "../../contexts/SidebarContext";
 
-import { ReactComponent as SidebarBackgroundSvg } from "../../assets/sidebar-background.svg";
 import logoImg from "../../assets/logo.png";
 import RoutesEnum from "../../routes/type-defs/RoutesEnum";
 import { useLanguage } from "../../contexts/LanguageContext";
@@ -37,38 +36,41 @@ export default function Sidebar(): React.ReactElement {
   }, [getSidebarActiveItem]);
 
   return (
-    <div id={styles.container} className={isCollapsed ? styles.collapsed : ""}>
-      <div id={styles.sidebarFillerImgWrapper}>
-        <SidebarBackgroundSvg id={styles.sidebarFillerImg} />
-      </div>
+    <div
+      id={styles.containerWrapper}
+      className={isCollapsed ? styles.collapsed : ""}
+    >
+      <div id={styles.container}>
+        <span id={styles.logoText}>Infinitum</span>
 
-      <div id={styles.sidebarContent}>
-        <div id={styles.sidebarHeader}>
-          <img id={styles.logo} src={logoImg} alt="Infinitum" />
+        <div id={styles.sidebarContent}>
+          <div id={styles.sidebarHeader}>
+            <img id={styles.logo} src={logoImg} alt="Infinitum" />
 
-          <ExpandableHamburger
-            isCollapsed={isCollapsed}
-            onExpand={() => setIsCollapsed(false)}
-            onCollapse={() => setIsCollapsed(true)}
-            theme="light"
-          />
-        </div>
+            <ExpandableHamburger
+              isCollapsed={isCollapsed}
+              onExpand={() => setIsCollapsed(false)}
+              onCollapse={() => setIsCollapsed(true)}
+              theme="light"
+            />
+          </div>
 
-        <div id={styles.sidebarItems}>
-          <SidebarItem
-            onClick={() => history.push(RoutesEnum.DASHBOARD)}
-            collapse={isCollapsed}
-            text={language.sidebar.homeItemName}
-            active={sidebarActiveItem === "home"}
-            icon={FiHome}
-          />
-          <SidebarItem
-            onClick={() => history.push(RoutesEnum.PROJECTS)}
-            collapse={isCollapsed}
-            text={language.sidebar.projectsItemName}
-            active={sidebarActiveItem === "projects"}
-            icon={FiClipboard}
-          />
+          <div id={styles.sidebarItems}>
+            <SidebarItem
+              onClick={() => history.push(RoutesEnum.DASHBOARD)}
+              collapse={isCollapsed}
+              text={language.sidebar.homeItemName}
+              active={sidebarActiveItem === "home"}
+              icon={FiHome}
+            />
+            <SidebarItem
+              onClick={() => history.push(RoutesEnum.PROJECTS)}
+              collapse={isCollapsed}
+              text={language.sidebar.projectsItemName}
+              active={sidebarActiveItem === "projects"}
+              icon={FiClipboard}
+            />
+          </div>
         </div>
       </div>
     </div>
