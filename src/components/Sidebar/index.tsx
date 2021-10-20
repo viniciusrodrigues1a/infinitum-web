@@ -12,10 +12,12 @@ import { useSidebar } from "../../contexts/SidebarContext";
 import { ReactComponent as SidebarBackgroundSvg } from "../../assets/sidebar-background.svg";
 import logoImg from "../../assets/logo.png";
 import RoutesEnum from "../../routes/type-defs/RoutesEnum";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 type SidebarItemNames = "home" | "projects" | null;
 
 export default function Sidebar(): React.ReactElement {
+  const { language } = useLanguage();
   const location = useLocation();
   const history = useHistory();
 
@@ -56,14 +58,14 @@ export default function Sidebar(): React.ReactElement {
           <SidebarItem
             onClick={() => history.push(RoutesEnum.DASHBOARD)}
             collapse={isCollapsed}
-            text="Início"
+            text={language.sidebar.homeItemName}
             active={sidebarActiveItem === "home"}
             icon={FiHome}
           />
           <SidebarItem
             onClick={() => history.push(RoutesEnum.PROJECTS)}
             collapse={isCollapsed}
-            text="Projetos"
+            text={language.sidebar.projectsItemName}
             active={sidebarActiveItem === "projects"}
             icon={FiClipboard}
           />

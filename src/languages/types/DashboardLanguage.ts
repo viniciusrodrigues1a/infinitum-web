@@ -1,4 +1,6 @@
 export type DashboardLanguage = {
+  headerTitle: string;
+
   card1: {
     title: string;
     option1: string;

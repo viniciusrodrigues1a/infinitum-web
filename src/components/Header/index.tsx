@@ -7,12 +7,14 @@ type HeaderProps = {
   openSidebar: () => void;
   closeSidebar: () => void;
   isSidebarOpen: boolean;
+  title: string;
 };
 
 export default function Header({
   openSidebar,
   closeSidebar,
   isSidebarOpen,
+  title,
 }: HeaderProps): React.ReactElement {
   return (
     <div id={styles.container}>
@@ -31,7 +33,7 @@ export default function Header({
             />
           </div>
         </div>
-        <span id={styles.title}>Página inicial</span>
+        <span id={styles.title}>{title}</span>
       </div>
 
       <div className={styles.flexAlignedRow}>

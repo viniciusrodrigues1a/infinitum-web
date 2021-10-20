@@ -53,6 +53,7 @@ export const ptBR: Language = {
     },
   },
   dashboard: {
+    headerTitle: "Página inicial",
     card1: {
       title: "Tickets concluídos",
       option1: "Semana",
@@ -76,5 +77,9 @@ export const ptBR: Language = {
       subtitle: "Todos os tickets atribuídos a você que já venceram",
       wordTickets: "tickets",
     },
+  },
+  sidebar: {
+    homeItemName: "Início",
+    projectsItemName: "Projetos",
   },
 };

@@ -52,6 +52,7 @@ export const enUS: Language = {
     },
   },
   dashboard: {
+    headerTitle: "Home page",
     card1: {
       title: "Completed tickets",
       option1: "Week",
@@ -75,5 +76,9 @@ export const enUS: Language = {
       subtitle: "All tickets assigned to you that have already expired",
       wordTickets: "tickets",
     },
+  },
+  sidebar: {
+    homeItemName: "Home",
+    projectsItemName: "Projects",
   },
 };

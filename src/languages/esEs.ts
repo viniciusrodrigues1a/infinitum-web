@@ -53,6 +53,7 @@ export const esEs: Language = {
     },
   },
   dashboard: {
+    headerTitle: "Página de inicio",
     card1: {
       title: "Tickets completados",
       option1: "Semana",
@@ -76,5 +77,9 @@ export const esEs: Language = {
       subtitle: "Todos los tickets asignados a usted que ya han caducado",
       wordTickets: "tickets",
     },
+  },
+  sidebar: {
+    homeItemName: "Inicio",
+    projectsItemName: "Proyectos",
   },
 };

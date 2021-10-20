@@ -16,6 +16,7 @@ export default function Dashboard(): React.ReactElement {
   return (
     <>
       <Header
+        title={language.dashboard.headerTitle}
         openSidebar={() => setIsSidebarOpen(true)}
         closeSidebar={() => setIsSidebarOpen(false)}
         isSidebarOpen={isSidebarOpen}
