@@ -31,8 +31,8 @@ export const enUS: Language = {
     },
     signInText: "Sign In",
     signUpText: "Sign Up",
-    signUpGoogleText: "Sign In with Google",
-    signUpEmailText: "Sign In with Email",
+    signUpGoogleText: "Sign in with Google",
+    signUpEmailText: "Sign in with Email",
     languageButtonText: "Language",
     signUpModal: {
       title: "Create your account",
@@ -49,6 +49,31 @@ export const enUS: Language = {
       alternativeTitle: ["Don't have an account?", "Sign up"],
       emailInputPlaceholder: "Email",
       passwordInputPlaceholder: "Password",
+    },
+  },
+  dashboard: {
+    card1: {
+      title: "Completed tickets",
+      option1: "Week",
+      option2: "Month",
+      option3: "Year",
+    },
+    card2: {
+      title: "My tickets",
+      subtitle: "All tickets assigned to you",
+      getTotalTicketsFormattedMessage: (total: number) => `of ${total} tickets`,
+      getTicketsLeftFormattedMessage: (ticketsLeft: number) =>
+        `${ticketsLeft} remaining`,
+    },
+    card3: {
+      title: "My tickets for today",
+      subtitle: "All tickets assigned to you that expire today",
+      moreInfo: "See all tickets",
+    },
+    card4: {
+      title: "My expired tickets",
+      subtitle: "All tickets assigned to you that have already expired",
+      wordTickets: "tickets",
     },
   },
 };

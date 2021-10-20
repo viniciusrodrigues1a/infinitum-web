@@ -52,4 +52,29 @@ export const ptBR: Language = {
       passwordInputPlaceholder: "Senha",
     },
   },
+  dashboard: {
+    card1: {
+      title: "Tickets concluídos",
+      option1: "Semana",
+      option2: "Mês",
+      option3: "Ano",
+    },
+    card2: {
+      title: "Meus tickets",
+      subtitle: "Todos os tickets atribuídos a você",
+      getTotalTicketsFormattedMessage: (total: number) => `de ${total} tickets`,
+      getTicketsLeftFormattedMessage: (ticketsLeft: number) =>
+        `${ticketsLeft} restantes`,
+    },
+    card3: {
+      title: "Meus tickets para hoje",
+      subtitle: "Todos os tickets atribuídos a você que vencem hoje",
+      moreInfo: "Veja todos os tickets",
+    },
+    card4: {
+      title: "Meus tickets vencidos",
+      subtitle: "Todos os tickets atribuídos a você que já venceram",
+      wordTickets: "tickets",
+    },
+  },
 };

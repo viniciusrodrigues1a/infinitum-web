@@ -1,6 +1,7 @@
 import React from "react";
 import { FiClipboard, FiAlignLeft } from "react-icons/fi";
 import Header from "../../components/Header";
+import { useLanguage } from "../../contexts/LanguageContext";
 import { useSidebar } from "../../contexts/SidebarContext";
 
 import Chart from "./components/Chart";
@@ -8,6 +9,8 @@ import Chart from "./components/Chart";
 import styles from "./Dashboard.module.css";
 
 export default function Dashboard(): React.ReactElement {
+  const { language } = useLanguage();
+
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
 
   return (
@@ -23,7 +26,9 @@ export default function Dashboard(): React.ReactElement {
           {/* CARD 1 */}
           <div className={styles.card}>
             <div className={styles.cardHeader}>
-              <h1 className={styles.cardTitle}>Tickets concluídos</h1>
+              <h1 className={styles.cardTitle}>
+                {language.dashboard.card1.title}
+              </h1>
               <div id={styles.chartOptions}>
                 <button
                   className={`
@@ -32,13 +37,13 @@ export default function Dashboard(): React.ReactElement {
                 `}
                   type="button"
                 >
-                  Semana
+                  {language.dashboard.card1.option1}
                 </button>
                 <button className={styles.chartOption} type="button">
-                  Mês
+                  {language.dashboard.card1.option2}
                 </button>
                 <button className={styles.chartOption} type="button">
-                  Ano
+                  {language.dashboard.card1.option3}
                 </button>
               </div>
             </div>
@@ -52,17 +57,22 @@ export default function Dashboard(): React.ReactElement {
           {/* CARD 2 */}
           <div id={styles.allTicketsCard} className={styles.card}>
             <div className={styles.cardHeader}>
-              <h1 className={styles.cardTitle}>Meus tickets</h1>
+              <h1 className={styles.cardTitle}>
+                {language.dashboard.card2.title}
+              </h1>
               <h2 className={styles.cardSubtitle}>
-                Todos os tickets atribuídos a você
+                {language.dashboard.card2.subtitle}
               </h2>
             </div>
             <div className={styles.cardBody}>
               <div className={styles.alignSpaceBetween}>
                 <p>
-                  <span id={styles.percentSpan}>50%</span> de 20 tickets
+                  <span id={styles.percentSpan}>50%</span>{" "}
+                  {language.dashboard.card2.getTotalTicketsFormattedMessage(20)}
                 </p>
-                <p> 10 restantes</p>
+                <p>
+                  {language.dashboard.card2.getTicketsLeftFormattedMessage(10)}
+                </p>
               </div>
               <div className={styles.cardBar} />
             </div>
@@ -72,11 +82,13 @@ export default function Dashboard(): React.ReactElement {
           <div className={styles.card}>
             <div className={styles.cardHeader}>
               <div className={styles.alignSpaceBetween}>
-                <h1 className={styles.cardTitle}>Meus tickets para hoje</h1>
+                <h1 className={styles.cardTitle}>
+                  {language.dashboard.card3.title}
+                </h1>
                 <span className={styles.cardDateInfo}>Qui, Out 20</span>
               </div>
               <h2 className={styles.cardSubtitle}>
-                Todos os tickets atribuídos a você que vencem hoje
+                {language.dashboard.card3.subtitle}
               </h2>
             </div>
             <div className={styles.cardBody}>
@@ -114,7 +126,7 @@ export default function Dashboard(): React.ReactElement {
 
               <div className={styles.cardMoreInfoContainer}>
                 <button type="button" className={styles.cardMoreInfo}>
-                  Veja todos os tickets
+                  {language.dashboard.card3.moreInfo}
                 </button>
               </div>
             </div>
@@ -124,11 +136,13 @@ export default function Dashboard(): React.ReactElement {
           <div id={styles.expiredTicketsCard} className={styles.card}>
             <div className={styles.cardHeader}>
               <div className={styles.alignSpaceBetween}>
-                <h1 className={styles.cardTitle}>Meus tickets vencidos</h1>
+                <h1 className={styles.cardTitle}>
+                  {language.dashboard.card4.title}
+                </h1>
                 <span className={styles.cardDateInfo}>Qui, Out 20</span>
               </div>
               <h2 className={styles.cardSubtitle}>
-                Todos os tickets atribuídos a você que já venceram
+                {language.dashboard.card4.subtitle}
               </h2>
             </div>
             <div className={styles.cardBody}>
@@ -158,14 +172,14 @@ export default function Dashboard(): React.ReactElement {
                   <div className={styles.cardTotalPercentualEllipsis} />
                   <div className={styles.cardPercentualEllipsisBackground} />
                   <strong className={styles.cardEllipsisPercentText}>
-                    4 <span>tickets</span>
+                    4 <span>{language.dashboard.card4.wordTickets}</span>
                   </strong>
                 </div>
               </div>
 
               <div className={styles.cardMoreInfoContainer}>
                 <button type="button" className={styles.cardMoreInfo}>
-                  Veja todos os tickets
+                  {language.dashboard.card3.moreInfo}
                 </button>
               </div>
             </div>
