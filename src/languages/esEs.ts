@@ -81,5 +81,17 @@ export const esEs: Language = {
   sidebar: {
     homeItemName: "Inicio",
     projectsItemName: "Proyectos",
+    settingsItemName: "Configuración",
+  },
+  projects: {
+    headerTitle: "Proyectos",
+    table: {
+      projectNameTitle: "Nombre del proyecto",
+      progressTitle: "Progreso",
+      statusTitle: "Status",
+      ownershipTitle: "Dueño",
+      startDateTitle: "Fecha de inicio",
+      endDateTitle: "Fecha de finalización",
+    },
   },
 };

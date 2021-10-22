@@ -6,7 +6,7 @@ export const enUS: Language = {
     introduction: {
       title: "Have no limits, be Infinitum.",
       description:
-        "Expand your horizon amid the cosmos. Manage projects with the highest productivity wherever you are.",
+        "Expand your horizon amidst the cosmos. Manage projects with the highest productivity wherever you are.",
     },
     pitch: {
       title: ["Check out more about our", "work"],
@@ -80,5 +80,17 @@ export const enUS: Language = {
   sidebar: {
     homeItemName: "Home",
     projectsItemName: "Projects",
+    settingsItemName: "Settings",
+  },
+  projects: {
+    headerTitle: "Projects",
+    table: {
+      projectNameTitle: "Project name",
+      progressTitle: "Progress",
+      statusTitle: "Status",
+      ownershipTitle: "Owner",
+      startDateTitle: "Start date",
+      endDateTitle: "End date",
+    },
   },
 };

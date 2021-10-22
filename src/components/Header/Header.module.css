@@ -14,7 +14,6 @@
 
 .hamburger {
   left: 0%;
-  transform: translateX(1.25rem);
 }
 
 .animatedHamburger {
@@ -32,7 +31,7 @@
 }
 
 #title {
-  margin-left: 2rem;
+  margin-left: 1.25rem;
   font-family: var(--title);
   font-size: 1rem;
 }

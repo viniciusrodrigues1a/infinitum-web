@@ -65,15 +65,6 @@
   transform: translateX(-50%) translateY(-50%);
 }
 
-.icon {
-  transition-property: all, left, position, transform, color;
-  transition-duration: 0.05s, 0s;
-}
-
-.container:not(.collapsed) .icon {
-  transition-delay: 0.19s, 0s;
-}
-
 .container.collapsed .icon {
   position: absolute;
   left: 50%;
@@ -129,7 +120,6 @@
   border-top-right-radius: 60px;
   border-bottom-right-radius: 60px;
   transform: translateY(-50%) translateX(0%);
-  transform: translateY(calc(-50% - 1.5px)) translateX(0%);
   transition: transform 0.15s;
 }
 
@@ -168,24 +158,24 @@
 /* 1920px */
 @media (min-width: 120rem) {
   .sidebarActiveItemOverlaySvgWrapper {
-    width: 12.3rem;
-    height: 10rem;
-    right: -13.125rem;
+    width: 12.6rem;
+    height: 14rem;
+    right: -14.125rem;
   }
 
   .sidebarActiveItemOverlaySvg {
-    width: 12.3rem;
-    height: 10rem;
+    width: 12.6rem;
+    height: 14rem;
   }
 
   .button span {
-    font-size: 1.75rem;
+    font-size: 1.55rem;
     margin-left: 0.625rem;
   }
 
   .icon {
-    width: 1.75rem;
-    height: 1.75rem;
+    width: 1.55rem;
+    height: 1.55rem;
   }
 
   .sidebarActiveItemOverlayIndicator {

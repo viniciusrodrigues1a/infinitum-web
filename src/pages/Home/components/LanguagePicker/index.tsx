@@ -34,7 +34,7 @@ export default function LanguagePicker({
       <a href="?lang=es-ES" className={styles.languageItem}>
         <div>
           <img src={flagES} alt="Bandera española" />
-          <span>Español (Espanha)</span>
+          <span>Español (España)</span>
         </div>
       </a>
     </div>

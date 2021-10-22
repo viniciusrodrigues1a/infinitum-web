@@ -81,5 +81,17 @@ export const ptBR: Language = {
   sidebar: {
     homeItemName: "Início",
     projectsItemName: "Projetos",
+    settingsItemName: "Configurações",
+  },
+  projects: {
+    headerTitle: "Projetos",
+    table: {
+      projectNameTitle: "Nome do projeto",
+      progressTitle: "Progresso",
+      statusTitle: "Status",
+      ownershipTitle: "Dono",
+      startDateTitle: "Data de início",
+      endDateTitle: "Data de término",
+    },
   },
 };

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { FiHome, FiClipboard } from "react-icons/fi";
+import { FiHome, FiClipboard, FiSettings } from "react-icons/fi";
 import { useHistory, useLocation } from "react-router-dom";
 
 import styles from "./Sidebar.module.css";
@@ -13,7 +13,7 @@ import logoImg from "../../assets/logo.png";
 import RoutesEnum from "../../routes/type-defs/RoutesEnum";
 import { useLanguage } from "../../contexts/LanguageContext";
 
-type SidebarItemNames = "home" | "projects" | null;
+type SidebarItemNames = "home" | "projects" | "settings" | null;
 
 export default function Sidebar(): React.ReactElement {
   const { language } = useLanguage();
@@ -69,6 +69,12 @@ export default function Sidebar(): React.ReactElement {
               text={language.sidebar.projectsItemName}
               active={sidebarActiveItem === "projects"}
               icon={FiClipboard}
+            />
+            <SidebarItem
+              collapse={isCollapsed}
+              text={language.sidebar.settingsItemName}
+              active={sidebarActiveItem === "settings"}
+              icon={FiSettings}
             />
           </div>
         </div>

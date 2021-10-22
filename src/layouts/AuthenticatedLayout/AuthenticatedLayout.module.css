@@ -1,3 +1,4 @@
+/*
 #container {
   display: table;
   width: 100%;
@@ -13,4 +14,21 @@
   display: table-cell;
   width: 100%;
   vertical-align: top;
+}
+ */
+
+#container {
+  display: grid;
+  grid-auto-columns: min-content 1fr;
+  grid-template-areas: "sidebar  main";
+  width: 100%;
+}
+
+#sidebar {
+  background-color: #242424;
+}
+
+#contentWrapper {
+  width: 100%;
+  min-height: 100vh;
 }

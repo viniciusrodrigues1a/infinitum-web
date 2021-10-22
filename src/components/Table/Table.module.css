@@ -1,0 +1,91 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+
+.table {
+  min-width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  border-spacing: 0;
+}
+
+.table td,
+.table th {
+  white-space: nowrap;
+}
+
+.tr:not(:first-child) > .td {
+  border-top: 1px solid #dddddd;
+}
+
+.tr:first-child > .td {
+  border-top: 1px solid #d4d4d4;
+}
+
+.tr:not(:first-child) > .td,
+.tr:first-child > .td {
+  padding-top: 10px;
+}
+
+.th,
+.td {
+  padding-bottom: 10px;
+  text-align: left;
+}
+
+.thDiv {
+  display: flex;
+  align-items: center;
+}
+
+.thDiv > .thIcon {
+  display: none;
+}
+
+.thText {
+  font-family: var(--text);
+  font-size: 0.875rem;
+  font-weight: normal;
+  color: #444444;
+}
+
+.td {
+  font-family: var(--text);
+  font-size: 1rem;
+  font-weight: normal;
+  color: var(--dark);
+}
+
+.th:not(:first-child),
+.td:not(:first-child) {
+  padding-left: 1.4rem;
+  padding-right: 1.4rem;
+}
+
+/* 414px */
+@media (min-width: 25.875rem) {
+  .thIcon {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.2rem;
+  }
+
+  .thText {
+    font-size: 1rem;
+  }
+
+  .td {
+    font-size: 1.125rem;
+  }
+
+  .th:not(:first-child),
+  .td:not(:first-child) {
+    padding-left: 2.2rem;
+    padding-right: 2.2rem;
+  }
+}

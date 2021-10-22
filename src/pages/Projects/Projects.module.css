@@ -1,0 +1,74 @@
+#container {
+  height: 100%;
+  display: grid;
+  grid-auto-rows: min-content 1fr;
+  grid-template-areas:
+    "header"
+    "main";
+}
+
+#main {
+  background-color: #ebebeb;
+  padding: 0 1.25rem;
+  height: 100%;
+}
+
+#mainHeaderWrapper {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  height: 4.5rem;
+}
+
+#mainHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#filterContainer {
+  display: flex;
+  align-items: center;
+}
+
+#filterText {
+  font-family: var(--title);
+  font-size: 1rem;
+  color: #1974d2;
+}
+
+#filterIcon {
+  margin-left: 6px;
+  transform: rotate(180deg);
+}
+
+#tableWrapper {
+  width: 100%;
+  height: 100%;
+  height: calc(100% - 4.5rem);
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+#newProjectButton {
+  border: 0;
+  border-radius: 6px;
+  background-color: #28ccc7;
+  font-size: 1rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  font-family: var(--text);
+}
+
+.buttonText {
+  margin-left: 6px;
+}
+
+/* 414px */
+@media (min-width: 25.875rem) {
+  #newProjectButton {
+    padding: 0.5rem 1.25rem;
+  }
+}
