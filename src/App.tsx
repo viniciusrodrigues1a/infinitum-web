@@ -7,11 +7,6 @@ import "./reset.css";
 
 import Routes from "./routes";
 
-import { LanguageProvider } from "./contexts/LanguageContext";
-import { SessionProvider } from "./contexts/SessionContext";
-import { APIServiceProvider } from "./contexts/APIServiceContext";
-import { SidebarProvider } from "./contexts/SidebarContext";
-
 export default function App(): React.ReactElement {
   useEffect(() => {
     const removePreloadClassName = () => {
@@ -28,15 +23,7 @@ export default function App(): React.ReactElement {
   return (
     <>
       <ToastContainer style={{ zIndex: 9999999 }} />
-      <LanguageProvider>
-        <SessionProvider>
-          <APIServiceProvider>
-            <SidebarProvider>
-              <Routes />
-            </SidebarProvider>
-          </APIServiceProvider>
-        </SessionProvider>
-      </LanguageProvider>
+      <Routes />
     </>
   );
 }

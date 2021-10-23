@@ -1,4 +1,6 @@
 import React, { useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
+
 import styles from "./languageModal.module.css";
 import "./languageModal.css";
 
@@ -135,9 +137,13 @@ export default function LanguageModal({
                     alt={lang.flagAlt}
                   />
                   <div className={styles.languageAnchorContainer}>
-                    <a href={lang.path} className={styles.languageAnchor}>
+                    <Link
+                      to={lang.path}
+                      onClick={closeModal}
+                      className={styles.languageAnchor}
+                    >
                       {lang.name}
-                    </a>
+                    </Link>
                   </div>
                 </div>
               );

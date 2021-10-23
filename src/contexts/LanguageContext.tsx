@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { useLocation } from "react-router-dom";
 import { languages, Language } from "../languages";
 
 type LanguageContextData = {
@@ -15,6 +22,8 @@ export const LanguageContext = createContext({} as LanguageContextData);
 export const LanguageProvider = ({
   children,
 }: LanguageProviderProps): React.ReactElement => {
+  const location = useLocation();
+
   const [language, setLanguage] = useState<Language>(
     languages["en-US"].content
   );
@@ -26,12 +35,12 @@ export const LanguageProvider = ({
     return browserLanguage;
   }
 
-  function getLangQueryParam() {
-    const params = new URLSearchParams(window.location.search);
+  const getLangQueryParam = useCallback(() => {
+    const params = new URLSearchParams(location.search);
     const lang = params.get("lang");
 
     return lang;
-  }
+  }, [location]);
 
   function setLanguageIfSupported(lang: string | null) {
     if (!lang) {
@@ -50,7 +59,7 @@ export const LanguageProvider = ({
 
     setLanguageIfSupported(browserLanguage);
     setLanguageIfSupported(langQueryParam);
-  }, []);
+  }, [getLangQueryParam]);
 
   return (
     <LanguageContext.Provider value={{ language, isoCode }}>
