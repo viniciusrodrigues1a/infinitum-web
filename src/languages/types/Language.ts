@@ -1,14 +1,12 @@
-import { DashboardLanguage } from "./DashboardLanguage";
-import { HomeLanguage } from "./HomeLanguage";
-import { SidebarLanguage } from "./SidebarLanguage";
-import { ProjectsLanguage } from "./ProjectsLanguage";
 import { AxiosLanguage } from "./libs";
+import { ValidationLanguage } from "./validation";
+import { PagesLanguage } from "./pages";
+import { ComponentsLanguage } from "./components";
 
 export type Language = {
-  home: HomeLanguage;
-  dashboard: DashboardLanguage;
-  sidebar: SidebarLanguage;
-  projects?: ProjectsLanguage;
+  pages: PagesLanguage;
+  components: ComponentsLanguage;
+  validation: ValidationLanguage;
   libs: {
     axios: AxiosLanguage;
   };

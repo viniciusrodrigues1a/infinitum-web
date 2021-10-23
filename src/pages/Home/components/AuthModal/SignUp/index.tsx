@@ -4,6 +4,7 @@ import { ModalProps } from "../../../../../components/Modal";
 import { useAPIService } from "../../../../../contexts/APIServiceContext";
 import { useLanguage } from "../../../../../contexts/LanguageContext";
 import showToast from "../../../../../utils/showToast";
+import registerValidation from "../../../../../validation/registerValidation";
 import AuthModalLayout from "../Layout";
 
 type SignUpProps = ModalProps & {
@@ -16,7 +17,11 @@ export default function SignUp({
   openAlternativeModal,
 }: SignUpProps): React.ReactElement {
   const { registerService } = useAPIService();
-  const { language } = useLanguage();
+  const {
+    language: {
+      pages: { home: homeLanguage },
+    },
+  } = useLanguage();
 
   const nameInputRef = useRef<HTMLInputElement>(null);
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -28,21 +33,19 @@ export default function SignUp({
     const email = emailInputRef.current?.value;
     const password = passwordInputRef.current?.value;
     const passwordConfirmation = passwordConfirmationInputRef.current?.value;
+    const body = { name, email, password, passwordConfirmation };
 
-    if (!name || !email || !password || !passwordConfirmation) {
+    if (!registerValidation.validateFields(body)) {
       toast.error("Preencha todos os campos");
       return;
     }
 
-    if (password !== passwordConfirmation) {
+    if (!registerValidation.validatePasswordConfirmationField(body)) {
       toast.error("Senhas não condizem");
+      return;
     }
 
-    const response = await registerService.register({
-      name,
-      email,
-      password,
-    });
+    const response = await registerService.register(body);
 
     if (!response.error) showToast("Conta criada com sucesso");
 
@@ -52,9 +55,9 @@ export default function SignUp({
 
   return (
     <AuthModalLayout
-      title={language.home.signUpModal.title}
-      buttonTitle={language.home.signUpModal.buttonTitle}
-      alternativeTitle={language.home.signUpModal.alternativeTitle}
+      title={homeLanguage.signUpModal.title}
+      buttonTitle={homeLanguage.signUpModal.buttonTitle}
+      alternativeTitle={homeLanguage.signUpModal.alternativeTitle}
       onButtonClick={handleButtonClick}
       onGoogleButtonClick={() => {}}
       onAlternativeClick={openAlternativeModal}
@@ -65,26 +68,26 @@ export default function SignUp({
           <input
             ref={nameInputRef}
             type="text"
-            placeholder={language.home.signUpModal.nameInputPlaceholder}
+            placeholder={homeLanguage.signUpModal.nameInputPlaceholder}
             name="name"
           />
           <input
             ref={emailInputRef}
             type="text"
-            placeholder={language.home.signUpModal.emailInputPlaceholder}
+            placeholder={homeLanguage.signUpModal.emailInputPlaceholder}
             name="email"
           />
           <input
             ref={passwordInputRef}
             type="password"
-            placeholder={language.home.signUpModal.passwordInputPlaceholder}
+            placeholder={homeLanguage.signUpModal.passwordInputPlaceholder}
             name="password"
           />
           <input
             ref={passwordConfirmationInputRef}
             type="password"
             placeholder={
-              language.home.signUpModal.passwordConfirmationInputPlaceholder
+              homeLanguage.signUpModal.passwordConfirmationInputPlaceholder
             }
             name="password-confirmation"
           />

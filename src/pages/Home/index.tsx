@@ -1,10 +1,4 @@
-import React, {
-  ReactElement,
-  useEffect,
-  useState,
-  useRef,
-  useContext,
-} from "react";
+import React, { ReactElement, useEffect, useState, useRef } from "react";
 import {
   FiMenu,
   FiGlobe,
@@ -27,7 +21,7 @@ import Star from "./components/Star";
 
 import logoImg from "../../assets/logo.png";
 
-import { LanguageContext } from "../../contexts/LanguageContext";
+import { useLanguage } from "../../contexts/LanguageContext";
 import LanguagePicker from "./components/LanguagePicker";
 import LanguageModal from "./components/LanguageModal";
 import AuthModal from "./components/AuthModal";
@@ -35,7 +29,11 @@ import Modal from "../../components/Modal";
 import DrawerMenu from "../../components/DrawerMenu";
 
 export default function Home(): ReactElement {
-  const { language } = useContext(LanguageContext);
+  const {
+    language: {
+      pages: { home: homeLanguage },
+    },
+  } = useLanguage();
 
   const [authModalShownName, setAuthModalShownName] = useState<
     "signup" | "signin" | null
@@ -137,7 +135,7 @@ export default function Home(): ReactElement {
                   className={styles.signInButton}
                   onClick={() => setAuthModalShownName("signin")}
                 >
-                  {language.home.signInText}
+                  {homeLanguage.signInText}
                 </button>
               </div>
 
@@ -147,7 +145,7 @@ export default function Home(): ReactElement {
                   className={styles.signUpButton}
                   onClick={() => setAuthModalShownName("signup")}
                 >
-                  {language.home.signUpText}
+                  {homeLanguage.signUpText}
                 </button>
               </div>
             </div>
@@ -167,7 +165,7 @@ export default function Home(): ReactElement {
                 setAuthModalShownName("signin");
               }}
             >
-              {language.home.signInText}
+              {homeLanguage.signInText}
             </button>
           </DrawerMenu.Item>
           <DrawerMenu.Item>
@@ -179,7 +177,7 @@ export default function Home(): ReactElement {
                 setAuthModalShownName("signup");
               }}
             >
-              {language.home.signUpText}
+              {homeLanguage.signUpText}
             </button>
           </DrawerMenu.Item>
           <DrawerMenu.Item>
@@ -191,7 +189,7 @@ export default function Home(): ReactElement {
               >
                 <FiGlobe size={28} color="var(--light)" />
 
-                <strong>{language.home.languageButtonText}</strong>
+                <strong>{homeLanguage.languageButtonText}</strong>
               </button>
 
               <LanguagePicker shown={languageMenuShown} />
@@ -204,10 +202,10 @@ export default function Home(): ReactElement {
         <div id={styles.mainFlex}>
           <div id={styles.introductionContainer}>
             <h1 id={styles.introductionTitle}>
-              {language.home.introduction.title}
+              {homeLanguage.introduction.title}
             </h1>
             <span id={styles.introductionDescription}>
-              {language.home.introduction.description}
+              {homeLanguage.introduction.description}
             </span>
             <div id={styles.introductionButtonContainer}>
               <Points />
@@ -218,7 +216,7 @@ export default function Home(): ReactElement {
                 type="button"
                 onClick={() => setAuthModalShownName("signup")}
               >
-                {language.home.signUpText}
+                {homeLanguage.signUpText}
               </button>
             </div>
           </div>
@@ -252,8 +250,8 @@ export default function Home(): ReactElement {
         <div>
           <img src={moonImg} id={styles.moon} />
           <h1>
-            {language.home.pitch.title[0]}{" "}
-            <span>{language.home.pitch.title[1]}</span>
+            {homeLanguage.pitch.title[0]}{" "}
+            <span>{homeLanguage.pitch.title[1]}</span>
           </h1>
           <div id={styles.pitch} />
         </div>
@@ -263,10 +261,10 @@ export default function Home(): ReactElement {
         <div className={styles.showcase}>
           <div className={styles.showcaseTextContainer}>
             <h2 className={styles.showcaseTitle}>
-              {language.home.showcase.title1}
+              {homeLanguage.showcase.title1}
             </h2>
             <p className={styles.showcaseDescription}>
-              {language.home.showcase.description1}
+              {homeLanguage.showcase.description1}
             </p>
           </div>
           <img
@@ -279,11 +277,11 @@ export default function Home(): ReactElement {
         <div className={styles.showcase}>
           <div className={styles.showcaseTextContainer}>
             <h2 className={styles.showcaseTitle}>
-              {language.home.showcase.title2}
+              {homeLanguage.showcase.title2}
             </h2>
 
             <p className={styles.showcaseDescription}>
-              {language.home.showcase.description2}
+              {homeLanguage.showcase.description2}
             </p>
           </div>
           <img
@@ -297,10 +295,10 @@ export default function Home(): ReactElement {
 
       <section id={styles.viewsSection} className={styles.sectionMargin}>
         <h1>
-          {language.home.views.title[0]}{" "}
-          <strong>{language.home.views.title[1]}</strong>
+          {homeLanguage.views.title[0]}{" "}
+          <strong>{homeLanguage.views.title[1]}</strong>
         </h1>
-        <p>{language.home.views.description}</p>
+        <p>{homeLanguage.views.description}</p>
 
         <div className={styles.options}>
           <button
@@ -360,12 +358,12 @@ export default function Home(): ReactElement {
         <div id={styles.loginOptions}>
           <button type="button">
             <img src={googleLogoImg} alt="Login with google" />
-            <span>{language.home.signUpGoogleText}</span>
+            <span>{homeLanguage.signUpGoogleText}</span>
           </button>
 
           <button type="button">
             <FiMail size={48} color="var(--light)" />
-            <span>{language.home.signUpEmailText}</span>
+            <span>{homeLanguage.signUpEmailText}</span>
           </button>
         </div>
 
@@ -389,13 +387,13 @@ export default function Home(): ReactElement {
         <div className={styles.footerInfo}>
           <FiMail size={32} color="var(--light)" />
           <a href="">
-            <strong>{language.home.footer.contactUs}</strong>
+            <strong>{homeLanguage.footer.contactUs}</strong>
           </a>
         </div>
         <div className={styles.footerInfo}>
           <button type="button" onClick={toggleLanguageModal}>
             <FiGlobe size={32} color="var(--light)" />
-            <strong>{language.home.languageButtonText}</strong>
+            <strong>{homeLanguage.languageButtonText}</strong>
           </button>
         </div>
       </footer>

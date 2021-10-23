@@ -5,6 +5,7 @@ import { useAPIService } from "../../../../../contexts/APIServiceContext";
 import { useLanguage } from "../../../../../contexts/LanguageContext";
 import { useSession } from "../../../../../contexts/SessionContext";
 import showToast from "../../../../../utils/showToast";
+import loginValidation from "../../../../../validation/loginValidation";
 import AuthModalLayout from "../Layout";
 
 type SignInProps = ModalProps & {
@@ -17,7 +18,11 @@ export default function SignIn({
   openAlternativeModal,
 }: SignInProps): React.ReactElement {
   const { loginService } = useAPIService();
-  const { language } = useLanguage();
+  const {
+    language: {
+      pages: { home: homeLanguage },
+    },
+  } = useLanguage();
   const session = useSession();
 
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -26,13 +31,14 @@ export default function SignIn({
   async function handleButtonClick() {
     const email = emailInputRef.current?.value;
     const password = passwordInputRef.current?.value;
+    const body = { email, password };
 
-    if (!email || !password) {
+    if (!loginValidation.validateFields(body)) {
       toast.error("Preencha todos os campos");
       return;
     }
 
-    const response = await loginService.login({ email, password });
+    const response = await loginService.login(body);
 
     const toastMsg = response.userFriendlyMessage;
     if (toastMsg) showToast(toastMsg, response.error);
@@ -41,9 +47,9 @@ export default function SignIn({
 
   return (
     <AuthModalLayout
-      title={language.home.signInModal.title}
-      buttonTitle={language.home.signInModal.buttonTitle}
-      alternativeTitle={language.home.signInModal.alternativeTitle}
+      title={homeLanguage.signInModal.title}
+      buttonTitle={homeLanguage.signInModal.buttonTitle}
+      alternativeTitle={homeLanguage.signInModal.alternativeTitle}
       onButtonClick={handleButtonClick}
       onGoogleButtonClick={() => {}}
       onAlternativeClick={openAlternativeModal}
@@ -54,13 +60,13 @@ export default function SignIn({
           <input
             ref={emailInputRef}
             type="text"
-            placeholder={language.home.signInModal.emailInputPlaceholder}
+            placeholder={homeLanguage.signInModal.emailInputPlaceholder}
             name="email"
           />
           <input
             ref={passwordInputRef}
             type="password"
-            placeholder={language.home.signInModal.passwordInputPlaceholder}
+            placeholder={homeLanguage.signInModal.passwordInputPlaceholder}
             name="password"
           />
         </>

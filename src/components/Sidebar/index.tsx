@@ -16,7 +16,11 @@ import { useLanguage } from "../../contexts/LanguageContext";
 type SidebarItemNames = "home" | "projects" | "settings" | null;
 
 export default function Sidebar(): React.ReactElement {
-  const { language } = useLanguage();
+  const {
+    language: {
+      components: { sidebar: sidebarLanguage },
+    },
+  } = useLanguage();
   const location = useLocation();
   const history = useHistory();
 
@@ -59,20 +63,20 @@ export default function Sidebar(): React.ReactElement {
             <SidebarItem
               onClick={() => history.push(RoutesEnum.DASHBOARD)}
               collapse={isCollapsed}
-              text={language.sidebar.homeItemName}
+              text={sidebarLanguage.homeItemName}
               active={sidebarActiveItem === "home"}
               icon={FiHome}
             />
             <SidebarItem
               onClick={() => history.push(RoutesEnum.PROJECTS)}
               collapse={isCollapsed}
-              text={language.sidebar.projectsItemName}
+              text={sidebarLanguage.projectsItemName}
               active={sidebarActiveItem === "projects"}
               icon={FiClipboard}
             />
             <SidebarItem
               collapse={isCollapsed}
-              text={language.sidebar.settingsItemName}
+              text={sidebarLanguage.settingsItemName}
               active={sidebarActiveItem === "settings"}
               icon={FiSettings}
             />

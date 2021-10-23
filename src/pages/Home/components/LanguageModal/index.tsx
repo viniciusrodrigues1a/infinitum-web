@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import styles from "./languageModal.module.css";
 import "./languageModal.css";
 
 import { languages } from "../../../../languages";
 
 import { ReactComponent as LanguageModalSvg } from "../../../../assets/language-modal.svg";
-import { LanguageContext } from "../../../../contexts/LanguageContext";
+import { useLanguage } from "../../../../contexts/LanguageContext";
 import Modal, { ModalProps } from "../../../../components/Modal";
 
 type LanguageModalProps = ModalProps;
@@ -28,7 +28,11 @@ export default function LanguageModal({
   shown,
   closeModal,
 }: LanguageModalProps): React.ReactElement {
-  const { language } = useContext(LanguageContext);
+  const {
+    language: {
+      pages: { home: homeLanguage },
+    },
+  } = useLanguage();
 
   const languageRoulette: LanguageRoulette = useMemo(
     () => ({
@@ -116,7 +120,7 @@ export default function LanguageModal({
           <LanguageModalSvg width="24rem" height="20rem" />
         </div>
 
-        <h1 id={styles.titleHeading}>{language.home.footer.modal.title}</h1>
+        <h1 id={styles.titleHeading}>{homeLanguage.footer.modal.title}</h1>
 
         <div id={styles.languagesWrapper}>
           <div id={styles.languagesContainer}>

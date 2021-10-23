@@ -20,13 +20,17 @@ import { ReactComponent as UserOwnerSvg } from "../../assets/user-owner.svg";
 import Table from "../../components/Table";
 
 export default function Projects(): React.ReactElement {
-  const { language } = useLanguage();
+  const {
+    language: {
+      pages: { projects: projectsLanguage },
+    },
+  } = useLanguage();
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
 
   return (
     <div id={styles.container}>
       <Header
-        title={language.dashboard.headerTitle}
+        title={projectsLanguage.headerTitle}
         openSidebar={() => setIsSidebarOpen(true)}
         closeSidebar={() => setIsSidebarOpen(false)}
         isSidebarOpen={isSidebarOpen}
@@ -37,7 +41,9 @@ export default function Projects(): React.ReactElement {
           <div id={styles.mainHeaderWrapper}>
             <div id={styles.mainHeader}>
               <div id={styles.filterContainer}>
-                <span id={styles.filterText}>Todos os projetos</span>
+                <span id={styles.filterText}>
+                  {projectsLanguage.filter.allProjects}
+                </span>
                 <FiTriangle
                   id={styles.filterIcon}
                   size={8}
@@ -52,7 +58,9 @@ export default function Projects(): React.ReactElement {
                   color="var(--dark)"
                   size={18}
                 />
-                <span className={styles.buttonText}>Novo projeto</span>
+                <span className={styles.buttonText}>
+                  {projectsLanguage.buttonText}
+                </span>
               </button>
             </div>
           </div>
@@ -61,11 +69,14 @@ export default function Projects(): React.ReactElement {
             <Table.Container>
               <Table.Head>
                 <Table.Row>
-                  <Table.Th leftIcon={FiClipboard} text="Nome do projeto" />
+                  <Table.Th
+                    leftIcon={FiClipboard}
+                    text={projectsLanguage.table.projectNameTitle}
+                  />
                   <Table.Th
                     align="center"
                     leftIcon={FiPercent}
-                    text="Progresso"
+                    text={projectsLanguage.table.progressTitle}
                   />
                   <Table.Th align="center" leftIcon={FiShield} text="Status" />
                   <Table.Th
@@ -73,17 +84,17 @@ export default function Projects(): React.ReactElement {
                     leftIcon={(props: IconBaseProps) => (
                       <UserOwnerSvg {...props} />
                     )}
-                    text="Dono"
+                    text={projectsLanguage.table.ownershipTitle}
                   />
                   <Table.Th
                     align="center"
                     leftIcon={FiCalendar}
-                    text="Data de início"
+                    text={projectsLanguage.table.startDateTitle}
                   />
                   <Table.Th
                     align="right"
                     leftIcon={FiCalendar}
-                    text="Data de término"
+                    text={projectsLanguage.table.endDateTitle}
                   />
                 </Table.Row>
               </Table.Head>
