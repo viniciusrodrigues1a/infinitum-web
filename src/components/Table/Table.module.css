@@ -19,11 +19,11 @@
 }
 
 .tr:not(:first-child) > .td {
-  border-top: 1px solid #dddddd;
+  border-top: 1px solid #e0e0e0;
 }
 
 .tr:first-child > .td {
-  border-top: 1px solid #d4d4d4;
+  border-top: 1px solid #d5d5d5;
 }
 
 .tr:not(:first-child) > .td,
@@ -42,7 +42,7 @@
   align-items: center;
 }
 
-.thDiv > .thIcon {
+.thIcon {
   display: none;
 }
 
@@ -50,7 +50,7 @@
   font-family: var(--text);
   font-size: 0.875rem;
   font-weight: normal;
-  color: #444444;
+  color: #666666;
 }
 
 .td {
@@ -62,8 +62,8 @@
 
 .th:not(:first-child),
 .td:not(:first-child) {
-  padding-left: 1.4rem;
-  padding-right: 1.4rem;
+  padding-left: 2.4rem;
+  padding-right: 2.4rem;
 }
 
 /* 414px */
@@ -85,7 +85,36 @@
 
   .th:not(:first-child),
   .td:not(:first-child) {
-    padding-left: 2.2rem;
-    padding-right: 2.2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+/* 600px */
+@media (min-width: 37.5rem) {
+  .thIcon {
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-right: 0.4rem;
+  }
+}
+
+/* 996px */
+@media (min-width: 62.25rem) {
+  .thIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.45rem;
+  }
+}
+
+/* 1500px */
+@media (min-width: 93.75rem) {
+  .thText {
+    font-size: 1.125rem;
+  }
+
+  .td {
+    font-size: 1.25rem;
   }
 }

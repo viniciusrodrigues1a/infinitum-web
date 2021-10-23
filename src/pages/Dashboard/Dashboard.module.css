@@ -352,8 +352,8 @@
   #cardsContainer {
     grid-row-gap: 2rem;
     grid-column-gap: 1rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 
   .card:nth-child(1) {
@@ -369,6 +369,11 @@
 
 /* 1200px */
 @media (min-width: 75rem) {
+  #cardsContainer {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
   .cardTitle {
     font-size: 1.5rem;
   }
@@ -382,11 +387,6 @@
 
   .cardDateInfo {
     font-size: 0.9375rem;
-  }
-
-  #cardsContainer {
-    padding-left: 3rem;
-    padding-right: 3rem;
   }
 }
 

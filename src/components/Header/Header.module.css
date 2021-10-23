@@ -58,6 +58,11 @@
 
 /* 996px */
 @media (min-width: 62.25rem) {
+  #container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
   #hamburgerWrapper {
     display: none;
   }
@@ -75,6 +80,11 @@
 
 /* 1200px */
 @media (min-width: 75rem) {
+  #container {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
   #title {
     font-size: 1.15rem;
   }

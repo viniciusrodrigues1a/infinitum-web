@@ -1,5 +1,4 @@
-import React, { DetailedHTMLProps, HTMLAttributes } from "react";
-import { useMemo } from "react";
+import React, { DetailedHTMLProps, HTMLAttributes, useMemo } from "react";
 import { IconBaseProps } from "react-icons/lib";
 
 import styles from "./Table.module.css";
