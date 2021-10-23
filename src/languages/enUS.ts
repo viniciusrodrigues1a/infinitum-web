@@ -2,6 +2,11 @@
 import Language from "./types";
 
 export const enUS: Language = {
+  libs: {
+    axios: {
+      unexpectedErrorMessage: "Something went wrong",
+    },
+  },
   home: {
     introduction: {
       title: "Have no limits, be Infinitum.",

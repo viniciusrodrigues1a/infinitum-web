@@ -2,6 +2,11 @@
 import Language from "./types";
 
 export const ptBR: Language = {
+  libs: {
+    axios: {
+      unexpectedErrorMessage: "Algo deu errado",
+    },
+  },
   home: {
     introduction: {
       title: "Não tenha limites, seja Infinitum",

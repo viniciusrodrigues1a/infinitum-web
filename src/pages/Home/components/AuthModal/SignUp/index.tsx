@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { ModalProps } from "../../../../../components/Modal";
 import { useAPIService } from "../../../../../contexts/APIServiceContext";
 import { useLanguage } from "../../../../../contexts/LanguageContext";
+import showToast from "../../../../../utils/showToast";
 import AuthModalLayout from "../Layout";
 
 type SignUpProps = ModalProps & {
@@ -14,7 +15,7 @@ export default function SignUp({
   closeModal,
   openAlternativeModal,
 }: SignUpProps): React.ReactElement {
-  const apiService = useAPIService();
+  const { registerService } = useAPIService();
   const { language } = useLanguage();
 
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -35,10 +36,18 @@ export default function SignUp({
 
     if (password !== passwordConfirmation) {
       toast.error("Senhas não condizem");
-      return;
     }
 
-    await apiService.registerAccount({ name, email, password });
+    const response = await registerService.register({
+      name,
+      email,
+      password,
+    });
+
+    if (!response.error) showToast("Conta criada com sucesso");
+
+    const toastMsg = response.userFriendlyMessage;
+    if (toastMsg) showToast(toastMsg, response.error);
   }
 
   return (

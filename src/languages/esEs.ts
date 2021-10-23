@@ -2,6 +2,11 @@
 import Language from "./types";
 
 export const esEs: Language = {
+  libs: {
+    axios: {
+      unexpectedErrorMessage: "Algo salió mal",
+    },
+  },
   home: {
     introduction: {
       title: "No tenga límites, sé Infinitum",

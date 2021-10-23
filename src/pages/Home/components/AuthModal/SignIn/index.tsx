@@ -4,6 +4,7 @@ import { ModalProps } from "../../../../../components/Modal";
 import { useAPIService } from "../../../../../contexts/APIServiceContext";
 import { useLanguage } from "../../../../../contexts/LanguageContext";
 import { useSession } from "../../../../../contexts/SessionContext";
+import showToast from "../../../../../utils/showToast";
 import AuthModalLayout from "../Layout";
 
 type SignInProps = ModalProps & {
@@ -15,7 +16,7 @@ export default function SignIn({
   closeModal,
   openAlternativeModal,
 }: SignInProps): React.ReactElement {
-  const apiService = useAPIService();
+  const { loginService } = useAPIService();
   const { language } = useLanguage();
   const session = useSession();
 
@@ -31,11 +32,11 @@ export default function SignIn({
       return;
     }
 
-    const token = await apiService.login({ email, password });
+    const response = await loginService.login({ email, password });
 
-    if (token) {
-      session.storeSession(token);
-    }
+    const toastMsg = response.userFriendlyMessage;
+    if (toastMsg) showToast(toastMsg, response.error);
+    if (response.data) session.storeSession(response.data.token);
   }
 
   return (
