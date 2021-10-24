@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import styles from "./languagePicker.module.css";
 
@@ -19,24 +20,24 @@ export default function LanguagePicker({
 
   return (
     <div id={styles.languageMenu}>
-      <a href="?lang=pt-BR" className={styles.languageItem}>
+      <Link to="?lang=pt-BR" className={styles.languageItem}>
         <div>
           <img src={flagBR} alt="Bandeira do Brasil" />
           <span>Português (Brasil)</span>
         </div>
-      </a>
-      <a href="?lang=en-US" className={styles.languageItem}>
+      </Link>
+      <Link to="?lang=en-US" className={styles.languageItem}>
         <div>
           <img src={flagUS} alt="US Flag" />
           <span>English (United States)</span>
         </div>
-      </a>
-      <a href="?lang=es-ES" className={styles.languageItem}>
+      </Link>
+      <Link to="?lang=es-ES" className={styles.languageItem}>
         <div>
           <img src={flagES} alt="Bandera española" />
           <span>Español (España)</span>
         </div>
-      </a>
+      </Link>
     </div>
   );
 }
