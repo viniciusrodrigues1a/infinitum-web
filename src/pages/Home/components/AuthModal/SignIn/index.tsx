@@ -21,6 +21,7 @@ export default function SignIn({
   const {
     language: {
       pages: { home: homeLanguage },
+      validation: validationLanguage,
     },
   } = useLanguage();
   const session = useSession();
@@ -34,7 +35,7 @@ export default function SignIn({
     const body = { email, password };
 
     if (!loginValidation.validateFields(body)) {
-      toast.error("Preencha todos os campos");
+      toast.error(validationLanguage.emptyFields);
       return;
     }
 

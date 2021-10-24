@@ -56,4 +56,6 @@ export type HomeLanguage = {
 
   signUpModal: SignUpModalLanguage;
   signInModal: SignInModalLanguage;
+
+  accountCreatedSuccessfully: string;
 };

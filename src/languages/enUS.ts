@@ -57,6 +57,7 @@ export const enUS: Language = {
         emailInputPlaceholder: "Email",
         passwordInputPlaceholder: "Password",
       },
+      accountCreatedSuccessfully: "Account created succesfully",
     },
     dashboard: {
       headerTitle: "Home page",

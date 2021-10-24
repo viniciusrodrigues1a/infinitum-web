@@ -20,6 +20,7 @@ export default function SignUp({
   const {
     language: {
       pages: { home: homeLanguage },
+      validation: validationLanguage,
     },
   } = useLanguage();
 
@@ -36,18 +37,18 @@ export default function SignUp({
     const body = { name, email, password, passwordConfirmation };
 
     if (!registerValidation.validateFields(body)) {
-      toast.error("Preencha todos os campos");
+      toast.error(validationLanguage.emptyFields);
       return;
     }
 
     if (!registerValidation.validatePasswordConfirmationField(body)) {
-      toast.error("Senhas não condizem");
+      toast.error(validationLanguage.passwordDoesntMatchConfirmation);
       return;
     }
 
     const response = await registerService.register(body);
 
-    if (!response.error) showToast("Conta criada com sucesso");
+    if (!response.error) showToast(homeLanguage.accountCreatedSuccessfully);
 
     const toastMsg = response.userFriendlyMessage;
     if (toastMsg) showToast(toastMsg, response.error);

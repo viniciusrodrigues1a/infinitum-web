@@ -60,6 +60,7 @@ export const esEs: Language = {
         emailInputPlaceholder: "Email",
         passwordInputPlaceholder: "Contraseña",
       },
+      accountCreatedSuccessfully: "Cuenta creada con éxito",
     },
     dashboard: {
       headerTitle: "Página de inicio",

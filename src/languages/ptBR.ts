@@ -57,6 +57,7 @@ export const ptBR: Language = {
         emailInputPlaceholder: "Email",
         passwordInputPlaceholder: "Senha",
       },
+      accountCreatedSuccessfully: "Conta criada com sucesso",
     },
     dashboard: {
       headerTitle: "Página inicial",
