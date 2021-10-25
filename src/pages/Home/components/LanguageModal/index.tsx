@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import styles from "./languageModal.module.css";
 import "./languageModal.css";
 
-import { languages } from "../../../../languages";
+import { languages, SupportedLanguages } from "../../../../languages";
 
 import { ReactComponent as LanguageModalSvg } from "../../../../assets/language-modal.svg";
 import { useLanguage } from "../../../../contexts/LanguageContext";
@@ -31,6 +31,7 @@ export default function LanguageModal({
   closeModal,
 }: LanguageModalProps): React.ReactElement {
   const {
+    changeLanguageTo,
     language: {
       pages: { home: homeLanguage },
     },
@@ -127,7 +128,8 @@ export default function LanguageModal({
         <div id={styles.languagesWrapper}>
           <div id={styles.languagesContainer}>
             {Object.keys(languages).map((langKey) => {
-              const lang = languages[langKey];
+              const langIsoCode = langKey as SupportedLanguages;
+              const lang = languages[langIsoCode];
 
               return (
                 <div className={styles.languageContainer} key={langKey}>
@@ -136,14 +138,17 @@ export default function LanguageModal({
                     src={lang.flagSvg}
                     alt={lang.flagAlt}
                   />
-                  <div className={styles.languageAnchorContainer}>
-                    <Link
-                      to={lang.path}
-                      onClick={closeModal}
-                      className={styles.languageAnchor}
+                  <div className={styles.languageButtonContainer}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        changeLanguageTo(langIsoCode);
+                        closeModal();
+                      }}
+                      className={styles.languageButton}
                     >
                       {lang.name}
-                    </Link>
+                    </button>
                   </div>
                 </div>
               );

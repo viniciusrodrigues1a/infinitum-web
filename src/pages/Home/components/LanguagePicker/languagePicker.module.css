@@ -8,6 +8,10 @@
 }
 
 .languageItem {
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  cursor: pointer;
   display: block;
   text-decoration: none;
   transition: all 0.2s;

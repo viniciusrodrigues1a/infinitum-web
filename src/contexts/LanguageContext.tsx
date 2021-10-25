@@ -1,16 +1,10 @@
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { useLocation } from "react-router-dom";
-import { languages, Language } from "../languages";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { languages, Language, SupportedLanguages } from "../languages";
 
 type LanguageContextData = {
   language: Language;
   isoCode: string;
+  changeLanguageTo(language: keyof typeof languages): void;
 };
 
 type LanguageProviderProps = {
@@ -22,8 +16,6 @@ export const LanguageContext = createContext({} as LanguageContextData);
 export const LanguageProvider = ({
   children,
 }: LanguageProviderProps): React.ReactElement => {
-  const location = useLocation();
-
   const [language, setLanguage] = useState<Language>(
     languages["en-US"].content
   );
@@ -35,13 +27,6 @@ export const LanguageProvider = ({
     return browserLanguage;
   }
 
-  const getLangQueryParam = useCallback(() => {
-    const params = new URLSearchParams(location.search);
-    const lang = params.get("lang");
-
-    return lang;
-  }, [location]);
-
   function setLanguageIfSupported(lang: string | null) {
     if (!lang) {
       return;
@@ -49,20 +34,23 @@ export const LanguageProvider = ({
 
     if (lang in languages) {
       setIsoCode(lang);
-      setLanguage(languages[lang].content);
+      setLanguage(languages[lang as SupportedLanguages].content);
     }
   }
 
   useEffect(() => {
     const browserLanguage = getBrowserDefaultLanguage();
-    const langQueryParam = getLangQueryParam();
 
     setLanguageIfSupported(browserLanguage);
-    setLanguageIfSupported(langQueryParam);
-  }, [getLangQueryParam]);
+  }, []);
+
+  function changeLanguageTo(language: SupportedLanguages) {
+    setIsoCode(language);
+    setLanguage(languages[language].content);
+  }
 
   return (
-    <LanguageContext.Provider value={{ language, isoCode }}>
+    <LanguageContext.Provider value={{ language, isoCode, changeLanguageTo }}>
       {children}
     </LanguageContext.Provider>
   );
