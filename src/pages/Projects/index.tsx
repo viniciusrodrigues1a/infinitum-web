@@ -1,13 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
 import {
   FiTriangle,
   FiClipboard,
   FiPercent,
   FiShield,
   FiCalendar,
-  FiPlusCircle,
 } from "react-icons/fi";
 import { IconBaseProps } from "react-icons/lib";
 
@@ -17,9 +14,11 @@ import { useSidebar } from "../../contexts/SidebarContext";
 import { useLanguage } from "../../contexts/LanguageContext";
 
 import Header from "../../components/Header";
+import EmptyProjects from "./components/EmptyProjects";
+import CreateButton from "../../components/CreateButton";
+import Table from "../../components/Table";
 
 import { ReactComponent as UserOwnerSvg } from "../../assets/user-owner.svg";
-import Table from "../../components/Table";
 import { useAPIService } from "../../contexts/APIServiceContext";
 import { ListProjectsServiceResponse } from "../../services/interfaces";
 import { useDateFormatter } from "../../contexts/DateFormatterContext";
@@ -86,74 +85,73 @@ export default function Projects(): React.ReactElement {
                 />
               </div>
 
-              <button type="button" id={styles.newProjectButton}>
-                <FiPlusCircle
-                  className={styles.buttonIcon}
-                  color="var(--dark)"
-                  size={18}
-                />
-                <span className={styles.buttonText}>
-                  {projectsLanguage.buttonText}
-                </span>
-              </button>
+              <CreateButton title={projectsLanguage.buttonText} />
             </div>
           </div>
 
-          <div id={styles.tableWrapper}>
-            <Table.Container>
-              <Table.Head>
-                <Table.Row>
-                  <Table.Th
-                    leftIcon={FiClipboard}
-                    text={projectsLanguage.table.projectNameTitle}
-                  />
-                  <Table.Th
-                    align="center"
-                    leftIcon={FiPercent}
-                    text={projectsLanguage.table.progressTitle}
-                  />
-                  <Table.Th align="center" leftIcon={FiShield} text="Status" />
-                  <Table.Th
-                    align="center"
-                    leftIcon={(props: IconBaseProps) => (
-                      <UserOwnerSvg {...props} />
-                    )}
-                    text={projectsLanguage.table.ownershipTitle}
-                  />
-                  <Table.Th
-                    align="center"
-                    leftIcon={FiCalendar}
-                    text={projectsLanguage.table.startDateTitle}
-                  />
-                  <Table.Th
-                    align="right"
-                    leftIcon={FiCalendar}
-                    text={projectsLanguage.table.endDateTitle}
-                  />
-                </Table.Row>
-              </Table.Head>
-              <Table.Body>
-                {projects.map((p) => (
+          {projects.length === 0 ? (
+            <EmptyProjects />
+          ) : (
+            <div id={styles.tableWrapper}>
+              <Table.Container>
+                <Table.Head>
                   <Table.Row>
-                    <Table.Td>{p.name}</Table.Td>
-                    <Table.Td align="center">9%</Table.Td>
-                    <Table.Td align="center">
-                      {p.archived ? "Arquivado" : "Ativo"}
-                    </Table.Td>
-                    <Table.Td align="center">
-                      {getOwnerParticipant(p.participants)}
-                    </Table.Td>
-                    <Table.Td align="center">
-                      {p.beginsAt ? formatToFullDate(p.beginsAt) : ""}
-                    </Table.Td>
-                    <Table.Td align="right">
-                      {p.finishesAt ? formatToFullDate(p.finishesAt) : ""}
-                    </Table.Td>
+                    <Table.Th
+                      leftIcon={FiClipboard}
+                      text={projectsLanguage.table.projectNameTitle}
+                    />
+                    <Table.Th
+                      align="center"
+                      leftIcon={FiPercent}
+                      text={projectsLanguage.table.progressTitle}
+                    />
+                    <Table.Th
+                      align="center"
+                      leftIcon={FiShield}
+                      text="Status"
+                    />
+                    <Table.Th
+                      align="center"
+                      leftIcon={(props: IconBaseProps) => (
+                        <UserOwnerSvg {...props} />
+                      )}
+                      text={projectsLanguage.table.ownershipTitle}
+                    />
+                    <Table.Th
+                      align="center"
+                      leftIcon={FiCalendar}
+                      text={projectsLanguage.table.startDateTitle}
+                    />
+                    <Table.Th
+                      align="right"
+                      leftIcon={FiCalendar}
+                      text={projectsLanguage.table.endDateTitle}
+                    />
                   </Table.Row>
-                ))}
-              </Table.Body>
-            </Table.Container>
-          </div>
+                </Table.Head>
+                <Table.Body>
+                  {projects.map((p) => (
+                    <Table.Row>
+                      <Table.Td>{p.name}</Table.Td>
+                      <Table.Td align="center">9%</Table.Td>
+                      <Table.Td align="center">
+                        {p.archived ? "Arquivado" : "Ativo"}
+                      </Table.Td>
+                      <Table.Td align="center">
+                        {getOwnerParticipant(p.participants)}
+                      </Table.Td>
+                      <Table.Td align="center">
+                        {p.beginsAt ? formatToFullDate(p.beginsAt) : ""}
+                      </Table.Td>
+                      <Table.Td align="right">
+                        {p.finishesAt ? formatToFullDate(p.finishesAt) : ""}
+                      </Table.Td>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table.Container>
+            </div>
+          )}
         </div>
       </main>
     </div>

@@ -1,0 +1,43 @@
+#emptyProjectsSvg * {
+  transition-timing-function: ease-in;
+}
+
+#emptyProjectsSvg_plus,
+#emptyProjectsSvg_square {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+#emptyProjectsSvg_plus {
+  transition-duration: 0.2s;
+}
+
+#emptyProjectsSvg_square {
+  transition-duration: 0.3s;
+}
+
+#emptyProjectsSvg:hover #emptyProjectsSvg_plus,
+#emptyProjectsSvg:hover #emptyProjectsSvg_square {
+  transform: rotate(90deg);
+}
+
+.emptyProjectsSvg_blur {
+  transform: translateX(30px);
+  transition: none !important;
+}
+
+#emptyProjectsSvg:hover .emptyProjectsSvg_blur {
+  transition: transform 0.5s ease-out !important;
+}
+
+#emptyProjectsSvg:hover .emptyProjectsSvg_blur_skeleton0 {
+  transform: translateX(-80px);
+}
+
+#emptyProjectsSvg:hover .emptyProjectsSvg_blur_skeleton1 {
+  transform: translateX(-180px);
+}
+
+#emptyProjectsSvg:hover .emptyProjectsSvg_blur_skeleton2 {
+  transform: translateX(-48px);
+}

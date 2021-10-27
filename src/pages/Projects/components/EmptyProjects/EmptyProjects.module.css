@@ -1,0 +1,72 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.svg {
+  width: 13.5rem;
+  height: 13.5rem;
+}
+
+.info {
+  margin-top: 3.125rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.infoTextContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.75rem;
+}
+
+.infoText {
+  color: var(--dark);
+  font-family: var(--text);
+  font-size: 1.8rem;
+}
+
+.infoTextIcon {
+  margin-left: 0.6rem;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+/* 414px */
+@media (min-width: 25.875rem) {
+  .svg {
+    width: 20rem;
+    height: 20rem;
+  }
+}
+
+/* 600px */
+@media (min-width: 37.5rem) {
+  .svg {
+    width: 25rem;
+    height: 25rem;
+  }
+}
+
+/* 996px */
+@media (min-width: 62.25rem) {
+  .container {
+    margin-top: 2.5rem;
+  }
+}
+
+/* 1920px */
+@media (min-width: 120rem) {
+  .svg {
+    width: 31.25rem;
+    height: 31.25rem;
+  }
+}
