@@ -404,13 +404,14 @@ export default function Home(): ReactElement {
       />
 
       <Modal.Container
-        shown={authModalShownName !== null}
+        shown={
+          authModalShownName === "signup" || authModalShownName === "signin"
+        }
         closeModal={() => setAuthModalShownName(null)}
       >
         <>
           {authModalShownName === "signup" && (
             <AuthModal.SignUp
-              shown={authModalShownName === "signup"}
               closeModal={() => setAuthModalShownName(null)}
               openAlternativeModal={() => {
                 setAuthModalShownName("signin");
@@ -420,7 +421,6 @@ export default function Home(): ReactElement {
 
           {authModalShownName === "signin" && (
             <AuthModal.SignIn
-              shown={authModalShownName === "signin"}
               closeModal={() => setAuthModalShownName(null)}
               openAlternativeModal={() => {
                 setAuthModalShownName("signup");

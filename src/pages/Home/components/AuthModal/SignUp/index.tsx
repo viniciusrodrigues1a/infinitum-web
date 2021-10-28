@@ -7,12 +7,11 @@ import showToast from "../../../../../utils/showToast";
 import registerValidation from "../../../../../validation/registerValidation";
 import AuthModalLayout from "../Layout";
 
-type SignUpProps = ModalProps & {
+type SignUpProps = Pick<ModalProps, "closeModal"> & {
   openAlternativeModal: () => void;
 };
 
 export default function SignUp({
-  shown,
   closeModal,
   openAlternativeModal,
 }: SignUpProps): React.ReactElement {
@@ -62,7 +61,6 @@ export default function SignUp({
       onButtonClick={handleButtonClick}
       onGoogleButtonClick={() => {}}
       onAlternativeClick={openAlternativeModal}
-      shown={shown}
       closeModal={closeModal}
       formComponent={() => (
         <>

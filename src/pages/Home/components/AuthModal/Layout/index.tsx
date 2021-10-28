@@ -5,7 +5,7 @@ import styles from "./AuthModalLayout.module.css";
 
 import asideImage from "../../../../../assets/signup-modal.png";
 
-type AuthModalLayoutProps = ModalProps & {
+type AuthModalLayoutProps = Pick<ModalProps, "closeModal"> & {
   title: string;
   buttonTitle: string;
   onButtonClick: () => void;
@@ -40,7 +40,6 @@ function AlternativeAuthSpan({ title, onClick }: AlternativeAuthSpanProps) {
 }
 
 export default function AuthModalLayout({
-  shown,
   closeModal,
   title,
   buttonTitle,
@@ -51,54 +50,52 @@ export default function AuthModalLayout({
   formComponent: FormComponent,
 }: AuthModalLayoutProps): React.ReactElement {
   return (
-    <Modal.Container shown={shown} closeModal={closeModal}>
-      <div id={styles.wrapper}>
-        <div id={styles.content}>
-          <div id={styles.closeButtonWrapper}>
-            <Modal.CloseButton closeModal={closeModal} size={40} />
-          </div>
-
-          <h1 id={styles.title}>{title}</h1>
-
-          <div id={styles.formAndButtonsWrapper}>
-            <form
-              id={styles.form}
-              onSubmit={(e) => {
-                e.preventDefault();
-                onButtonClick();
-              }}
-            >
-              <FormComponent />
-
-              <div id={styles.buttonContainer}>
-                <button
-                  type="button"
-                  id={styles.signInWithGoogleButton}
-                  className={styles.button}
-                  onClick={onGoogleButtonClick}
-                >
-                  Google
-                </button>
-                <button
-                  type="submit"
-                  id={styles.signUpButton}
-                  className={styles.button}
-                >
-                  {buttonTitle}
-                </button>
-              </div>
-            </form>
-          </div>
-
-          <div id={styles.hasAnAccount}>
-            <AlternativeAuthSpan
-              title={alternativeTitle}
-              onClick={onAlternativeClick}
-            />
-          </div>
+    <div id={styles.wrapper}>
+      <div id={styles.content}>
+        <div id={styles.closeButtonWrapper}>
+          <Modal.CloseButton closeModal={closeModal} size={40} />
         </div>
-        <img id={styles.signUpImg} src={asideImage} alt="Foguete no espaço" />
+
+        <h1 id={styles.title}>{title}</h1>
+
+        <div id={styles.formAndButtonsWrapper}>
+          <form
+            id={styles.form}
+            onSubmit={(e) => {
+              e.preventDefault();
+              onButtonClick();
+            }}
+          >
+            <FormComponent />
+
+            <div id={styles.buttonContainer}>
+              <button
+                type="button"
+                id={styles.signInWithGoogleButton}
+                className={styles.button}
+                onClick={onGoogleButtonClick}
+              >
+                Google
+              </button>
+              <button
+                type="submit"
+                id={styles.signUpButton}
+                className={styles.button}
+              >
+                {buttonTitle}
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div id={styles.hasAnAccount}>
+          <AlternativeAuthSpan
+            title={alternativeTitle}
+            onClick={onAlternativeClick}
+          />
+        </div>
       </div>
-    </Modal.Container>
+      <img id={styles.signUpImg} src={asideImage} alt="Foguete no espaço" />
+    </div>
   );
 }
