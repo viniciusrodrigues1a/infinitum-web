@@ -5,6 +5,8 @@ import { useLanguage } from "../../contexts/LanguageContext";
 import { useSidebar } from "../../contexts/SidebarContext";
 
 import Chart from "./components/Chart";
+import Title from "../../components/Title";
+import Subtitle from "../../components/Subtitle";
 
 import styles from "./Dashboard.module.css";
 
@@ -31,9 +33,7 @@ export default function Dashboard(): React.ReactElement {
           {/* CARD 1 */}
           <div className={styles.card}>
             <div className={styles.cardHeader}>
-              <h1 className={styles.cardTitle}>
-                {dashboardLanguage.card1.title}
-              </h1>
+              <Title>{dashboardLanguage.card1.title}</Title>
               <div id={styles.chartOptions}>
                 <button
                   className={`
@@ -62,12 +62,8 @@ export default function Dashboard(): React.ReactElement {
           {/* CARD 2 */}
           <div id={styles.allTicketsCard} className={styles.card}>
             <div className={styles.cardHeader}>
-              <h1 className={styles.cardTitle}>
-                {dashboardLanguage.card2.title}
-              </h1>
-              <h2 className={styles.cardSubtitle}>
-                {dashboardLanguage.card2.subtitle}
-              </h2>
+              <Title>{dashboardLanguage.card2.title}</Title>
+              <Subtitle>{dashboardLanguage.card2.subtitle}</Subtitle>
             </div>
             <div className={styles.cardBody}>
               <div className={styles.alignSpaceBetween}>
@@ -87,14 +83,10 @@ export default function Dashboard(): React.ReactElement {
           <div className={styles.card}>
             <div className={styles.cardHeader}>
               <div className={styles.alignSpaceBetween}>
-                <h1 className={styles.cardTitle}>
-                  {dashboardLanguage.card3.title}
-                </h1>
+                <Title>{dashboardLanguage.card3.title}</Title>
                 <span className={styles.cardDateInfo}>Qui, Out 20</span>
               </div>
-              <h2 className={styles.cardSubtitle}>
-                {dashboardLanguage.card3.subtitle}
-              </h2>
+              <Subtitle>{dashboardLanguage.card3.subtitle}</Subtitle>
             </div>
             <div className={styles.cardBody}>
               <div className={styles.cardTicketsPercentageWrapper}>
@@ -141,14 +133,10 @@ export default function Dashboard(): React.ReactElement {
           <div id={styles.expiredTicketsCard} className={styles.card}>
             <div className={styles.cardHeader}>
               <div className={styles.alignSpaceBetween}>
-                <h1 className={styles.cardTitle}>
-                  {dashboardLanguage.card4.title}
-                </h1>
+                <Title>{dashboardLanguage.card4.title}</Title>
                 <span className={styles.cardDateInfo}>Qui, Out 20</span>
               </div>
-              <h2 className={styles.cardSubtitle}>
-                {dashboardLanguage.card4.subtitle}
-              </h2>
+              <Subtitle>{dashboardLanguage.card4.subtitle}</Subtitle>
             </div>
             <div className={styles.cardBody}>
               <div className={styles.cardTicketsPercentageWrapper}>
