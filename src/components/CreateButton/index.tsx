@@ -5,13 +5,19 @@ import styles from "./CreateButton.module.css";
 
 export type CreateButtonProps = {
   title: string;
+  onClick?: () => void;
+};
+
+CreateButton.defaultProps = {
+  onClick: () => null,
 };
 
 export default function CreateButton({
   title,
+  onClick,
 }: CreateButtonProps): React.ReactElement {
   return (
-    <button type="button" className={styles.newProjectButton}>
+    <button type="button" className={styles.newProjectButton} onClick={onClick}>
       <FiPlusCircle
         className={styles.buttonIcon}
         color="var(--dark)"

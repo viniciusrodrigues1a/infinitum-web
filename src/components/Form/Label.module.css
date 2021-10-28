@@ -1,0 +1,12 @@
+.titleLabel {
+  font-size: 1.125rem;
+  font-family: var(--text);
+  color: var(--dark);
+}
+
+.descriptionLabel {
+  font-size: 1rem;
+  font-family: var(--text);
+  color: #999999;
+  margin-top: 0.125rem;
+}
