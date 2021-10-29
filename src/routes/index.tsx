@@ -24,13 +24,13 @@ export default function Routes(): React.ReactElement {
             <SessionProvider>
               <APIServiceProvider>
                 <SidebarProvider>
-                  <ProjectsProvider>
-                    <>
-                      <AuthorizedRoute
-                        exact
-                        path={RoutesEnum.HOME}
-                        component={Home}
-                      />
+                  <>
+                    <AuthorizedRoute
+                      exact
+                      path={RoutesEnum.HOME}
+                      component={Home}
+                    />
+                    <ProjectsProvider>
                       <AuthorizedRoute
                         exact
                         path={RoutesEnum.DASHBOARD}
@@ -44,8 +44,8 @@ export default function Routes(): React.ReactElement {
                         isPrivate
                       />
                       <AuthorizedRoute component={() => <Redirect to="/" />} />
-                    </>
-                  </ProjectsProvider>
+                    </ProjectsProvider>
+                  </>
                 </SidebarProvider>
               </APIServiceProvider>
             </SessionProvider>

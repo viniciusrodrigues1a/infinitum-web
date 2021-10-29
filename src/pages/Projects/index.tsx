@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FiTriangle,
   FiClipboard,
@@ -18,6 +18,7 @@ import EmptyProjects from "./components/EmptyProjects";
 import CreateButton from "../../components/CreateButton";
 import Table from "../../components/Table";
 import CreateProjectModal from "../../components/CreateProjectModal";
+import Loader from "../../components/Loader";
 
 import { ReactComponent as UserOwnerSvg } from "../../assets/user-owner.svg";
 import { useProjects } from "../../contexts/ProjectsContext";
@@ -29,7 +30,7 @@ export default function Projects(): React.ReactElement {
     },
   } = useLanguage();
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
-  const { projects } = useProjects();
+  const { projects, loading } = useProjects();
 
   const [isCreationModalOpen, setIsCreationModalOpen] = useState(false);
 
@@ -66,7 +67,11 @@ export default function Projects(): React.ReactElement {
               </div>
             </div>
 
-            {projects.length === 0 ? (
+            {loading ? (
+              <div style={{ marginTop: "5rem" }}>
+                <Loader />
+              </div>
+            ) : projects.length === 0 ? (
               <EmptyProjects />
             ) : (
               <div id={styles.tableWrapper}>
@@ -107,20 +112,24 @@ export default function Projects(): React.ReactElement {
                     </Table.Row>
                   </Table.Head>
                   <Table.Body>
-                    {projects.map((p) => (
-                      <Table.Row>
-                        <Table.Td>{p.name}</Table.Td>
-                        <Table.Td align="center">9%</Table.Td>
-                        <Table.Td align="center">
-                          {p.archived ? "Arquivado" : "Ativo"}
-                        </Table.Td>
-                        <Table.Td align="center">{p.ownerName}</Table.Td>
-                        <Table.Td align="center">{p.beginsAtFullDate}</Table.Td>
-                        <Table.Td align="right">
-                          {p.finishesAtFullDate}
-                        </Table.Td>
-                      </Table.Row>
-                    ))}
+                    <>
+                      {projects.map((p) => (
+                        <Table.Row>
+                          <Table.Td>{p.name}</Table.Td>
+                          <Table.Td align="center">9%</Table.Td>
+                          <Table.Td align="center">
+                            {p.archived ? "Arquivado" : "Ativo"}
+                          </Table.Td>
+                          <Table.Td align="center">{p.ownerName}</Table.Td>
+                          <Table.Td align="center">
+                            {p.beginsAtFullDate}
+                          </Table.Td>
+                          <Table.Td align="right">
+                            {p.finishesAtFullDate}
+                          </Table.Td>
+                        </Table.Row>
+                      ))}
+                    </>
                   </Table.Body>
                 </Table.Container>
               </div>

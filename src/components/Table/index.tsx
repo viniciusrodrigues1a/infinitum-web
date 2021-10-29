@@ -58,9 +58,9 @@ function eitherProp(one: string, another: string) {
 }
 
 Th.propTypes = {
-  children: () => eitherProp("children", "leftIcon"),
-  leftIcon: () => eitherProp("children", "leftIcon"),
-  text: () => eitherProp("children", "text"),
+  children: eitherProp("children", "leftIcon"),
+  leftIcon: eitherProp("children", "leftIcon"),
+  text: eitherProp("children", "text"),
 };
 
 type ThProps = BaseElementProps<HTMLTableCellElement> & {

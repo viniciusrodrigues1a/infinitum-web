@@ -33,6 +33,7 @@ export default function CreateProjectModal({
     setTitle("");
     setStartDate("");
     setEndDate("");
+    setDescription("");
   }, []);
 
   const handleCloseModal = useCallback(() => {

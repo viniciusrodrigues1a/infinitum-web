@@ -5,7 +5,6 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { useLocation } from "react-router-dom";
 import RoutesEnum from "../routes/type-defs/RoutesEnum";
 import { ListProjectsServiceResponse } from "../services/interfaces";
 
@@ -15,6 +14,7 @@ import { useDateFormatter } from "./DateFormatterContext";
 
 type ProjectsContextData = {
   projects: FormattedProject[];
+  loading: boolean;
   fetchProjects: () => Promise<void>;
 };
 
@@ -27,7 +27,6 @@ type ProjectsProviderProps = {
 export function ProjectsProvider({
   children,
 }: ProjectsProviderProps): React.ReactElement {
-  const location = useLocation();
   const { listProjectsService } = useAPIService();
   const { formatToFullDate } = useDateFormatter();
 
@@ -63,21 +62,29 @@ export function ProjectsProvider({
   );
 
   const updateProjectsState = useCallback(async () => {
-    const projects = await listProjectsService.list();
+    if (projects.length === 0) setLoading(true);
 
-    if (projects.data) {
-      const formattedProjects = formatProjects(projects.data);
+    const response = await listProjectsService.list();
+
+    if (response.data) {
+      const formattedProjects = formatProjects(response.data);
       setProjects(formattedProjects);
     }
-  }, [listProjectsService, formatProjects]);
+
+    setLoading(false);
+  }, [listProjectsService, formatProjects, projects]);
 
   useEffect(() => {
-    if (location.pathname === RoutesEnum.PROJECTS) updateProjectsState();
-  }, [location, updateProjectsState]);
+    updateProjectsState();
+  }, [updateProjectsState]);
 
   return (
     <ProjectsContext.Provider
-      value={{ projects, fetchProjects: updateProjectsState }}
+      value={{
+        projects,
+        loading,
+        fetchProjects: updateProjectsState,
+      }}
     >
       {children}
     </ProjectsContext.Provider>
