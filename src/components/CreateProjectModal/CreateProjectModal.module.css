@@ -52,6 +52,12 @@
   justify-self: center;
 }
 
+#submitButton {
+  margin-top: 3.5rem;
+  padding: 1.875rem 4.375rem;
+  width: 100%;
+}
+
 /* 600px */
 @media (min-width: 37.5rem) {
   #content {
@@ -80,6 +86,10 @@
 
   #imageInputWrapper {
     align-self: center;
+  }
+
+  #submitButton {
+    width: auto;
   }
 }
 

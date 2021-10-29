@@ -5,6 +5,7 @@ import Subtitle from "../Subtitle";
 import Form from "../Form";
 
 import styles from "./CreateProjectModal.module.css";
+import CreateButton from "../CreateButton";
 
 export type CreateProjectModalProps = {
   shown: boolean;
@@ -16,6 +17,7 @@ export default function CreateProjectModal({
   closeModal,
 }: CreateProjectModalProps): React.ReactElement {
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
@@ -44,7 +46,7 @@ export default function CreateProjectModal({
           </div>
 
           <div id={styles.formWrapper}>
-            <Form.Container className={styles.form}>
+            <Form.Container className={styles.form} onSubmit={handleSubmit}>
               <div id={styles.imageInputWrapper}>
                 <Form.ImageInput id="project-image" />
               </div>
@@ -97,12 +99,16 @@ export default function CreateProjectModal({
                   <Form.TextArea
                     id="description"
                     placeholder="Descrição"
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                   />
                 </Form.InputWrapper>
               </div>
             </Form.Container>
+          </div>
+
+          <div>
+            <CreateButton title="Criar" id={styles.submitButton} />
           </div>
         </div>
       </div>
