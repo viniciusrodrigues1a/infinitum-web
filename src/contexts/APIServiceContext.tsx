@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useEffect, useMemo } from "react";
 import api from "../services/api";
+import CreateProjectService from "../services/CreateProjectService";
 import {
+  ICreateProjectService,
   IListProjectsService,
   ILoginService,
   IRegisterService,
@@ -15,6 +17,7 @@ type APIServiceContextData = {
   loginService: ILoginService;
   registerService: IRegisterService;
   listProjectsService: IListProjectsService;
+  createProjectService: ICreateProjectService;
 };
 
 type APIServiceProviderProps = {
@@ -29,15 +32,16 @@ export const APIServiceProvider = ({
   const { sessionToken } = useSession();
   const { isoCode, language } = useLanguage();
 
-  const services = useMemo(
-    () =>
-      ({
-        loginService: new LoginService(api, language.libs.axios),
-        registerService: new RegisterService(api, language.libs.axios),
-        listProjectsService: new ListProjectsService(api, language.libs.axios),
-      } as APIServiceContextData),
-    [language]
-  );
+  const services = useMemo(() => {
+    const lang = language.libs.axios;
+
+    return {
+      loginService: new LoginService(api, lang),
+      registerService: new RegisterService(api, lang),
+      listProjectsService: new ListProjectsService(api, lang),
+      createProjectService: new CreateProjectService(api, lang),
+    } as APIServiceContextData;
+  }, [language]);
 
   useEffect(() => {
     api.defaults.headers.common["Accept-Language"] = isoCode;

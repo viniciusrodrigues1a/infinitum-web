@@ -1,11 +1,16 @@
 import React, { useCallback, useState } from "react";
-import Modal from "../Modal";
-import Title from "../Title";
-import Subtitle from "../Subtitle";
-import Form from "../Form";
 
 import styles from "./CreateProjectModal.module.css";
+
 import CreateButton from "../CreateButton";
+import Form from "../Form";
+import Modal from "../Modal";
+import Subtitle from "../Subtitle";
+import Title from "../Title";
+
+import { useAPIService } from "../../contexts/APIServiceContext";
+import showToast from "../../utils/showToast";
+import { useProjects } from "../../contexts/ProjectsContext";
 
 export type CreateProjectModalProps = {
   shown: boolean;
@@ -16,17 +21,40 @@ export default function CreateProjectModal({
   shown,
   closeModal,
 }: CreateProjectModalProps): React.ReactElement {
+  const { createProjectService } = useAPIService();
+  const { fetchProjects } = useProjects();
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  const handleCloseModal = useCallback(() => {
+  const clearInputs = useCallback(() => {
     setTitle("");
     setStartDate("");
     setEndDate("");
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    clearInputs();
     closeModal();
-  }, [closeModal]);
+  }, [closeModal, clearInputs]);
+
+  async function handleSubmit() {
+    const response = await createProjectService.createProject({
+      name: title,
+      description,
+      beginsAt: startDate ? new Date(startDate) : undefined,
+      finishesAt: endDate ? new Date(endDate) : undefined,
+    });
+
+    const toastMsg = response.userFriendlyMessage;
+    if (toastMsg) showToast(toastMsg, response.error);
+    if (!response.error) {
+      handleCloseModal();
+      await fetchProjects();
+    }
+  }
 
   return (
     <Modal.Container shown={shown} closeModal={handleCloseModal}>
@@ -108,7 +136,11 @@ export default function CreateProjectModal({
           </div>
 
           <div>
-            <CreateButton title="Criar" id={styles.submitButton} />
+            <CreateButton
+              title="Criar"
+              id={styles.submitButton}
+              onClick={handleSubmit}
+            />
           </div>
         </div>
       </div>

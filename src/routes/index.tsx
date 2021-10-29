@@ -13,6 +13,7 @@ import { SessionProvider } from "../contexts/SessionContext";
 import { APIServiceProvider } from "../contexts/APIServiceContext";
 import { SidebarProvider } from "../contexts/SidebarContext";
 import { DateFormatterProvider } from "../contexts/DateFormatterContext";
+import { ProjectsProvider } from "../contexts/ProjectsContext";
 
 export default function Routes(): React.ReactElement {
   return (
@@ -23,26 +24,28 @@ export default function Routes(): React.ReactElement {
             <SessionProvider>
               <APIServiceProvider>
                 <SidebarProvider>
-                  <>
-                    <AuthorizedRoute
-                      exact
-                      path={RoutesEnum.HOME}
-                      component={Home}
-                    />
-                    <AuthorizedRoute
-                      exact
-                      path={RoutesEnum.DASHBOARD}
-                      component={Dashboard}
-                      isPrivate
-                    />
-                    <AuthorizedRoute
-                      exact
-                      path={RoutesEnum.PROJECTS}
-                      component={Projects}
-                      isPrivate
-                    />
-                    <AuthorizedRoute component={() => <Redirect to="/" />} />
-                  </>
+                  <ProjectsProvider>
+                    <>
+                      <AuthorizedRoute
+                        exact
+                        path={RoutesEnum.HOME}
+                        component={Home}
+                      />
+                      <AuthorizedRoute
+                        exact
+                        path={RoutesEnum.DASHBOARD}
+                        component={Dashboard}
+                        isPrivate
+                      />
+                      <AuthorizedRoute
+                        exact
+                        path={RoutesEnum.PROJECTS}
+                        component={Projects}
+                        isPrivate
+                      />
+                      <AuthorizedRoute component={() => <Redirect to="/" />} />
+                    </>
+                  </ProjectsProvider>
                 </SidebarProvider>
               </APIServiceProvider>
             </SessionProvider>

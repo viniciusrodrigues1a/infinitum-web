@@ -20,9 +20,7 @@ import Table from "../../components/Table";
 import CreateProjectModal from "../../components/CreateProjectModal";
 
 import { ReactComponent as UserOwnerSvg } from "../../assets/user-owner.svg";
-import { useAPIService } from "../../contexts/APIServiceContext";
-import { ListProjectsServiceResponse } from "../../services/interfaces";
-import { useDateFormatter } from "../../contexts/DateFormatterContext";
+import { useProjects } from "../../contexts/ProjectsContext";
 
 export default function Projects(): React.ReactElement {
   const {
@@ -31,36 +29,9 @@ export default function Projects(): React.ReactElement {
     },
   } = useLanguage();
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
-  const { listProjectsService } = useAPIService();
-  const { formatToFullDate } = useDateFormatter();
+  const { projects } = useProjects();
 
   const [isCreationModalOpen, setIsCreationModalOpen] = useState(false);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [projects, setProjects] = useState<ListProjectsServiceResponse[]>([]);
-
-  const callService = useCallback(async () => {
-    const projects = await listProjectsService.list();
-
-    if (projects.data) {
-      setProjects(projects.data);
-    }
-  }, [listProjectsService]);
-
-  useEffect(() => {
-    callService();
-  }, [callService]);
-
-  const getOwnerParticipant = useCallback(
-    (participants: ListProjectsServiceResponse["participants"]) => {
-      const owner = participants.find((p) => p.projectRoleName === "owner");
-
-      if (!owner) return "";
-
-      return owner.name;
-    },
-    []
-  );
 
   return (
     <>
@@ -143,14 +114,10 @@ export default function Projects(): React.ReactElement {
                         <Table.Td align="center">
                           {p.archived ? "Arquivado" : "Ativo"}
                         </Table.Td>
-                        <Table.Td align="center">
-                          {getOwnerParticipant(p.participants)}
-                        </Table.Td>
-                        <Table.Td align="center">
-                          {p.beginsAt ? formatToFullDate(p.beginsAt) : ""}
-                        </Table.Td>
+                        <Table.Td align="center">{p.ownerName}</Table.Td>
+                        <Table.Td align="center">{p.beginsAtFullDate}</Table.Td>
                         <Table.Td align="right">
-                          {p.finishesAt ? formatToFullDate(p.finishesAt) : ""}
+                          {p.finishesAtFullDate}
                         </Table.Td>
                       </Table.Row>
                     ))}
