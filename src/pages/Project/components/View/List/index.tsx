@@ -1,14 +1,31 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   FiAlignLeft,
   FiCalendar,
-  FiTriangle,
   FiPlusCircle,
+  FiTriangle,
 } from "react-icons/fi";
+import { useParams } from "react-router-dom";
 
 import styles from "./List.module.scss";
 
+import { useProjects } from "../../../../../contexts/ProjectsContext";
+
+import { FormattedIssueGroup } from "../../../../../services/type-defs/FormattedProject";
+
 export default function List(): React.ReactElement {
+  const params = useParams<{ projectId: string }>();
+  const { getProjectById } = useProjects();
+
+  const project = useMemo(
+    () => getProjectById(params.projectId),
+    [getProjectById, params]
+  );
+
+  if (!project) {
+    return <h1>Projeto não encontrado!</h1>;
+  }
+
   return (
     <div id={styles.container}>
       <div id={styles.infoHeadContainer}>
@@ -22,61 +39,39 @@ export default function List(): React.ReactElement {
         </div>
       </div>
 
-      <div className={styles.issuesSection}>
-        <div className={styles.issuesSectionHeader}>
-          <FiTriangle
-            className={styles.issuesSectionHeaderIcon}
-            fill="var(--dark)"
-            color="var(--dark)"
-            size={12}
-          />
-          <h1>A fazer</h1>
+      {project.issueGroups.map((issueGroup: FormattedIssueGroup, index) => (
+        <div key={issueGroup.issueGroupId} className={styles.issuesSection}>
+          <div className={styles.issuesSectionHeader}>
+            <FiTriangle
+              className={styles.issuesSectionHeaderIcon}
+              fill="var(--dark)"
+              color="var(--dark)"
+              size={12}
+            />
+            <h1>{issueGroup.title}</h1>
+          </div>
+
+          <div className={styles.issues}>
+            {issueGroup.issues.map((issue) => (
+              <div key={issue.issueId} className={styles.issue}>
+                <span>{issue.title}</span>
+                <span>{issue.expiresAtFullDate}</span>
+              </div>
+            ))}
+            <button type="button" className={styles.newIssueButton}>
+              <FiPlusCircle size={18} color="#888888" />
+              <span>Adicionar nova tarefa...</span>
+            </button>
+          </div>
+
+          {index === project.issueGroups.length - 1 && (
+            <button type="button" className={styles.newSectionButton}>
+              <FiPlusCircle size={20} color="#888888" />
+              <span>Adicionar seção...</span>
+            </button>
+          )}
         </div>
-
-        <div className={styles.issues}>
-          {new Array(2).fill(0).map(() => (
-            <div className={styles.issue}>
-              <span>Projeto TCC</span>
-              <span>Set 7, 2021</span>
-            </div>
-          ))}
-          <button type="button" className={styles.newIssueButton}>
-            <FiPlusCircle size={18} color="#888888" />
-            <span>Adicionar nova tarefa...</span>
-          </button>
-        </div>
-      </div>
-
-      <div className={styles.issuesSection}>
-        <div className={styles.issuesSectionHeader}>
-          <FiTriangle
-            className={styles.issuesSectionHeaderIcon}
-            fill="var(--dark)"
-            color="var(--dark)"
-            size={12}
-          />
-          <h1>Em andamento</h1>
-        </div>
-
-        <div className={styles.issues}>
-          {new Array(2).fill(0).map(() => (
-            <div className={styles.issue}>
-              <span>Projeto TCC</span>
-              <span>Set 7, 2021</span>
-            </div>
-          ))}
-
-          <button type="button" className={styles.newIssueButton}>
-            <FiPlusCircle size={18} color="#888888" />
-            <span>Adicionar nova tarefa...</span>
-          </button>
-        </div>
-
-        <button type="button" className={styles.newSectionButton}>
-          <FiPlusCircle size={20} color="#888888" />
-          <span>Adicionar seção...</span>
-        </button>
-      </div>
+      ))}
     </div>
   );
 }

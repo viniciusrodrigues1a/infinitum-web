@@ -8,6 +8,7 @@ import React, {
 import { ListProjectsServiceResponse } from "../services/interfaces";
 
 import { FormattedProject } from "../services/type-defs/FormattedProject";
+import { Issue, IssueGroup } from "../services/type-defs/Project";
 import { useAPIService } from "./APIServiceContext";
 import { useDateFormatter } from "./DateFormatterContext";
 
@@ -15,6 +16,7 @@ type ProjectsContextData = {
   projects: FormattedProject[];
   loading: boolean;
   fetchProjects: () => Promise<void>;
+  getProjectById: (id: string) => FormattedProject | undefined;
 };
 
 export const ProjectsContext = createContext({} as ProjectsContextData);
@@ -57,6 +59,14 @@ export function ProjectsProvider({
         ownerName: getOwnerParticipant(p.participants),
         beginsAtFullDate: getFormattedDate(p.beginsAt),
         finishesAtFullDate: getFormattedDate(p.finishesAt),
+        issueGroups: p.issueGroups.map((ig) => ({
+          ...ig,
+          issues: ig.issues.map((i) => ({
+            ...i,
+            createdAtFullDate: getFormattedDate(i.createdAt),
+            expiresAtFullDate: getFormattedDate(i.expiresAt),
+          })),
+        })),
       })),
     [getOwnerParticipant, getFormattedDate]
   );
@@ -80,12 +90,17 @@ export function ProjectsProvider({
     }
   }, [isReadyForAuthRequests]); // adding updateProjectsState to the deps array is going to make it run forever
 
+  function getProjectById(id: string): FormattedProject | undefined {
+    return projects.find((p) => p.projectId === id);
+  }
+
   return (
     <ProjectsContext.Provider
       value={{
         projects,
         loading,
         fetchProjects: updateProjectsState,
+        getProjectById,
       }}
     >
       {children}

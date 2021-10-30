@@ -1,3 +1,17 @@
+export type Issue = {
+  issueId: string;
+  title: string;
+  description: string;
+  expiresAt: string | null;
+  createdAt: string | null;
+};
+
+export type IssueGroup = {
+  issueGroupId: string;
+  title: string;
+  issues: Issue[];
+};
+
 export type Project = {
   projectId: string;
   name: string;
@@ -12,4 +26,5 @@ export type Project = {
     email: string;
     projectRoleName: string;
   }[];
+  issueGroups: IssueGroup[];
 };
