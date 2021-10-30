@@ -50,14 +50,34 @@
     display: flex;
     align-items: center;
 
-    > .issuesSectionHeaderIcon {
-      margin-right: 1rem;
-      transform: rotate(180deg);
-    }
-
     > h1 {
       font-family: var(--title);
       font-size: 1.875rem;
+    }
+
+    > .issuesSectionHeaderIconButton {
+      width: 1rem;
+      height: 2rem;
+      margin-right: 0.75rem;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      cursor: pointer;
+      border: none;
+      background: none;
+
+      > .issuesSectionHeaderIcon {
+        height: 100%;
+        transform: rotate(180deg);
+        transition: all 0.2s;
+      }
+    }
+
+    > .issuesSectionHeaderIconButtonCollapsed {
+      > .issuesSectionHeaderIcon {
+        fill: transparent;
+        transform: rotate(90deg);
+      }
     }
   }
 }

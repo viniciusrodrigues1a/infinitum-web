@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import {
   FiAlignLeft,
   FiCalendar,
@@ -16,6 +16,24 @@ import { FormattedIssueGroup } from "../../../../../services/type-defs/Formatted
 export default function List(): React.ReactElement {
   const params = useParams<{ projectId: string }>();
   const { getProjectById } = useProjects();
+
+  const [collapsedSections, setCollapsedSections] = useState<Array<string>>([]);
+
+  function toggleCollapsedSectionState(sectionIdentifier: string) {
+    if (collapsedSections.indexOf(sectionIdentifier) === -1) {
+      setCollapsedSections([...collapsedSections, sectionIdentifier]);
+    } else {
+      setCollapsedSections((prevState) =>
+        prevState.filter((p) => p !== sectionIdentifier)
+      );
+    }
+  }
+
+  const isSectionCollapsed = useCallback(
+    (sectionIdentifier: string) =>
+      collapsedSections.indexOf(sectionIdentifier) !== -1,
+    [collapsedSections]
+  );
 
   const project = useMemo(
     () => getProjectById(params.projectId),
@@ -42,27 +60,41 @@ export default function List(): React.ReactElement {
       {project.issueGroups.map((issueGroup: FormattedIssueGroup, index) => (
         <div key={issueGroup.issueGroupId} className={styles.issuesSection}>
           <div className={styles.issuesSectionHeader}>
-            <FiTriangle
-              className={styles.issuesSectionHeaderIcon}
-              fill="var(--dark)"
-              color="var(--dark)"
-              size={12}
-            />
+            <button
+              onClick={() =>
+                toggleCollapsedSectionState(issueGroup.issueGroupId)
+              }
+              type="button"
+              className={`${styles.issuesSectionHeaderIconButton} ${
+                isSectionCollapsed(issueGroup.issueGroupId)
+                  ? styles.issuesSectionHeaderIconButtonCollapsed
+                  : ""
+              }`}
+            >
+              <FiTriangle
+                className={`${styles.issuesSectionHeaderIcon}`}
+                fill="var(--dark)"
+                color="var(--dark)"
+                size={12}
+              />
+            </button>
             <h1>{issueGroup.title}</h1>
           </div>
 
-          <div className={styles.issues}>
-            {issueGroup.issues.map((issue) => (
-              <div key={issue.issueId} className={styles.issue}>
-                <span>{issue.title}</span>
-                <span>{issue.expiresAtFullDate}</span>
-              </div>
-            ))}
-            <button type="button" className={styles.newIssueButton}>
-              <FiPlusCircle size={18} color="#888888" />
-              <span>Adicionar nova tarefa...</span>
-            </button>
-          </div>
+          {!isSectionCollapsed(issueGroup.issueGroupId) && (
+            <div className={styles.issues}>
+              {issueGroup.issues.map((issue) => (
+                <div key={issue.issueId} className={styles.issue}>
+                  <span>{issue.title}</span>
+                  <span>{issue.expiresAtFullDate}</span>
+                </div>
+              ))}
+              <button type="button" className={styles.newIssueButton}>
+                <FiPlusCircle size={18} color="#888888" />
+                <span>Adicionar nova tarefa...</span>
+              </button>
+            </div>
+          )}
 
           {index === project.issueGroups.length - 1 && (
             <button type="button" className={styles.newSectionButton}>
