@@ -7,7 +7,13 @@ import styles from "./EmptyProjects.module.css";
 import { ReactComponent as Svg } from "../../../../assets/empty-projects-svg.svg";
 import CreateButton from "../../../../components/CreateButton";
 
-export default function EmptyProjects(): React.ReactElement {
+type EmptyProjectsProps = {
+  onButtonClick: () => void;
+};
+
+export default function EmptyProjects({
+  onButtonClick,
+}: EmptyProjectsProps): React.ReactElement {
   return (
     <div className={styles.container}>
       <Svg className={styles.svg} />
@@ -25,7 +31,7 @@ export default function EmptyProjects(): React.ReactElement {
         </div>
 
         <div className={styles.buttonWrapper}>
-          <CreateButton title="New project" />
+          <CreateButton title="New project" onClick={onButtonClick} />
         </div>
       </div>
     </div>

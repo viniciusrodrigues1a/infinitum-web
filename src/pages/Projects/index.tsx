@@ -75,7 +75,9 @@ export default function Projects(): React.ReactElement {
                 <Loader />
               </div>
             ) : projects.length === 0 ? (
-              <EmptyProjects />
+              <EmptyProjects
+                onButtonClick={() => setIsCreationModalOpen(true)}
+              />
             ) : (
               <div id={styles.tableWrapper}>
                 <Table.Container>
