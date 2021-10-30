@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   FiTriangle,
   FiClipboard,
@@ -8,6 +8,7 @@ import {
 } from "react-icons/fi";
 import { IconBaseProps } from "react-icons/lib";
 
+import { useHistory } from "react-router-dom";
 import styles from "./Projects.module.css";
 
 import { useSidebar } from "../../contexts/SidebarContext";
@@ -24,6 +25,8 @@ import { ReactComponent as UserOwnerSvg } from "../../assets/user-owner.svg";
 import { useProjects } from "../../contexts/ProjectsContext";
 
 export default function Projects(): React.ReactElement {
+  const history = useHistory();
+
   const {
     language: {
       pages: { projects: projectsLanguage },
@@ -114,7 +117,12 @@ export default function Projects(): React.ReactElement {
                   <Table.Body>
                     <>
                       {projects.map((p) => (
-                        <Table.Row>
+                        <Table.Row
+                          onClick={() =>
+                            history.push(`/project/${p.projectId}`)
+                          }
+                          style={{ cursor: "pointer" }}
+                        >
                           <Table.Td>{p.name}</Table.Td>
                           <Table.Td align="center">9%</Table.Td>
                           <Table.Td align="center">

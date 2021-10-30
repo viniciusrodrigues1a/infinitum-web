@@ -78,7 +78,7 @@ export function ProjectsProvider({
     if (isReadyForAuthRequests) {
       updateProjectsState();
     }
-  }, [isReadyForAuthRequests, updateProjectsState]);
+  }, [isReadyForAuthRequests]); // adding updateProjectsState to the deps array is going to make it run forever
 
   return (
     <ProjectsContext.Provider
