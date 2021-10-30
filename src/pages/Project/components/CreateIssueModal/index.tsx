@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 
+import { useParams } from "react-router-dom";
 import styles from "./CreateIssueModal.module.scss";
 
 import Modal, { ModalProps } from "../../../../components/Modal";
@@ -7,25 +8,49 @@ import Title from "../../../../components/Title";
 import Subtitle from "../../../../components/Subtitle";
 import Form from "../../../../components/Form";
 import CreateButton from "../../../../components/CreateButton";
+import { useAPIService } from "../../../../contexts/APIServiceContext";
+import showToast from "../../../../utils/showToast";
+import { useProjects } from "../../../../contexts/ProjectsContext";
 
 export default function CreateIssueModal({
   shown,
   closeModal,
 }: ModalProps): React.ReactElement {
+  const params = useParams<{ projectId: string }>();
+  const { getProjectById, fetchProjects } = useProjects();
+  const { createIssueService } = useAPIService();
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [startDate, setStartDate] = useState("");
+  const [expirationDate, setExpirationDate] = useState("");
 
   const clearInputs = useCallback(() => {
     setTitle("");
     setDescription("");
-    setStartDate("");
+    setExpirationDate("");
   }, []);
 
   const handleCloseModal = useCallback(() => {
     clearInputs();
     closeModal();
   }, [closeModal, clearInputs]);
+
+  async function handleSubmit() {
+    const response = await createIssueService.createIssue({
+      title,
+      description,
+      expiresAt: expirationDate ? new Date(expirationDate) : undefined,
+      issueGroupId: getProjectById(params.projectId)!.issueGroups[0]
+        .issueGroupId,
+    });
+
+    const toastMsg = response.userFriendlyMessage;
+    if (toastMsg) showToast(toastMsg, response.error);
+    if (!response.error) {
+      handleCloseModal();
+      await fetchProjects();
+    }
+  }
 
   return (
     <Modal.Container shown={shown} closeModal={closeModal}>
@@ -43,7 +68,7 @@ export default function CreateIssueModal({
           </div>
 
           <div id={styles.formWrapper}>
-            <Form.Container id={styles.form}>
+            <Form.Container id={styles.form} onSubmit={handleSubmit}>
               <Form.InputWrapper>
                 <Form.Label
                   htmlFor="title"
@@ -68,8 +93,8 @@ export default function CreateIssueModal({
                   id="start-date"
                   type="date"
                   placeholder="Data de início"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
+                  value={expirationDate}
+                  onChange={(e) => setExpirationDate(e.target.value)}
                 />
               </Form.InputWrapper>
 
@@ -92,7 +117,11 @@ export default function CreateIssueModal({
           </div>
 
           <div>
-            <CreateButton id={styles.submitButton} title="Criar" />
+            <CreateButton
+              id={styles.submitButton}
+              title="Criar"
+              onClick={handleSubmit}
+            />
           </div>
         </div>
       </div>
