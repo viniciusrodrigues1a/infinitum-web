@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useMemo } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import api from "../services/api";
 import CreateProjectService from "../services/CreateProjectService";
 import {
@@ -14,6 +20,7 @@ import { useLanguage } from "./LanguageContext";
 import { useSession } from "./SessionContext";
 
 type APIServiceContextData = {
+  isReadyForAuthRequests: boolean;
   loginService: ILoginService;
   registerService: IRegisterService;
   listProjectsService: IListProjectsService;
@@ -29,8 +36,9 @@ export const APIServiceContext = createContext({} as APIServiceContextData);
 export const APIServiceProvider = ({
   children,
 }: APIServiceProviderProps): React.ReactElement => {
-  const { sessionToken } = useSession();
+  const { sessionToken, isSignedIn } = useSession();
   const { isoCode, language } = useLanguage();
+  const [isReadyForAuthRequests, setIsReadyForAuthRequests] = useState(false);
 
   const services = useMemo(() => {
     const lang = language.libs.axios;
@@ -40,7 +48,7 @@ export const APIServiceProvider = ({
       registerService: new RegisterService(api, lang),
       listProjectsService: new ListProjectsService(api, lang),
       createProjectService: new CreateProjectService(api, lang),
-    } as APIServiceContextData;
+    } as Omit<APIServiceContextData, "isReadyForAuthRequests">;
   }, [language]);
 
   useEffect(() => {
@@ -48,13 +56,16 @@ export const APIServiceProvider = ({
   }, [isoCode]);
 
   useEffect(() => {
-    if (sessionToken) {
+    if (isSignedIn()) {
       api.defaults.headers.common.Authorization = `Bearer ${sessionToken}`;
+      setIsReadyForAuthRequests(true);
+    } else {
+      setIsReadyForAuthRequests(false);
     }
-  }, [sessionToken]);
+  }, [sessionToken, isSignedIn]);
 
   return (
-    <APIServiceContext.Provider value={services}>
+    <APIServiceContext.Provider value={{ ...services, isReadyForAuthRequests }}>
       {children}
     </APIServiceContext.Provider>
   );

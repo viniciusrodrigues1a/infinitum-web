@@ -10,7 +10,6 @@ import { ListProjectsServiceResponse } from "../services/interfaces";
 import { FormattedProject } from "../services/type-defs/FormattedProject";
 import { useAPIService } from "./APIServiceContext";
 import { useDateFormatter } from "./DateFormatterContext";
-import { useSession } from "./SessionContext";
 
 type ProjectsContextData = {
   projects: FormattedProject[];
@@ -27,7 +26,7 @@ type ProjectsProviderProps = {
 export function ProjectsProvider({
   children,
 }: ProjectsProviderProps): React.ReactElement {
-  const { isSignedIn } = useSession();
+  const { isReadyForAuthRequests } = useAPIService();
   const { listProjectsService } = useAPIService();
   const { formatToFullDate } = useDateFormatter();
 
@@ -76,10 +75,10 @@ export function ProjectsProvider({
   }, [listProjectsService, formatProjects, projects]);
 
   useEffect(() => {
-    if (isSignedIn()) {
+    if (isReadyForAuthRequests) {
       updateProjectsState();
     }
-  }, [isSignedIn, updateProjectsState]);
+  }, [isReadyForAuthRequests, updateProjectsState]);
 
   return (
     <ProjectsContext.Provider
