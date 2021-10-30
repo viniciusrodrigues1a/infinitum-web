@@ -5,12 +5,12 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import RoutesEnum from "../routes/type-defs/RoutesEnum";
 import { ListProjectsServiceResponse } from "../services/interfaces";
 
 import { FormattedProject } from "../services/type-defs/FormattedProject";
 import { useAPIService } from "./APIServiceContext";
 import { useDateFormatter } from "./DateFormatterContext";
+import { useSession } from "./SessionContext";
 
 type ProjectsContextData = {
   projects: FormattedProject[];
@@ -27,6 +27,7 @@ type ProjectsProviderProps = {
 export function ProjectsProvider({
   children,
 }: ProjectsProviderProps): React.ReactElement {
+  const { isSignedIn } = useSession();
   const { listProjectsService } = useAPIService();
   const { formatToFullDate } = useDateFormatter();
 
@@ -75,8 +76,10 @@ export function ProjectsProvider({
   }, [listProjectsService, formatProjects, projects]);
 
   useEffect(() => {
-    updateProjectsState();
-  }, [updateProjectsState]);
+    if (isSignedIn()) {
+      updateProjectsState();
+    }
+  }, [isSignedIn, updateProjectsState]);
 
   return (
     <ProjectsContext.Provider
