@@ -1,4 +1,10 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   FiAlignLeft,
   FiCalendar,
@@ -12,12 +18,69 @@ import styles from "./List.module.scss";
 import { useProjects } from "../../../../../contexts/ProjectsContext";
 
 import { FormattedIssueGroup } from "../../../../../services/type-defs/FormattedProject";
+import { useAPIService } from "../../../../../contexts/APIServiceContext";
+import showToast from "../../../../../utils/showToast";
 
 export default function List(): React.ReactElement {
   const params = useParams<{ projectId: string }>();
-  const { getProjectById } = useProjects();
+  const { createIssueService } = useAPIService();
+  const { getProjectById, fetchProjects } = useProjects();
 
   const [collapsedSections, setCollapsedSections] = useState<Array<string>>([]);
+  const [
+    isCreatingNewIssueForIssueGroupId,
+    setIsCreatingNewIssueForIssueGroupId,
+  ] = useState<string | null>(null);
+  const [newIssueTitle, setNewIssueTitle] = useState("");
+
+  const newIssueTitleInputRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = useCallback(async () => {
+    if (!isCreatingNewIssueForIssueGroupId) return;
+
+    const response = await createIssueService.createIssue({
+      title: newIssueTitle,
+      description: " ",
+      issueGroupId: isCreatingNewIssueForIssueGroupId,
+    });
+    setIsCreatingNewIssueForIssueGroupId(null);
+    setNewIssueTitle("");
+
+    const toastMsg = response.userFriendlyMessage;
+    if (toastMsg) showToast(toastMsg, response.error);
+    if (!response.error) {
+      await fetchProjects();
+    }
+  }, [
+    isCreatingNewIssueForIssueGroupId,
+    createIssueService,
+    fetchProjects,
+    newIssueTitle,
+  ]);
+
+  const handleKeyPress = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        handleSubmit();
+      }
+    },
+    [handleSubmit]
+  );
+
+  useEffect(() => {
+    if (newIssueTitleInputRef.current) {
+      const elem = newIssueTitleInputRef.current;
+      elem.focus();
+
+      elem.addEventListener("blur", handleSubmit);
+      elem.addEventListener("keypress", handleKeyPress);
+
+      return () => {
+        elem.removeEventListener("blur", handleSubmit);
+        elem.removeEventListener("keypress", handleKeyPress);
+      };
+    }
+  }, [isCreatingNewIssueForIssueGroupId, handleSubmit, handleKeyPress]);
 
   function toggleCollapsedSectionState(sectionIdentifier: string) {
     if (collapsedSections.indexOf(sectionIdentifier) === -1) {
@@ -89,7 +152,31 @@ export default function List(): React.ReactElement {
                   <span>{issue.expiresAtFullDate}</span>
                 </div>
               ))}
-              <button type="button" className={styles.newIssueButton}>
+
+              {isCreatingNewIssueForIssueGroupId ===
+                issueGroup.issueGroupId && (
+                <div className={styles.newIssueInputsContainer}>
+                  <div>
+                    <input
+                      ref={newIssueTitleInputRef}
+                      type="text"
+                      name="title"
+                      id="title"
+                      placeholder="Título"
+                      value={newIssueTitle}
+                      onChange={(e) => setNewIssueTitle(e.target.value)}
+                    />
+                  </div>
+                </div>
+              )}
+
+              <button
+                type="button"
+                className={styles.newIssueButton}
+                onClick={() =>
+                  setIsCreatingNewIssueForIssueGroupId(issueGroup.issueGroupId)
+                }
+              >
                 <FiPlusCircle size={18} color="#888888" />
                 <span>Adicionar nova tarefa...</span>
               </button>

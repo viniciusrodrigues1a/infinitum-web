@@ -6,6 +6,7 @@ import styles from "./EmptyProjects.module.css";
 
 import { ReactComponent as Svg } from "../../../../assets/empty-projects-svg.svg";
 import CreateButton from "../../../../components/CreateButton";
+import { useLanguage } from "../../../../contexts/LanguageContext";
 
 type EmptyProjectsProps = {
   onButtonClick: () => void;
@@ -14,6 +15,12 @@ type EmptyProjectsProps = {
 export default function EmptyProjects({
   onButtonClick,
 }: EmptyProjectsProps): React.ReactElement {
+  const {
+    language: {
+      pages: { projects: projectsLanguage },
+    },
+  } = useLanguage();
+
   return (
     <div className={styles.container}>
       <Svg className={styles.svg} />
@@ -31,7 +38,10 @@ export default function EmptyProjects({
         </div>
 
         <div className={styles.buttonWrapper}>
-          <CreateButton title="New project" onClick={onButtonClick} />
+          <CreateButton
+            title={projectsLanguage.buttonText}
+            onClick={onButtonClick}
+          />
         </div>
       </div>
     </div>

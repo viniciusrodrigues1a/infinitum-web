@@ -53,7 +53,7 @@ export default function CreateIssueModal({
   }
 
   return (
-    <Modal.Container shown={shown} closeModal={closeModal}>
+    <Modal.Container shown={shown} closeModal={handleCloseModal}>
       <div id={styles.wrapper}>
         <div id={styles.content}>
           <div id={styles.closeButtonWrapper}>

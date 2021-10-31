@@ -1,3 +1,5 @@
+$issueFieldWidth: 50%;
+
 #container {
   padding: 0 1.25rem 3.5rem;
 
@@ -21,7 +23,7 @@
   > div {
     display: flex;
     align-items: center;
-    width: 50%;
+    width: $issueFieldWidth;
 
     > span {
       margin-left: 0.625rem;
@@ -90,7 +92,7 @@
     align-items: center;
 
     > span {
-      width: 50%;
+      width: $issueFieldWidth;
       font-family: var(--text);
       font-size: 1.125rem;
     }
@@ -125,4 +127,24 @@
 .newSectionButton {
   font-size: 1.45rem;
   margin-top: 2.25rem;
+}
+
+.newIssueInputsContainer {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 1.125rem;
+
+  > div {
+    width: $issueFieldWidth;
+
+    > input {
+      padding: 1rem 0.9rem;
+      border: none;
+      background: none;
+      background-color: #f0f0f0;
+      border: 1px solid #666666;
+      border-radius: 0.25rem;
+      color: var(--dark);
+    }
+  }
 }
