@@ -4,6 +4,7 @@ import InputWrapper from "./InputWrapper";
 import Label from "./Label";
 import TextArea from "./TextArea";
 import ImageInput from "./ImageInput";
+import Select from "./Select";
 
 const Form = {
   Container,
@@ -12,6 +13,7 @@ const Form = {
   Input,
   TextArea,
   ImageInput,
+  Select,
 };
 
 export default Form;

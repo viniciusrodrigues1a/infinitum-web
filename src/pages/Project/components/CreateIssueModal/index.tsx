@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 import { useParams } from "react-router-dom";
 import styles from "./CreateIssueModal.module.scss";
@@ -22,7 +22,13 @@ export default function CreateIssueModal({
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [issueGroupId, setIssueGroupId] = useState<string>("");
   const [expirationDate, setExpirationDate] = useState("");
+
+  const project = useMemo(
+    () => getProjectById(params.projectId),
+    [getProjectById, params]
+  );
 
   const clearInputs = useCallback(() => {
     setTitle("");
@@ -40,8 +46,7 @@ export default function CreateIssueModal({
       title,
       description,
       expiresAt: expirationDate ? new Date(expirationDate) : undefined,
-      issueGroupId: getProjectById(params.projectId)!.issueGroups[0]
-        .issueGroupId,
+      issueGroupId,
     });
 
     const toastMsg = response.userFriendlyMessage;
@@ -50,6 +55,10 @@ export default function CreateIssueModal({
       handleCloseModal();
       await fetchProjects();
     }
+  }
+
+  if (!project) {
+    return <h1>Projeto não encontrado!</h1>;
   }
 
   return (
@@ -97,6 +106,26 @@ export default function CreateIssueModal({
                   onChange={(e) => setExpirationDate(e.target.value)}
                 />
               </Form.InputWrapper>
+
+              <div id={styles.selectInputWrapper}>
+                <Form.InputWrapper>
+                  <Form.Label
+                    htmlFor="section"
+                    titleLabel="Seção"
+                    descriptionLabel="A qual seção do seu projeto seu ticket fará parte"
+                  />
+                  <Form.Select
+                    id="section"
+                    placeholder="Selecione uma seção"
+                    options={project.issueGroups.map((ig) => ({
+                      value: ig.issueGroupId,
+                      text: ig.title,
+                    }))}
+                    value={issueGroupId}
+                    onChange={(e) => setIssueGroupId(e.target.value)}
+                  />
+                </Form.InputWrapper>
+              </div>
 
               <div id={styles.descriptionInputWrapper}>
                 <Form.InputWrapper>
