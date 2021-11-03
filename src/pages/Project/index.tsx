@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { FiList, FiLayout } from "react-icons/fi";
+import { FiList, FiLayout, FiSettings } from "react-icons/fi";
 
 import { useParams } from "react-router-dom";
 import styles from "./Project.module.scss";
@@ -9,6 +9,7 @@ import Header from "../../components/Header";
 import ViewOption from "./components/ViewOption";
 import View from "./components/View";
 import CreateIssueModal from "./components/CreateIssueModal";
+import UpdateProjectModal from "./components/UpdateProjectModal";
 
 import { useSidebar } from "../../contexts/SidebarContext";
 import { useProjects } from "../../contexts/ProjectsContext";
@@ -24,6 +25,7 @@ export default function Project(): React.ReactElement {
   );
 
   const [isCreationModalOpen, setIsCreationModalOpen] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
   if (!project) {
     return <h1>Projeto não encontrado!</h1>;
@@ -38,16 +40,26 @@ export default function Project(): React.ReactElement {
           closeSidebar={() => setIsSidebarOpen(false)}
           isSidebarOpen={isSidebarOpen}
         />
-        <div id={styles.optionsContainer}>
-          <CreateButton
-            title="Novo card"
-            onClick={() => setIsCreationModalOpen(true)}
-          />
+        <div id={styles.headerOptions}>
+          <div id={styles.optionsContainer}>
+            <CreateButton
+              title="Novo card"
+              onClick={() => setIsCreationModalOpen(true)}
+            />
 
-          <div id={styles.viewOptionsContainer}>
-            <ViewOption text="Lista" icon={FiList} active />
-            <ViewOption text="Kanban" icon={FiLayout} />
+            <div id={styles.viewOptionsContainer}>
+              <ViewOption text="Lista" icon={FiList} active />
+              <ViewOption text="Kanban" icon={FiLayout} />
+            </div>
           </div>
+
+          <button
+            id={styles.updateButton}
+            type="button"
+            onClick={() => setIsUpdateModalOpen(true)}
+          >
+            <FiSettings color="var(--dark)" size={20} />
+          </button>
         </div>
       </div>
 
@@ -58,6 +70,10 @@ export default function Project(): React.ReactElement {
       <CreateIssueModal
         shown={isCreationModalOpen}
         closeModal={() => setIsCreationModalOpen(false)}
+      />
+      <UpdateProjectModal
+        shown={isUpdateModalOpen}
+        closeModal={() => setIsUpdateModalOpen(false)}
       />
     </div>
   );

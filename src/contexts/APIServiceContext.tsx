@@ -15,9 +15,11 @@ import {
   IRegisterService,
 } from "../services/interfaces";
 import { ICreateIssueService } from "../services/interfaces/ICreateIssueService";
+import { IUpdateProjectService } from "../services/interfaces/IUpdateProjectService";
 import ListProjectsService from "../services/ListProjectsService";
 import LoginService from "../services/LoginService";
 import RegisterService from "../services/RegisterService";
+import UpdateProjectService from "../services/UpdateProjectService";
 import { useLanguage } from "./LanguageContext";
 import { useSession } from "./SessionContext";
 
@@ -28,6 +30,7 @@ type APIServiceContextData = {
   listProjectsService: IListProjectsService;
   createProjectService: ICreateProjectService;
   createIssueService: ICreateIssueService;
+  updateProjectService: IUpdateProjectService;
 };
 
 type APIServiceProviderProps = {
@@ -52,6 +55,7 @@ export const APIServiceProvider = ({
       listProjectsService: new ListProjectsService(api, lang),
       createProjectService: new CreateProjectService(api, lang),
       createIssueService: new CreateIssueService(api, lang),
+      updateProjectService: new UpdateProjectService(api, lang),
     } as Omit<APIServiceContextData, "isReadyForAuthRequests">;
   }, [language]);
 
