@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { FiHome, FiClipboard, FiSettings } from "react-icons/fi";
+import { FiHome, FiClipboard } from "react-icons/fi";
 import { useHistory, useLocation } from "react-router-dom";
 
 import styles from "./Sidebar.module.css";
@@ -73,12 +73,6 @@ export default function Sidebar(): React.ReactElement {
               text={sidebarLanguage.projectsItemName}
               active={sidebarActiveItem === "projects"}
               icon={FiClipboard}
-            />
-            <SidebarItem
-              collapse={isCollapsed}
-              text={sidebarLanguage.settingsItemName}
-              active={sidebarActiveItem === "settings"}
-              icon={FiSettings}
             />
           </div>
         </div>
