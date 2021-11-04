@@ -2,37 +2,6 @@
   width: 26rem;
   height: 26rem;
 }
-#eye1 {
-  animation: moveLeftEye 10s ease-in-out forwards infinite;
-}
-
-#eye2 {
-  animation: moveRightEye 10s ease-in-out forwards infinite;
-}
-
-@keyframes moveLeftEye {
-  0% {
-    transform: translateX(0) translateY(0);
-  }
-  50% {
-    transform: translateX(1px) translateY(2px);
-  }
-  100% {
-    transform: translateX(0) translateY(0);
-  }
-}
-
-@keyframes moveRightEye {
-  0% {
-    transform: translateX(0) translateY(0);
-  }
-  50% {
-    transform: translateX(1px) translateY(2px);
-  }
-  100% {
-    transform: translateX(0) translateY(0);
-  }
-}
 
 /* 1200px */
 @media (min-width: 75rem) {
