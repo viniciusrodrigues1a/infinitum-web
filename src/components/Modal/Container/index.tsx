@@ -5,12 +5,18 @@ export type ContainerProps = {
   shown: boolean;
   closeModal: () => void;
   children: React.ReactElement;
+  changeScroll?: boolean;
+};
+
+Container.defaultProps = {
+  changeScroll: true,
 };
 
 export default function Container({
   shown,
   closeModal,
   children,
+  changeScroll = true,
 }: ContainerProps): React.ReactElement {
   const outsideModalContainerRef = useRef<HTMLDivElement>(null);
 
@@ -36,13 +42,17 @@ export default function Container({
     body.addEventListener("keyup", onKeyup);
 
     return () => {
-      body.classList.remove("noVerticalScroll");
+      if (changeScroll) {
+        body.classList.remove("noVerticalScroll");
+      }
       body.removeEventListener("click", onClick);
       body.removeEventListener("keyup", onKeyup);
     };
-  }, [shown, closeModal]);
+  }, [shown, closeModal, changeScroll]);
 
   useEffect(() => {
+    if (!changeScroll) return;
+
     const body = document.querySelector("body");
     if (!body) {
       return;

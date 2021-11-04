@@ -1,0 +1,145 @@
+$horizontalPadding: 2rem;
+
+#wrapper {
+  display: flex;
+  margin: 4rem auto;
+  max-width: 42rem;
+  width: 85%;
+
+  /* 600px */
+  @media (min-width: 37.5rem) {
+    width: 70%;
+  }
+
+  /* 996px */
+  @media (min-width: 62.25rem) {
+    width: 50%;
+  }
+
+  /* 1200px */
+  @media (min-width: 75rem) {
+    width: 36%;
+  }
+}
+
+#content {
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  margin-top: 3rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+#warningContainer {
+  margin-top: 0.875rem;
+  display: flex;
+  align-items: center;
+  background-color: #f3e4c7;
+  padding: 0.875rem $horizontalPadding;
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23D8A643FF' stroke-width='3' stroke-dasharray='16' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+
+  > strong {
+    color: var(--dark);
+    font-family: var(--text);
+    font-size: 1.125rem;
+    font-weight: normal;
+    margin-left: 0.875rem;
+  }
+}
+
+#description {
+  margin-top: 2rem;
+  font-size: 1.125rem;
+  font-family: var(--text);
+  color: var(--dark);
+  line-height: 1.4;
+
+  > strong {
+    font-weight: bold;
+  }
+}
+
+#inputContainer {
+  label {
+    font-size: 1rem;
+    color: var(--dark);
+    font-family: var(--text);
+
+    > span {
+      color: #d85c43;
+    }
+  }
+
+  input {
+    margin-top: 0.5rem;
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    border: 1px solid #bbbbbb;
+    border-radius: 4px;
+    padding: 0.625rem;
+    font-family: var(--text);
+  }
+}
+
+#buttonsContainer {
+  display: flex;
+  justify-content: flex-end;
+
+  #cancelButton,
+  #deleteButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--text);
+    font-size: 1rem;
+    font-weight: normal;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  #cancelButton {
+    color: #777777;
+    margin-right: 2rem;
+
+    &:hover {
+      color: var(--dark);
+    }
+  }
+
+  #deleteButton {
+    color: var(--dark);
+    background: rgba(216, 92, 67, 0.4);
+    border-radius: 4px;
+    padding: 0.85rem 3.275rem;
+
+    &:disabled {
+      background: rgba(216, 92, 67, 0.2);
+      cursor: not-allowed;
+    }
+
+    &:not:disabled:hover {
+      background: rgba(216, 92, 67, 0.8);
+    }
+  }
+}
+
+#inputContainer,
+#buttonsContainer {
+  margin-top: 3.5rem;
+}
+
+#titleWrapper,
+#description,
+#inputContainer,
+#buttonsContainer {
+  padding-left: $horizontalPadding;
+  padding-right: $horizontalPadding;
+}

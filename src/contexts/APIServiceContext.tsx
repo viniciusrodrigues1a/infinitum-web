@@ -8,6 +8,7 @@ import React, {
 import api from "../services/api";
 import CreateIssueService from "../services/CreateIssueService";
 import CreateProjectService from "../services/CreateProjectService";
+import DeleteProjectService from "../services/DeleteProjectService";
 import {
   ICreateProjectService,
   IListProjectsService,
@@ -15,6 +16,7 @@ import {
   IRegisterService,
 } from "../services/interfaces";
 import { ICreateIssueService } from "../services/interfaces/ICreateIssueService";
+import { IDeleteProjectService } from "../services/interfaces/IDeleteProjectService";
 import { IUpdateProjectService } from "../services/interfaces/IUpdateProjectService";
 import ListProjectsService from "../services/ListProjectsService";
 import LoginService from "../services/LoginService";
@@ -31,6 +33,7 @@ type APIServiceContextData = {
   createProjectService: ICreateProjectService;
   createIssueService: ICreateIssueService;
   updateProjectService: IUpdateProjectService;
+  deleteProjectService: IDeleteProjectService;
 };
 
 type APIServiceProviderProps = {
@@ -56,6 +59,7 @@ export const APIServiceProvider = ({
       createProjectService: new CreateProjectService(api, lang),
       createIssueService: new CreateIssueService(api, lang),
       updateProjectService: new UpdateProjectService(api, lang),
+      deleteProjectService: new DeleteProjectService(api, lang),
     } as Omit<APIServiceContextData, "isReadyForAuthRequests">;
   }, [language]);
 

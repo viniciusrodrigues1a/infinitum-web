@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { FiEdit3 } from "react-icons/fi";
+import React, { useCallback, useEffect, useState } from "react";
+import { FiEdit3, FiTrash2 } from "react-icons/fi";
 
 import { useParams } from "react-router-dom";
 import styles from "./UpdateProjectModal.module.scss";
@@ -9,6 +9,7 @@ import Form from "../../../../components/Form";
 import Modal from "../../../../components/Modal";
 import Subtitle from "../../../../components/Subtitle";
 import Title from "../../../../components/Title";
+import DeleteProjectModal from "../DeleteProjectModal";
 
 import { useAPIService } from "../../../../contexts/APIServiceContext";
 import { useProjects } from "../../../../contexts/ProjectsContext";
@@ -31,6 +32,8 @@ export default function UpdateProjectModal({
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   useEffect(() => {
     const project = getProjectById(params.projectId);
@@ -58,6 +61,7 @@ export default function UpdateProjectModal({
 
   const handleCloseModal = useCallback(() => {
     clearInputs();
+    setIsDeleteModalOpen(false);
     closeModal();
   }, [closeModal, clearInputs]);
 
@@ -80,91 +84,108 @@ export default function UpdateProjectModal({
 
   return (
     <Modal.Container shown={shown} closeModal={handleCloseModal}>
-      <div id={styles.wrapper}>
-        <div id={styles.content}>
-          <div id={styles.closeButtonWrapper}>
-            <Modal.CloseButton closeModal={handleCloseModal} />
-          </div>
-
-          <div>
-            <Title>Configuração do seu projeto</Title>
-            <div id={styles.subtitleWrapper}>
-              <Subtitle>Atualize as informações do seu projeto</Subtitle>
+      <>
+        <div id={styles.wrapper}>
+          <div id={styles.content}>
+            <div id={styles.closeButtonWrapper}>
+              <Modal.CloseButton closeModal={handleCloseModal} />
             </div>
-          </div>
 
-          <div id={styles.formWrapper}>
-            <Form.Container className={styles.form} onSubmit={handleSubmit}>
-              <div id={styles.imageInputWrapper}>
-                <Form.ImageInput id="project-image" />
+            <div id={styles.contentHeader}>
+              <div id={styles.contentHeaderTitleWrapper}>
+                <Title>Configuração do seu projeto</Title>
+                <div id={styles.subtitleWrapper}>
+                  <Subtitle>Atualize as informações do seu projeto</Subtitle>
+                </div>
               </div>
 
-              <Form.InputWrapper>
-                <Form.Label
-                  htmlFor="title"
-                  titleLabel="Título"
-                  descriptionLabel="Este é o nome usado para se referir ao seu projeto"
-                />
-                <Form.Input
-                  id="title"
-                  placeholder="Título"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-              </Form.InputWrapper>
+              <button
+                type="button"
+                id={styles.deleteButton}
+                onClick={() => setIsDeleteModalOpen(true)}
+              >
+                <FiTrash2 color="#D85C43" size={24} />
+              </button>
+            </div>
 
-              <Form.InputWrapper>
-                <Form.Label
-                  htmlFor="dates"
-                  titleLabel="Data de início e término"
-                  descriptionLabel="O tempo de vida do seu projeto"
-                />
-                <div className={styles.dateInputsContainer}>
-                  <Form.Input
-                    id="start-date"
-                    type="date"
-                    placeholder="Data de início"
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
-                  />
-                  <Form.Input
-                    id="end-date"
-                    type="date"
-                    placeholder="Data de término"
-                    value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
-                  />
+            <div id={styles.formWrapper}>
+              <Form.Container className={styles.form} onSubmit={handleSubmit}>
+                <div id={styles.imageInputWrapper}>
+                  <Form.ImageInput id="project-image" />
                 </div>
-              </Form.InputWrapper>
 
-              <div id={styles.descriptionInputWrapper}>
                 <Form.InputWrapper>
                   <Form.Label
-                    htmlFor="description"
-                    titleLabel="Descrição"
-                    descriptionLabel="Dê uma breve descrição de seu projeto"
+                    htmlFor="title"
+                    titleLabel="Título"
+                    descriptionLabel="Este é o nome usado para se referir ao seu projeto"
                   />
-                  <Form.TextArea
-                    id="description"
-                    placeholder="Descrição"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                  <Form.Input
+                    id="title"
+                    placeholder="Título"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                   />
                 </Form.InputWrapper>
-              </div>
-            </Form.Container>
-          </div>
 
-          <div>
-            <CreateButton
-              title="Atualizar"
-              id={styles.submitButton}
-              onClick={handleSubmit}
-              icon={FiEdit3}
-            />
+                <Form.InputWrapper>
+                  <Form.Label
+                    htmlFor="dates"
+                    titleLabel="Data de início e término"
+                    descriptionLabel="O tempo de vida do seu projeto"
+                  />
+                  <div className={styles.dateInputsContainer}>
+                    <Form.Input
+                      id="start-date"
+                      type="date"
+                      placeholder="Data de início"
+                      value={startDate}
+                      onChange={(e) => setStartDate(e.target.value)}
+                    />
+                    <Form.Input
+                      id="end-date"
+                      type="date"
+                      placeholder="Data de término"
+                      value={endDate}
+                      onChange={(e) => setEndDate(e.target.value)}
+                    />
+                  </div>
+                </Form.InputWrapper>
+
+                <div id={styles.descriptionInputWrapper}>
+                  <Form.InputWrapper>
+                    <Form.Label
+                      htmlFor="description"
+                      titleLabel="Descrição"
+                      descriptionLabel="Dê uma breve descrição de seu projeto"
+                    />
+                    <Form.TextArea
+                      id="description"
+                      placeholder="Descrição"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                    />
+                  </Form.InputWrapper>
+                </div>
+              </Form.Container>
+            </div>
+
+            <div>
+              <CreateButton
+                title="Atualizar"
+                id={styles.submitButton}
+                onClick={handleSubmit}
+                icon={FiEdit3}
+              />
+            </div>
           </div>
         </div>
-      </div>
+
+        <DeleteProjectModal
+          shown={isDeleteModalOpen}
+          closeModal={() => setIsDeleteModalOpen(false)}
+        />
+      </>
     </Modal.Container>
   );
 }
