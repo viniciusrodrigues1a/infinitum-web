@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FiBell } from "react-icons/fi";
+import { useSession } from "../../contexts/SessionContext";
 import ExpandableHamburger from "../ExpandableHamburger";
 import styles from "./Header.module.css";
 
@@ -16,6 +17,27 @@ export default function Header({
   isSidebarOpen,
   title,
 }: HeaderProps): React.ReactElement {
+  const { clearSession } = useSession();
+
+  const [isDropdownShown, setIsDropdownShown] = useState(false);
+
+  useEffect(() => {
+    const body = document.querySelector("body");
+    if (!body) {
+      return;
+    }
+
+    function onClick() {
+      if (isDropdownShown) {
+        setIsDropdownShown(false);
+      }
+    }
+
+    body.addEventListener("click", onClick);
+
+    return () => body.removeEventListener("click", onClick);
+  }, [isDropdownShown]);
+
   return (
     <div id={styles.container}>
       <div className={styles.flexAlignedRow}>
@@ -38,7 +60,22 @@ export default function Header({
 
       <div className={styles.flexAlignedRow}>
         <FiBell id={styles.bellIcon} color="var(--dark)" size={20} />
-        <div id={styles.userAvatar} />
+        <div id={styles.userAvatarWrapper}>
+          <button
+            aria-label="More options"
+            type="button"
+            id={styles.userAvatar}
+            onClick={() => setIsDropdownShown(!isDropdownShown)}
+          />
+
+          {isDropdownShown && (
+            <div id={styles.headerDropdown}>
+              <button type="button" onClick={clearSession}>
+                Encerrar sessão
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 type SessionContextData = {
   isSignedIn: () => boolean;
@@ -24,11 +24,20 @@ export function SessionProvider({
 
   function clearSession() {
     setSessionToken(null);
+    localStorage.removeItem("jwtToken");
   }
 
   function storeSession(token: string) {
     setSessionToken(token);
+    localStorage.setItem("jwtToken", token);
   }
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("jwtToken");
+    if (storedToken) {
+      storeSession(storedToken);
+    }
+  }, []);
 
   return (
     <SessionContext.Provider
