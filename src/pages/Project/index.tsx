@@ -26,6 +26,7 @@ export default function Project(): React.ReactElement {
 
   const [isCreationModalOpen, setIsCreationModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [activeView, setActiveView] = useState<"list" | "kanban">("list");
 
   if (!project) {
     return <h1>Projeto não encontrado!</h1>;
@@ -48,8 +49,18 @@ export default function Project(): React.ReactElement {
             />
 
             <div id={styles.viewOptionsContainer}>
-              <ViewOption text="Lista" icon={FiList} active />
-              <ViewOption text="Kanban" icon={FiLayout} />
+              <ViewOption
+                text="Lista"
+                icon={FiList}
+                active={activeView === "list"}
+                onClick={() => setActiveView("list")}
+              />
+              <ViewOption
+                text="Kanban"
+                icon={FiLayout}
+                active={activeView === "kanban"}
+                onClick={() => setActiveView("kanban")}
+              />
             </div>
           </div>
 
@@ -64,7 +75,8 @@ export default function Project(): React.ReactElement {
       </div>
 
       <main role="main">
-        <View.List />
+        {activeView === "list" && <View.List />}
+        {activeView === "kanban" && <View.Kanban />}
       </main>
 
       <CreateIssueModal

@@ -6,6 +6,7 @@ import styles from "./ViewOption.module.scss";
 export type ViewOptionProps = {
   text: string;
   active?: boolean;
+  onClick?: () => void;
   icon: (
     props: DetailedHTMLProps<
       HTMLAttributes<HTMLElement | SVGElement>,
@@ -17,17 +18,20 @@ export type ViewOptionProps = {
 
 ViewOption.defaultProps = {
   active: false,
+  onClick: () => null,
 };
 
 export default function ViewOption({
   icon: Icon,
   text,
   active,
+  onClick,
 }: ViewOptionProps): React.ReactElement {
   return (
     <button
       type="button"
       className={`${styles.container} ${active ? styles.active : ""}`}
+      onClick={onClick}
     >
       <Icon
         className={styles.icon}

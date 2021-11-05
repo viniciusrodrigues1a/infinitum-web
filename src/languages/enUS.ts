@@ -100,6 +100,53 @@ export const enUS: Language = {
         startDateTitle: "Start date",
         endDateTitle: "End date",
       },
+      emptyProjectsText: "You haven't created a project yet",
+      createModal: {
+        title: "Project creation",
+        subtitle: "The first step to realizing your idea",
+
+        titleInputLabel: "Title",
+        titleInputDescription:
+          "This will be the name used to refer to your project",
+        titleInputPlaceholder: "Title",
+
+        dateInputLabel: "Start and end date",
+        dateInputDescription: "The lifetime of your project",
+
+        descriptionInputLabel: "Description",
+        descriptionInputDescription: "Give a brief description of your project",
+        descriptionInputPlaceholder: "Description",
+
+        submitButtonText: "Create",
+      },
+    },
+    project: {
+      newCardButtonText: "New card",
+      viewOptionList: "List",
+      viewOptionKanban: "Kanban",
+      createIssueModal: {
+        title: "Ticket creation",
+        subtitle: "Fill in the necessary information to create a ticket",
+
+        titleInputLabel: "Title",
+        titleInputDescription:
+          "This will be the name used to refer to your project",
+        titleInputPlaceholder: "Title",
+
+        expiringDateInputLabel: "Date of conclusion",
+        expiringDateInputDescription: "The limit date for this ticket",
+
+        sectionInputLabel: "Section",
+        sectionInputDescription:
+          "To which section of your project this ticket will be a part of",
+        sectionInputPlaceholder: "Select a section",
+
+        descriptionInputLabel: "Description",
+        descriptionInputDescription: "Give a brief description of your project",
+        descriptionInputPlaceholder: "Description",
+
+        submitButtonText: "Create",
+      },
     },
   },
   components: {

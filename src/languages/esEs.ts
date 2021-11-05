@@ -103,6 +103,57 @@ export const esEs: Language = {
         startDateTitle: "Fecha de inicio",
         endDateTitle: "Fecha de finalización",
       },
+      emptyProjectsText: "Aún no tienes ningún proyecto",
+      createModal: {
+        title: "Creación de proyectos",
+        subtitle: "El primer paso para hacer realidad tu idea",
+
+        titleInputLabel: "Título",
+        titleInputDescription:
+          "Este será el nombre utilizado para referirse a su proyecto.",
+        titleInputPlaceholder: "Título",
+
+        dateInputLabel: "Fecha de inicio y finalización",
+        dateInputDescription: "La vida útil de su proyecto",
+
+        descriptionInputLabel: "Descripción",
+        descriptionInputDescription:
+          "Proporcione una breve descripción de su proyecto",
+        descriptionInputPlaceholder: "Descripción",
+
+        submitButtonText: "Crear",
+      },
+    },
+    // TODO
+    project: {
+      newCardButtonText: "Novo card",
+      viewOptionList: "Lista",
+      viewOptionKanban: "Kanban",
+      createIssueModal: {
+        title: "Criação de ticket",
+        subtitle: "Adicione as informações do seu ticket",
+
+        titleInputLabel: "Título",
+        titleInputDescription:
+          "Este será el nombre utilizado para referirse a su proyecto.",
+        titleInputPlaceholder: "Título",
+
+        expiringDateInputLabel: "Data de conclusão",
+        expiringDateInputDescription: "A data de conclusão deste ticket",
+
+        sectionInputLabel: "Seção",
+        sectionInputDescription:
+          "A qual seção do seu projeto seu ticket fará parte",
+        sectionInputPlaceholder: "Selecione uma seção",
+        // TODO //
+
+        descriptionInputLabel: "Descripción",
+        descriptionInputDescription:
+          "Proporcione una breve descripción de su proyecto",
+        descriptionInputPlaceholder: "Descripción",
+
+        submitButtonText: "Crear",
+      },
     },
   },
   components: {

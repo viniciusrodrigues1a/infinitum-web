@@ -108,7 +108,7 @@ export default function List(): React.ReactElement {
   }
 
   return (
-    <div id={styles.container}>
+    <>
       <div id={styles.infoHeadContainer}>
         <div>
           <FiAlignLeft color="#999999" size={20} />
@@ -191,6 +191,6 @@ export default function List(): React.ReactElement {
           )}
         </div>
       ))}
-    </div>
+    </>
   );
 }

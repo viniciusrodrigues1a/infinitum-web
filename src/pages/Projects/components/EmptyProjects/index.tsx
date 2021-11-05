@@ -28,7 +28,7 @@ export default function EmptyProjects({
       <div className={styles.info}>
         <div className={styles.infoTextContainer}>
           <p className={styles.infoText}>
-            Você não possui nenhum projeto ainda
+            {projectsLanguage.emptyProjectsText}
           </p>
           <FiFrown
             className={styles.infoTextIcon}

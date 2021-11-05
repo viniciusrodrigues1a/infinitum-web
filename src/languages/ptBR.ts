@@ -100,6 +100,53 @@ export const ptBR: Language = {
         startDateTitle: "Data de início",
         endDateTitle: "Data de término",
       },
+      emptyProjectsText: "Você não possui nenhum projeto ainda",
+      createModal: {
+        title: "Criação de projeto",
+        subtitle: "O primeiro passo para a realização da sua ideia",
+
+        titleInputLabel: "Título",
+        titleInputDescription:
+          "Este será o nome usado para se referir ao seu projeto",
+        titleInputPlaceholder: "Título",
+
+        dateInputLabel: "Data de início e término",
+        dateInputDescription: "O tempo de vida do seu projeto",
+
+        descriptionInputLabel: "Descrição",
+        descriptionInputDescription: "Dê uma breve descrição de seu projeto",
+        descriptionInputPlaceholder: "Descrição",
+
+        submitButtonText: "Criar",
+      },
+    },
+    project: {
+      newCardButtonText: "Novo card",
+      viewOptionList: "Lista",
+      viewOptionKanban: "Kanban",
+      createIssueModal: {
+        title: "Criação de ticket",
+        subtitle: "Adicione as informações do seu ticket",
+
+        titleInputLabel: "Título",
+        titleInputDescription:
+          "Este será o nome usado para se referir ao seu projeto",
+        titleInputPlaceholder: "Título",
+
+        expiringDateInputLabel: "Data de conclusão",
+        expiringDateInputDescription: "A data de conclusão deste ticket",
+
+        sectionInputLabel: "Seção",
+        sectionInputDescription:
+          "A qual seção do seu projeto seu ticket fará parte",
+        sectionInputPlaceholder: "Selecione uma seção",
+
+        descriptionInputLabel: "Descrição",
+        descriptionInputDescription: "Dê uma breve descrição de seu projeto",
+        descriptionInputPlaceholder: "Descrição",
+
+        submitButtonText: "Criar",
+      },
     },
   },
   components: {

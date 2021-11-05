@@ -11,6 +11,7 @@ import CreateButton from "../../../../components/CreateButton";
 import { useAPIService } from "../../../../contexts/APIServiceContext";
 import showToast from "../../../../utils/showToast";
 import { useProjects } from "../../../../contexts/ProjectsContext";
+import { useLanguage } from "../../../../contexts/LanguageContext";
 
 export default function CreateIssueModal({
   shown,
@@ -19,6 +20,11 @@ export default function CreateIssueModal({
   const params = useParams<{ projectId: string }>();
   const { getProjectById, fetchProjects } = useProjects();
   const { createIssueService } = useAPIService();
+  const {
+    language: {
+      pages: { project: projectLanguage },
+    },
+  } = useLanguage();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -70,9 +76,9 @@ export default function CreateIssueModal({
           </div>
 
           <div>
-            <Title>Criação de ticket</Title>
+            <Title>{projectLanguage.createIssueModal.title}</Title>
             <div id={styles.subtitleWrapper}>
-              <Subtitle>Adicione as informações do seu ticket</Subtitle>
+              <Subtitle>{projectLanguage.createIssueModal.subtitle}</Subtitle>
             </div>
           </div>
 
@@ -81,12 +87,16 @@ export default function CreateIssueModal({
               <Form.InputWrapper>
                 <Form.Label
                   htmlFor="title"
-                  titleLabel="Título"
-                  descriptionLabel="Este será o nome usado para se referir ao seu projeto"
+                  titleLabel={projectLanguage.createIssueModal.titleInputLabel}
+                  descriptionLabel={
+                    projectLanguage.createIssueModal.titleInputDescription
+                  }
                 />
                 <Form.Input
                   id="title"
-                  placeholder="Título"
+                  placeholder={
+                    projectLanguage.createIssueModal.titleInputPlaceholder
+                  }
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                 />
@@ -95,13 +105,17 @@ export default function CreateIssueModal({
               <Form.InputWrapper>
                 <Form.Label
                   htmlFor="start-date"
-                  titleLabel="Data de conclusão"
-                  descriptionLabel="A data de conclusão deste ticket"
+                  titleLabel={
+                    projectLanguage.createIssueModal.expiringDateInputLabel
+                  }
+                  descriptionLabel={
+                    projectLanguage.createIssueModal
+                      .expiringDateInputDescription
+                  }
                 />
                 <Form.Input
                   id="start-date"
                   type="date"
-                  placeholder="Data de início"
                   value={expirationDate}
                   onChange={(e) => setExpirationDate(e.target.value)}
                 />
@@ -111,12 +125,18 @@ export default function CreateIssueModal({
                 <Form.InputWrapper>
                   <Form.Label
                     htmlFor="section"
-                    titleLabel="Seção"
-                    descriptionLabel="A qual seção do seu projeto seu ticket fará parte"
+                    titleLabel={
+                      projectLanguage.createIssueModal.sectionInputLabel
+                    }
+                    descriptionLabel={
+                      projectLanguage.createIssueModal.sectionInputDescription
+                    }
                   />
                   <Form.Select
                     id="section"
-                    placeholder="Selecione uma seção"
+                    placeholder={
+                      projectLanguage.createIssueModal.sectionInputPlaceholder
+                    }
                     options={project.issueGroups.map((ig) => ({
                       value: ig.issueGroupId,
                       text: ig.title,
@@ -131,12 +151,20 @@ export default function CreateIssueModal({
                 <Form.InputWrapper>
                   <Form.Label
                     htmlFor="description"
-                    titleLabel="Descrição"
-                    descriptionLabel="Dê uma breve descrição de seu projeto"
+                    titleLabel={
+                      projectLanguage.createIssueModal.descriptionInputLabel
+                    }
+                    descriptionLabel={
+                      projectLanguage.createIssueModal
+                        .descriptionInputDescription
+                    }
                   />
                   <Form.TextArea
                     id="description"
-                    placeholder="Descrição"
+                    placeholder={
+                      projectLanguage.createIssueModal
+                        .descriptionInputPlaceholder
+                    }
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                   />
@@ -148,7 +176,7 @@ export default function CreateIssueModal({
           <div>
             <CreateButton
               id={styles.submitButton}
-              title="Criar"
+              title={projectLanguage.createIssueModal.submitButtonText}
               onClick={handleSubmit}
             />
           </div>

@@ -11,6 +11,19 @@
   main {
     height: 100%;
     background-color: #ebebeb;
+    padding: 0 1.25rem 3.5rem;
+
+    /* 996px */
+    @media (min-width: 62.25rem) {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+
+    /* 1200px */
+    @media (min-width: 75rem) {
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
   }
 }
 

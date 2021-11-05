@@ -11,6 +11,7 @@ import Title from "../Title";
 import { useAPIService } from "../../contexts/APIServiceContext";
 import showToast from "../../utils/showToast";
 import { useProjects } from "../../contexts/ProjectsContext";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 export type CreateProjectModalProps = {
   shown: boolean;
@@ -23,6 +24,11 @@ export default function CreateProjectModal({
 }: CreateProjectModalProps): React.ReactElement {
   const { createProjectService } = useAPIService();
   const { fetchProjects } = useProjects();
+  const {
+    language: {
+      pages: { projects: projectsLanguage },
+    },
+  } = useLanguage();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -66,11 +72,9 @@ export default function CreateProjectModal({
           </div>
 
           <div>
-            <Title>Criação de projeto</Title>
+            <Title>{projectsLanguage.createModal.title}</Title>
             <div id={styles.subtitleWrapper}>
-              <Subtitle>
-                O primeiro passo para a realização da sua ideia
-              </Subtitle>
+              <Subtitle>{projectsLanguage.createModal.subtitle}</Subtitle>
             </div>
           </div>
 
@@ -83,12 +87,16 @@ export default function CreateProjectModal({
               <Form.InputWrapper>
                 <Form.Label
                   htmlFor="title"
-                  titleLabel="Título"
-                  descriptionLabel="Este será o nome usado para se referir ao seu projeto"
+                  titleLabel={projectsLanguage.createModal.titleInputLabel}
+                  descriptionLabel={
+                    projectsLanguage.createModal.titleInputDescription
+                  }
                 />
                 <Form.Input
                   id="title"
-                  placeholder="Título"
+                  placeholder={
+                    projectsLanguage.createModal.titleInputPlaceholder
+                  }
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                 />
@@ -97,21 +105,21 @@ export default function CreateProjectModal({
               <Form.InputWrapper>
                 <Form.Label
                   htmlFor="dates"
-                  titleLabel="Data de início e término"
-                  descriptionLabel="O tempo de vida do seu projeto"
+                  titleLabel={projectsLanguage.createModal.dateInputLabel}
+                  descriptionLabel={
+                    projectsLanguage.createModal.dateInputDescription
+                  }
                 />
                 <div className={styles.dateInputsContainer}>
                   <Form.Input
                     id="start-date"
                     type="date"
-                    placeholder="Data de início"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
                   />
                   <Form.Input
                     id="end-date"
                     type="date"
-                    placeholder="Data de término"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
                   />
@@ -122,12 +130,18 @@ export default function CreateProjectModal({
                 <Form.InputWrapper>
                   <Form.Label
                     htmlFor="description"
-                    titleLabel="Descrição"
-                    descriptionLabel="Dê uma breve descrição de seu projeto"
+                    titleLabel={
+                      projectsLanguage.createModal.descriptionInputLabel
+                    }
+                    descriptionLabel={
+                      projectsLanguage.createModal.descriptionInputDescription
+                    }
                   />
                   <Form.TextArea
                     id="description"
-                    placeholder="Descrição"
+                    placeholder={
+                      projectsLanguage.createModal.descriptionInputPlaceholder
+                    }
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                   />
@@ -138,7 +152,7 @@ export default function CreateProjectModal({
 
           <div>
             <CreateButton
-              title="Criar"
+              title={projectsLanguage.createModal.submitButtonText}
               id={styles.submitButton}
               onClick={handleSubmit}
             />
