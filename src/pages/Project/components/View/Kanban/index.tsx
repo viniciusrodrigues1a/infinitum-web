@@ -132,6 +132,7 @@ export default function Kanban(): React.ReactElement {
                 <button
                   type="button"
                   className={styles.addCardButton}
+                  disabled={!!isCreatingNewIssueForIssueGroupId}
                   onClick={() =>
                     setIsCreatingNewIssueForIssueGroupId(
                       issueGroup.issueGroupId
@@ -144,6 +145,23 @@ export default function Kanban(): React.ReactElement {
               </div>
             </div>
           ))}
+
+          <div
+            className={`${styles.issueSectionContainer} ${styles.skeletonIssueSection}`}
+          >
+            <div className={styles.issueSectionHeader}>
+              <button
+                type="button"
+                className={styles.addIssueButton}
+                onClick={() => {}}
+              >
+                <FiPlusCircle color="#888888" size={24} />
+                <span>Nova seção</span>
+              </button>
+            </div>
+
+            <div className={styles.issueSectionBody} />
+          </div>
         </div>
       </div>
     </div>

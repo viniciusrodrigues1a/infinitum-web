@@ -1,4 +1,5 @@
 #containerGrid {
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas: "a";
@@ -113,10 +114,37 @@
         cursor: pointer;
         background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23888888FF' stroke-width='2' stroke-dasharray='10' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
 
+        &:disabled {
+          cursor: not-allowed;
+        }
+
         > span {
           color: #888888;
           margin-left: 0.625rem;
         }
+      }
+    }
+  }
+
+  .skeletonIssueSection .issueSectionHeader {
+    display: flex;
+    justify-content: center;
+
+    &::after {
+      background-color: rgba(68, 68, 68, 0.5);
+    }
+
+    > button {
+      background: none;
+      border: none;
+      display: flex;
+      align-items: center;
+
+      > span {
+        font-size: 1.15rem;
+        font-family: var(--text);
+        color: #888888;
+        margin-left: 0.625rem;
       }
     }
   }
