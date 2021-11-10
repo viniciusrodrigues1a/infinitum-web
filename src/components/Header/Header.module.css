@@ -55,6 +55,7 @@
 
 #headerDropdown {
   position: absolute;
+  z-index: 5;
   bottom: -3.75rem;
   left: 50%;
   transform: translateX(-50%);
