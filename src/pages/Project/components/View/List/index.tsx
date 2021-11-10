@@ -42,13 +42,13 @@ export default function List(): React.ReactElement {
 
   const handleSubmit = useCallback(async () => {
     if (!isCreatingNewIssueForIssueGroupId) return;
+    closeCreationInput();
 
     const response = await createIssueService.createIssue({
       title: newIssueTitle,
       description: " ",
       issueGroupId: isCreatingNewIssueForIssueGroupId,
     });
-    closeCreationInput();
 
     const toastMsg = response.userFriendlyMessage;
     if (toastMsg) showToast(toastMsg, response.error);

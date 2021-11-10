@@ -26,16 +26,20 @@ export default function Kanban(): React.ReactElement {
 
   const newIssueTitleInputRef = useRef<HTMLInputElement>(null);
 
+  function closeCreationInput() {
+    setIsCreatingNewIssueForIssueGroupId(null);
+    setNewIssueTitle("");
+  }
+
   const handleSubmit = useCallback(async () => {
     if (!isCreatingNewIssueForIssueGroupId) return;
+    closeCreationInput();
 
     const response = await createIssueService.createIssue({
       title: newIssueTitle,
       description: " ",
       issueGroupId: isCreatingNewIssueForIssueGroupId,
     });
-    setIsCreatingNewIssueForIssueGroupId(null);
-    setNewIssueTitle("");
 
     const toastMsg = response.userFriendlyMessage;
     if (toastMsg) showToast(toastMsg, response.error);
@@ -49,29 +53,18 @@ export default function Kanban(): React.ReactElement {
     newIssueTitle,
   ]);
 
-  const handleKeyPress = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
-        handleSubmit();
-      }
-    },
-    [handleSubmit]
-  );
-
   useEffect(() => {
     if (newIssueTitleInputRef.current) {
       const elem = newIssueTitleInputRef.current;
       elem.focus();
 
-      elem.addEventListener("blur", handleSubmit);
-      elem.addEventListener("keypress", handleKeyPress);
+      elem.addEventListener("blur", closeCreationInput);
 
       return () => {
-        elem.removeEventListener("blur", handleSubmit);
-        elem.removeEventListener("keypress", handleKeyPress);
+        elem.removeEventListener("blur", closeCreationInput);
       };
     }
-  }, [isCreatingNewIssueForIssueGroupId, handleKeyPress, handleSubmit]);
+  }, [isCreatingNewIssueForIssueGroupId, handleSubmit]);
 
   const project = useMemo(
     () => getProjectById(params.projectId),
@@ -117,16 +110,23 @@ export default function Kanban(): React.ReactElement {
 
                 {isCreatingNewIssueForIssueGroupId ===
                   issueGroup.issueGroupId && (
-                  <input
-                    ref={newIssueTitleInputRef}
-                    type="text"
-                    name="card-title"
-                    id="card-title"
-                    value={newIssueTitle}
-                    onChange={(e) => setNewIssueTitle(e.target.value)}
-                    placeholder="Título"
-                    className={styles.issueCardInput}
-                  />
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      handleSubmit();
+                    }}
+                  >
+                    <input
+                      ref={newIssueTitleInputRef}
+                      type="text"
+                      name="card-title"
+                      id="card-title"
+                      value={newIssueTitle}
+                      onChange={(e) => setNewIssueTitle(e.target.value)}
+                      placeholder="Título"
+                      className={styles.issueCardInput}
+                    />
+                  </form>
                 )}
 
                 <button
