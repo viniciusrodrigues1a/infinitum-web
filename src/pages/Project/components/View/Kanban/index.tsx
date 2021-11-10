@@ -15,25 +15,39 @@ import styles from "./Kanban.module.scss";
 
 export default function Kanban(): React.ReactElement {
   const params = useParams<{ projectId: string }>();
-  const { createIssueService } = useAPIService();
+  const { createIssueService, createIssueGroupService } = useAPIService();
   const { getProjectById, fetchProjects } = useProjects();
 
   const [
     isCreatingNewIssueForIssueGroupId,
     setIsCreatingNewIssueForIssueGroupId,
   ] = useState<string | null>(null);
+  const [isCreatingNewIssueGroup, setIsCreatingNewIssueGroup] =
+    useState<boolean>(false);
   const [newIssueTitle, setNewIssueTitle] = useState("");
+  const [newIssueGroupTitle, setNewIssueGroupTitle] = useState("");
 
   const newIssueTitleInputRef = useRef<HTMLInputElement>(null);
+  const newIssueGroupTitleInputRef = useRef<HTMLInputElement>(null);
 
-  function closeCreationInput() {
+  function closeIssueCreationInput() {
     setIsCreatingNewIssueForIssueGroupId(null);
     setNewIssueTitle("");
   }
 
-  const handleSubmit = useCallback(async () => {
+  function closeIssueGroupCreationInput() {
+    setIsCreatingNewIssueGroup(false);
+    setNewIssueGroupTitle("");
+  }
+
+  const project = useMemo(
+    () => getProjectById(params.projectId),
+    [params, getProjectById]
+  );
+
+  const handleIssueSubmit = useCallback(async () => {
     if (!isCreatingNewIssueForIssueGroupId) return;
-    closeCreationInput();
+    closeIssueCreationInput();
 
     const response = await createIssueService.createIssue({
       title: newIssueTitle,
@@ -53,23 +67,53 @@ export default function Kanban(): React.ReactElement {
     newIssueTitle,
   ]);
 
+  const handleIssueGroupSubmit = useCallback(async () => {
+    if (!isCreatingNewIssueGroup) return;
+    closeIssueCreationInput();
+
+    const response = await createIssueGroupService.createIssueGroup({
+      title: newIssueGroupTitle,
+      projectId: project!.projectId,
+    });
+
+    const toastMsg = response.userFriendlyMessage;
+    if (toastMsg) showToast(toastMsg, response.error);
+    if (!response.error) {
+      await fetchProjects();
+    }
+  }, [
+    isCreatingNewIssueGroup,
+    createIssueGroupService,
+    fetchProjects,
+    newIssueGroupTitle,
+    project,
+  ]);
+
   useEffect(() => {
     if (newIssueTitleInputRef.current) {
       const elem = newIssueTitleInputRef.current;
       elem.focus();
 
-      elem.addEventListener("blur", closeCreationInput);
+      elem.addEventListener("blur", closeIssueCreationInput);
 
       return () => {
-        elem.removeEventListener("blur", closeCreationInput);
+        elem.removeEventListener("blur", closeIssueCreationInput);
       };
     }
-  }, [isCreatingNewIssueForIssueGroupId, handleSubmit]);
+  }, [isCreatingNewIssueForIssueGroupId]);
 
-  const project = useMemo(
-    () => getProjectById(params.projectId),
-    [params, getProjectById]
-  );
+  useEffect(() => {
+    if (newIssueGroupTitleInputRef.current) {
+      const elem = newIssueGroupTitleInputRef.current;
+      elem.focus();
+
+      elem.addEventListener("blur", closeIssueGroupCreationInput);
+
+      return () => {
+        elem.removeEventListener("blur", closeIssueGroupCreationInput);
+      };
+    }
+  }, [isCreatingNewIssueGroup]);
 
   if (!project) return <h1>Projeto não encontrado</h1>;
 
@@ -109,11 +153,12 @@ export default function Kanban(): React.ReactElement {
                 ))}
 
                 {isCreatingNewIssueForIssueGroupId ===
-                  issueGroup.issueGroupId && (
+                issueGroup.issueGroupId ? (
                   <form
+                    className={styles.issueCardInputContainer}
                     onSubmit={(e) => {
                       e.preventDefault();
-                      handleSubmit();
+                      handleIssueSubmit();
                     }}
                   >
                     <input
@@ -127,37 +172,57 @@ export default function Kanban(): React.ReactElement {
                       className={styles.issueCardInput}
                     />
                   </form>
+                ) : (
+                  <button
+                    type="button"
+                    className={styles.addCardButton}
+                    disabled={!!isCreatingNewIssueForIssueGroupId}
+                    onClick={() =>
+                      setIsCreatingNewIssueForIssueGroupId(
+                        issueGroup.issueGroupId
+                      )
+                    }
+                  >
+                    <FiPlusCircle color="#888888" size={20} />
+                    <span>Novo card</span>
+                  </button>
                 )}
-
-                <button
-                  type="button"
-                  className={styles.addCardButton}
-                  disabled={!!isCreatingNewIssueForIssueGroupId}
-                  onClick={() =>
-                    setIsCreatingNewIssueForIssueGroupId(
-                      issueGroup.issueGroupId
-                    )
-                  }
-                >
-                  <FiPlusCircle color="#888888" size={20} />
-                  <span>Novo card</span>
-                </button>
               </div>
             </div>
           ))}
 
           <div
-            className={`${styles.issueSectionContainer} ${styles.skeletonIssueSection}`}
+            className={`${styles.issueSectionContainer} ${styles.skeletonIssueGroup}`}
           >
             <div className={styles.issueSectionHeader}>
-              <button
-                type="button"
-                className={styles.addIssueButton}
-                onClick={() => {}}
-              >
-                <FiPlusCircle color="#888888" size={24} />
-                <span>Nova seção</span>
-              </button>
+              {isCreatingNewIssueGroup ? (
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleIssueGroupSubmit();
+                  }}
+                >
+                  <input
+                    ref={newIssueGroupTitleInputRef}
+                    className={styles.issueGroupInput}
+                    type="text"
+                    name="issue-group-title"
+                    id="issue-group-title"
+                    placeholder="Título da seção"
+                    value={newIssueGroupTitle}
+                    onChange={(e) => setNewIssueGroupTitle(e.target.value)}
+                  />
+                </form>
+              ) : (
+                <button
+                  type="button"
+                  className={styles.addIssueButton}
+                  onClick={() => setIsCreatingNewIssueGroup(true)}
+                >
+                  <FiPlusCircle color="#888888" size={24} />
+                  <span>Nova seção</span>
+                </button>
+              )}
             </div>
 
             <div className={styles.issueSectionBody} />
