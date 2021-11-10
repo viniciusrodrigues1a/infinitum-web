@@ -113,22 +113,27 @@ $issueFieldWidth: 50%;
   margin-top: 2.25rem;
 }
 
+.newIssueInputsContainer form,
+.newIssueGroupInputContainer {
+  width: $issueFieldWidth;
+
+  input {
+    padding: 1rem 0.9rem;
+    border: none;
+    background: none;
+    background-color: #f0f0f0;
+    border: 1px solid #666666;
+    border-radius: 0.25rem;
+    color: var(--dark);
+  }
+}
+
+.newIssueGroupInputContainer {
+  margin-top: 2.125rem;
+}
+
 .newIssueInputsContainer {
   display: flex;
   justify-content: flex-start;
   margin-top: 1.125rem;
-
-  > form {
-    width: $issueFieldWidth;
-
-    > input {
-      padding: 1rem 0.9rem;
-      border: none;
-      background: none;
-      background-color: #f0f0f0;
-      border: 1px solid #666666;
-      border-radius: 0.25rem;
-      color: var(--dark);
-    }
-  }
 }

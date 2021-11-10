@@ -23,7 +23,7 @@ import showToast from "../../../../../utils/showToast";
 
 export default function List(): React.ReactElement {
   const params = useParams<{ projectId: string }>();
-  const { createIssueService } = useAPIService();
+  const { createIssueService, createIssueGroupService } = useAPIService();
   const { getProjectById, fetchProjects } = useProjects();
 
   const [collapsedSections, setCollapsedSections] = useState<Array<string>>([]);
@@ -31,18 +31,32 @@ export default function List(): React.ReactElement {
     isCreatingNewIssueForIssueGroupId,
     setIsCreatingNewIssueForIssueGroupId,
   ] = useState<string | null>(null);
+  const [isCreatingNewIssueGroup, setIsCreatingNewIssueGroup] =
+    useState<boolean>(false);
   const [newIssueTitle, setNewIssueTitle] = useState("");
+  const [newIssueGroupTitle, setNewIssueGroupTitle] = useState("");
 
   const newIssueTitleInputRef = useRef<HTMLInputElement>(null);
+  const newIssueGroupTitleInputRef = useRef<HTMLInputElement>(null);
 
-  function closeCreationInput() {
+  function closeIssueCreationInput() {
     setIsCreatingNewIssueForIssueGroupId(null);
     setNewIssueTitle("");
   }
 
-  const handleSubmit = useCallback(async () => {
+  function closeIssueGroupCreationInput() {
+    setIsCreatingNewIssueGroup(false);
+    setNewIssueGroupTitle("");
+  }
+
+  const project = useMemo(
+    () => getProjectById(params.projectId),
+    [getProjectById, params]
+  );
+
+  const handleIssueSubmit = useCallback(async () => {
     if (!isCreatingNewIssueForIssueGroupId) return;
-    closeCreationInput();
+    closeIssueCreationInput();
 
     const response = await createIssueService.createIssue({
       title: newIssueTitle,
@@ -62,18 +76,53 @@ export default function List(): React.ReactElement {
     newIssueTitle,
   ]);
 
+  const handleIssueGroupSubmit = useCallback(async () => {
+    if (!isCreatingNewIssueGroup) return;
+    closeIssueGroupCreationInput();
+
+    const response = await createIssueGroupService.createIssueGroup({
+      title: newIssueGroupTitle,
+      projectId: project!.projectId,
+    });
+
+    const toastMsg = response.userFriendlyMessage;
+    if (toastMsg) showToast(toastMsg, response.error);
+    if (!response.error) {
+      await fetchProjects();
+    }
+  }, [
+    isCreatingNewIssueGroup,
+    createIssueGroupService,
+    fetchProjects,
+    newIssueGroupTitle,
+    project,
+  ]);
+
   useEffect(() => {
     if (newIssueTitleInputRef.current) {
       const elem = newIssueTitleInputRef.current;
       elem.focus();
 
-      elem.addEventListener("blur", closeCreationInput);
+      elem.addEventListener("blur", closeIssueCreationInput);
 
       return () => {
-        elem.removeEventListener("blur", closeCreationInput);
+        elem.removeEventListener("blur", closeIssueCreationInput);
       };
     }
-  }, [isCreatingNewIssueForIssueGroupId, handleSubmit]);
+  }, [isCreatingNewIssueForIssueGroupId]);
+
+  useEffect(() => {
+    if (newIssueGroupTitleInputRef.current) {
+      const elem = newIssueGroupTitleInputRef.current;
+      elem.focus();
+
+      elem.addEventListener("blur", closeIssueGroupCreationInput);
+
+      return () => {
+        elem.removeEventListener("blur", closeIssueGroupCreationInput);
+      };
+    }
+  }, [isCreatingNewIssueGroup]);
 
   function toggleCollapsedSectionState(sectionIdentifier: string) {
     if (collapsedSections.indexOf(sectionIdentifier) === -1) {
@@ -89,11 +138,6 @@ export default function List(): React.ReactElement {
     (sectionIdentifier: string) =>
       collapsedSections.indexOf(sectionIdentifier) !== -1,
     [collapsedSections]
-  );
-
-  const project = useMemo(
-    () => getProjectById(params.projectId),
-    [getProjectById, params]
   );
 
   if (!project) {
@@ -146,47 +190,73 @@ export default function List(): React.ReactElement {
                 </div>
               ))}
 
-              {isCreatingNewIssueForIssueGroupId ===
-                issueGroup.issueGroupId && (
+              {isCreatingNewIssueForIssueGroupId === issueGroup.issueGroupId ? (
                 <div className={styles.newIssueInputsContainer}>
                   <form
                     onSubmit={(e) => {
-                      console.log("submit");
                       e.preventDefault();
-                      handleSubmit();
+                      handleIssueSubmit();
                     }}
                   >
                     <input
                       ref={newIssueTitleInputRef}
                       type="text"
-                      name="title"
-                      id="title"
-                      placeholder="Título"
+                      name="issue-title"
+                      id="issue-title"
+                      placeholder="Título do ticket"
                       value={newIssueTitle}
                       onChange={(e) => setNewIssueTitle(e.target.value)}
                     />
                   </form>
                 </div>
+              ) : (
+                <button
+                  type="button"
+                  className={styles.newIssueButton}
+                  onClick={() =>
+                    setIsCreatingNewIssueForIssueGroupId(
+                      issueGroup.issueGroupId
+                    )
+                  }
+                >
+                  <FiPlusCircle size={18} color="#888888" />
+                  <span>Adicionar nova tarefa...</span>
+                </button>
               )}
-
-              <button
-                type="button"
-                className={styles.newIssueButton}
-                onClick={() =>
-                  setIsCreatingNewIssueForIssueGroupId(issueGroup.issueGroupId)
-                }
-              >
-                <FiPlusCircle size={18} color="#888888" />
-                <span>Adicionar nova tarefa...</span>
-              </button>
             </div>
           )}
 
           {index === project.issueGroups.length - 1 && (
-            <button type="button" className={styles.newSectionButton}>
-              <FiPlusCircle size={20} color="#888888" />
-              <span>Adicionar seção...</span>
-            </button>
+            <>
+              {isCreatingNewIssueGroup ? (
+                <form
+                  className={styles.newIssueGroupInputContainer}
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleIssueGroupSubmit();
+                  }}
+                >
+                  <input
+                    ref={newIssueGroupTitleInputRef}
+                    type="text"
+                    name="issue-group-title"
+                    id="issue-group-title"
+                    placeholder="Título da seção"
+                    value={newIssueGroupTitle}
+                    onChange={(e) => setNewIssueGroupTitle(e.target.value)}
+                  />
+                </form>
+              ) : (
+                <button
+                  type="button"
+                  className={styles.newSectionButton}
+                  onClick={() => setIsCreatingNewIssueGroup(true)}
+                >
+                  <FiPlusCircle size={20} color="#888888" />
+                  <span>Adicionar seção...</span>
+                </button>
+              )}
+            </>
           )}
         </div>
       ))}
