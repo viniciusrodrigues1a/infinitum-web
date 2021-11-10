@@ -35,6 +35,11 @@ export default function List(): React.ReactElement {
 
   const newIssueTitleInputRef = useRef<HTMLInputElement>(null);
 
+  function closeCreationInput() {
+    setIsCreatingNewIssueForIssueGroupId(null);
+    setNewIssueTitle("");
+  }
+
   const handleSubmit = useCallback(async () => {
     if (!isCreatingNewIssueForIssueGroupId) return;
 
@@ -43,8 +48,7 @@ export default function List(): React.ReactElement {
       description: " ",
       issueGroupId: isCreatingNewIssueForIssueGroupId,
     });
-    setIsCreatingNewIssueForIssueGroupId(null);
-    setNewIssueTitle("");
+    closeCreationInput();
 
     const toastMsg = response.userFriendlyMessage;
     if (toastMsg) showToast(toastMsg, response.error);
@@ -58,29 +62,18 @@ export default function List(): React.ReactElement {
     newIssueTitle,
   ]);
 
-  const handleKeyPress = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
-        handleSubmit();
-      }
-    },
-    [handleSubmit]
-  );
-
   useEffect(() => {
     if (newIssueTitleInputRef.current) {
       const elem = newIssueTitleInputRef.current;
       elem.focus();
 
-      elem.addEventListener("blur", handleSubmit);
-      elem.addEventListener("keypress", handleKeyPress);
+      elem.addEventListener("blur", closeCreationInput);
 
       return () => {
-        elem.removeEventListener("blur", handleSubmit);
-        elem.removeEventListener("keypress", handleKeyPress);
+        elem.removeEventListener("blur", closeCreationInput);
       };
     }
-  }, [isCreatingNewIssueForIssueGroupId, handleSubmit, handleKeyPress]);
+  }, [isCreatingNewIssueForIssueGroupId, handleSubmit]);
 
   function toggleCollapsedSectionState(sectionIdentifier: string) {
     if (collapsedSections.indexOf(sectionIdentifier) === -1) {
@@ -156,7 +149,13 @@ export default function List(): React.ReactElement {
               {isCreatingNewIssueForIssueGroupId ===
                 issueGroup.issueGroupId && (
                 <div className={styles.newIssueInputsContainer}>
-                  <div>
+                  <form
+                    onSubmit={(e) => {
+                      console.log("submit");
+                      e.preventDefault();
+                      handleSubmit();
+                    }}
+                  >
                     <input
                       ref={newIssueTitleInputRef}
                       type="text"
@@ -166,7 +165,7 @@ export default function List(): React.ReactElement {
                       value={newIssueTitle}
                       onChange={(e) => setNewIssueTitle(e.target.value)}
                     />
-                  </div>
+                  </form>
                 </div>
               )}
 
