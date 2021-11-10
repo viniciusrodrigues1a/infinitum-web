@@ -1,12 +1,14 @@
 import { AxiosInstance } from "axios";
 import { AxiosLanguage } from "../languages/types/libs";
 import {
-  CreateIssueServiceRequest,
-  ICreateIssueService,
-} from "./interfaces/ICreateIssueService";
+  CreateIssueGroupServiceRequest,
+  ICreateIssueGroupService,
+} from "./interfaces";
 import { APIResponse } from "./type-defs/APIResponse";
 
-export default class CreateIssueService implements ICreateIssueService {
+export default class CreateIssueGroupService
+  implements ICreateIssueGroupService
+{
   private readonly axiosInstance: AxiosInstance;
 
   private readonly language: AxiosLanguage;
@@ -16,18 +18,14 @@ export default class CreateIssueService implements ICreateIssueService {
     this.language = language;
   }
 
-  async createIssue({
+  async createIssueGroup({
     title,
-    description,
-    expiresAt,
-    issueGroupId,
-  }: CreateIssueServiceRequest): Promise<APIResponse<null>> {
+    projectId,
+  }: CreateIssueGroupServiceRequest): Promise<APIResponse<null>> {
     try {
-      await this.axiosInstance.post("/issues/", {
+      await this.axiosInstance.post("/issueGroups", {
         title,
-        description,
-        expiresAt,
-        issueGroupId,
+        projectId,
       });
 
       return { data: null, error: false };
