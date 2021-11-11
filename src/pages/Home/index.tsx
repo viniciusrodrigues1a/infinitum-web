@@ -20,6 +20,8 @@ import Points from "./components/Points";
 import Star from "./components/Star";
 
 import logoImg from "../../assets/logo.png";
+import kanbanPreviewImg from "../../assets/kanban-preview.png";
+import listPreviewImg from "../../assets/list-preview.png";
 
 import { useLanguage } from "../../contexts/LanguageContext";
 import LanguagePicker from "./components/LanguagePicker";
@@ -325,33 +327,12 @@ export default function Home(): ReactElement {
               color={viewOptionIndex === 1 ? "var(--dark)" : "#a6a6a6"}
             />
           </button>
-          <button
-            type="button"
-            onClick={() => setViewOptionIndex(2)}
-            className={`${styles.option} ${
-              viewOptionIndex === 2 ? styles.selectedOption : ""
-            }`}
-          >
-            <FiPieChart
-              size={28}
-              color={viewOptionIndex === 2 ? "var(--dark)" : "#a6a6a6"}
-            />
-          </button>
-          <button
-            type="button"
-            onClick={() => setViewOptionIndex(3)}
-            className={`${styles.option} ${
-              viewOptionIndex === 3 ? styles.selectedOption : ""
-            }`}
-          >
-            <FiActivity
-              size={28}
-              color={viewOptionIndex === 3 ? "var(--dark)" : "#a6a6a6"}
-            />
-          </button>
         </div>
 
-        <div />
+        <img
+          src={viewOptionIndex === 0 ? listPreviewImg : kanbanPreviewImg}
+          alt="Project view"
+        />
       </section>
 
       <section id={styles.authSection} className={styles.sectionMargin}>

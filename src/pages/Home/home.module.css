@@ -342,6 +342,7 @@ header .hamburgerNormal > line {
   display: flex;
   justify-content: center;
   align-items: center;
+  display: none;
 }
 
 .option {
@@ -364,11 +365,18 @@ header .hamburgerNormal > line {
   transform: scale(1.15);
 }
 
-#viewsSection > div:last-child {
+#viewsSection > img {
   width: 90%;
-  height: 280px;
+  max-width: 75rem;
+  max-height: 39.0625rem;
+
+  border: 1px solid #444444;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  border-radius: 4px;
   background-color: #e0e0e0;
   margin-top: 1.25rem;
+  display: none;
 }
 
 /* Auth Section Styles */
@@ -699,9 +707,14 @@ footer {
     text-align: left;
   }
 
-  #viewsSection > div:last-child {
-    width: 70%;
-    height: 28rem;
+  #viewsSection .options {
+    display: flex;
+  }
+
+  #viewsSection > img {
+    display: initial;
+    width: 90%;
+    height: auto;
   }
 
   #authSection {
