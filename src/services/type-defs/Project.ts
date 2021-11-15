@@ -4,6 +4,7 @@ export type Issue = {
   description: string;
   expiresAt: string | null;
   createdAt: string | null;
+  completed: boolean;
 };
 
 export type IssueGroup = {

@@ -126,7 +126,9 @@ export default function Projects(): React.ReactElement {
                           style={{ cursor: "pointer" }}
                         >
                           <Table.Td>{p.name}</Table.Td>
-                          <Table.Td align="center">9%</Table.Td>
+                          <Table.Td align="center">
+                            {p.progressPercentage}%
+                          </Table.Td>
                           <Table.Td align="center">
                             {p.archived ? "Arquivado" : "Ativo"}
                           </Table.Td>

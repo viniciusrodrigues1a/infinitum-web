@@ -8,7 +8,7 @@ import React, {
 import { ListProjectsServiceResponse } from "../services/interfaces";
 
 import { FormattedProject } from "../services/type-defs/FormattedProject";
-import { Issue, IssueGroup } from "../services/type-defs/Project";
+import { Issue, IssueGroup, Project } from "../services/type-defs/Project";
 import { useAPIService } from "./APIServiceContext";
 import { useDateFormatter } from "./DateFormatterContext";
 
@@ -47,6 +47,24 @@ export function ProjectsProvider({
     []
   );
 
+  const getProgressPercentage = useCallback((project: Project): number => {
+    let totalIssues = 0;
+    let completedIssues = 0;
+
+    project.issueGroups.forEach((issueGroup: IssueGroup) => {
+      issueGroup.issues.forEach((issue: Issue) => {
+        totalIssues += 1;
+        if (issue.completed) completedIssues += 1;
+
+        if (issue.title === "Ticket para terça") {
+          console.log(issue.expiresAt);
+        }
+      });
+    });
+
+    return Math.round((100 * completedIssues) / totalIssues);
+  }, []);
+
   const getFormattedDate = useCallback(
     (date: string | null) => (date ? formatToFullDate(date) : ""),
     [formatToFullDate]
@@ -57,6 +75,7 @@ export function ProjectsProvider({
       rawProjects.map((p) => ({
         ...p,
         ownerName: getOwnerParticipant(p.participants),
+        progressPercentage: getProgressPercentage(p),
         beginsAtFullDate: getFormattedDate(p.beginsAt),
         finishesAtFullDate: getFormattedDate(p.finishesAt),
         issueGroups: p.issueGroups.map((ig) => ({
@@ -68,7 +87,7 @@ export function ProjectsProvider({
           })),
         })),
       })),
-    [getOwnerParticipant, getFormattedDate]
+    [getOwnerParticipant, getFormattedDate, getProgressPercentage]
   );
 
   const updateProjectsState = useCallback(async () => {

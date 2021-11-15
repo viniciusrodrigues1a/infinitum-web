@@ -11,6 +11,7 @@ export type FormattedIssueGroup = Omit<IssueGroup, "issues"> & {
 
 export type FormattedProject = Project & {
   ownerName: string;
+  progressPercentage: number;
   beginsAtFullDate: string;
   finishesAtFullDate: string;
   issueGroups: FormattedIssueGroup[];
