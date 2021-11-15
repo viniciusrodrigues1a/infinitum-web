@@ -1,4 +1,3 @@
-import { url } from "inspector";
 import React, { useEffect, useState } from "react";
 import {
   Area,
@@ -15,16 +14,6 @@ import Dot from "./Dot";
 import Squares, { MousePos } from "./Squares";
 import XAxisTick from "./XAxisTick";
 import YAxisTick from "./YAxisTick";
-
-const fakeData = [
-  { date: "seg", value: 1 },
-  { date: "ter", value: 7 },
-  { date: "qua", value: 16 },
-  { date: "qui", value: 19 },
-  { date: "sex", value: 0 },
-  { date: "sab", value: 5 },
-  { date: "dom", value: 1 },
-];
 
 /*
 =============================
@@ -55,7 +44,7 @@ type RechartsMouseMoveEvent = {
   isTooltipActive: boolean;
 };
 
-export default function Chart(): React.ReactElement {
+export default function Chart({ data }: { data: any }): React.ReactElement {
   const [mousePos, setMousePos] = useState<MousePos | null>(null);
 
   useEffect(() => {
@@ -81,7 +70,7 @@ export default function Chart(): React.ReactElement {
       height={CONTAINER_HEIGHT}
     >
       <AreaChart
-        data={fakeData}
+        data={data}
         onMouseMove={handleOnMouseMove}
         onMouseLeave={handleOnMouseLeave}
       >
@@ -147,11 +136,12 @@ export default function Chart(): React.ReactElement {
               y={y}
               payload={payload}
               index={index}
-              dataLength={fakeData.length}
+              dataLength={data.length}
             />
           )}
         />
         <YAxis
+          allowDecimals={false}
           padding={{ top: 80 }}
           width={20}
           axisLine={false}

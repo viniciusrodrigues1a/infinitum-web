@@ -7,6 +7,21 @@
   justify-content: flex-start;
 }
 
+#errorContainer {
+  margin-top: 10rem;
+  padding: 0 10rem;
+}
+
+#errorContainer h1 {
+  color: var(--dark);
+  font-family: var(--text);
+  font-size: 1.8rem;
+}
+
+#loaderContainer {
+  margin-top: 10rem;
+}
+
 #cardsContainer {
   display: flex;
   flex-direction: column;
@@ -131,6 +146,7 @@
   height: 150px;
   border-radius: 50%;
   box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
 }
 
 .cardPercentualEllipsisWrapper,
@@ -165,7 +181,7 @@
   border-bottom-left-radius: 300px;
   border-bottom-right-radius: 300px;
   width: 150px;
-  height: 75px;
+  height: 150px;
   background-color: #eeeeee;
   position: absolute;
   bottom: 0%;
@@ -187,6 +203,7 @@
 
 .cardTicketsPercentageWrapper {
   position: relative;
+  min-height: 7rem;
 }
 
 .alignSpaceBetween {
@@ -246,22 +263,29 @@
   font-size: 1rem;
 }
 
-#allTicketsCard .cardBar {
+#allTicketsCard .cardBarWrapper {
   margin-top: 0.75rem;
+  position: relative;
   width: 100%;
   height: 1rem;
+}
+
+#allTicketsCard .cardBarTotal {
+  width: 100%;
+  height: 100%;
   border-radius: 1.25rem;
   background: linear-gradient(
     90deg,
     rgba(212, 212, 212, 0.4) 48.59%,
     #d4d4d4 100%
   );
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-#allTicketsCard .cardBar:after {
-  content: "";
-  width: 50%;
+#allTicketsCard .cardBarProgress {
+  width: 0%;
   height: 100%;
   border-radius: 1.25rem;
   background: linear-gradient(
@@ -415,7 +439,7 @@
     border-bottom-left-radius: 360px;
     border-bottom-right-radius: 360px;
     width: 180px;
-    height: 90px;
+    height: 180px;
   }
 }
 

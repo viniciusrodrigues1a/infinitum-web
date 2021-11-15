@@ -10,9 +10,11 @@ import CreateIssueGroupService from "../services/CreateIssueGroupService";
 import CreateIssueService from "../services/CreateIssueService";
 import CreateProjectService from "../services/CreateProjectService";
 import DeleteProjectService from "../services/DeleteProjectService";
+import GetIssuesOverviewService from "../services/GetIssuesOverviewService";
 import {
   ICreateIssueGroupService,
   ICreateProjectService,
+  IGetIssuesOverviewService,
   IListProjectsService,
   ILoginService,
   IRegisterService,
@@ -37,6 +39,7 @@ type APIServiceContextData = {
   updateProjectService: IUpdateProjectService;
   deleteProjectService: IDeleteProjectService;
   createIssueGroupService: ICreateIssueGroupService;
+  getIssuesOverviewService: IGetIssuesOverviewService;
 };
 
 type APIServiceProviderProps = {
@@ -64,6 +67,7 @@ export const APIServiceProvider = ({
       updateProjectService: new UpdateProjectService(api, lang),
       deleteProjectService: new DeleteProjectService(api, lang),
       createIssueGroupService: new CreateIssueGroupService(api, lang),
+      getIssuesOverviewService: new GetIssuesOverviewService(api, lang),
     } as Omit<APIServiceContextData, "isReadyForAuthRequests">;
   }, [language]);
 

@@ -61,6 +61,8 @@ export const ptBR: Language = {
     },
     dashboard: {
       headerTitle: "Página inicial",
+      overviewError:
+        "Houve um erro ao buscar suas informações. Tente recarregar a página.",
       card1: {
         title: "Tickets concluídos",
         option1: "Semana",

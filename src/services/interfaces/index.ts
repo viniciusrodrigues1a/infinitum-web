@@ -4,3 +4,4 @@ export * from "./IListProjectsService";
 export * from "./ICreateProjectService";
 export * from "./ICreateIssueService";
 export * from "./ICreateIssueGroupService";
+export * from "./IGetIssuesOverviewService";

@@ -64,6 +64,8 @@ export const esEs: Language = {
     },
     dashboard: {
       headerTitle: "Página de inicio",
+      overviewError:
+        "Hubo un error al obtener tu información. Intenta volver a cargar la página.",
       card1: {
         title: "Tickets completados",
         option1: "Semana",

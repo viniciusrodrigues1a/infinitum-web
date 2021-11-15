@@ -1,6 +1,8 @@
 export type DashboardLanguage = {
   headerTitle: string;
 
+  overviewError: string;
+
   card1: {
     title: string;
     option1: string;

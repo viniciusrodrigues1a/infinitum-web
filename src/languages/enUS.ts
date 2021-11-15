@@ -61,6 +61,8 @@ export const enUS: Language = {
     },
     dashboard: {
       headerTitle: "Home page",
+      overviewError:
+        "There was an error trying to retrieve your information. Try reloading the page.",
       card1: {
         title: "Completed tickets",
         option1: "Week",
