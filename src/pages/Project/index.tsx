@@ -10,6 +10,7 @@ import ViewOption from "./components/ViewOption";
 import View from "./components/View";
 import CreateIssueModal from "./components/CreateIssueModal";
 import UpdateProjectModal from "./components/UpdateProjectModal";
+import ManageParticipantsModal from "./components/ManageParticipantsModal";
 
 import { useSidebar } from "../../contexts/SidebarContext";
 import { useProjects } from "../../contexts/ProjectsContext";
@@ -26,6 +27,7 @@ export default function Project(): React.ReactElement {
 
   const [isCreationModalOpen, setIsCreationModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [isParticipantsModalOpen, setIsParticipantsModalOpen] = useState(false);
   const [activeView, setActiveView] = useState<"list" | "kanban">("list");
 
   if (!project) {
@@ -40,6 +42,15 @@ export default function Project(): React.ReactElement {
           openSidebar={() => setIsSidebarOpen(true)}
           closeSidebar={() => setIsSidebarOpen(false)}
           isSidebarOpen={isSidebarOpen}
+          rightSideComponent={() => (
+            <button
+              id={styles.membersButton}
+              type="button"
+              onClick={() => setIsParticipantsModalOpen(true)}
+            >
+              Membros
+            </button>
+          )}
         />
         <div id={styles.headerOptions}>
           <div id={styles.optionsContainer}>
@@ -86,6 +97,11 @@ export default function Project(): React.ReactElement {
       <UpdateProjectModal
         shown={isUpdateModalOpen}
         closeModal={() => setIsUpdateModalOpen(false)}
+      />
+      <ManageParticipantsModal
+        shown={isParticipantsModalOpen}
+        closeModal={() => setIsParticipantsModalOpen(false)}
+        project={project}
       />
     </div>
   );

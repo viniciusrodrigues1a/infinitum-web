@@ -1,0 +1,148 @@
+#wrapper {
+  display: flex;
+  margin: 6rem auto;
+  max-width: 60rem;
+  width: 84%;
+
+  /* 600px */
+  @media (min-width: 37.5rem) {
+    width: 70%;
+  }
+
+  /* 1200px */
+  @media (min-width: 75rem) {
+    width: 50%;
+  }
+
+  /* 1500px */
+  @media (min-width: 93.75rem) {
+    width: 40%;
+  }
+}
+
+#content {
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  padding: 4rem 2rem 2rem;
+  border-radius: 16px;
+
+  /* 600px */
+  @media (min-width: 37.5rem) {
+    padding: 3rem;
+  }
+
+  /* 1200px */
+  @media (min-width: 75rem) {
+    padding: 4rem;
+  }
+
+  /* 1500px */
+  @media (min-width: 93.75rem) {
+    padding: 5rem;
+  }
+}
+
+#closeButtonWrapper {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+#formWrapper {
+  margin-top: 4.375rem;
+
+  #tagsInputContainer {
+    background: none;
+    border: none;
+    cursor: text;
+    background-color: #e9e9e9;
+    border: 1px solid #888888;
+    border-radius: 4px;
+    padding: 0.875rem;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+    &:focus-within {
+      border: 1px solid #222222;
+    }
+
+    input {
+      background: none;
+      border: none;
+      width: 100%;
+
+      &:focus {
+        border: none;
+        outline: none;
+      }
+    }
+
+    .tag + input {
+      padding-top: 1rem;
+    }
+  }
+
+  .tag {
+    background: none;
+    border: none;
+    background-color: #4376d8;
+    color: var(--light);
+    padding: 0.25rem 0.5rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+
+    .tagIcon {
+      margin-left: 0.5rem;
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+  }
+
+  .invalidTag {
+    animation-name: invalidTagIndicatorAnimation;
+    animation-timing-function: ease-out;
+    animation-duration: 0.2s;
+  }
+}
+
+#submitButton {
+  margin-top: 3.5rem;
+  padding: 1.575rem 2.375rem;
+  width: 100%;
+
+  /* 996px */
+  @media (min-width: 62.25rem) {
+    width: auto;
+  }
+}
+
+@keyframes invalidTagIndicatorAnimation {
+  0% {
+    background-color: #4376d8;
+    transform: scale(1.015) translateX(0);
+  }
+  25% {
+    /*transform: scale(1.05);*/
+    transform: scale(1.015) translateX(2px);
+  }
+  50% {
+    background-color: #d85c43;
+    transform: scale(1.015) translateX(0);
+  }
+  75% {
+    transform: scale(1.015) translateX(-2px);
+  }
+  100% {
+    background-color: #4376d8;
+    transform: scale(1) translateX(0);
+  }
+}

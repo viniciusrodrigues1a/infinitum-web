@@ -1,0 +1,175 @@
+#wrapper {
+  display: flex;
+  margin: 4rem auto;
+  max-width: 70rem;
+  width: 94%;
+
+  /* 600px */
+  @media (min-width: 37.5rem) {
+    width: 80%;
+  }
+
+  /* 1200px */
+  @media (min-width: 75rem) {
+    width: 60%;
+  }
+
+  /* 1500px */
+  @media (min-width: 93.75rem) {
+    width: 50%;
+  }
+}
+
+#content {
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  padding: 4rem 2rem 2rem;
+  border-radius: 16px;
+
+  /* 600px */
+  @media (min-width: 37.5rem) {
+    padding: 3rem;
+  }
+
+  /* 1200px */
+  @media (min-width: 75rem) {
+    padding: 4rem;
+  }
+
+  /* 1500px */
+  @media (min-width: 93.75rem) {
+    padding: 5rem;
+  }
+}
+
+#closeButtonWrapper {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+#participantsList {
+  margin-top: 4.375rem;
+}
+
+#listHeaderContainer {
+  display: flex;
+  align-items: center;
+
+  .listTextHeader {
+    font-size: 1.15rem;
+    color: var(--dark);
+    font-family: var(--text);
+    letter-spacing: -0.025rem;
+
+    /* 414px */
+    @media (min-width: 25.875rem) {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+.listColumn:nth-child(1) {
+  width: 100%;
+}
+
+.listColumn:nth-child(2) {
+  width: 60%;
+  display: flex;
+  justify-content: flex-end;
+
+  /* 414px */
+  @media (min-width: 25.875rem) {
+    display: initial;
+  }
+}
+
+.listColumn:nth-child(3) {
+  display: none;
+
+  /* 414px */
+  @media (min-width: 25.875rem) {
+    width: 3rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.participantContainer {
+  margin-top: 1.375rem;
+  display: flex;
+  align-items: center;
+
+  .listColumn:nth-child(1) {
+    display: flex;
+    align-items: center;
+  }
+
+  .participantImg {
+    width: 3rem;
+    height: 3rem;
+    background-color: #be6767;
+    border-radius: 50%;
+    margin-right: 0.75rem;
+    display: none;
+
+    /* 414px */
+    @media (min-width: 25.875rem) {
+      display: initial;
+    }
+  }
+
+  .participantInfo {
+    display: flex;
+    flex-direction: column;
+
+    .participantName {
+      font-size: 1rem;
+      color: #444444;
+      font-family: var(--text);
+    }
+
+    .participantEmail {
+      margin-top: 0.375rem;
+      font-size: 0.875rem;
+      color: #888888;
+      font-family: var(--text);
+    }
+  }
+
+  .participantRole {
+    background-color: #e0e0e0;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    color: #444444;
+    font-family: var(--text);
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .participantRoleIcon {
+    display: none;
+
+    /* 414px */
+    @media (min-width: 25.875rem) {
+      display: initial;
+      margin-left: 0.4rem;
+    }
+  }
+}
+
+#submitButton {
+  margin-top: 3.5rem;
+  padding: 1.575rem 2.375rem;
+  width: 100%;
+
+  /* 996px */
+  @media (min-width: 62.25rem) {
+    width: auto;
+  }
+}

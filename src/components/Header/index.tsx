@@ -9,6 +9,11 @@ type HeaderProps = {
   closeSidebar: () => void;
   isSidebarOpen: boolean;
   title: string;
+  rightSideComponent?: () => React.ReactElement;
+};
+
+Header.defaultProps = {
+  rightSideComponent: () => null,
 };
 
 export default function Header({
@@ -16,6 +21,7 @@ export default function Header({
   closeSidebar,
   isSidebarOpen,
   title,
+  rightSideComponent: RightSideComponent,
 }: HeaderProps): React.ReactElement {
   const { clearSession } = useSession();
 
@@ -59,6 +65,8 @@ export default function Header({
       </div>
 
       <div className={styles.flexAlignedRow}>
+        {RightSideComponent && <RightSideComponent />}
+
         <FiBell id={styles.bellIcon} color="var(--dark)" size={20} />
         <div id={styles.userAvatarWrapper}>
           <button

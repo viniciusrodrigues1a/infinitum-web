@@ -11,9 +11,21 @@
   cursor: pointer;
 }
 
+.buttonIcon {
+  display: none;
+}
+
 .buttonText {
-  margin-left: 6px;
   font-size: 1rem;
+}
+
+/* 340px */
+@media (min-width: 21.25rem) {
+  .buttonIcon {
+    display: block;
+    display: initial;
+    margin-right: 6px;
+  }
 }
 
 /* 414px */
