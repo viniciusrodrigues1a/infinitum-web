@@ -14,12 +14,14 @@ export type CreateButtonProps = {
   ) => React.ReactElement;
   title: string;
   onClick?: () => void;
+  isSubmitButton?: boolean;
   id?: string;
 };
 
 CreateButton.defaultProps = {
   onClick: () => null,
   leftIcon: null,
+  isSubmitButton: false,
   id: "",
 };
 
@@ -27,12 +29,13 @@ export default function CreateButton({
   icon: Icon,
   title,
   onClick,
+  isSubmitButton,
   id,
 }: CreateButtonProps): React.ReactElement {
   return (
     <button
       id={id}
-      type="button"
+      type={isSubmitButton ? "submit" : "button"}
       className={styles.newProjectButton}
       onClick={onClick}
     >

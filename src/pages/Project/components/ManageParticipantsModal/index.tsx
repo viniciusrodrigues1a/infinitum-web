@@ -9,7 +9,12 @@ import Subtitle from "../../../../components/Subtitle";
 import CreateButton from "../../../../components/CreateButton";
 import AddParticipantsModal from "../AddParticipantsModal";
 
+import { useAPIService } from "../../../../contexts/APIServiceContext";
+
 import { FormattedProject } from "../../../../services/type-defs/FormattedProject";
+import showToast from "../../../../utils/showToast";
+import { useProjects } from "../../../../contexts/ProjectsContext";
+import DeleteParticipantConfirmationModal from "../DeleteParticipantConfirmationModal";
 
 export type ManageParticipantsModalProps = {
   shown: boolean;
@@ -17,18 +22,44 @@ export type ManageParticipantsModalProps = {
   project: FormattedProject;
 };
 
+type DeleteParticipantConfirmationModalConfig = {
+  shown?: boolean;
+  accountEmail?: string;
+} & ({ shown: false } | { shown: true; accountEmail: string });
+
 export default function ManageParticipantsModal({
   closeModal,
   shown,
   project,
 }: ManageParticipantsModalProps): React.ReactElement {
+  const { kickParticipantService } = useAPIService();
+  const { fetchProjects } = useProjects();
+
   const [isAddParticipantsModalOpen, setIsAddParticipantsModalOpen] =
     useState(false);
+  const [
+    deleteParticipantConfirmationModalConfig,
+    setDeleteParticipantConfirmationModalConfig,
+  ] = useState<DeleteParticipantConfirmationModalConfig>({ shown: false });
 
   const handleCloseModal = useCallback(() => {
     closeModal();
     setIsAddParticipantsModalOpen(false);
   }, [closeModal]);
+
+  async function handleKickButtonClick(accountEmail: string) {
+    const response = await kickParticipantService.kickParticipant({
+      projectId: project.projectId,
+      accountEmail,
+    });
+
+    const toastMsg = response.userFriendlyMessage;
+    if (toastMsg) showToast(toastMsg, response.error);
+    if (!response.error) {
+      setDeleteParticipantConfirmationModalConfig({ shown: false });
+      await fetchProjects();
+    }
+  }
 
   return (
     <Modal.Container shown={shown} closeModal={handleCloseModal}>
@@ -80,7 +111,18 @@ export default function ManageParticipantsModal({
                       </span>
                     </div>
                     <div className={styles.listColumn}>
-                      <FiXCircle color="var(--dark)" size={22} />
+                      <button
+                        className={styles.kickButton}
+                        type="button"
+                        onClick={() =>
+                          setDeleteParticipantConfirmationModalConfig({
+                            shown: true,
+                            accountEmail: participant.email,
+                          })
+                        }
+                      >
+                        <FiXCircle color="var(--dark)" size={22} />
+                      </button>
                     </div>
                   </div>
                 </>
@@ -100,6 +142,21 @@ export default function ManageParticipantsModal({
         <AddParticipantsModal
           shown={isAddParticipantsModalOpen}
           closeModal={() => setIsAddParticipantsModalOpen(false)}
+          project={project}
+        />
+        <DeleteParticipantConfirmationModal
+          shown={deleteParticipantConfirmationModalConfig.shown}
+          closeModal={() =>
+            setDeleteParticipantConfirmationModalConfig({ shown: false })
+          }
+          accountEmail={
+            deleteParticipantConfirmationModalConfig.accountEmail as string
+          }
+          onConfirm={() =>
+            handleKickButtonClick(
+              deleteParticipantConfirmationModalConfig.accountEmail as string
+            )
+          }
         />
       </>
     </Modal.Container>

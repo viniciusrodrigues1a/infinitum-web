@@ -9,16 +9,25 @@ import Modal from "../../../../components/Modal";
 import CreateButton from "../../../../components/CreateButton";
 
 import { ReactComponent as TagIcon } from "../../../../assets/tag-x-circle.svg";
+import { useAPIService } from "../../../../contexts/APIServiceContext";
+import { useProjects } from "../../../../contexts/ProjectsContext";
+import { FormattedProject } from "../../../../services/type-defs/FormattedProject";
+import showToast from "../../../../utils/showToast";
 
 type AddParticipantsModalProps = {
   closeModal: () => void;
   shown: boolean;
+  project: FormattedProject;
 };
 
 export default function AddParticipantsModal({
   shown,
   closeModal,
+  project,
 }: AddParticipantsModalProps): React.ReactElement {
+  const { inviteToProjectService } = useAPIService();
+  const { fetchProjects } = useProjects();
+
   const [tags, setTags] = useState<Array<string>>([]);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -93,6 +102,22 @@ export default function AddParticipantsModal({
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+
+    /* eslint-disable-next-line */
+    for (const tag of tags) {
+      /* eslint-disable-next-line */
+      const response = await inviteToProjectService.inviteToProject({
+        projectId: project.projectId,
+        projectName: project.name,
+        roleName: "member",
+        accountEmail: tag,
+      });
+
+      const toastMsg = response.userFriendlyMessage;
+      if (toastMsg) showToast(toastMsg, response.error);
+    }
+
+    await fetchProjects();
   }
 
   return (
@@ -135,15 +160,16 @@ export default function AddParticipantsModal({
                 onKeyUp={addTag}
               />
             </button>
-          </form>
 
-          <div>
-            <CreateButton
-              id={styles.submitButton}
-              title="Enviar convite"
-              icon={FiSend}
-            />
-          </div>
+            <div>
+              <CreateButton
+                id={styles.submitButton}
+                title="Enviar convite"
+                icon={FiSend}
+                isSubmitButton
+              />
+            </div>
+          </form>
         </div>
       </div>
     </Modal.Container>

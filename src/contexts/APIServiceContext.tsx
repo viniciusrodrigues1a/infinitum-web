@@ -15,6 +15,8 @@ import {
   ICreateIssueGroupService,
   ICreateProjectService,
   IGetIssuesOverviewService,
+  IInviteToProjectService,
+  IKickParticipantService,
   IListProjectsService,
   ILoginService,
   IRegisterService,
@@ -22,6 +24,8 @@ import {
 import { ICreateIssueService } from "../services/interfaces/ICreateIssueService";
 import { IDeleteProjectService } from "../services/interfaces/IDeleteProjectService";
 import { IUpdateProjectService } from "../services/interfaces/IUpdateProjectService";
+import InviteToProjectService from "../services/InviteToProjectService";
+import KickParticipantService from "../services/KickParticipantService";
 import ListProjectsService from "../services/ListProjectsService";
 import LoginService from "../services/LoginService";
 import RegisterService from "../services/RegisterService";
@@ -40,6 +44,8 @@ type APIServiceContextData = {
   deleteProjectService: IDeleteProjectService;
   createIssueGroupService: ICreateIssueGroupService;
   getIssuesOverviewService: IGetIssuesOverviewService;
+  kickParticipantService: IKickParticipantService;
+  inviteToProjectService: IInviteToProjectService;
 };
 
 type APIServiceProviderProps = {
@@ -68,6 +74,8 @@ export const APIServiceProvider = ({
       deleteProjectService: new DeleteProjectService(api, lang),
       createIssueGroupService: new CreateIssueGroupService(api, lang),
       getIssuesOverviewService: new GetIssuesOverviewService(api, lang),
+      kickParticipantService: new KickParticipantService(api, lang),
+      inviteToProjectService: new InviteToProjectService(api, lang),
     } as Omit<APIServiceContextData, "isReadyForAuthRequests">;
   }, [language]);
 
