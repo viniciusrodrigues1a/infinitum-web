@@ -4,13 +4,14 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 87.5%;
+  width: 100vw;
+}
+
 body {
   background-color: #f5f5f5;
   overflow-x: hidden;
-}
-
-html {
-  font-size: 87.5%;
 }
 
 body.preload * {
