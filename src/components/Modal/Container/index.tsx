@@ -63,7 +63,7 @@ export default function Container({
     } else {
       body.classList.remove("noVerticalScroll");
     }
-  }, [shown]);
+  }, [shown, changeScroll]);
 
   if (!shown) {
     return <></>;

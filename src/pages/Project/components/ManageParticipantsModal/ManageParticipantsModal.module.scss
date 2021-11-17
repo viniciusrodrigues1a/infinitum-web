@@ -141,25 +141,21 @@
     }
   }
 
+  .participantRoleContainer {
+    display: inline-block;
+  }
+
   .participantRole {
+    background: none;
     background-color: #e0e0e0;
-    padding: 0.25rem 0.75rem;
+    border: none;
     border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
     font-size: 1rem;
     color: #444444;
     font-family: var(--text);
     display: inline-flex;
     align-items: center;
-  }
-
-  .participantRoleIcon {
-    display: none;
-
-    /* 414px */
-    @media (min-width: 25.875rem) {
-      display: initial;
-      margin-left: 0.4rem;
-    }
   }
 
   .kickButton {

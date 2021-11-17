@@ -20,6 +20,7 @@ import {
   IListProjectsService,
   ILoginService,
   IRegisterService,
+  IUpdateRoleService,
 } from "../services/interfaces";
 import { ICreateIssueService } from "../services/interfaces/ICreateIssueService";
 import { IDeleteProjectService } from "../services/interfaces/IDeleteProjectService";
@@ -30,6 +31,7 @@ import ListProjectsService from "../services/ListProjectsService";
 import LoginService from "../services/LoginService";
 import RegisterService from "../services/RegisterService";
 import UpdateProjectService from "../services/UpdateProjectService";
+import UpdateRoleService from "../services/UpdateRoleService";
 import { useLanguage } from "./LanguageContext";
 import { useSession } from "./SessionContext";
 
@@ -46,6 +48,7 @@ type APIServiceContextData = {
   getIssuesOverviewService: IGetIssuesOverviewService;
   kickParticipantService: IKickParticipantService;
   inviteToProjectService: IInviteToProjectService;
+  updateRoleService: IUpdateRoleService;
 };
 
 type APIServiceProviderProps = {
@@ -76,6 +79,7 @@ export const APIServiceProvider = ({
       getIssuesOverviewService: new GetIssuesOverviewService(api, lang),
       kickParticipantService: new KickParticipantService(api, lang),
       inviteToProjectService: new InviteToProjectService(api, lang),
+      updateRoleService: new UpdateRoleService(api, lang),
     } as Omit<APIServiceContextData, "isReadyForAuthRequests">;
   }, [language]);
 

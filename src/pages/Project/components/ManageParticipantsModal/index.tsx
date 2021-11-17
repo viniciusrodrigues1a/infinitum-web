@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { FiChevronDown, FiXCircle } from "react-icons/fi";
+import { FiXCircle } from "react-icons/fi";
 
 import styles from "./ManageParticipantsModal.module.scss";
 
@@ -32,7 +32,7 @@ export default function ManageParticipantsModal({
   shown,
   project,
 }: ManageParticipantsModalProps): React.ReactElement {
-  const { kickParticipantService } = useAPIService();
+  const { kickParticipantService, updateRoleService } = useAPIService();
   const { fetchProjects } = useProjects();
 
   const [isAddParticipantsModalOpen, setIsAddParticipantsModalOpen] =
@@ -57,6 +57,25 @@ export default function ManageParticipantsModal({
     if (toastMsg) showToast(toastMsg, response.error);
     if (!response.error) {
       setDeleteParticipantConfirmationModalConfig({ shown: false });
+      await fetchProjects();
+    }
+  }
+
+  async function handleSelectOnChange(
+    e: React.ChangeEvent<HTMLSelectElement>,
+    accountEmail: string
+  ) {
+    const roleName = e.currentTarget.value;
+
+    const response = await updateRoleService.updateRole({
+      roleName,
+      projectId: project.projectId,
+      accountEmail,
+    });
+
+    const toastMsg = response.userFriendlyMessage;
+    if (toastMsg) showToast(toastMsg, response.error);
+    if (!response.error) {
       await fetchProjects();
     }
   }
@@ -87,45 +106,55 @@ export default function ManageParticipantsModal({
               </div>
 
               {project.participants.map((participant) => (
-                <>
-                  <div className={styles.participantContainer}>
-                    <div className={styles.listColumn}>
-                      <div className={styles.participantImg} />
-                      <div className={styles.participantInfo}>
-                        <span className={styles.participantName}>
-                          {participant.name}
-                        </span>
-                        <span className={styles.participantEmail}>
-                          {participant.email}
-                        </span>
-                      </div>
-                    </div>
-                    <div className={styles.listColumn}>
-                      <span className={styles.participantRole}>
-                        {participant.projectRoleName}
-                        <FiChevronDown
-                          color="#444444"
-                          size={18}
-                          className={styles.participantRoleIcon}
-                        />
+                <div
+                  className={styles.participantContainer}
+                  key={participant.id}
+                >
+                  <div className={styles.listColumn}>
+                    <div className={styles.participantImg} />
+                    <div className={styles.participantInfo}>
+                      <span className={styles.participantName}>
+                        {participant.name}
+                      </span>
+                      <span className={styles.participantEmail}>
+                        {participant.email}
                       </span>
                     </div>
-                    <div className={styles.listColumn}>
-                      <button
-                        className={styles.kickButton}
-                        type="button"
-                        onClick={() =>
-                          setDeleteParticipantConfirmationModalConfig({
-                            shown: true,
-                            accountEmail: participant.email,
-                          })
-                        }
-                      >
-                        <FiXCircle color="var(--dark)" size={22} />
-                      </button>
+                  </div>
+                  <div className={styles.listColumn}>
+                    <div className={styles.participantRoleContainer}>
+                      {participant.projectRoleName === "owner" ? (
+                        <span className={styles.participantRole}>Dono</span>
+                      ) : (
+                        <select
+                          className={styles.participantRole}
+                          value={participant.projectRoleName}
+                          onChange={(e) =>
+                            handleSelectOnChange(e, participant.email)
+                          }
+                        >
+                          <option value="espectator">Espectador</option>
+                          <option value="member">Membro</option>
+                          <option value="admin">Admin</option>
+                        </select>
+                      )}
                     </div>
                   </div>
-                </>
+                  <div className={styles.listColumn}>
+                    <button
+                      className={styles.kickButton}
+                      type="button"
+                      onClick={() =>
+                        setDeleteParticipantConfirmationModalConfig({
+                          shown: true,
+                          accountEmail: participant.email,
+                        })
+                      }
+                    >
+                      <FiXCircle color="var(--dark)" size={22} />
+                    </button>
+                  </div>
+                </div>
               ))}
             </div>
 

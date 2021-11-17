@@ -7,3 +7,4 @@ export * from "./ICreateIssueGroupService";
 export * from "./IGetIssuesOverviewService";
 export * from "./IKickParticipantService";
 export * from "./IInviteToProjectService";
+export * from "./IUpdateRoleService";
