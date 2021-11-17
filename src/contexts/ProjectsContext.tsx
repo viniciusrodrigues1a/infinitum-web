@@ -58,7 +58,7 @@ export function ProjectsProvider({
       });
     });
 
-    return Math.round((100 * completedIssues) / totalIssues);
+    return Math.round((100 * completedIssues) / totalIssues) || 0;
   }, []);
 
   const getFormattedDate = useCallback(
