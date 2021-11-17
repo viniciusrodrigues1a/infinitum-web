@@ -21,11 +21,11 @@ export default function AuthorizedRoute({
 }: RouteProps & AuthorizedRouteProps): React.ReactElement {
   const session = useContext(SessionContext);
 
-  if (session.isSignedIn() && !isPrivate) {
+  if (session.isReady && session.isSignedIn() && !isPrivate) {
     return <Redirect to={RoutesEnum.DASHBOARD} />;
   }
 
-  if (!session.isSignedIn() && isPrivate) {
+  if (session.isReady && !session.isSignedIn() && isPrivate) {
     return <Redirect to={RoutesEnum.HOME} />;
   }
 

@@ -5,6 +5,7 @@ type SessionContextData = {
   clearSession: () => void;
   storeSession: (token: string) => void;
   sessionToken: string | null | undefined;
+  isReady: boolean;
 };
 
 type SessionProviderProps = {
@@ -17,6 +18,7 @@ export function SessionProvider({
   children,
 }: SessionProviderProps): React.ReactElement {
   const [sessionToken, setSessionToken] = useState<string | null>(null);
+  const [isReady, setIsReady] = useState<boolean>(false);
 
   function isSignedIn() {
     return sessionToken !== null;
@@ -37,11 +39,12 @@ export function SessionProvider({
     if (storedToken) {
       storeSession(storedToken);
     }
+    setIsReady(true);
   }, []);
 
   return (
     <SessionContext.Provider
-      value={{ isSignedIn, storeSession, clearSession, sessionToken }}
+      value={{ isSignedIn, storeSession, clearSession, sessionToken, isReady }}
     >
       {children}
     </SessionContext.Provider>
