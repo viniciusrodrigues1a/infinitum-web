@@ -55,10 +55,6 @@ export function ProjectsProvider({
       issueGroup.issues.forEach((issue: Issue) => {
         totalIssues += 1;
         if (issue.completed) completedIssues += 1;
-
-        if (issue.title === "Ticket para terça") {
-          console.log(issue.expiresAt);
-        }
       });
     });
 
