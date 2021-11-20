@@ -8,3 +8,5 @@ export * from "./IGetIssuesOverviewService";
 export * from "./IKickParticipantService";
 export * from "./IInviteToProjectService";
 export * from "./IUpdateRoleService";
+export * from "./IUpdateProjectImageService";
+export * from "./IFindProjectImageService";

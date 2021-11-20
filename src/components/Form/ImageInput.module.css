@@ -6,10 +6,13 @@
   height: 6rem;
 }
 
+.imgShown {
+  background: none;
+}
+
 .img {
   width: 6rem;
   height: 6rem;
-  opacity: 0;
 }
 
 .icon {

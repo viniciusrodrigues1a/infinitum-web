@@ -25,9 +25,15 @@ export default function UpdateProjectModal({
   closeModal,
 }: UpdateProjectModalProps): React.ReactElement {
   const params = useParams<{ projectId: string }>();
-  const { updateProjectService } = useAPIService();
+  const {
+    updateProjectService,
+    updateProjectImageService,
+    findProjectImageService,
+  } = useAPIService();
   const { getProjectById, fetchProjects } = useProjects();
 
+  const [imagePreview, setImagePreview] = useState("");
+  const [newImageFile, setNewImageFile] = useState<File | null>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -50,7 +56,19 @@ export default function UpdateProjectModal({
       setStartDate(sanitizedStartDate);
       setEndDate(sanitizedEndDate);
     }
-  }, [getProjectById, params]);
+  }, [getProjectById, params, shown]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await findProjectImageService.findProjectImage(
+        params.projectId
+      );
+
+      if (response.data) {
+        setImagePreview(response.data.dataURL);
+      }
+    })();
+  }, [findProjectImageService, params, shown]);
 
   const clearInputs = useCallback(() => {
     setTitle("");
@@ -62,10 +80,19 @@ export default function UpdateProjectModal({
   const handleCloseModal = useCallback(() => {
     clearInputs();
     setIsDeleteModalOpen(false);
+    setImagePreview("");
     closeModal();
   }, [closeModal, clearInputs]);
 
   async function handleSubmit() {
+    await updateProject();
+    await updateProjectImage();
+
+    handleCloseModal();
+    await fetchProjects();
+  }
+
+  async function updateProject() {
     const response = await updateProjectService.updateProject({
       projectId: params.projectId,
       name: title,
@@ -76,10 +103,28 @@ export default function UpdateProjectModal({
 
     const toastMsg = response.userFriendlyMessage;
     if (toastMsg) showToast(toastMsg, response.error);
-    if (!response.error) {
-      handleCloseModal();
-      await fetchProjects();
-    }
+  }
+
+  async function updateProjectImage() {
+    if (!newImageFile) return;
+
+    const formData = new FormData();
+    formData.append("file", newImageFile);
+    formData.append("projectId", params.projectId);
+
+    await updateProjectImageService.updateProjectImage(formData);
+  }
+
+  function handleOnImageInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!e.target.files) return;
+
+    const file = e.target.files[0];
+
+    setNewImageFile(file);
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => setImagePreview(reader.result as string);
   }
 
   return (
@@ -111,7 +156,11 @@ export default function UpdateProjectModal({
             <div id={styles.formWrapper}>
               <Form.Container className={styles.form} onSubmit={handleSubmit}>
                 <div id={styles.imageInputWrapper}>
-                  <Form.ImageInput id="project-image" />
+                  <Form.ImageInput
+                    src={imagePreview}
+                    id="project-image"
+                    onChange={handleOnImageInputChange}
+                  />
                 </div>
 
                 <Form.InputWrapper>

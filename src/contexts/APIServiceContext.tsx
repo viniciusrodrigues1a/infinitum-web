@@ -10,16 +10,19 @@ import CreateIssueGroupService from "../services/CreateIssueGroupService";
 import CreateIssueService from "../services/CreateIssueService";
 import CreateProjectService from "../services/CreateProjectService";
 import DeleteProjectService from "../services/DeleteProjectService";
+import FindProjectImageService from "../services/FindProjectImageService";
 import GetIssuesOverviewService from "../services/GetIssuesOverviewService";
 import {
   ICreateIssueGroupService,
   ICreateProjectService,
+  IFindProjectImageService,
   IGetIssuesOverviewService,
   IInviteToProjectService,
   IKickParticipantService,
   IListProjectsService,
   ILoginService,
   IRegisterService,
+  IUpdateProjectImageService,
   IUpdateRoleService,
 } from "../services/interfaces";
 import { ICreateIssueService } from "../services/interfaces/ICreateIssueService";
@@ -30,6 +33,7 @@ import KickParticipantService from "../services/KickParticipantService";
 import ListProjectsService from "../services/ListProjectsService";
 import LoginService from "../services/LoginService";
 import RegisterService from "../services/RegisterService";
+import UpdateProjectImageService from "../services/UpdateProjectImageService";
 import UpdateProjectService from "../services/UpdateProjectService";
 import UpdateRoleService from "../services/UpdateRoleService";
 import { useLanguage } from "./LanguageContext";
@@ -49,6 +53,8 @@ type APIServiceContextData = {
   kickParticipantService: IKickParticipantService;
   inviteToProjectService: IInviteToProjectService;
   updateRoleService: IUpdateRoleService;
+  updateProjectImageService: IUpdateProjectImageService;
+  findProjectImageService: IFindProjectImageService;
 };
 
 type APIServiceProviderProps = {
@@ -80,6 +86,8 @@ export const APIServiceProvider = ({
       kickParticipantService: new KickParticipantService(api, lang),
       inviteToProjectService: new InviteToProjectService(api, lang),
       updateRoleService: new UpdateRoleService(api, lang),
+      updateProjectImageService: new UpdateProjectImageService(api),
+      findProjectImageService: new FindProjectImageService(api),
     } as Omit<APIServiceContextData, "isReadyForAuthRequests">;
   }, [language]);
 
