@@ -38,11 +38,13 @@ export function ProjectsProvider({
 
   const getOwnerParticipant = useCallback(
     (participants: ListProjectsServiceResponse["participants"]) => {
-      const owner = participants.find((p) => p.projectRoleName === "owner");
+      const participant = participants.find(
+        (p) => p.role.name.value === "owner"
+      );
 
-      if (!owner) return "";
+      if (!participant) return "";
 
-      return owner.name;
+      return participant.account.name;
     },
     []
   );

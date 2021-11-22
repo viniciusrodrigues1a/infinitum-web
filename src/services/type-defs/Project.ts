@@ -22,10 +22,15 @@ export type Project = {
   createdAt: string;
   archived: boolean | null;
   participants: {
-    id: string;
-    name: string;
-    email: string;
-    projectRoleName: string;
+    account: {
+      name: string;
+      email: string;
+    };
+    role: {
+      name: {
+        value: string;
+      };
+    };
   }[];
   issueGroups: IssueGroup[];
 };

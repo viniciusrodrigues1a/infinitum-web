@@ -108,29 +108,29 @@ export default function ManageParticipantsModal({
               {project.participants.map((participant) => (
                 <div
                   className={styles.participantContainer}
-                  key={participant.id}
+                  key={participant.account.email}
                 >
                   <div className={styles.listColumn}>
                     <div className={styles.participantImg} />
                     <div className={styles.participantInfo}>
                       <span className={styles.participantName}>
-                        {participant.name}
+                        {participant.account.name}
                       </span>
                       <span className={styles.participantEmail}>
-                        {participant.email}
+                        {participant.account.email}
                       </span>
                     </div>
                   </div>
                   <div className={styles.listColumn}>
                     <div className={styles.participantRoleContainer}>
-                      {participant.projectRoleName === "owner" ? (
+                      {participant.role.name.value === "owner" ? (
                         <span className={styles.participantRole}>Dono</span>
                       ) : (
                         <select
                           className={styles.participantRole}
-                          value={participant.projectRoleName}
+                          value={participant.role.name.value}
                           onChange={(e) =>
-                            handleSelectOnChange(e, participant.email)
+                            handleSelectOnChange(e, participant.account.email)
                           }
                         >
                           <option value="espectator">Espectador</option>
@@ -147,7 +147,7 @@ export default function ManageParticipantsModal({
                       onClick={() =>
                         setDeleteParticipantConfirmationModalConfig({
                           shown: true,
-                          accountEmail: participant.email,
+                          accountEmail: participant.account.email,
                         })
                       }
                     >
