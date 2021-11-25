@@ -91,6 +91,7 @@
 
       .issueCard {
         background-color: #eeeeee;
+        cursor: pointer;
 
         > strong {
           font-family: var(--text);
@@ -159,4 +160,12 @@
       }
     }
   }
+}
+
+.cardIsBeingDragged {
+  cursor: grabbing !important;
+}
+
+.dropzoneDragOver {
+  background: rgba(118, 200, 147, 0.2) !important;
 }

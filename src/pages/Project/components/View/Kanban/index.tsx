@@ -15,7 +15,8 @@ import styles from "./Kanban.module.scss";
 
 export default function Kanban(): React.ReactElement {
   const params = useParams<{ projectId: string }>();
-  const { createIssueService, createIssueGroupService } = useAPIService();
+  const { createIssueService, createIssueGroupService, moveIssueService } =
+    useAPIService();
   const { getProjectById, fetchProjects } = useProjects();
 
   const [
@@ -115,6 +116,80 @@ export default function Kanban(): React.ReactElement {
     }
   }, [isCreatingNewIssueGroup]);
 
+  useEffect(() => {
+    const cards = document.querySelectorAll(`.${styles.issueCard}`);
+    const dropzones = document.querySelectorAll(`.${styles.issueSectionBody}`);
+
+    cards.forEach((card) => {
+      card.addEventListener("dragstart", onDragStart);
+      card.addEventListener("dragend", onDragEnd);
+    });
+
+    function onDragStart(e: any) {
+      dropzones.forEach((dropzone) =>
+        dropzone.classList.add(styles.dropzoneHighlight)
+      );
+
+      if (e.target.classList) {
+        e.target.classList.add(styles.cardIsBeingDragged);
+      }
+
+      e.dataTransfer.setData("issueId", e.target.dataset.issueId);
+    }
+
+    function onDragEnd(e: any) {
+      if (e.target.classList) {
+        e.target.classList.remove(styles.cardIsBeingDragged);
+      }
+    }
+
+    dropzones.forEach((dropzone) => {
+      dropzone.addEventListener("dragenter", onDragEnter);
+      dropzone.addEventListener("dragover", onDragOver);
+      dropzone.addEventListener("dragleave", onDragLeave);
+      dropzone.addEventListener("drop", onDrop);
+    });
+
+    function onDragEnter(e: any) {
+      e.preventDefault();
+    }
+
+    function onDragOver(e: any) {
+      e.preventDefault();
+
+      if (e.target.classList) {
+        e.currentTarget.classList.add(styles.dropzoneDragOver);
+      }
+    }
+
+    function onDragLeave(e: any) {
+      if (e.target.classList) {
+        e.currentTarget.classList.remove(styles.dropzoneDragOver);
+      }
+    }
+
+    async function onDrop(e: any) {
+      e.stopImmediatePropagation();
+
+      if (e.target.classList) {
+        e.currentTarget.classList.remove(styles.dropzoneDragOver);
+      }
+
+      const issueId = e.dataTransfer.getData("issueId");
+
+      const response = await moveIssueService.moveIssue({
+        issueId,
+        moveToIssueGroupId: e.currentTarget.dataset.issueGroupId,
+      });
+
+      const toastMsg = response.userFriendlyMessage;
+      if (toastMsg) showToast(toastMsg, response.error);
+      if (!response.error) {
+        await fetchProjects();
+      }
+    }
+  }, [fetchProjects, moveIssueService]);
+
   if (!project) return <h1>Projeto não encontrado</h1>;
 
   return (
@@ -145,9 +220,16 @@ export default function Kanban(): React.ReactElement {
                 </div>
               </div>
 
-              <div className={styles.issueSectionBody}>
+              <div
+                className={styles.issueSectionBody}
+                data-issue-group-id={issueGroup.issueGroupId}
+              >
                 {issueGroup.issues.map((issue) => (
-                  <div className={styles.issueCard}>
+                  <div
+                    className={styles.issueCard}
+                    data-issue-id={issue.issueId}
+                    draggable
+                  >
                     <strong>{issue.title}</strong>
                   </div>
                 ))}

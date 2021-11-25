@@ -10,3 +10,4 @@ export * from "./IInviteToProjectService";
 export * from "./IUpdateRoleService";
 export * from "./IUpdateProjectImageService";
 export * from "./IFindProjectImageService";
+export * from "./IMoveIssueService";
