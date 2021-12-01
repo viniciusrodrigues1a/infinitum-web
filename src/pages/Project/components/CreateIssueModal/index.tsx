@@ -48,10 +48,18 @@ export default function CreateIssueModal({
   }, [closeModal, clearInputs]);
 
   async function handleSubmit() {
+    let date: Date | undefined;
+    if (expirationDate) {
+      const [year, month, day] = expirationDate
+        .split("-")
+        .map((e) => Number(e));
+      const timezoneOffsetInHours = new Date().getTimezoneOffset() / 60;
+      date = new Date(year, month - 1, day, 12 - timezoneOffsetInHours);
+    }
     const response = await createIssueService.createIssue({
       title,
       description,
-      expiresAt: expirationDate ? new Date(expirationDate) : undefined,
+      expiresAt: date,
       issueGroupId,
     });
 

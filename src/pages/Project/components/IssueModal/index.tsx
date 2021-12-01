@@ -90,11 +90,19 @@ export default function IssueModal({
   }
 
   async function updateIssue() {
+    let date: Date | undefined;
+    if (expirationDate) {
+      const [year, month, day] = expirationDate
+        .split("-")
+        .map((e) => Number(e));
+      const timezoneOffsetInHours = new Date().getTimezoneOffset() / 60;
+      date = new Date(year, month - 1, day, 12 - timezoneOffsetInHours);
+    }
     const response = await updateIssueService.updateIssue({
       issueId: issue.issueId,
       newTitle: title,
       newDescription: description,
-      newExpiresAt: expirationDate ? new Date(expirationDate) : undefined,
+      newExpiresAt: date,
       newAssignedToEmail: assignedToEmail,
     });
 
@@ -186,7 +194,9 @@ export default function IssueModal({
                 id="expiration-date"
                 type="date"
                 value={expirationDate}
-                onChange={(e) => setExpirationDate(e.target.value)}
+                onChange={(e) => {
+                  setExpirationDate(e.target.value);
+                }}
               />
             </div>
 
