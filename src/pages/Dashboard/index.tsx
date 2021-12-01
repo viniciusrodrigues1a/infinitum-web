@@ -12,6 +12,7 @@ import Loader from "../../components/Loader";
 import styles from "./Dashboard.module.css";
 import { useAPIService } from "../../contexts/APIServiceContext";
 import { GetIssuesOverviewServiceResponse } from "../../services/interfaces";
+import { useDateFormatter } from "../../contexts/DateFormatterContext";
 
 type ChartDataConfig = {
   type: "WEEK" | "MONTH";
@@ -24,6 +25,7 @@ export default function Dashboard(): React.ReactElement {
       pages: { dashboard: dashboardLanguage },
     },
   } = useLanguage();
+  const { formatToFullDate } = useDateFormatter();
   const { getIssuesOverviewService } = useAPIService();
 
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
@@ -158,7 +160,9 @@ export default function Dashboard(): React.ReactElement {
               <div className={styles.cardHeader}>
                 <div className={styles.alignSpaceBetween}>
                   <Title>{dashboardLanguage.card3.title}</Title>
-                  <span className={styles.cardDateInfo}>Qui, Out 20</span>
+                  <span className={styles.cardDateInfo}>
+                    {formatToFullDate(new Date())}
+                  </span>
                 </div>
                 <Subtitle>{dashboardLanguage.card3.subtitle}</Subtitle>
               </div>
@@ -210,7 +214,9 @@ export default function Dashboard(): React.ReactElement {
               <div className={styles.cardHeader}>
                 <div className={styles.alignSpaceBetween}>
                   <Title>{dashboardLanguage.card4.title}</Title>
-                  <span className={styles.cardDateInfo}>Qui, Out 20</span>
+                  <span className={styles.cardDateInfo}>
+                    {formatToFullDate(new Date())}
+                  </span>
                 </div>
                 <Subtitle>{dashboardLanguage.card4.subtitle}</Subtitle>
               </div>
