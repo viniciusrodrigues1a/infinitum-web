@@ -149,6 +149,12 @@ export const enUS: Language = {
 
         submitButtonText: "Create",
       },
+      issueModal: {
+        title: "Ticket information",
+        subtitle: "Verify and update information about this ticket",
+        cancelButtonText: "Close",
+        updateButtonText: "Update",
+      },
     },
   },
   components: {

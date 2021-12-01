@@ -149,6 +149,12 @@ export const ptBR: Language = {
 
         submitButtonText: "Criar",
       },
+      issueModal: {
+        title: "Informações do ticket",
+        subtitle: "Verifique e altere informações do ticket",
+        cancelButtonText: "Fechar",
+        updateButtonText: "Atualizar",
+      },
     },
   },
   components: {

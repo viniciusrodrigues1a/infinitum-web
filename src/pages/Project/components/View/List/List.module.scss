@@ -72,8 +72,20 @@ $issueFieldWidth: 50%;
   margin-top: 1.375rem;
 
   > .issue {
+    padding-bottom: 0.625rem;
+    padding-top: 0.625rem;
+    cursor: pointer;
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
     display: flex;
     align-items: center;
+    transition: 0.1s;
+
+    &:hover {
+      background-color: #e8e8e8;
+    }
 
     > span {
       width: $issueFieldWidth;
@@ -83,8 +95,6 @@ $issueFieldWidth: 50%;
   }
 
   > .issue + .issue {
-    margin-top: 0.625rem;
-    padding-top: 0.625rem;
     border-top: 1px solid #dddddd;
   }
 }

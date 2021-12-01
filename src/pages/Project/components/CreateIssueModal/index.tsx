@@ -104,7 +104,7 @@ export default function CreateIssueModal({
 
               <Form.InputWrapper>
                 <Form.Label
-                  htmlFor="start-date"
+                  htmlFor="expiration-date"
                   titleLabel={
                     projectLanguage.createIssueModal.expiringDateInputLabel
                   }
@@ -114,7 +114,7 @@ export default function CreateIssueModal({
                   }
                 />
                 <Form.Input
-                  id="start-date"
+                  id="expiration-date"
                   type="date"
                   value={expirationDate}
                   onChange={(e) => setExpirationDate(e.target.value)}

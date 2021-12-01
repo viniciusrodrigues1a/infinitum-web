@@ -156,6 +156,12 @@ export const esEs: Language = {
 
         submitButtonText: "Crear",
       },
+      issueModal: {
+        title: "Ticket information", // TODO
+        subtitle: "Verify and update information about this ticket",
+        cancelButtonText: "Close",
+        updateButtonText: "Update",
+      },
     },
   },
   components: {

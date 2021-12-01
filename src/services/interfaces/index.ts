@@ -11,3 +11,4 @@ export * from "./IUpdateRoleService";
 export * from "./IUpdateProjectImageService";
 export * from "./IFindProjectImageService";
 export * from "./IMoveIssueService";
+export * from "./IUpdateIssueService";

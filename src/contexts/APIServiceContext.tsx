@@ -23,6 +23,7 @@ import {
   ILoginService,
   IMoveIssueService,
   IRegisterService,
+  IUpdateIssueService,
   IUpdateProjectImageService,
   IUpdateRoleService,
 } from "../services/interfaces";
@@ -35,6 +36,7 @@ import ListProjectsService from "../services/ListProjectsService";
 import LoginService from "../services/LoginService";
 import MoveIssueService from "../services/MoveIssueService";
 import RegisterService from "../services/RegisterService";
+import UpdateIssueService from "../services/UpdateIssueService";
 import UpdateProjectImageService from "../services/UpdateProjectImageService";
 import UpdateProjectService from "../services/UpdateProjectService";
 import UpdateRoleService from "../services/UpdateRoleService";
@@ -58,6 +60,7 @@ type APIServiceContextData = {
   updateProjectImageService: IUpdateProjectImageService;
   findProjectImageService: IFindProjectImageService;
   moveIssueService: IMoveIssueService;
+  updateIssueService: IUpdateIssueService;
 };
 
 type APIServiceProviderProps = {
@@ -92,6 +95,7 @@ export const APIServiceProvider = ({
       updateProjectImageService: new UpdateProjectImageService(api),
       findProjectImageService: new FindProjectImageService(api),
       moveIssueService: new MoveIssueService(api, lang),
+      updateIssueService: new UpdateIssueService(api, lang),
     } as Omit<APIServiceContextData, "isReadyForAuthRequests">;
   }, [language]);
 

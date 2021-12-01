@@ -76,9 +76,9 @@
       );
       padding: 5px;
 
-      .issueCard + .issueCard,
-      .issueCard + .addCardButton,
-      .issueCard + .issueCardInputContainer {
+      .issueCardWrapper + .issueCardWrapper,
+      .issueCardWrapper + .addCardButton,
+      .issueCardWrapper + .issueCardInputContainer {
         margin-top: 1rem;
       }
 
@@ -89,14 +89,22 @@
         border-radius: 5px;
       }
 
-      .issueCard {
-        background-color: #eeeeee;
-        cursor: pointer;
+      .issueCardWrapper {
+        background: none;
+        border: none;
+        width: 100%;
+        text-align: left;
 
-        > strong {
-          font-family: var(--text);
-          letter-spacing: 0.02rem;
-          font-weight: bold;
+        .issueCard {
+          background-color: #eeeeee;
+          cursor: pointer;
+
+          > strong {
+            font-family: var(--text);
+            letter-spacing: 0.02rem;
+            font-weight: bold;
+            font-size: 1rem;
+          }
         }
       }
 

@@ -15,17 +15,31 @@ import { useParams } from "react-router-dom";
 
 import styles from "./List.module.scss";
 
+import IssueModal from "../../IssueModal";
+
 import { useProjects } from "../../../../../contexts/ProjectsContext";
 
-import { FormattedIssueGroup } from "../../../../../services/type-defs/FormattedProject";
+import {
+  FormattedIssue,
+  FormattedIssueGroup,
+} from "../../../../../services/type-defs/FormattedProject";
 import { useAPIService } from "../../../../../contexts/APIServiceContext";
 import showToast from "../../../../../utils/showToast";
+
+type IssueModalConfig = {
+  shown: boolean;
+  issue: FormattedIssue | null;
+};
 
 export default function List(): React.ReactElement {
   const params = useParams<{ projectId: string }>();
   const { createIssueService, createIssueGroupService } = useAPIService();
   const { getProjectById, fetchProjects } = useProjects();
 
+  const [issueModalConfig, setIssueModalConfig] = useState<IssueModalConfig>({
+    shown: false,
+    issue: null,
+  });
   const [collapsedSections, setCollapsedSections] = useState<Array<string>>([]);
   const [
     isCreatingNewIssueForIssueGroupId,
@@ -184,10 +198,20 @@ export default function List(): React.ReactElement {
           {!isSectionCollapsed(issueGroup.issueGroupId) && (
             <div className={styles.issues}>
               {issueGroup.issues.map((issue) => (
-                <div key={issue.issueId} className={styles.issue}>
+                <button
+                  onClick={() =>
+                    setIssueModalConfig({
+                      shown: true,
+                      issue,
+                    })
+                  }
+                  type="button"
+                  key={issue.issueId}
+                  className={styles.issue}
+                >
                   <span>{issue.title}</span>
                   <span>{issue.expiresAtFullDate}</span>
-                </div>
+                </button>
               ))}
 
               {isCreatingNewIssueForIssueGroupId === issueGroup.issueGroupId ? (
@@ -260,6 +284,18 @@ export default function List(): React.ReactElement {
           )}
         </div>
       ))}
+
+      <IssueModal
+        shown={issueModalConfig.shown}
+        issue={issueModalConfig.issue as FormattedIssue}
+        issueGroups={project.issueGroups}
+        closeModal={() =>
+          setIssueModalConfig({
+            shown: false,
+            issue: null,
+          })
+        }
+      />
     </>
   );
 }

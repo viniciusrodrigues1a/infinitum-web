@@ -25,4 +25,12 @@ export type ProjectLanguage = {
 
     submitButtonText: string;
   };
+
+  issueModal: {
+    title: string;
+    subtitle: string;
+
+    cancelButtonText: string;
+    updateButtonText: string;
+  };
 };
