@@ -18,12 +18,14 @@ export default class UpdateIssueService implements IUpdateIssueService {
     newTitle,
     newCompleted,
     newDescription,
+    newExpiresAt,
     newAssignedToEmail,
   }: UpdateIssueServiceRequest): Promise<APIResponse<null>> {
     try {
       const body = {
         newTitle,
         newCompleted,
+        newExpiresAt,
         newDescription,
         newAssignedToEmail,
       };

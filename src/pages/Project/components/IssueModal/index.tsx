@@ -94,6 +94,7 @@ export default function IssueModal({
       issueId: issue.issueId,
       newTitle: title,
       newDescription: description,
+      newExpiresAt: expirationDate ? new Date(expirationDate) : undefined,
       newAssignedToEmail: assignedToEmail,
     });
 
