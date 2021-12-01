@@ -93,12 +93,26 @@ export default function UpdateProjectModal({
   }
 
   async function updateProject() {
+    let beginsAt: Date | undefined;
+    if (startDate) {
+      const [year, month, day] = startDate.split("-").map((e) => Number(e));
+      const timezoneOffsetInHours = new Date().getTimezoneOffset() / 60;
+      beginsAt = new Date(year, month - 1, day, 12 - timezoneOffsetInHours);
+    }
+
+    let finishesAt: Date | undefined;
+    if (endDate) {
+      const [year, month, day] = endDate.split("-").map((e) => Number(e));
+      const timezoneOffsetInHours = new Date().getTimezoneOffset() / 60;
+      finishesAt = new Date(year, month - 1, day, 12 - timezoneOffsetInHours);
+    }
+
     const response = await updateProjectService.updateProject({
       projectId: params.projectId,
       name: title,
       description,
-      beginsAt: startDate ? new Date(startDate) : undefined,
-      finishesAt: endDate ? new Date(endDate) : undefined,
+      beginsAt,
+      finishesAt,
     });
 
     const toastMsg = response.userFriendlyMessage;

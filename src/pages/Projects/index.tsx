@@ -37,6 +37,8 @@ export default function Projects(): React.ReactElement {
 
   const [isCreationModalOpen, setIsCreationModalOpen] = useState(false);
 
+  console.log(projects);
+
   return (
     <>
       <div id={styles.container}>
