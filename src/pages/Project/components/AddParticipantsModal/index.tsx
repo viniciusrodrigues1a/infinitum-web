@@ -103,6 +103,8 @@ export default function AddParticipantsModal({
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
+    if (tags.length === 0) return;
+
     /* eslint-disable-next-line */
     for (const tag of tags) {
       /* eslint-disable-next-line */
@@ -117,6 +119,7 @@ export default function AddParticipantsModal({
       if (toastMsg) showToast(toastMsg, response.error);
     }
 
+    handleCloseModal();
     await fetchProjects();
   }
 
