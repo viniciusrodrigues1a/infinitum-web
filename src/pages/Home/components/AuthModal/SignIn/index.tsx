@@ -8,6 +8,8 @@ import showToast from "../../../../../utils/showToast";
 import loginValidation from "../../../../../validation/loginValidation";
 import AuthModalLayout from "../Layout";
 
+import asideImage from "../../../../../assets/signin-modal.png";
+
 type SignInProps = Pick<ModalProps, "closeModal"> & {
   openAlternativeModal: () => void;
 };
@@ -54,6 +56,7 @@ export default function SignIn({
       onGoogleButtonClick={() => {}}
       onAlternativeClick={openAlternativeModal}
       closeModal={closeModal}
+      asideImageSrc={asideImage}
       formComponent={() => (
         <>
           <input

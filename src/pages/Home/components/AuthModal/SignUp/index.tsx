@@ -7,6 +7,8 @@ import showToast from "../../../../../utils/showToast";
 import registerValidation from "../../../../../validation/registerValidation";
 import AuthModalLayout from "../Layout";
 
+import asideImage from "../../../../../assets/signup-modal.png";
+
 type SignUpProps = Pick<ModalProps, "closeModal"> & {
   openAlternativeModal: () => void;
 };
@@ -62,6 +64,7 @@ export default function SignUp({
       onGoogleButtonClick={() => {}}
       onAlternativeClick={openAlternativeModal}
       closeModal={closeModal}
+      asideImageSrc={asideImage}
       formComponent={() => (
         <>
           <input

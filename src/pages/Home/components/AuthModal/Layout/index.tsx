@@ -3,8 +3,6 @@ import Modal, { ModalProps } from "../../../../../components/Modal";
 
 import styles from "./AuthModalLayout.module.css";
 
-import asideImage from "../../../../../assets/signup-modal.png";
-
 type AuthModalLayoutProps = Pick<ModalProps, "closeModal"> & {
   title: string;
   buttonTitle: string;
@@ -13,6 +11,7 @@ type AuthModalLayoutProps = Pick<ModalProps, "closeModal"> & {
   alternativeTitle: string[] | string;
   onAlternativeClick: () => void;
   formComponent: () => React.ReactElement;
+  asideImageSrc: string;
 };
 
 type AlternativeAuthSpanProps = {
@@ -48,6 +47,7 @@ export default function AuthModalLayout({
   alternativeTitle,
   onAlternativeClick,
   formComponent: FormComponent,
+  asideImageSrc,
 }: AuthModalLayoutProps): React.ReactElement {
   return (
     <div id={styles.wrapper}>
@@ -95,7 +95,12 @@ export default function AuthModalLayout({
           />
         </div>
       </div>
-      <img id={styles.signUpImg} src={asideImage} alt="Foguete no espaço" />
+      <img
+        width="32.8125rem"
+        id={styles.signUpImg}
+        src={asideImageSrc}
+        alt="Foguete no espaço"
+      />
     </div>
   );
 }
