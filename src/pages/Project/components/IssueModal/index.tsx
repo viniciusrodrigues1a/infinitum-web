@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FiXCircle, FiEdit3 } from "react-icons/fi";
+import { FiXCircle, FiEdit3, FiTrash2 } from "react-icons/fi";
 
 import styles from "./IssueModal.module.scss";
 
@@ -39,7 +39,8 @@ export default function IssueModal({
       pages: { project: projectLanguage },
     },
   } = useLanguage();
-  const { updateIssueService, moveIssueService } = useAPIService();
+  const { updateIssueService, moveIssueService, deleteIssueService } =
+    useAPIService();
   const { fetchProjects } = useProjects();
 
   const [title, setTitle] = useState("");
@@ -108,6 +109,18 @@ export default function IssueModal({
 
     const toastMsg = response.userFriendlyMessage;
     if (toastMsg) showToast(toastMsg, response.error);
+  }
+
+  async function deleteIssue() {
+    const response = await deleteIssueService.deleteIssue({
+      issueId: issue.issueId,
+    });
+
+    const toastMsg = response.userFriendlyMessage;
+    if (toastMsg) showToast(toastMsg, response.error);
+
+    handleCloseModal();
+    await fetchProjects();
   }
 
   return (
@@ -217,9 +230,9 @@ export default function IssueModal({
             <div id={styles.buttonsWrapper}>
               <CreateButton
                 id={styles.cancelButton}
-                icon={FiXCircle}
+                icon={FiTrash2}
                 title={projectLanguage.issueModal.cancelButtonText}
-                onClick={handleCloseModal}
+                onClick={deleteIssue}
               />
 
               <CreateButton

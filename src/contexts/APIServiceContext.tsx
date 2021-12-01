@@ -9,12 +9,14 @@ import api from "../services/api";
 import CreateIssueGroupService from "../services/CreateIssueGroupService";
 import CreateIssueService from "../services/CreateIssueService";
 import CreateProjectService from "../services/CreateProjectService";
+import DeleteIssueService from "../services/DeleteIssueService";
 import DeleteProjectService from "../services/DeleteProjectService";
 import FindProjectImageService from "../services/FindProjectImageService";
 import GetIssuesOverviewService from "../services/GetIssuesOverviewService";
 import {
   ICreateIssueGroupService,
   ICreateProjectService,
+  IDeleteIssueService,
   IFindProjectImageService,
   IGetIssuesOverviewService,
   IInviteToProjectService,
@@ -61,6 +63,7 @@ type APIServiceContextData = {
   findProjectImageService: IFindProjectImageService;
   moveIssueService: IMoveIssueService;
   updateIssueService: IUpdateIssueService;
+  deleteIssueService: IDeleteIssueService;
 };
 
 type APIServiceProviderProps = {
@@ -96,6 +99,7 @@ export const APIServiceProvider = ({
       findProjectImageService: new FindProjectImageService(api),
       moveIssueService: new MoveIssueService(api, lang),
       updateIssueService: new UpdateIssueService(api, lang),
+      deleteIssueService: new DeleteIssueService(api, lang),
     } as Omit<APIServiceContextData, "isReadyForAuthRequests">;
   }, [language]);
 

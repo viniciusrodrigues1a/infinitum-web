@@ -159,7 +159,7 @@ export const esEs: Language = {
       issueModal: {
         title: "Ticket information", // TODO
         subtitle: "Verify and update information about this ticket",
-        cancelButtonText: "Close",
+        cancelButtonText: "Delete",
         updateButtonText: "Update",
         assignedInputLabel: "Assigned to participant",
         assignedInputPlaceholder: "Assigned to",

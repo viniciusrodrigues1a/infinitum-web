@@ -152,7 +152,7 @@ export const enUS: Language = {
       issueModal: {
         title: "Ticket information",
         subtitle: "Verify and update information about this ticket",
-        cancelButtonText: "Close",
+        cancelButtonText: "Delete",
         updateButtonText: "Update",
         assignedInputLabel: "Assigned to participant",
         assignedInputPlaceholder: "Assigned to",

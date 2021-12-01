@@ -152,7 +152,7 @@ export const ptBR: Language = {
       issueModal: {
         title: "Informações do ticket",
         subtitle: "Verifique e altere informações do ticket",
-        cancelButtonText: "Fechar",
+        cancelButtonText: "Excluir",
         updateButtonText: "Atualizar",
         assignedInputLabel: "Participante responsável",
         assignedInputPlaceholder: "Responsável",
