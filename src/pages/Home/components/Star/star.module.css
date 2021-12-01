@@ -2,20 +2,21 @@
   width: 10px;
   height: 10px;
   position: absolute;
-  animation: star 3s infinite ease-in-out;
+  animation: star 2s infinite ease-in-out;
 }
 
 @keyframes star {
-  0%{
-  opacity: 0;
+  0% {
+    opacity: 0;
     transform: scale(1) rotate(0deg);
   }
-  50%{
+  50% {
     opacity: 1;
     transform: scale(1.1) rotate(180deg);
   }
-  100%{
+  100% {
     opacity: 0;
     transform: scale(1) rotate(360deg);
   }
 }
+

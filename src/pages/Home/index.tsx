@@ -240,15 +240,21 @@ export default function Home(): ReactElement {
         ref={pitchSectionRef}
       >
         <Star top="1rem" left="36%" delay={0.1} />
-        <Star top="90%" left="10rem" delay={1.3} />
+        <Star top="90%" left="10rem" delay={1} />
         <Star top="3rem" left="75%" delay={0.9} />
         <Star top="4rem" left="20%" delay={0.56} />
         <Star top="85%" left="80%" delay={0.45} />
         <Star top="86%" left="10%" />
         <Star top="14%" left="5%" delay={0.33} />
+        <Star top="9%" left="7%" delay={0.74} />
+        <Star top="4%" left="22%" delay={0.43} />
+        <Star top="7%" left="94%" delay={0} />
+        <Star top="7%" left="44%" delay={0.93} />
+        <Star top="12%" left="56%" delay={0} />
+        <Star top="4%" left="66%" delay={0.2} />
 
         <div>
-          <img src={moonImg} id={styles.moon} />
+          <img src={moonImg} id={styles.moon} alt="Moon" />
           <h1>
             {homeLanguage.pitch.title[0]}{" "}
             <span>{homeLanguage.pitch.title[1]}</span>
@@ -345,16 +351,25 @@ export default function Home(): ReactElement {
           <img src={landImg} alt="" />
         </div>
 
-        <Star top="32%" left="38%" delay={0.1} />
-        <Star top="38%" left="94%" delay={0.2} />
+        <Star top="32%" left="38%" delay={0.23} />
+        <Star top="32%" left="42%" delay={0.33} />
+        <Star top="40%" left="42%" delay={0} />
+        <Star top="34%" left="27%" delay={0.45} />
+        <Star top="28%" left="18%" delay={0} />
+        <Star top="22%" left="12%" delay={0.3} />
+        <Star top="44%" left="22%" delay={1.1} />
+        <Star top="35%" left="8%" delay={0} />
+        <Star top="38%" left="15%" delay={0.34} />
+        <Star top="42%" left="33%" delay={0.16} />
+        <Star top="38%" left="94%" delay={0.55} />
         <Star top="38%" left="0.5rem" delay={0.2} />
-        <Star top="18%" left="72%" delay={0.2} />
-        <Star top="30%" left="60%" delay={0.8} />
-        <Star top="20%" left="20%" delay={0.1} />
+        <Star top="18%" left="72%" delay={0.9} />
+        <Star top="30%" left="60%" delay={0} />
+        <Star top="20%" left="20%" delay={0.94} />
         <Star top="15%" left="90%" delay={0.7} />
         <Star top="15%" left="50%" delay={0.9} />
-        <Star top="8rem" left="2rem" delay={0.4} />
-        <Star top="4rem" left="10%" delay={0.5} />
+        <Star top="8rem" left="2rem" delay={1} />
+        <Star top="4rem" left="10%" delay={0.544} />
       </section>
 
       <footer>
