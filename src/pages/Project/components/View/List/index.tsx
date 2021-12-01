@@ -74,7 +74,6 @@ export default function List(): React.ReactElement {
 
     const response = await createIssueService.createIssue({
       title: newIssueTitle,
-      description: " ",
       issueGroupId: isCreatingNewIssueForIssueGroupId,
     });
 
