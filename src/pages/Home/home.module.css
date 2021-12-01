@@ -420,10 +420,6 @@ header .hamburgerNormal > line {
 }
 
 #loginOptions > button:nth-child(1) {
-  background-color: var(--primary);
-}
-
-#loginOptions > button:nth-child(2) {
   margin-top: 1.75rem;
   background-color: #f86825;
   color: var(--light);

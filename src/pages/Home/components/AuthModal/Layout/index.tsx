@@ -70,14 +70,6 @@ export default function AuthModalLayout({
 
             <div id={styles.buttonContainer}>
               <button
-                type="button"
-                id={styles.signInWithGoogleButton}
-                className={styles.button}
-                onClick={onGoogleButtonClick}
-              >
-                Google
-              </button>
-              <button
                 type="submit"
                 id={styles.signUpButton}
                 className={styles.button}

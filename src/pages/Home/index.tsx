@@ -335,12 +335,7 @@ export default function Home(): ReactElement {
 
       <section id={styles.authSection} className={styles.sectionMargin}>
         <div id={styles.loginOptions}>
-          <button type="button">
-            <img src={googleLogoImg} alt="Login with google" />
-            <span>{homeLanguage.signUpGoogleText}</span>
-          </button>
-
-          <button type="button">
+          <button type="button" onClick={() => setAuthModalShownName("signin")}>
             <FiMail size={48} color="var(--light)" />
             <span>{homeLanguage.signUpEmailText}</span>
           </button>
