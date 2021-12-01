@@ -17,12 +17,14 @@ import { useAPIService } from "../../../../contexts/APIServiceContext";
 import showToast from "../../../../utils/showToast";
 import { useProjects } from "../../../../contexts/ProjectsContext";
 import { useLanguage } from "../../../../contexts/LanguageContext";
+import { Participant } from "../../../../services/type-defs/Project";
 
 type IssueModalProps = {
   closeModal: () => void;
   shown: boolean;
   issue: FormattedIssue;
   issueGroups: FormattedIssueGroup[];
+  participants: Participant[];
 };
 
 export default function IssueModal({
@@ -30,6 +32,7 @@ export default function IssueModal({
   closeModal,
   issue,
   issueGroups,
+  participants,
 }: IssueModalProps): React.ReactElement {
   const {
     language: {
@@ -40,6 +43,7 @@ export default function IssueModal({
   const { fetchProjects } = useProjects();
 
   const [title, setTitle] = useState("");
+  const [assignedToEmail, setAssignedToEmail] = useState<string | null>(null);
   const [description, setDescription] = useState("");
   const [expirationDate, setExpirationDate] = useState<string | undefined>(
     undefined
@@ -50,6 +54,7 @@ export default function IssueModal({
     if (!issue) return;
 
     setTitle(issue.title);
+    setAssignedToEmail(issue.assignedToEmail);
     setDescription(issue.description);
 
     const date = issue.expiresAt
@@ -88,6 +93,7 @@ export default function IssueModal({
       issueId: issue.issueId,
       newTitle: title,
       newDescription: description,
+      newAssignedToEmail: assignedToEmail,
     });
 
     const toastMsg = response.userFriendlyMessage;
@@ -103,6 +109,8 @@ export default function IssueModal({
     const toastMsg = response.userFriendlyMessage;
     if (toastMsg) showToast(toastMsg, response.error);
   }
+
+  if (!issue) return <></>;
 
   return (
     <Modal.Container shown={shown} closeModal={handleCloseModal}>
@@ -130,6 +138,27 @@ export default function IssueModal({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
+
+            <div className={styles.assignedInputWrapper}>
+              <span className={styles.label}>Participante responsável:</span>
+              <Form.Select
+                id="participants"
+                placeholder="Responsável"
+                options={participants.map((participant) => ({
+                  value: participant.account.email,
+                  text: participant.account.name,
+                }))}
+                value={assignedToEmail || undefined}
+                onChange={(e) => setAssignedToEmail(e.target.value)}
+              />
+              <button
+                type="button"
+                className={styles.cancelAssignedInputButton}
+                onClick={() => setAssignedToEmail(null)}
+              >
+                <FiXCircle color="var(--dark)" size={20} />
+              </button>
+            </div>
 
             <div className={styles.dateInputWrapper}>
               <span className={styles.label}>
@@ -161,7 +190,7 @@ export default function IssueModal({
               />
             </div>
 
-            <div id={styles.descriptionInputWrapper}>
+            <div className={styles.descriptionInputWrapper}>
               <Form.InputWrapper>
                 <Form.Label
                   htmlFor="description"

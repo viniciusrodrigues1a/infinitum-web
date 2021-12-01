@@ -5,12 +5,25 @@ export type Issue = {
   expiresAt: string | null;
   createdAt: string | null;
   completed: boolean;
+  assignedToEmail: string;
 };
 
 export type IssueGroup = {
   issueGroupId: string;
   title: string;
   issues: Issue[];
+};
+
+export type Participant = {
+  account: {
+    name: string;
+    email: string;
+  };
+  role: {
+    name: {
+      value: string;
+    };
+  };
 };
 
 export type Project = {
@@ -21,16 +34,6 @@ export type Project = {
   finishesAt: string | null;
   createdAt: string;
   archived: boolean | null;
-  participants: {
-    account: {
-      name: string;
-      email: string;
-    };
-    role: {
-      name: {
-        value: string;
-      };
-    };
-  }[];
+  participants: Participant[];
   issueGroups: IssueGroup[];
 };

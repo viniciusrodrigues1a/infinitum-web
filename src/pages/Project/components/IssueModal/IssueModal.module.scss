@@ -65,7 +65,8 @@ $inputMarginBetween: 1.7rem;
   }
 
   .dateInputWrapper,
-  .issueGroupSelectWrapper {
+  .issueGroupSelectWrapper,
+  .assignedInputWrapper {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -77,21 +78,51 @@ $inputMarginBetween: 1.7rem;
     }
   }
 
-  .dateInputWrapper {
+  .assignedInputWrapper,
+  .dateInputWrapper,
+  .issueGroupSelectWrapper,
+  .descriptionInputWrapper {
     margin-top: $inputMarginBetween;
-    margin-bottom: $inputMarginBetween;
+  }
 
+  .dateInputWrapper {
     input {
       width: 13rem;
     }
   }
 
-  .issueGroupSelectWrapper {
-    margin-bottom: $inputMarginBetween;
+  .assignedInputWrapper {
+    select {
+      width: auto;
+      max-width: 15rem;
+    }
+  }
+
+  .cancelAssignedInputButton {
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0.75rem;
+    position: relative;
+    padding: 0.4rem;
+    cursor: pointer;
+
+    svg {
+      transition: all 0.2s;
+    }
+
+    &:hover {
+      svg {
+        stroke: #444444;
+      }
+    }
   }
 
   .dateInputWrapper input,
-  .issueGroupSelectWrapper select {
+  .issueGroupSelectWrapper select,
+  .assignedInputWrapper select {
     margin-top: 0 !important;
   }
 }

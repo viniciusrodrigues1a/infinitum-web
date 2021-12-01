@@ -345,6 +345,7 @@ export default function Kanban(): React.ReactElement {
         shown={issueModalConfig.shown}
         issue={issueModalConfig.issue as FormattedIssue}
         issueGroups={project.issueGroups}
+        participants={project.participants}
         closeModal={() =>
           setIssueModalConfig({
             shown: false,
