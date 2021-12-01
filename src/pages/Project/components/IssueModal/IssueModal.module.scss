@@ -96,6 +96,10 @@ $inputMarginBetween: 1.7rem;
       width: auto;
       max-width: 15rem;
     }
+
+    .assignedInputFlex {
+      display: flex;
+    }
   }
 
   .cancelAssignedInputButton {

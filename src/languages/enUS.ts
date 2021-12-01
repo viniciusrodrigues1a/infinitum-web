@@ -154,6 +154,8 @@ export const enUS: Language = {
         subtitle: "Verify and update information about this ticket",
         cancelButtonText: "Close",
         updateButtonText: "Update",
+        assignedInputLabel: "Assigned to participant",
+        assignedInputPlaceholder: "Assigned to",
       },
     },
   },

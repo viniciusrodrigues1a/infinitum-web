@@ -110,8 +110,6 @@ export default function IssueModal({
     if (toastMsg) showToast(toastMsg, response.error);
   }
 
-  if (!issue) return <></>;
-
   return (
     <Modal.Container shown={shown} closeModal={handleCloseModal}>
       <div id={styles.wrapper}>
@@ -140,24 +138,30 @@ export default function IssueModal({
             />
 
             <div className={styles.assignedInputWrapper}>
-              <span className={styles.label}>Participante responsável:</span>
-              <Form.Select
-                id="participants"
-                placeholder="Responsável"
-                options={participants.map((participant) => ({
-                  value: participant.account.email,
-                  text: participant.account.name,
-                }))}
-                value={assignedToEmail || undefined}
-                onChange={(e) => setAssignedToEmail(e.target.value)}
-              />
-              <button
-                type="button"
-                className={styles.cancelAssignedInputButton}
-                onClick={() => setAssignedToEmail(null)}
-              >
-                <FiXCircle color="var(--dark)" size={20} />
-              </button>
+              <span className={styles.label}>
+                {projectLanguage.issueModal.assignedInputLabel}:
+              </span>
+              <div className={styles.assignedInputFlex}>
+                <Form.Select
+                  id="participants"
+                  placeholder={
+                    projectLanguage.issueModal.assignedInputPlaceholder
+                  }
+                  options={participants.map((participant) => ({
+                    value: participant.account.email,
+                    text: participant.account.name,
+                  }))}
+                  value={assignedToEmail || undefined}
+                  onChange={(e) => setAssignedToEmail(e.target.value)}
+                />
+                <button
+                  type="button"
+                  className={styles.cancelAssignedInputButton}
+                  onClick={() => setAssignedToEmail(null)}
+                >
+                  <FiXCircle color="var(--dark)" size={20} />
+                </button>
+              </div>
             </div>
 
             <div className={styles.dateInputWrapper}>

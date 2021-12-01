@@ -154,6 +154,8 @@ export const ptBR: Language = {
         subtitle: "Verifique e altere informações do ticket",
         cancelButtonText: "Fechar",
         updateButtonText: "Atualizar",
+        assignedInputLabel: "Participante responsável",
+        assignedInputPlaceholder: "Responsável",
       },
     },
   },

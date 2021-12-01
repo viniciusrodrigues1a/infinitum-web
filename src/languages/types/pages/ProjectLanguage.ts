@@ -30,6 +30,9 @@ export type ProjectLanguage = {
     title: string;
     subtitle: string;
 
+    assignedInputLabel: string;
+    assignedInputPlaceholder: string;
+
     cancelButtonText: string;
     updateButtonText: string;
   };
