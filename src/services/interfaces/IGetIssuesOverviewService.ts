@@ -22,6 +22,10 @@ export type GetIssuesOverviewServiceResponse = {
     date: string;
     value: number;
   }[];
+  issuesMonthlyOverview: {
+    date: string;
+    value: number;
+  }[];
 };
 
 export interface IGetIssuesOverviewService {

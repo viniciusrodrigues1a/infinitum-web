@@ -13,6 +13,11 @@ import styles from "./Dashboard.module.css";
 import { useAPIService } from "../../contexts/APIServiceContext";
 import { GetIssuesOverviewServiceResponse } from "../../services/interfaces";
 
+type ChartDataConfig = {
+  type: "WEEK" | "MONTH";
+  data: any;
+};
+
 export default function Dashboard(): React.ReactElement {
   const {
     language: {
@@ -25,6 +30,10 @@ export default function Dashboard(): React.ReactElement {
 
   const [error, setError] = useState<boolean>(false);
   const [overview, setOverview] = useState<GetIssuesOverviewServiceResponse>();
+  const [chartDataConfig, setChartDataConfig] = useState<ChartDataConfig>({
+    type: "WEEK",
+    data: [],
+  });
 
   useEffect(() => {
     (async () => {
@@ -32,6 +41,10 @@ export default function Dashboard(): React.ReactElement {
 
       if (response.data) {
         setOverview(response.data);
+        setChartDataConfig({
+          type: "WEEK",
+          data: response.data.issuesWeeklyOverview,
+        });
       }
 
       setError(response.error);
@@ -64,25 +77,44 @@ export default function Dashboard(): React.ReactElement {
                 <Title>{dashboardLanguage.card1.title}</Title>
                 <div id={styles.chartOptions}>
                   <button
-                    className={`
-                      ${styles.chartOption}
-                      ${styles.chartActiveOption}
-                      `}
+                    className={[
+                      styles.chartOption,
+                      chartDataConfig.type === "WEEK"
+                        ? styles.chartActiveOption
+                        : "",
+                    ].join(" ")}
                     type="button"
+                    onClick={() =>
+                      setChartDataConfig({
+                        type: "WEEK",
+                        data: overview.issuesWeeklyOverview,
+                      })
+                    }
                   >
                     {dashboardLanguage.card1.option1}
                   </button>
-                  <button className={styles.chartOption} type="button">
+                  <button
+                    className={[
+                      styles.chartOption,
+                      chartDataConfig.type === "MONTH"
+                        ? styles.chartActiveOption
+                        : "",
+                    ].join(" ")}
+                    type="button"
+                    onClick={() =>
+                      setChartDataConfig({
+                        type: "MONTH",
+                        data: overview.issuesMonthlyOverview,
+                      })
+                    }
+                  >
                     {dashboardLanguage.card1.option2}
-                  </button>
-                  <button className={styles.chartOption} type="button">
-                    {dashboardLanguage.card1.option3}
                   </button>
                 </div>
               </div>
               <div className={styles.cardBody}>
                 <div id={styles.chartWrapper}>
-                  <Chart data={overview.issuesWeeklyOverview} />
+                  <Chart data={chartDataConfig.data} />
                 </div>
               </div>
             </div>

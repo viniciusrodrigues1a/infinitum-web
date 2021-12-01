@@ -127,7 +127,7 @@ export default function Chart({ data }: { data: any }): React.ReactElement {
 
         <XAxis
           dataKey="date"
-          interval={0}
+          interval={data.length > 10 ? 1 : 0}
           axisLine={false}
           tickLine={false}
           tick={({ x, y, payload, index }) => (

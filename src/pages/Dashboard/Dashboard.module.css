@@ -222,12 +222,13 @@
   background: none;
   text-transform: uppercase;
   font-size: 1rem;
+  color: #bbbbbb;
+  cursor: pointer;
+  transition: 0.1s;
 }
 
 .chartOption + .chartOption {
   margin-left: 1.25rem;
-  color: #bbbbbb;
-  cursor: pointer;
 }
 
 .chartActiveOption {
