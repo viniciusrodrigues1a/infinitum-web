@@ -31,7 +31,6 @@ export const enUS: Language = {
           "View data as a map, calendar, timeline, kanban, and more.",
       },
       footer: {
-        contactUs: "Contact Us",
         modal: {
           title: "Choose a language",
         },

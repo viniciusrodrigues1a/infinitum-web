@@ -34,7 +34,6 @@ export const esEs: Language = {
           "Ver datos como mapa, calendario, línea de tiempo, kanban y más.",
       },
       footer: {
-        contactUs: "Contacta con nosotros",
         modal: {
           title: "Elige un idioma",
         },

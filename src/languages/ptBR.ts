@@ -31,7 +31,6 @@ export const ptBR: Language = {
           "Visualize os dados como mapa, calendário, linha do tempo, kanban e muito mais.",
       },
       footer: {
-        contactUs: "Contate-nos",
         modal: {
           title: "Escolha um idioma",
         },

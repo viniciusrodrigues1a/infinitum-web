@@ -2,10 +2,8 @@ import React, { ReactElement, useEffect, useState, useRef } from "react";
 import {
   FiMenu,
   FiGlobe,
-  FiPieChart,
   FiList,
   FiLayout,
-  FiActivity,
   FiMail,
   FiArrowDown,
 } from "react-icons/fi";
@@ -365,12 +363,6 @@ export default function Home(): ReactElement {
       </section>
 
       <footer>
-        <div className={styles.footerInfo}>
-          <FiMail size={32} color="var(--light)" />
-          <a href="">
-            <strong>{homeLanguage.footer.contactUs}</strong>
-          </a>
-        </div>
         <div className={styles.footerInfo}>
           <button type="button" onClick={toggleLanguageModal}>
             <FiGlobe size={32} color="var(--light)" />

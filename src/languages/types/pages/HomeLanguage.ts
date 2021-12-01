@@ -20,7 +20,6 @@ type HomeViewsLanguage = {
 };
 
 type HomeFooterLanguage = {
-  contactUs: string;
   modal: {
     title: string;
   };
