@@ -1,3 +1,4 @@
+import { AcceptInvitationLanguage } from "./AcceptInvitationLanguage";
 import { DashboardLanguage } from "./DashboardLanguage";
 import { HomeLanguage } from "./HomeLanguage";
 import { ProjectLanguage } from "./ProjectLanguage";
@@ -8,4 +9,5 @@ export type PagesLanguage = {
   dashboard: DashboardLanguage;
   projects: ProjectsLanguage;
   project: ProjectLanguage;
+  acceptInvitation: AcceptInvitationLanguage;
 };

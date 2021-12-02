@@ -5,6 +5,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
+import AcceptInvitationService from "../services/AcceptInvitationService";
 import api from "../services/api";
 import CreateIssueGroupService from "../services/CreateIssueGroupService";
 import CreateIssueService from "../services/CreateIssueService";
@@ -14,6 +15,7 @@ import DeleteProjectService from "../services/DeleteProjectService";
 import FindProjectImageService from "../services/FindProjectImageService";
 import GetIssuesOverviewService from "../services/GetIssuesOverviewService";
 import {
+  IAcceptInvitationService,
   ICreateIssueGroupService,
   ICreateProjectService,
   IDeleteIssueService,
@@ -64,6 +66,7 @@ type APIServiceContextData = {
   moveIssueService: IMoveIssueService;
   updateIssueService: IUpdateIssueService;
   deleteIssueService: IDeleteIssueService;
+  acceptInvitationService: IAcceptInvitationService;
 };
 
 type APIServiceProviderProps = {
@@ -100,6 +103,7 @@ export const APIServiceProvider = ({
       moveIssueService: new MoveIssueService(api, lang),
       updateIssueService: new UpdateIssueService(api, lang),
       deleteIssueService: new DeleteIssueService(api, lang),
+      acceptInvitationService: new AcceptInvitationService(api, lang),
     } as Omit<APIServiceContextData, "isReadyForAuthRequests">;
   }, [language]);
 

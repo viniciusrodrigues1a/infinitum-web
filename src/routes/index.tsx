@@ -8,6 +8,7 @@ import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
 import Projects from "../pages/Projects";
 import Project from "../pages/Project";
+import AcceptInvitation from "../pages/AcceptInvitation";
 
 import { LanguageProvider } from "../contexts/LanguageContext";
 import { SessionProvider } from "../contexts/SessionContext";
@@ -47,6 +48,13 @@ export default function Routes(): React.ReactElement {
                       exact
                       path={RoutesEnum.PROJECT}
                       component={Project}
+                      isPrivate
+                    />
+                    <AuthorizedRoute
+                      exact
+                      path={RoutesEnum.ACCEPT_INVITATION}
+                      component={AcceptInvitation}
+                      showAuthorizedLayout={false}
                       isPrivate
                     />
                     <AuthorizedRoute component={() => <Redirect to="/" />} />

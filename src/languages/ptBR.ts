@@ -156,6 +156,11 @@ export const ptBR: Language = {
         assignedInputPlaceholder: "Responsável",
       },
     },
+    acceptInvitation: {
+      title: "Convite aceito!",
+      subtitle: "Redirecionando em",
+      goBackLink: "Voltar à página inicial agora",
+    },
   },
   components: {
     sidebar: {

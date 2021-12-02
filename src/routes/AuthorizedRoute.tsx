@@ -8,15 +8,18 @@ import RoutesEnum from "./type-defs/RoutesEnum";
 type AuthorizedRouteProps = {
   isPrivate?: boolean;
   component: () => React.ReactElement;
+  showAuthorizedLayout?: boolean;
 };
 
 AuthorizedRoute.defaultProps = {
   isPrivate: false,
+  showAuthorizedLayout: true,
 };
 
 export default function AuthorizedRoute({
   isPrivate,
   component: Component,
+  showAuthorizedLayout,
   ...rest
 }: RouteProps & AuthorizedRouteProps): React.ReactElement {
   const session = useContext(SessionContext);
@@ -33,7 +36,7 @@ export default function AuthorizedRoute({
     <Route
       {...rest}
       render={() =>
-        isPrivate ? (
+        isPrivate && showAuthorizedLayout ? (
           <AuthenticatedLayout>
             <Component />
           </AuthenticatedLayout>

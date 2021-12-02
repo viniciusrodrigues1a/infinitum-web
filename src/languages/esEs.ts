@@ -163,6 +163,11 @@ export const esEs: Language = {
         assignedInputPlaceholder: "Assigned to",
       },
     },
+    acceptInvitation: {
+      title: "Invitación aceptada!",
+      subtitle: "Redirigiendo en",
+      goBackLink: "Regrese al inicio ahora",
+    },
   },
   components: {
     sidebar: {

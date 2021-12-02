@@ -13,3 +13,4 @@ export * from "./IFindProjectImageService";
 export * from "./IMoveIssueService";
 export * from "./IUpdateIssueService";
 export * from "./IDeleteIssueService";
+export * from "./IAcceptInvitationService";

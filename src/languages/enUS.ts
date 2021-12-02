@@ -156,6 +156,11 @@ export const enUS: Language = {
         assignedInputPlaceholder: "Assigned to",
       },
     },
+    acceptInvitation: {
+      title: "Invitation accepted!",
+      subtitle: "Redirecting in",
+      goBackLink: "Go back to the Dashboard now",
+    },
   },
   components: {
     sidebar: {
