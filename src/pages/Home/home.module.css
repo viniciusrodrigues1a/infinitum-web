@@ -249,10 +249,10 @@ header .hamburgerNormal > line {
   background-position: center;
   background-size: 6rem 6rem;
   width: 90%;
-  height: 16rem;
   margin-top: 3rem;
   position: relative;
   z-index: 1;
+  border-radius: 16px;
 }
 
 /* Showcase Section Styles */
@@ -559,7 +559,6 @@ footer {
   }
 
   #pitch {
-    height: 19rem;
   }
 }
 
@@ -672,7 +671,7 @@ footer {
     position: absolute;
     z-index: 1;
     top: -5rem;
-    right: -13rem;
+    right: -4rem;
   }
 
   #showcaseSection {
@@ -786,9 +785,12 @@ footer {
   }
 
   #pitch {
-    width: 130%;
-    height: 24rem;
-    background-size: 10rem 10rem;
+    width: 72.5rem;
+  }
+
+  #pitchSection #moon {
+    top: -5rem;
+    right: 1.25rem;
   }
 
   #showcaseSection {

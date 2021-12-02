@@ -21,6 +21,7 @@ import kanbanPreviewImg from "../../assets/kanban-preview.png";
 import listPreviewImg from "../../assets/list-preview.png";
 import dashboardPreviewImg from "../../assets/dashboard-preview.png";
 import projectsPreviewImg from "../../assets/projects-preview.png";
+import showcaseGif from "../../assets/showcase.gif";
 
 import { useLanguage } from "../../contexts/LanguageContext";
 import LanguagePicker from "./components/LanguagePicker";
@@ -260,7 +261,7 @@ export default function Home(): ReactElement {
             {homeLanguage.pitch.title[0]}{" "}
             <span>{homeLanguage.pitch.title[1]}</span>
           </h1>
-          <div id={styles.pitch} />
+          <img id={styles.pitch} src={showcaseGif} alt="" />
         </div>
       </section>
 
