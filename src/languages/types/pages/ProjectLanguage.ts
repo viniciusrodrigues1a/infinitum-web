@@ -36,4 +36,8 @@ export type ProjectLanguage = {
     cancelButtonText: string;
     updateButtonText: string;
   };
+
+  kanban: {
+    updateIssueGroupText: string;
+  };
 };

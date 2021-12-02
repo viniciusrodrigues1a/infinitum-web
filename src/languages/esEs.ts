@@ -162,6 +162,10 @@ export const esEs: Language = {
         assignedInputLabel: "Assigned to participant",
         assignedInputPlaceholder: "Assigned to",
       },
+      kanban: {
+        updateIssueGroupText:
+          "Marcar todos entradas movido para cá como concluido?",
+      },
     },
     acceptInvitation: {
       title: "Invitación aceptada!",

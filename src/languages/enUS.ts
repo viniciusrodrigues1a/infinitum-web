@@ -155,6 +155,9 @@ export const enUS: Language = {
         assignedInputLabel: "Assigned to participant",
         assignedInputPlaceholder: "Assigned to",
       },
+      kanban: {
+        updateIssueGroupText: "Mark all tickets moved here as completed?",
+      },
     },
     acceptInvitation: {
       title: "Invitation accepted!",

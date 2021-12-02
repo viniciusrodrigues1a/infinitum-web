@@ -155,6 +155,10 @@ export const ptBR: Language = {
         assignedInputLabel: "Participante responsável",
         assignedInputPlaceholder: "Responsável",
       },
+      kanban: {
+        updateIssueGroupText:
+          "Marcar todos tickets movido para cá como concluido?",
+      },
     },
     acceptInvitation: {
       title: "Convite aceito!",

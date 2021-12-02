@@ -20,6 +20,7 @@ import {
   FormattedIssue,
   FormattedIssueGroup,
 } from "../../../../../services/type-defs/FormattedProject";
+import { useLanguage } from "../../../../../contexts/LanguageContext";
 
 type IssueModalConfig = {
   shown: boolean;
@@ -35,6 +36,11 @@ export default function Kanban(): React.ReactElement {
     updateIssueGroupFinalStatusService,
   } = useAPIService();
   const { getProjectById, fetchProjects } = useProjects();
+  const {
+    language: {
+      pages: { project: projectLanguage },
+    },
+  } = useLanguage();
 
   const [
     isCreatingNewIssueForIssueGroupId,
@@ -291,7 +297,7 @@ export default function Kanban(): React.ReactElement {
                         className={styles.moreOptionsDropdown}
                       >
                         <span>
-                          Marcar todos tickets movido para cá como concluido?
+                          {projectLanguage.kanban.updateIssueGroupText}
                         </span>
                         <input
                           ref={moreOptionsDropdownInputRef}
