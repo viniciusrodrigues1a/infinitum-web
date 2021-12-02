@@ -161,6 +161,7 @@ export default function List(): React.ReactElement {
   ) {
     await updateIssueService.updateIssue({
       issueId,
+      newAssignedToEmail: "undefined",
       newCompleted: !currentCompletedStatus,
     });
 

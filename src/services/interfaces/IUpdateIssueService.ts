@@ -6,7 +6,7 @@ export type UpdateIssueServiceRequest = Partial<{
   newDescription: string;
   newExpiresAt: Date | undefined;
   newCompleted: boolean;
-  newAssignedToEmail: string | null;
+  newAssignedToEmail: string | undefined | false;
 }>;
 
 export interface IUpdateIssueService {

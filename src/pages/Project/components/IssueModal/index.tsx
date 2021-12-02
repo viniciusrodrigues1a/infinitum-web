@@ -44,7 +44,9 @@ export default function IssueModal({
   const { fetchProjects } = useProjects();
 
   const [title, setTitle] = useState("");
-  const [assignedToEmail, setAssignedToEmail] = useState<string | null>(null);
+  const [assignedToEmail, setAssignedToEmail] = useState<string | undefined>(
+    undefined
+  );
   const [description, setDescription] = useState("");
   const [expirationDate, setExpirationDate] = useState<string | undefined>(
     undefined
@@ -103,6 +105,7 @@ export default function IssueModal({
       newTitle: title,
       newDescription: description,
       newExpiresAt: date,
+      newCompleted: issue.completed,
       newAssignedToEmail: assignedToEmail,
     });
 
@@ -179,7 +182,7 @@ export default function IssueModal({
                 <button
                   type="button"
                   className={styles.cancelAssignedInputButton}
-                  onClick={() => setAssignedToEmail(null)}
+                  onClick={() => setAssignedToEmail(undefined)}
                 >
                   <FiXCircle color="var(--dark)" size={20} />
                 </button>
