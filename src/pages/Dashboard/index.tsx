@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FiClipboard, FiAlignLeft } from "react-icons/fi";
 import Header from "../../components/Header";
 import { useLanguage } from "../../contexts/LanguageContext";
@@ -26,7 +26,7 @@ export default function Dashboard(): React.ReactElement {
     },
   } = useLanguage();
   const { formatToFullDate } = useDateFormatter();
-  const { getIssuesOverviewService } = useAPIService();
+  const { getIssuesOverviewService, isReadyForAuthRequests } = useAPIService();
 
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
 
@@ -37,21 +37,25 @@ export default function Dashboard(): React.ReactElement {
     data: [],
   });
 
+  const fetchIssuesOverview = useCallback(async () => {
+    if (!isReadyForAuthRequests) return;
+
+    const response = await getIssuesOverviewService.getIssuesOverview();
+
+    if (response.data) {
+      setOverview(response.data);
+      setChartDataConfig({
+        type: "WEEK",
+        data: response.data.issuesWeeklyOverview,
+      });
+    }
+
+    setError(response.error);
+  }, [getIssuesOverviewService, isReadyForAuthRequests]);
+
   useEffect(() => {
-    (async () => {
-      const response = await getIssuesOverviewService.getIssuesOverview();
-
-      if (response.data) {
-        setOverview(response.data);
-        setChartDataConfig({
-          type: "WEEK",
-          data: response.data.issuesWeeklyOverview,
-        });
-      }
-
-      setError(response.error);
-    })();
-  }, [getIssuesOverviewService]);
+    fetchIssuesOverview();
+  }, [fetchIssuesOverview]);
 
   return (
     <>
