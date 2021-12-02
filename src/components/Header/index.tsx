@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { FiUser } from "react-icons/fi";
+
 import { useSession } from "../../contexts/SessionContext";
 import ExpandableHamburger from "../ExpandableHamburger";
 import styles from "./Header.module.css";
@@ -72,7 +74,9 @@ export default function Header({
             type="button"
             id={styles.userAvatar}
             onClick={() => setIsDropdownShown(!isDropdownShown)}
-          />
+          >
+            <FiUser color="var(--light)" size={28} />
+          </button>
 
           {isDropdownShown && (
             <div id={styles.headerDropdown}>

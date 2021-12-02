@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { FiXCircle } from "react-icons/fi";
+import { FiXCircle, FiUser } from "react-icons/fi";
 
 import styles from "./ManageParticipantsModal.module.scss";
 
@@ -111,7 +111,9 @@ export default function ManageParticipantsModal({
                   key={participant.account.email}
                 >
                   <div className={styles.listColumn}>
-                    <div className={styles.participantImg} />
+                    <div className={styles.participantImg}>
+                      <FiUser color="var(--light)" size={22} />
+                    </div>
                     <div className={styles.participantInfo}>
                       <span className={styles.participantName}>
                         {participant.account.name}

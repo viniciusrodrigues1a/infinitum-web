@@ -119,7 +119,9 @@
 
     /* 414px */
     @media (min-width: 25.875rem) {
-      display: initial;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 
