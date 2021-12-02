@@ -18,12 +18,11 @@ export const enUS: Language = {
         title: ["Check out more about our", "work"],
       },
       showcase: {
-        title1: "Manage everything in one workspace",
-        description1:
-          "Planning, tracking, and delivering your team’s best work has never been easier.",
-        title2: "Set up in minutes",
+        title1: "Be in control of everything",
+        description1: "Visualize all of your progress in one place.",
+        title2: "Quick set up",
         description2:
-          "Get started fast with hundreds of visual and customizable templates - or create your own.",
+          "Get started fast with a simple and easy to use interface.",
       },
       views: {
         title: ["Track your effort with different", "views"],

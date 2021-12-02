@@ -18,12 +18,11 @@ export const esEs: Language = {
         title: ["Conozca más sobre nuestro", "trabajo"],
       },
       showcase: {
-        title1: "Administre todo en un solo espacio de trabajo",
-        description1:
-          "Planificar, rastrear y entregar el mejor trabajo de su equipo nunca ha sido tan fácil.",
-        title2: "Configurar en minutos",
+        title1: "Ten el control de todo",
+        description1: "Visualice todo su progreso en un solo lugar.",
+        title2: "Configuración rápida",
         description2:
-          "Comience rápidamente con cientos de plantillas visuales y personalizables, o cree las suyas propias.",
+          "Comience rápidamente con una interfaz simple y fácil de usar.",
       },
       views: {
         title: [

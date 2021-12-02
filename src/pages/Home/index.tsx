@@ -11,7 +11,6 @@ import styles from "./home.module.css";
 
 import moonImg from "../../assets/moon.png";
 import landImg from "../../assets/land.png";
-import googleLogoImg from "../../assets/google-logo.png";
 
 import HeroSvg from "./components/HeroSvg";
 import Points from "./components/Points";
@@ -20,6 +19,8 @@ import Star from "./components/Star";
 import logoImg from "../../assets/logo.png";
 import kanbanPreviewImg from "../../assets/kanban-preview.png";
 import listPreviewImg from "../../assets/list-preview.png";
+import dashboardPreviewImg from "../../assets/dashboard-preview.png";
+import projectsPreviewImg from "../../assets/projects-preview.png";
 
 import { useLanguage } from "../../contexts/LanguageContext";
 import LanguagePicker from "./components/LanguagePicker";
@@ -275,9 +276,10 @@ export default function Home(): ReactElement {
           </div>
           <img
             className={styles.showcaseImg}
-            src="https://http2.mlstatic.com/D_NQ_NP_721511-MLB20567637142_012016-O.jpg"
-            width="300px"
-            height="200px"
+            src={dashboardPreviewImg}
+            width="400px"
+            height="225px"
+            alt="Dashboard page"
           />
         </div>
         <div className={styles.showcase}>
@@ -292,9 +294,10 @@ export default function Home(): ReactElement {
           </div>
           <img
             className={styles.showcaseImg}
-            src="https://http2.mlstatic.com/D_NQ_NP_721511-MLB20567637142_012016-O.jpg"
-            width="300px"
-            height="200px"
+            src={projectsPreviewImg}
+            width="400px"
+            height="225px"
+            alt="Projects page"
           />
         </div>
       </section>

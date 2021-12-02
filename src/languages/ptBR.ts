@@ -18,12 +18,11 @@ export const ptBR: Language = {
         title: ["Confira mais sobre nosso", "trabalho"],
       },
       showcase: {
-        title1: "Gerencie tudo em um espaço de trabalho",
-        description1:
-          "Planejar, acompanhar e entregar o melhor trabalho de sua equipe nunca foi tão fácil.",
-        title2: "Configuração em minutos",
+        title1: "Tenha controle de tudo",
+        description1: "Visualize todo seu progresso em um só lugar.",
+        title2: "Configuração rápida",
         description2:
-          "Comece rapidamente com centenas de modelos visuais e personalizáveis - ou crie o seu próprio.",
+          "Comece rapidamente com uma interface fácil e simples de usar.",
       },
       views: {
         title: ["Acompanhe seu esforço com diferentes", "visualizações"],

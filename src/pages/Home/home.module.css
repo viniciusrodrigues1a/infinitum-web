@@ -261,6 +261,7 @@ header .hamburgerNormal > line {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
 }
 
 .showcase + .showcase {
@@ -286,7 +287,8 @@ header .hamburgerNormal > line {
 }
 
 .showcaseImg {
-  margin: auto 0;
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Views Section Styles */
