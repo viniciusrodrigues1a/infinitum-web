@@ -1,7 +1,7 @@
 import { APIResponse } from "../type-defs/APIResponse";
 import { Issue } from "../type-defs/Project";
 
-type IssueWithProjectName = Issue & { projectName: string };
+export type IssueWithProjectName = Issue & { projectName: string };
 
 export type GetIssuesOverviewServiceResponse = {
   expiredIssues: {

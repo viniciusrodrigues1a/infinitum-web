@@ -13,6 +13,7 @@ import styles from "./Dashboard.module.css";
 import { useAPIService } from "../../contexts/APIServiceContext";
 import { GetIssuesOverviewServiceResponse } from "../../services/interfaces";
 import { useDateFormatter } from "../../contexts/DateFormatterContext";
+import IssueListModal from "./components/IssueListModal";
 
 type ChartDataConfig = {
   type: "WEEK" | "MONTH";
@@ -36,6 +37,10 @@ export default function Dashboard(): React.ReactElement {
     type: "WEEK",
     data: [],
   });
+  const [expiredTicketsModalShown, setExpiredTicketsModalShown] =
+    useState(false);
+  const [ticketsForTodayModalShown, setTicketsForTodayModalShown] =
+    useState(false);
 
   const fetchIssuesOverview = useCallback(async () => {
     if (!isReadyForAuthRequests) return;
@@ -57,6 +62,14 @@ export default function Dashboard(): React.ReactElement {
     fetchIssuesOverview();
   }, [fetchIssuesOverview]);
 
+  if (!overview) {
+    return (
+      <div id={styles.loaderContainer}>
+        <Loader />
+      </div>
+    );
+  }
+
   return (
     <>
       <Header
@@ -70,10 +83,6 @@ export default function Dashboard(): React.ReactElement {
         {error ? (
           <div id={styles.errorContainer}>
             <h1>{dashboardLanguage.overviewError}</h1>
-          </div>
-        ) : !overview ? (
-          <div id={styles.loaderContainer}>
-            <Loader />
           </div>
         ) : (
           <div id={styles.cardsContainer}>
@@ -206,7 +215,11 @@ export default function Dashboard(): React.ReactElement {
                 </div>
 
                 <div className={styles.cardMoreInfoContainer}>
-                  <button type="button" className={styles.cardMoreInfo}>
+                  <button
+                    type="button"
+                    className={styles.cardMoreInfo}
+                    onClick={() => setTicketsForTodayModalShown(true)}
+                  >
                     {dashboardLanguage.card3.moreInfo}
                   </button>
                 </div>
@@ -253,7 +266,11 @@ export default function Dashboard(): React.ReactElement {
                 </div>
 
                 <div className={styles.cardMoreInfoContainer}>
-                  <button type="button" className={styles.cardMoreInfo}>
+                  <button
+                    type="button"
+                    className={styles.cardMoreInfo}
+                    onClick={() => setExpiredTicketsModalShown(true)}
+                  >
                     {dashboardLanguage.card3.moreInfo}
                   </button>
                 </div>
@@ -262,6 +279,22 @@ export default function Dashboard(): React.ReactElement {
           </div>
         )}
       </main>
+
+      <IssueListModal
+        shown={ticketsForTodayModalShown}
+        closeModal={() => setTicketsForTodayModalShown(false)}
+        issues={overview.issuesForToday.issues}
+        title={dashboardLanguage.card3.title}
+        subtitle={dashboardLanguage.card3.subtitle}
+      />
+
+      <IssueListModal
+        shown={expiredTicketsModalShown}
+        closeModal={() => setExpiredTicketsModalShown(false)}
+        issues={overview.expiredIssues.issues}
+        title={dashboardLanguage.card4.title}
+        subtitle={dashboardLanguage.card4.subtitle}
+      />
     </>
   );
 }
