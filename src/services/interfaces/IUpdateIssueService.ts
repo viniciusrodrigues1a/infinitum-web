@@ -5,7 +5,7 @@ export type UpdateIssueServiceRequest = Partial<{
   newTitle: string;
   newDescription: string;
   newExpiresAt: Date | undefined;
-  newCompleted: string;
+  newCompleted: boolean;
   newAssignedToEmail: string | null;
 }>;
 

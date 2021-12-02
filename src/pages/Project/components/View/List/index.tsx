@@ -10,6 +10,7 @@ import {
   FiCalendar,
   FiPlusCircle,
   FiTriangle,
+  FiCheckCircle,
 } from "react-icons/fi";
 import { useParams } from "react-router-dom";
 
@@ -33,7 +34,8 @@ type IssueModalConfig = {
 
 export default function List(): React.ReactElement {
   const params = useParams<{ projectId: string }>();
-  const { createIssueService, createIssueGroupService } = useAPIService();
+  const { createIssueService, createIssueGroupService, updateIssueService } =
+    useAPIService();
   const { getProjectById, fetchProjects } = useProjects();
 
   const [issueModalConfig, setIssueModalConfig] = useState<IssueModalConfig>({
@@ -153,6 +155,18 @@ export default function List(): React.ReactElement {
     [collapsedSections]
   );
 
+  async function updateIssueCompletedStatus(
+    issueId: string,
+    currentCompletedStatus: boolean
+  ) {
+    await updateIssueService.updateIssue({
+      issueId,
+      newCompleted: !currentCompletedStatus,
+    });
+
+    await fetchProjects();
+  }
+
   if (!project) {
     return <h1>Projeto não encontrado!</h1>;
   }
@@ -197,20 +211,38 @@ export default function List(): React.ReactElement {
           {!isSectionCollapsed(issueGroup.issueGroupId) && (
             <div className={styles.issues}>
               {issueGroup.issues.map((issue) => (
-                <button
-                  onClick={() =>
-                    setIssueModalConfig({
-                      shown: true,
-                      issue,
-                    })
-                  }
-                  type="button"
-                  key={issue.issueId}
-                  className={styles.issue}
-                >
-                  <span>{issue.title}</span>
-                  <span>{issue.expiresAtFullDate}</span>
-                </button>
+                <div className={styles.issueWrapper}>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      updateIssueCompletedStatus(issue.issueId, issue.completed)
+                    }
+                  >
+                    <FiCheckCircle
+                      className={
+                        issue.completed
+                          ? styles.checkCircleIconCompleted
+                          : styles.checkCircleIcon
+                      }
+                      color={issue.completed ? "#359e76" : "#999999"}
+                      size={20}
+                    />
+                  </button>
+                  <button
+                    onClick={() =>
+                      setIssueModalConfig({
+                        shown: true,
+                        issue,
+                      })
+                    }
+                    type="button"
+                    key={issue.issueId}
+                    className={styles.issue}
+                  >
+                    <span>{issue.title}</span>
+                    <span>{issue.expiresAtFullDate}</span>
+                  </button>
+                </div>
               ))}
 
               {isCreatingNewIssueForIssueGroupId === issueGroup.issueGroupId ? (
