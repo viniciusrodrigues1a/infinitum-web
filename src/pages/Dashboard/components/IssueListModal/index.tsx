@@ -37,7 +37,7 @@ export default function IssueListModal({
 
           <div id={styles.issueListWrapper}>
             {issues.map((issue) => (
-              <div className={styles.cardTicket}>
+              <div className={styles.cardTicket} key={issue.issueId}>
                 <div className={styles.cardTicketInfo}>
                   <FiAlignLeft color="var(--dark)" size={14} />
                   <strong>{issue.title}</strong>
