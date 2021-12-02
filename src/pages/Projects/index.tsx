@@ -51,18 +51,6 @@ export default function Projects(): React.ReactElement {
           <div id={styles.mainContent}>
             <div id={styles.mainHeaderWrapper}>
               <div id={styles.mainHeader}>
-                <div id={styles.filterContainer}>
-                  <span id={styles.filterText}>
-                    {projectsLanguage.filter.allProjects}
-                  </span>
-                  <FiTriangle
-                    id={styles.filterIcon}
-                    size={8}
-                    color="#1974D2"
-                    fill="#1974D2"
-                  />
-                </div>
-
                 <CreateButton
                   title={projectsLanguage.buttonText}
                   onClick={() => setIsCreationModalOpen(true)}
