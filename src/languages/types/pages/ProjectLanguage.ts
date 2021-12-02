@@ -4,6 +4,8 @@ export type ProjectLanguage = {
   viewOptionList: string;
   viewOptionKanban: string;
 
+  membersButtonText: string;
+
   createIssueModal: {
     title: string;
     subtitle: string;

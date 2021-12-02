@@ -124,28 +124,27 @@ export const esEs: Language = {
         submitButtonText: "Crear",
       },
     },
-    // TODO
     project: {
-      newCardButtonText: "Novo card",
+      newCardButtonText: "Nuevo ticket",
       viewOptionList: "Lista",
       viewOptionKanban: "Kanban",
+      membersButtonText: "Miembros",
       createIssueModal: {
-        title: "Criação de ticket",
-        subtitle: "Adicione as informações do seu ticket",
+        title: "Creación de tickets",
+        subtitle: "Complete la información necesaria para crear un ticket",
 
         titleInputLabel: "Título",
         titleInputDescription:
           "Este será el nombre utilizado para referirse a su proyecto.",
         titleInputPlaceholder: "Título",
 
-        expiringDateInputLabel: "Data de conclusão",
-        expiringDateInputDescription: "A data de conclusão deste ticket",
+        expiringDateInputLabel: "Fecha de conclusión",
+        expiringDateInputDescription: "La fecha límite para este ticket",
 
-        sectionInputLabel: "Seção",
+        sectionInputLabel: "Sección",
         sectionInputDescription:
-          "A qual seção do seu projeto seu ticket fará parte",
+          "¿A qué sección de su proyecto formará parte este ticket?",
         sectionInputPlaceholder: "Selecione uma seção",
-        // TODO //
 
         descriptionInputLabel: "Descripción",
         descriptionInputDescription:
@@ -155,12 +154,12 @@ export const esEs: Language = {
         submitButtonText: "Crear",
       },
       issueModal: {
-        title: "Ticket information", // TODO
-        subtitle: "Verify and update information about this ticket",
-        cancelButtonText: "Delete",
-        updateButtonText: "Update",
-        assignedInputLabel: "Assigned to participant",
-        assignedInputPlaceholder: "Assigned to",
+        title: "Información de ticket", // TODO
+        subtitle: "Verificar y actualizar la información sobre este ticket",
+        cancelButtonText: "Borrar",
+        updateButtonText: "Actualizar",
+        assignedInputLabel: "Asignado al participante",
+        assignedInputPlaceholder: "Asignado a",
       },
       kanban: {
         updateIssueGroupText:

@@ -118,6 +118,13 @@
         .issueCard {
           background-color: #eeeeee;
           cursor: pointer;
+          position: relative;
+
+          .completedIcon {
+            position: absolute;
+            bottom: 0.4rem;
+            right: 0.4rem;
+          }
 
           > strong {
             font-family: var(--text);

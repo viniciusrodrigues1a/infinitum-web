@@ -124,6 +124,7 @@ export const enUS: Language = {
       newCardButtonText: "New card",
       viewOptionList: "List",
       viewOptionKanban: "Kanban",
+      membersButtonText: "Members",
       createIssueModal: {
         title: "Ticket creation",
         subtitle: "Fill in the necessary information to create a ticket",

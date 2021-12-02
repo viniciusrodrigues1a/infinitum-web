@@ -124,6 +124,7 @@ export const ptBR: Language = {
       newCardButtonText: "Novo card",
       viewOptionList: "Lista",
       viewOptionKanban: "Kanban",
+      membersButtonText: "Membros",
       createIssueModal: {
         title: "Criação de ticket",
         subtitle: "Adicione as informações do seu ticket",

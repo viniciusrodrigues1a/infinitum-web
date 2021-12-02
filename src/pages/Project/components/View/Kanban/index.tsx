@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { FiMoreVertical, FiPlusCircle } from "react-icons/fi";
+import { FiMoreVertical, FiPlusCircle, FiCheckCircle } from "react-icons/fi";
 import { useParams } from "react-router-dom";
 
 import styles from "./Kanban.module.scss";
@@ -337,6 +337,12 @@ export default function Kanban(): React.ReactElement {
                         draggable
                       >
                         <strong>{issue.title}</strong>
+
+                        <FiCheckCircle
+                          className={styles.completedIcon}
+                          size={16}
+                          color={issue.completed ? "#359e76" : "#999999"}
+                        />
                       </div>
                     </button>
                   ))}

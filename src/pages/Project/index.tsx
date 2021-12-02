@@ -14,11 +14,17 @@ import ManageParticipantsModal from "./components/ManageParticipantsModal";
 
 import { useSidebar } from "../../contexts/SidebarContext";
 import { useProjects } from "../../contexts/ProjectsContext";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 export default function Project(): React.ReactElement {
   const params = useParams<{ projectId: string }>();
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
   const { getProjectById } = useProjects();
+  const {
+    language: {
+      pages: { project: projectLanguage },
+    },
+  } = useLanguage();
 
   const project = useMemo(
     () => getProjectById(params.projectId),
@@ -48,26 +54,26 @@ export default function Project(): React.ReactElement {
               type="button"
               onClick={() => setIsParticipantsModalOpen(true)}
             >
-              Membros
+              {projectLanguage.membersButtonText}
             </button>
           )}
         />
         <div id={styles.headerOptions}>
           <div id={styles.optionsContainer}>
             <CreateButton
-              title="Novo card"
+              title={projectLanguage.newCardButtonText}
               onClick={() => setIsCreationModalOpen(true)}
             />
 
             <div id={styles.viewOptionsContainer}>
               <ViewOption
-                text="Lista"
+                text={projectLanguage.viewOptionList}
                 icon={FiList}
                 active={activeView === "list"}
                 onClick={() => setActiveView("list")}
               />
               <ViewOption
-                text="Kanban"
+                text={projectLanguage.viewOptionKanban}
                 icon={FiLayout}
                 active={activeView === "kanban"}
                 onClick={() => setActiveView("kanban")}
