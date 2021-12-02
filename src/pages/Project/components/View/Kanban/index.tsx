@@ -28,8 +28,12 @@ type IssueModalConfig = {
 
 export default function Kanban(): React.ReactElement {
   const params = useParams<{ projectId: string }>();
-  const { createIssueService, createIssueGroupService, moveIssueService } =
-    useAPIService();
+  const {
+    createIssueService,
+    createIssueGroupService,
+    moveIssueService,
+    updateIssueGroupFinalStatusService,
+  } = useAPIService();
   const { getProjectById, fetchProjects } = useProjects();
 
   const [
@@ -44,9 +48,14 @@ export default function Kanban(): React.ReactElement {
     shown: false,
     issue: null,
   });
+  const [issueGroupIdBeingUpdated, setIssueGroupIdBeingUpdated] = useState<
+    string | undefined
+  >(undefined);
 
   const newIssueTitleInputRef = useRef<HTMLInputElement>(null);
   const newIssueGroupTitleInputRef = useRef<HTMLInputElement>(null);
+  const moreOptionsDropdownRef = useRef<HTMLDivElement>(null);
+  const moreOptionsDropdownInputRef = useRef<HTMLInputElement>(null);
 
   function closeIssueCreationInput() {
     setIsCreatingNewIssueForIssueGroupId(null);
@@ -207,6 +216,40 @@ export default function Kanban(): React.ReactElement {
     }
   }, [fetchProjects, moveIssueService]);
 
+  useEffect(() => {
+    const body = document.querySelector("body");
+
+    if (!body) {
+      return;
+    }
+
+    function onClick(e: MouseEvent) {
+      if (
+        e.target !== moreOptionsDropdownRef.current &&
+        e.target !== moreOptionsDropdownInputRef.current &&
+        issueGroupIdBeingUpdated
+      ) {
+        setIssueGroupIdBeingUpdated(undefined);
+      }
+    }
+
+    body.addEventListener("click", onClick);
+
+    return () => body.removeEventListener("click", onClick);
+  }, [issueGroupIdBeingUpdated]);
+
+  async function updateIssueGroupFinalStatus(isFinal: boolean) {
+    if (issueGroupIdBeingUpdated) {
+      await updateIssueGroupFinalStatusService.updateIssueGroupFinalStatus({
+        issueGroupId: issueGroupIdBeingUpdated,
+        newIsFinal: isFinal,
+      });
+
+      setIssueGroupIdBeingUpdated(undefined);
+      await fetchProjects();
+    }
+  }
+
   if (!project) return <h1>Projeto não encontrado</h1>;
 
   return (
@@ -232,9 +275,38 @@ export default function Kanban(): React.ReactElement {
                       <FiPlusCircle color="var(--dark)" size={20} />
                     </button>
 
-                    <button type="button" className={styles.moreOptionsButton}>
+                    <button
+                      type="button"
+                      className={styles.moreOptionsButton}
+                      onClick={() =>
+                        setIssueGroupIdBeingUpdated(issueGroup.issueGroupId)
+                      }
+                    >
                       <FiMoreVertical color="var(--dark)" size={20} />
                     </button>
+
+                    {issueGroupIdBeingUpdated === issueGroup.issueGroupId && (
+                      <div
+                        ref={moreOptionsDropdownRef}
+                        className={styles.moreOptionsDropdown}
+                      >
+                        <span>
+                          Marcar todos tickets movido para cá como concluido?
+                        </span>
+                        <input
+                          ref={moreOptionsDropdownInputRef}
+                          type="checkbox"
+                          name="issue-group-final"
+                          id="issue-group-final"
+                          defaultChecked={
+                            issueGroup.shouldUpdateIssuesToCompleted
+                          }
+                          onChange={(e) =>
+                            updateIssueGroupFinalStatus(e.target.checked)
+                          }
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
 

@@ -12,6 +12,7 @@ export type IssueGroup = {
   issueGroupId: string;
   title: string;
   issues: Issue[];
+  shouldUpdateIssuesToCompleted: boolean;
 };
 
 export type Participant = {

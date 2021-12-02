@@ -14,3 +14,4 @@ export * from "./IMoveIssueService";
 export * from "./IUpdateIssueService";
 export * from "./IDeleteIssueService";
 export * from "./IAcceptInvitationService";
+export * from "./IUpdateIssueGroupFinalStatusService";
