@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FiBell } from "react-icons/fi";
 import { useSession } from "../../contexts/SessionContext";
 import ExpandableHamburger from "../ExpandableHamburger";
 import styles from "./Header.module.css";
@@ -67,7 +66,6 @@ export default function Header({
       <div className={styles.flexAlignedRow}>
         {RightSideComponent && <RightSideComponent />}
 
-        <FiBell id={styles.bellIcon} color="var(--dark)" size={20} />
         <div id={styles.userAvatarWrapper}>
           <button
             aria-label="More options"

@@ -35,6 +35,11 @@
   font-size: 1.25rem;
   color: #666666;
   cursor: pointer;
+  transition: all 0.1s;
+
+  &:hover {
+    color: #333333;
+  }
 }
 
 #headerOptions {
