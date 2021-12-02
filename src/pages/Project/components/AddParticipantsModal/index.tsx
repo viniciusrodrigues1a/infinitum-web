@@ -100,9 +100,7 @@ export default function AddParticipantsModal({
     inputElem.focus();
   }
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-
+  async function handleSubmit() {
     if (tags.length === 0) return;
 
     /* eslint-disable-next-line */
@@ -138,7 +136,7 @@ export default function AddParticipantsModal({
           <Title>Convide usuários</Title>
           <Subtitle>Convide usuários para seu projeto</Subtitle>
 
-          <form id={styles.formWrapper} onSubmit={handleSubmit}>
+          <form id={styles.formWrapper} onSubmit={(e) => e.preventDefault()}>
             <button
               type="button"
               id={styles.tagsInputContainer}
@@ -169,7 +167,7 @@ export default function AddParticipantsModal({
                 id={styles.submitButton}
                 title="Enviar convite"
                 icon={FiSend}
-                isSubmitButton
+                onClick={handleSubmit}
               />
             </div>
           </form>
