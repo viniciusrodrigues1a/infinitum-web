@@ -22,7 +22,7 @@ export default function CreateProjectModal({
   shown,
   closeModal,
 }: CreateProjectModalProps): React.ReactElement {
-  const { createProjectService } = useAPIService();
+  const { createProjectService, updateProjectImageService } = useAPIService();
   const { fetchProjects } = useProjects();
   const {
     language: {
@@ -30,6 +30,8 @@ export default function CreateProjectModal({
     },
   } = useLanguage();
 
+  const [imagePreview, setImagePreview] = useState("");
+  const [newImageFile, setNewImageFile] = useState<File | null>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -48,6 +50,16 @@ export default function CreateProjectModal({
   }, [closeModal, clearInputs]);
 
   async function handleSubmit() {
+    const projectId = await updateProject();
+    if (!projectId) return;
+
+    await updateProjectImage(projectId);
+
+    handleCloseModal();
+    await fetchProjects();
+  }
+
+  async function updateProject(): Promise<string | undefined> {
     let beginsAt: Date | undefined;
     if (startDate) {
       const [year, month, day] = startDate.split("-").map((e) => Number(e));
@@ -71,10 +83,30 @@ export default function CreateProjectModal({
 
     const toastMsg = response.userFriendlyMessage;
     if (toastMsg) showToast(toastMsg, response.error);
-    if (!response.error) {
-      handleCloseModal();
-      await fetchProjects();
-    }
+
+    if (response.data) return response.data;
+  }
+
+  async function updateProjectImage(projectId: string) {
+    if (!newImageFile) return;
+
+    const formData = new FormData();
+    formData.append("file", newImageFile);
+    formData.append("projectId", projectId);
+
+    await updateProjectImageService.updateProjectImage(formData);
+  }
+
+  function handleOnImageInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!e.target.files) return;
+
+    const file = e.target.files[0];
+
+    setNewImageFile(file);
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => setImagePreview(reader.result as string);
   }
 
   return (
@@ -95,7 +127,11 @@ export default function CreateProjectModal({
           <div id={styles.formWrapper}>
             <Form.Container className={styles.form} onSubmit={handleSubmit}>
               <div id={styles.imageInputWrapper}>
-                <Form.ImageInput id="project-image" />
+                <Form.ImageInput
+                  src={imagePreview}
+                  id="project-image"
+                  onChange={handleOnImageInputChange}
+                />
               </div>
 
               <Form.InputWrapper>

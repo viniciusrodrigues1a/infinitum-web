@@ -23,12 +23,12 @@ export default class CreateProjectService implements ICreateProjectService {
     description: string;
     beginsAt: Date;
     finishesAt: Date;
-  }>): Promise<APIResponse<null>> {
+  }>): Promise<APIResponse<string>> {
     try {
       const body = { name, description, beginsAt, finishesAt };
-      await this.axiosInstance.post("/projects/", body);
+      const response = await this.axiosInstance.post("/projects/", body);
 
-      return { data: null, error: false };
+      return { data: (response.data as any).id, error: false };
     } catch (err) {
       if (err.response) {
         const userFriendlyMessage = err.response.data.error.message;

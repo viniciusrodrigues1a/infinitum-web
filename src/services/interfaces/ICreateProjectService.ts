@@ -8,5 +8,7 @@ export type CreateProjectServiceRequest = Partial<{
 }>;
 
 export interface ICreateProjectService {
-  createProject(data: CreateProjectServiceRequest): Promise<APIResponse<null>>;
+  createProject(
+    data: CreateProjectServiceRequest
+  ): Promise<APIResponse<string>>;
 }
