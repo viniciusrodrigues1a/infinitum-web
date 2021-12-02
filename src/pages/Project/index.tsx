@@ -15,6 +15,7 @@ import ManageParticipantsModal from "./components/ManageParticipantsModal";
 import { useSidebar } from "../../contexts/SidebarContext";
 import { useProjects } from "../../contexts/ProjectsContext";
 import { useLanguage } from "../../contexts/LanguageContext";
+import Loader from "../../components/Loader";
 
 export default function Project(): React.ReactElement {
   const params = useParams<{ projectId: string }>();
@@ -37,7 +38,15 @@ export default function Project(): React.ReactElement {
   const [activeView, setActiveView] = useState<"list" | "kanban">("list");
 
   if (!project) {
-    return <h1>Projeto não encontrado!</h1>;
+    return (
+      <div
+        style={{
+          marginTop: "5rem",
+        }}
+      >
+        <Loader />
+      </div>
+    );
   }
 
   return (
