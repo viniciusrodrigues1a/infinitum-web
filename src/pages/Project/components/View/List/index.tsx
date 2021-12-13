@@ -18,6 +18,8 @@ import styles from "./List.module.scss";
 
 import UpdateIssueModal from "../../../../../components/UpdateIssueModal";
 
+import IssueGroupOptionsButton from "../IssueGroupOptionsButton";
+
 import { useProjects } from "../../../../../contexts/ProjectsContext";
 
 import {
@@ -34,8 +36,12 @@ type UpdateIssueModalConfig = {
 
 export default function List(): React.ReactElement {
   const params = useParams<{ projectId: string }>();
-  const { createIssueService, createIssueGroupService, updateIssueService } =
-    useAPIService();
+  const {
+    createIssueService,
+    createIssueGroupService,
+    updateIssueService,
+    updateIssueGroupFinalStatusService,
+  } = useAPIService();
   const { getProjectById, fetchProjects } = useProjects();
 
   const [issueModalConfig, setUpdateIssueModalConfig] =
@@ -52,6 +58,9 @@ export default function List(): React.ReactElement {
     useState<boolean>(false);
   const [newIssueTitle, setNewIssueTitle] = useState("");
   const [newIssueGroupTitle, setNewIssueGroupTitle] = useState("");
+  const [issueGroupIdBeingUpdated, setIssueGroupIdBeingUpdated] = useState<
+    string | undefined
+  >(undefined);
 
   const newIssueTitleInputRef = useRef<HTMLInputElement>(null);
   const newIssueGroupTitleInputRef = useRef<HTMLInputElement>(null);
@@ -169,6 +178,36 @@ export default function List(): React.ReactElement {
     await fetchProjects();
   }
 
+  async function updateIssueGroupFinalStatus(isFinal: boolean) {
+    if (issueGroupIdBeingUpdated) {
+      await updateIssueGroupFinalStatusService.updateIssueGroupFinalStatus({
+        issueGroupId: issueGroupIdBeingUpdated,
+        newIsFinal: isFinal,
+      });
+
+      setIssueGroupIdBeingUpdated(undefined);
+      await fetchProjects();
+    }
+  }
+
+  useEffect(() => {
+    const body = document.querySelector("body");
+
+    if (!body) {
+      return;
+    }
+
+    function onClick() {
+      if (issueGroupIdBeingUpdated) {
+        setIssueGroupIdBeingUpdated(undefined);
+      }
+    }
+
+    body.addEventListener("click", onClick);
+
+    return () => body.removeEventListener("click", onClick);
+  }, [issueGroupIdBeingUpdated]);
+
   if (!project) {
     return <h1>Projeto não encontrado!</h1>;
   }
@@ -189,25 +228,38 @@ export default function List(): React.ReactElement {
       {project.issueGroups.map((issueGroup: FormattedIssueGroup, index) => (
         <div key={issueGroup.issueGroupId} className={styles.issuesSection}>
           <div className={styles.issuesSectionHeader}>
-            <button
-              onClick={() =>
-                toggleCollapsedSectionState(issueGroup.issueGroupId)
+            <div className={styles.issueSectionHeaderTitle}>
+              <button
+                onClick={() =>
+                  toggleCollapsedSectionState(issueGroup.issueGroupId)
+                }
+                type="button"
+                className={`${styles.issuesSectionHeaderIconButton} ${
+                  isSectionCollapsed(issueGroup.issueGroupId)
+                    ? styles.issuesSectionHeaderIconButtonCollapsed
+                    : ""
+                }`}
+              >
+                <FiTriangle
+                  className={`${styles.issuesSectionHeaderIcon}`}
+                  fill="var(--dark)"
+                  color="var(--dark)"
+                  size={12}
+                />
+              </button>
+              <h1>{issueGroup.title}</h1>
+            </div>
+
+            <IssueGroupOptionsButton
+              isDropdownShown={
+                issueGroupIdBeingUpdated === issueGroup.issueGroupId
               }
-              type="button"
-              className={`${styles.issuesSectionHeaderIconButton} ${
-                isSectionCollapsed(issueGroup.issueGroupId)
-                  ? styles.issuesSectionHeaderIconButtonCollapsed
-                  : ""
-              }`}
-            >
-              <FiTriangle
-                className={`${styles.issuesSectionHeaderIcon}`}
-                fill="var(--dark)"
-                color="var(--dark)"
-                size={12}
-              />
-            </button>
-            <h1>{issueGroup.title}</h1>
+              defaultChecked={issueGroup.shouldUpdateIssuesToCompleted}
+              onClick={() =>
+                setIssueGroupIdBeingUpdated(issueGroup.issueGroupId)
+              }
+              onChange={(e) => updateIssueGroupFinalStatus(e.target.checked)}
+            />
           </div>
 
           {!isSectionCollapsed(issueGroup.issueGroupId) && (

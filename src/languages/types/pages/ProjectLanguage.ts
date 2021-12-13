@@ -4,6 +4,8 @@ export type ProjectLanguage = {
   viewOptionList: string;
   viewOptionKanban: string;
 
+  updateIssueGroupInputText: string;
+
   membersButtonText: string;
 
   createIssueModal: {
@@ -37,9 +39,5 @@ export type ProjectLanguage = {
 
     cancelButtonText: string;
     updateButtonText: string;
-  };
-
-  kanban: {
-    updateIssueGroupText: string;
   };
 };

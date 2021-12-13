@@ -124,6 +124,7 @@ export const enUS: Language = {
       newCardButtonText: "New card",
       viewOptionList: "List",
       viewOptionKanban: "Kanban",
+      updateIssueGroupInputText: "Mark all tickets moved here as completed?",
       membersButtonText: "Members",
       createIssueModal: {
         title: "Ticket creation",
@@ -155,9 +156,6 @@ export const enUS: Language = {
         updateButtonText: "Update",
         assignedInputLabel: "Assigned to participant",
         assignedInputPlaceholder: "Assigned to",
-      },
-      kanban: {
-        updateIssueGroupText: "Mark all tickets moved here as completed?",
       },
     },
     acceptInvitation: {

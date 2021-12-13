@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { FiMoreVertical, FiPlusCircle, FiCheckCircle } from "react-icons/fi";
+import { FiPlusCircle, FiCheckCircle } from "react-icons/fi";
 import { useParams } from "react-router-dom";
 
 import styles from "./Kanban.module.scss";
@@ -16,11 +16,12 @@ import { useProjects } from "../../../../../contexts/ProjectsContext";
 import showToast from "../../../../../utils/showToast";
 import UpdateIssueModal from "../../../../../components/UpdateIssueModal";
 
+import IssueGroupOptionsButton from "../IssueGroupOptionsButton";
+
 import {
   FormattedIssue,
   FormattedIssueGroup,
 } from "../../../../../services/type-defs/FormattedProject";
-import { useLanguage } from "../../../../../contexts/LanguageContext";
 
 type UpdateIssueModalConfig = {
   shown: boolean;
@@ -36,11 +37,6 @@ export default function Kanban(): React.ReactElement {
     updateIssueGroupFinalStatusService,
   } = useAPIService();
   const { getProjectById, fetchProjects } = useProjects();
-  const {
-    language: {
-      pages: { project: projectLanguage },
-    },
-  } = useLanguage();
 
   const [
     isCreatingNewIssueForIssueGroupId,
@@ -61,8 +57,6 @@ export default function Kanban(): React.ReactElement {
 
   const newIssueTitleInputRef = useRef<HTMLInputElement>(null);
   const newIssueGroupTitleInputRef = useRef<HTMLInputElement>(null);
-  const moreOptionsDropdownRef = useRef<HTMLDivElement>(null);
-  const moreOptionsDropdownInputRef = useRef<HTMLInputElement>(null);
 
   function closeIssueCreationInput() {
     setIsCreatingNewIssueForIssueGroupId(null);
@@ -230,12 +224,8 @@ export default function Kanban(): React.ReactElement {
       return;
     }
 
-    function onClick(e: MouseEvent) {
-      if (
-        e.target !== moreOptionsDropdownRef.current &&
-        e.target !== moreOptionsDropdownInputRef.current &&
-        issueGroupIdBeingUpdated
-      ) {
+    function onClick() {
+      if (issueGroupIdBeingUpdated) {
         setIssueGroupIdBeingUpdated(undefined);
       }
     }
@@ -282,38 +272,18 @@ export default function Kanban(): React.ReactElement {
                       <FiPlusCircle color="var(--dark)" size={20} />
                     </button>
 
-                    <button
-                      type="button"
-                      className={styles.moreOptionsButton}
+                    <IssueGroupOptionsButton
+                      isDropdownShown={
+                        issueGroupIdBeingUpdated === issueGroup.issueGroupId
+                      }
+                      defaultChecked={issueGroup.shouldUpdateIssuesToCompleted}
                       onClick={() =>
                         setIssueGroupIdBeingUpdated(issueGroup.issueGroupId)
                       }
-                    >
-                      <FiMoreVertical color="var(--dark)" size={20} />
-                    </button>
-
-                    {issueGroupIdBeingUpdated === issueGroup.issueGroupId && (
-                      <div
-                        ref={moreOptionsDropdownRef}
-                        className={styles.moreOptionsDropdown}
-                      >
-                        <span>
-                          {projectLanguage.kanban.updateIssueGroupText}
-                        </span>
-                        <input
-                          ref={moreOptionsDropdownInputRef}
-                          type="checkbox"
-                          name="issue-group-final"
-                          id="issue-group-final"
-                          defaultChecked={
-                            issueGroup.shouldUpdateIssuesToCompleted
-                          }
-                          onChange={(e) =>
-                            updateIssueGroupFinalStatus(e.target.checked)
-                          }
-                        />
-                      </div>
-                    )}
+                      onChange={(e) =>
+                        updateIssueGroupFinalStatus(e.target.checked)
+                      }
+                    />
                   </div>
                 </div>
 

@@ -128,6 +128,8 @@ export const esEs: Language = {
       newCardButtonText: "Nuevo ticket",
       viewOptionList: "Lista",
       viewOptionKanban: "Kanban",
+      updateIssueGroupInputText:
+        "Marcar todos entradas movido para cá como concluido?",
       membersButtonText: "Miembros",
       createIssueModal: {
         title: "Creación de tickets",
@@ -160,10 +162,6 @@ export const esEs: Language = {
         updateButtonText: "Actualizar",
         assignedInputLabel: "Asignado al participante",
         assignedInputPlaceholder: "Asignado a",
-      },
-      kanban: {
-        updateIssueGroupText:
-          "Marcar todos entradas movido para cá como concluido?",
       },
     },
     acceptInvitation: {

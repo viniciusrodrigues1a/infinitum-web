@@ -124,6 +124,8 @@ export const ptBR: Language = {
       newCardButtonText: "Novo card",
       viewOptionList: "Lista",
       viewOptionKanban: "Kanban",
+      updateIssueGroupInputText:
+        "Marcar todos tickets movido para cá como concluido?",
       membersButtonText: "Membros",
       createIssueModal: {
         title: "Criação de ticket",
@@ -155,10 +157,6 @@ export const ptBR: Language = {
         updateButtonText: "Atualizar",
         assignedInputLabel: "Participante responsável",
         assignedInputPlaceholder: "Responsável",
-      },
-      kanban: {
-        updateIssueGroupText:
-          "Marcar todos tickets movido para cá como concluido?",
       },
     },
     acceptInvitation: {
