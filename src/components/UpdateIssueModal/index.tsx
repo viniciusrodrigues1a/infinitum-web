@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { FiXCircle, FiEdit3, FiTrash2 } from "react-icons/fi";
 
-import styles from "./IssueModal.module.scss";
+import styles from "./UpdateIssueModal.module.scss";
 
-import Modal from "../../../../components/Modal";
-import Title from "../../../../components/Title";
-import Subtitle from "../../../../components/Subtitle";
-import Form from "../../../../components/Form";
-import CreateButton from "../../../../components/CreateButton";
+import Modal from "../Modal";
+import Title from "../Title";
+import Subtitle from "../Subtitle";
+import Form from "../Form";
+import CreateButton from "../CreateButton";
 
 import {
   FormattedIssue,
   FormattedIssueGroup,
-} from "../../../../services/type-defs/FormattedProject";
-import { useAPIService } from "../../../../contexts/APIServiceContext";
-import showToast from "../../../../utils/showToast";
-import { useProjects } from "../../../../contexts/ProjectsContext";
-import { useLanguage } from "../../../../contexts/LanguageContext";
-import { Participant } from "../../../../services/type-defs/Project";
+} from "../../services/type-defs/FormattedProject";
+import { useAPIService } from "../../contexts/APIServiceContext";
+import showToast from "../../utils/showToast";
+import { useProjects } from "../../contexts/ProjectsContext";
+import { useLanguage } from "../../contexts/LanguageContext";
+import { Participant } from "../../services/type-defs/Project";
 
-type IssueModalProps = {
+type UpdateIssueModalProps = {
   closeModal: () => void;
   shown: boolean;
   issue: FormattedIssue;
@@ -27,13 +27,13 @@ type IssueModalProps = {
   participants: Participant[];
 };
 
-export default function IssueModal({
+export default function UpdateIssueModal({
   shown,
   closeModal,
   issue,
   issueGroups,
   participants,
-}: IssueModalProps): React.ReactElement {
+}: UpdateIssueModalProps): React.ReactElement {
   const {
     language: {
       pages: { project: projectLanguage },

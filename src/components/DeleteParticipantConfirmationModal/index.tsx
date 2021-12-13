@@ -2,9 +2,9 @@ import React from "react";
 
 import styles from "./DeleteParticipantConfirmationModal.module.scss";
 
-import Modal from "../../../../components/Modal";
-import Title from "../../../../components/Title";
-import Subtitle from "../../../../components/Subtitle";
+import Modal from "../Modal";
+import Title from "../Title";
+import Subtitle from "../Subtitle";
 
 type DeleteParticipantConfirmationModalProps = {
   shown: boolean;

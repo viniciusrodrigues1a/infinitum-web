@@ -13,7 +13,7 @@ import styles from "./Dashboard.module.css";
 import { useAPIService } from "../../contexts/APIServiceContext";
 import { GetIssuesOverviewServiceResponse } from "../../services/interfaces";
 import { useDateFormatter } from "../../contexts/DateFormatterContext";
-import IssueListModal from "./components/IssueListModal";
+import IssueListModal from "../../components/IssueListModal";
 
 type ChartDataConfig = {
   type: "WEEK" | "MONTH";

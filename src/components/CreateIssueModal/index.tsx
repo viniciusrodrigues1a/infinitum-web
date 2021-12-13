@@ -3,15 +3,15 @@ import React, { useCallback, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./CreateIssueModal.module.scss";
 
-import Modal, { ModalProps } from "../../../../components/Modal";
-import Title from "../../../../components/Title";
-import Subtitle from "../../../../components/Subtitle";
-import Form from "../../../../components/Form";
-import CreateButton from "../../../../components/CreateButton";
-import { useAPIService } from "../../../../contexts/APIServiceContext";
-import showToast from "../../../../utils/showToast";
-import { useProjects } from "../../../../contexts/ProjectsContext";
-import { useLanguage } from "../../../../contexts/LanguageContext";
+import Modal, { ModalProps } from "../Modal";
+import Title from "../Title";
+import Subtitle from "../Subtitle";
+import Form from "../Form";
+import CreateButton from "../CreateButton";
+import { useAPIService } from "../../contexts/APIServiceContext";
+import showToast from "../../utils/showToast";
+import { useProjects } from "../../contexts/ProjectsContext";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 export default function CreateIssueModal({
   shown,

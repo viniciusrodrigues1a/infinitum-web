@@ -3,11 +3,11 @@ import { FiClipboard, FiAlignLeft } from "react-icons/fi";
 
 import styles from "./IssueListModal.module.scss";
 
-import Title from "../../../../components/Title";
-import Subtitle from "../../../../components/Subtitle";
-import Modal from "../../../../components/Modal";
+import Title from "../Title";
+import Subtitle from "../Subtitle";
+import Modal from "../Modal";
 
-import { IssueWithProjectName } from "../../../../services/interfaces";
+import { IssueWithProjectName } from "../../services/interfaces";
 
 type IssueListModalProps = {
   shown: boolean;

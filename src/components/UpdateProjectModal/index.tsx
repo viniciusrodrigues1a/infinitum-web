@@ -4,16 +4,16 @@ import { FiEdit3, FiTrash2 } from "react-icons/fi";
 import { useParams } from "react-router-dom";
 import styles from "./UpdateProjectModal.module.scss";
 
-import CreateButton from "../../../../components/CreateButton";
-import Form from "../../../../components/Form";
-import Modal from "../../../../components/Modal";
-import Subtitle from "../../../../components/Subtitle";
-import Title from "../../../../components/Title";
+import CreateButton from "../CreateButton";
+import Form from "../Form";
+import Modal from "../Modal";
+import Subtitle from "../Subtitle";
+import Title from "../Title";
 import DeleteProjectModal from "../DeleteProjectModal";
 
-import { useAPIService } from "../../../../contexts/APIServiceContext";
-import { useProjects } from "../../../../contexts/ProjectsContext";
-import showToast from "../../../../utils/showToast";
+import { useAPIService } from "../../contexts/APIServiceContext";
+import { useProjects } from "../../contexts/ProjectsContext";
+import showToast from "../../utils/showToast";
 
 export type UpdateProjectModalProps = {
   shown: boolean;

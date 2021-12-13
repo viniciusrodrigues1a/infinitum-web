@@ -1,18 +1,18 @@
-import React, { FormEvent, useCallback, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { FiSend } from "react-icons/fi";
 
 import styles from "./AddParticipantsModal.module.scss";
 
-import Title from "../../../../components/Title";
-import Subtitle from "../../../../components/Subtitle";
-import Modal from "../../../../components/Modal";
-import CreateButton from "../../../../components/CreateButton";
+import Title from "../Title";
+import Subtitle from "../Subtitle";
+import Modal from "../Modal";
+import CreateButton from "../CreateButton";
 
-import { ReactComponent as TagIcon } from "../../../../assets/tag-x-circle.svg";
-import { useAPIService } from "../../../../contexts/APIServiceContext";
-import { useProjects } from "../../../../contexts/ProjectsContext";
-import { FormattedProject } from "../../../../services/type-defs/FormattedProject";
-import showToast from "../../../../utils/showToast";
+import { ReactComponent as TagIcon } from "../../assets/tag-x-circle.svg";
+import { useAPIService } from "../../contexts/APIServiceContext";
+import { useProjects } from "../../contexts/ProjectsContext";
+import { FormattedProject } from "../../services/type-defs/FormattedProject";
+import showToast from "../../utils/showToast";
 
 type AddParticipantsModalProps = {
   closeModal: () => void;

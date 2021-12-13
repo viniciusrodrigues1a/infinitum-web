@@ -6,11 +6,10 @@ import styles from "./Project.module.scss";
 
 import CreateButton from "../../components/CreateButton";
 import Header from "../../components/Header";
-import ViewOption from "./components/ViewOption";
 import View from "./components/View";
-import CreateIssueModal from "./components/CreateIssueModal";
-import UpdateProjectModal from "./components/UpdateProjectModal";
-import ManageParticipantsModal from "./components/ManageParticipantsModal";
+import CreateIssueModal from "../../components/CreateIssueModal";
+import UpdateProjectModal from "../../components/UpdateProjectModal";
+import ManageParticipantsModal from "../../components/ManageParticipantsModal";
 
 import { useSidebar } from "../../contexts/SidebarContext";
 import { useProjects } from "../../contexts/ProjectsContext";
@@ -75,13 +74,13 @@ export default function Project(): React.ReactElement {
             />
 
             <div id={styles.viewOptionsContainer}>
-              <ViewOption
+              <View.Option
                 text={projectLanguage.viewOptionList}
                 icon={FiList}
                 active={activeView === "list"}
                 onClick={() => setActiveView("list")}
               />
-              <ViewOption
+              <View.Option
                 text={projectLanguage.viewOptionKanban}
                 icon={FiLayout}
                 active={activeView === "kanban"}

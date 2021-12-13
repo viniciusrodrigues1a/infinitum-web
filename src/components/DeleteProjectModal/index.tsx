@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { FiAlertTriangle } from "react-icons/fi";
 import { useParams, useHistory } from "react-router-dom";
 
-import Modal from "../../../../components/Modal";
-import Title from "../../../../components/Title";
-import { useAPIService } from "../../../../contexts/APIServiceContext";
-import { useProjects } from "../../../../contexts/ProjectsContext";
-import RoutesEnum from "../../../../routes/type-defs/RoutesEnum";
-import showToast from "../../../../utils/showToast";
+import Modal from "../Modal";
+import Title from "../Title";
+import { useAPIService } from "../../contexts/APIServiceContext";
+import { useProjects } from "../../contexts/ProjectsContext";
+import RoutesEnum from "../../routes/type-defs/RoutesEnum";
+import showToast from "../../utils/showToast";
 
 import styles from "./DeleteProjectModal.module.scss";
 

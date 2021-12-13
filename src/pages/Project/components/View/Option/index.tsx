@@ -1,7 +1,7 @@
 import React, { DetailedHTMLProps, HTMLAttributes } from "react";
 import { IconBaseProps } from "react-icons/lib";
 
-import styles from "./ViewOption.module.scss";
+import styles from "./Option.module.scss";
 
 export type ViewOptionProps = {
   text: string;

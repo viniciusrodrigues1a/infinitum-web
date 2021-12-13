@@ -14,7 +14,7 @@ import { useAPIService } from "../../../../../contexts/APIServiceContext";
 import { useProjects } from "../../../../../contexts/ProjectsContext";
 
 import showToast from "../../../../../utils/showToast";
-import IssueModal from "../../IssueModal";
+import UpdateIssueModal from "../../../../../components/UpdateIssueModal";
 
 import {
   FormattedIssue,
@@ -22,7 +22,7 @@ import {
 } from "../../../../../services/type-defs/FormattedProject";
 import { useLanguage } from "../../../../../contexts/LanguageContext";
 
-type IssueModalConfig = {
+type UpdateIssueModalConfig = {
   shown: boolean;
   issue: FormattedIssue | null;
 };
@@ -50,10 +50,11 @@ export default function Kanban(): React.ReactElement {
     useState<boolean>(false);
   const [newIssueTitle, setNewIssueTitle] = useState("");
   const [newIssueGroupTitle, setNewIssueGroupTitle] = useState("");
-  const [issueModalConfig, setIssueModalConfig] = useState<IssueModalConfig>({
-    shown: false,
-    issue: null,
-  });
+  const [issueModalConfig, setUpdateIssueModalConfig] =
+    useState<UpdateIssueModalConfig>({
+      shown: false,
+      issue: null,
+    });
   const [issueGroupIdBeingUpdated, setIssueGroupIdBeingUpdated] = useState<
     string | undefined
   >(undefined);
@@ -325,7 +326,7 @@ export default function Kanban(): React.ReactElement {
                       type="button"
                       className={styles.issueCardWrapper}
                       onClick={() =>
-                        setIssueModalConfig({
+                        setUpdateIssueModalConfig({
                           shown: true,
                           issue,
                         })
@@ -425,13 +426,13 @@ export default function Kanban(): React.ReactElement {
           </div>
         </div>
       </div>
-      <IssueModal
+      <UpdateIssueModal
         shown={issueModalConfig.shown}
         issue={issueModalConfig.issue as FormattedIssue}
         issueGroups={project.issueGroups}
         participants={project.participants}
         closeModal={() =>
-          setIssueModalConfig({
+          setUpdateIssueModalConfig({
             shown: false,
             issue: null,
           })

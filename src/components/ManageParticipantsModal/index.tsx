@@ -3,17 +3,17 @@ import { FiXCircle, FiUser } from "react-icons/fi";
 
 import styles from "./ManageParticipantsModal.module.scss";
 
-import Modal from "../../../../components/Modal";
-import Title from "../../../../components/Title";
-import Subtitle from "../../../../components/Subtitle";
-import CreateButton from "../../../../components/CreateButton";
+import Modal from "../Modal";
+import Title from "../Title";
+import Subtitle from "../Subtitle";
+import CreateButton from "../CreateButton";
 import AddParticipantsModal from "../AddParticipantsModal";
 
-import { useAPIService } from "../../../../contexts/APIServiceContext";
+import { useAPIService } from "../../contexts/APIServiceContext";
 
-import { FormattedProject } from "../../../../services/type-defs/FormattedProject";
-import showToast from "../../../../utils/showToast";
-import { useProjects } from "../../../../contexts/ProjectsContext";
+import { FormattedProject } from "../../services/type-defs/FormattedProject";
+import showToast from "../../utils/showToast";
+import { useProjects } from "../../contexts/ProjectsContext";
 import DeleteParticipantConfirmationModal from "../DeleteParticipantConfirmationModal";
 
 export type ManageParticipantsModalProps = {

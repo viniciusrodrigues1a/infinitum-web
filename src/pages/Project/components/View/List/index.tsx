@@ -16,7 +16,7 @@ import { useParams } from "react-router-dom";
 
 import styles from "./List.module.scss";
 
-import IssueModal from "../../IssueModal";
+import UpdateIssueModal from "../../../../../components/UpdateIssueModal";
 
 import { useProjects } from "../../../../../contexts/ProjectsContext";
 
@@ -27,7 +27,7 @@ import {
 import { useAPIService } from "../../../../../contexts/APIServiceContext";
 import showToast from "../../../../../utils/showToast";
 
-type IssueModalConfig = {
+type UpdateIssueModalConfig = {
   shown: boolean;
   issue: FormattedIssue | null;
 };
@@ -38,10 +38,11 @@ export default function List(): React.ReactElement {
     useAPIService();
   const { getProjectById, fetchProjects } = useProjects();
 
-  const [issueModalConfig, setIssueModalConfig] = useState<IssueModalConfig>({
-    shown: false,
-    issue: null,
-  });
+  const [issueModalConfig, setUpdateIssueModalConfig] =
+    useState<UpdateIssueModalConfig>({
+      shown: false,
+      issue: null,
+    });
   const [collapsedSections, setCollapsedSections] = useState<Array<string>>([]);
   const [
     isCreatingNewIssueForIssueGroupId,
@@ -231,7 +232,7 @@ export default function List(): React.ReactElement {
                   </button>
                   <button
                     onClick={() =>
-                      setIssueModalConfig({
+                      setUpdateIssueModalConfig({
                         shown: true,
                         issue,
                       })
@@ -317,13 +318,13 @@ export default function List(): React.ReactElement {
         </div>
       ))}
 
-      <IssueModal
+      <UpdateIssueModal
         shown={issueModalConfig.shown}
         issue={issueModalConfig.issue as FormattedIssue}
         issueGroups={project.issueGroups}
         participants={project.participants}
         closeModal={() =>
-          setIssueModalConfig({
+          setUpdateIssueModalConfig({
             shown: false,
             issue: null,
           })
