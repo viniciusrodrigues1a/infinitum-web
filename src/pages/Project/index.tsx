@@ -10,11 +10,12 @@ import View from "./components/View";
 import CreateIssueModal from "../../components/CreateIssueModal";
 import UpdateProjectModal from "../../components/UpdateProjectModal";
 import ManageParticipantsModal from "../../components/ManageParticipantsModal";
+import Loader from "../../components/Loader";
 
+import { ViewsProvider } from "../../contexts/ViewsContext";
 import { useSidebar } from "../../contexts/SidebarContext";
 import { useProjects } from "../../contexts/ProjectsContext";
 import { useLanguage } from "../../contexts/LanguageContext";
-import Loader from "../../components/Loader";
 
 export default function Project(): React.ReactElement {
   const params = useParams<{ projectId: string }>();
@@ -100,8 +101,10 @@ export default function Project(): React.ReactElement {
       </div>
 
       <main role="main">
-        {activeView === "list" && <View.List />}
-        {activeView === "kanban" && <View.Kanban />}
+        <ViewsProvider>
+          {activeView === "list" && <View.List project={project} />}
+          {activeView === "kanban" && <View.Kanban project={project} />}
+        </ViewsProvider>
       </main>
 
       <CreateIssueModal

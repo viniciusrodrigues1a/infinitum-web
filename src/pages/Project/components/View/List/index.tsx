@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   FiAlignLeft,
   FiCalendar,
@@ -12,115 +6,86 @@ import {
   FiTriangle,
   FiCheckCircle,
 } from "react-icons/fi";
-import { useParams } from "react-router-dom";
 
 import styles from "./List.module.scss";
-
-import UpdateIssueModal from "../../../../../components/UpdateIssueModal";
-
-import IssueGroupOptionsButton from "../IssueGroupOptionsButton";
-
-import { useProjects } from "../../../../../contexts/ProjectsContext";
 
 import {
   FormattedIssue,
   FormattedIssueGroup,
+  FormattedProject,
 } from "../../../../../services/type-defs/FormattedProject";
-import { useAPIService } from "../../../../../contexts/APIServiceContext";
-import showToast from "../../../../../utils/showToast";
 
-type UpdateIssueModalConfig = {
-  shown: boolean;
-  issue: FormattedIssue | null;
+import UpdateIssueModal from "../../../../../components/UpdateIssueModal";
+import IssueGroupOptionsButton from "../IssueGroupOptionsButton";
+
+import { useViewsState } from "../../../../../contexts/ViewsContext";
+
+type ListProps = {
+  project: FormattedProject;
 };
 
-export default function List(): React.ReactElement {
-  const params = useParams<{ projectId: string }>();
+export default function List({ project }: ListProps): React.ReactElement {
   const {
-    createIssueService,
-    createIssueGroupService,
-    updateIssueService,
-    updateIssueGroupFinalStatusService,
-  } = useAPIService();
-  const { getProjectById, fetchProjects } = useProjects();
-
-  const [issueModalConfig, setUpdateIssueModalConfig] =
-    useState<UpdateIssueModalConfig>({
-      shown: false,
-      issue: null,
-    });
-  const [collapsedSections, setCollapsedSections] = useState<Array<string>>([]);
-  const [
+    issueBeingUpdated,
+    setIssueBeingUpdated,
+    issueGroupIdBeingUpdated,
+    setIssueGroupIdBeingUpdated,
     isCreatingNewIssueForIssueGroupId,
     setIsCreatingNewIssueForIssueGroupId,
-  ] = useState<string | null>(null);
-  const [isCreatingNewIssueGroup, setIsCreatingNewIssueGroup] =
-    useState<boolean>(false);
+    isCreatingNewIssueGroup,
+    setIsCreatingNewIssueGroup,
+    createIssue,
+    createIssueGroup,
+    updateIssueCompletedStatus,
+    updateIssueGroupFinalStatus,
+  } = useViewsState();
+
+  const [collapsedSections, setCollapsedSections] = useState<Array<string>>([]);
   const [newIssueTitle, setNewIssueTitle] = useState("");
   const [newIssueGroupTitle, setNewIssueGroupTitle] = useState("");
-  const [issueGroupIdBeingUpdated, setIssueGroupIdBeingUpdated] = useState<
-    string | undefined
-  >(undefined);
 
   const newIssueTitleInputRef = useRef<HTMLInputElement>(null);
   const newIssueGroupTitleInputRef = useRef<HTMLInputElement>(null);
 
-  function closeIssueCreationInput() {
+  const closeIssueCreationInput = useCallback(() => {
     setIsCreatingNewIssueForIssueGroupId(null);
     setNewIssueTitle("");
-  }
+  }, [setIsCreatingNewIssueForIssueGroupId]);
 
-  function closeIssueGroupCreationInput() {
+  const closeIssueGroupCreationInput = useCallback(async () => {
     setIsCreatingNewIssueGroup(false);
     setNewIssueGroupTitle("");
-  }
-
-  const project = useMemo(
-    () => getProjectById(params.projectId),
-    [getProjectById, params]
-  );
+  }, [setIsCreatingNewIssueGroup]);
 
   const handleIssueSubmit = useCallback(async () => {
     if (!isCreatingNewIssueForIssueGroupId) return;
     closeIssueCreationInput();
 
-    const response = await createIssueService.createIssue({
+    await createIssue({
       title: newIssueTitle,
       issueGroupId: isCreatingNewIssueForIssueGroupId,
     });
-
-    const toastMsg = response.userFriendlyMessage;
-    if (toastMsg) showToast(toastMsg, response.error);
-    if (!response.error) {
-      await fetchProjects();
-    }
   }, [
     isCreatingNewIssueForIssueGroupId,
-    createIssueService,
-    fetchProjects,
     newIssueTitle,
+    createIssue,
+    closeIssueCreationInput,
   ]);
 
   const handleIssueGroupSubmit = useCallback(async () => {
     if (!isCreatingNewIssueGroup) return;
     closeIssueGroupCreationInput();
 
-    const response = await createIssueGroupService.createIssueGroup({
+    await createIssueGroup({
       title: newIssueGroupTitle,
-      projectId: project!.projectId,
+      projectId: project.projectId,
     });
-
-    const toastMsg = response.userFriendlyMessage;
-    if (toastMsg) showToast(toastMsg, response.error);
-    if (!response.error) {
-      await fetchProjects();
-    }
   }, [
     isCreatingNewIssueGroup,
-    createIssueGroupService,
-    fetchProjects,
+    createIssueGroup,
     newIssueGroupTitle,
     project,
+    closeIssueGroupCreationInput,
   ]);
 
   useEffect(() => {
@@ -134,7 +99,7 @@ export default function List(): React.ReactElement {
         elem.removeEventListener("blur", closeIssueCreationInput);
       };
     }
-  }, [isCreatingNewIssueForIssueGroupId]);
+  }, [isCreatingNewIssueForIssueGroupId, closeIssueCreationInput]);
 
   useEffect(() => {
     if (newIssueGroupTitleInputRef.current) {
@@ -147,7 +112,7 @@ export default function List(): React.ReactElement {
         elem.removeEventListener("blur", closeIssueGroupCreationInput);
       };
     }
-  }, [isCreatingNewIssueGroup]);
+  }, [isCreatingNewIssueGroup, closeIssueGroupCreationInput]);
 
   function toggleCollapsedSectionState(sectionIdentifier: string) {
     if (collapsedSections.indexOf(sectionIdentifier) === -1) {
@@ -165,31 +130,6 @@ export default function List(): React.ReactElement {
     [collapsedSections]
   );
 
-  async function updateIssueCompletedStatus(
-    issueId: string,
-    currentCompletedStatus: boolean
-  ) {
-    await updateIssueService.updateIssue({
-      issueId,
-      newAssignedToEmail: "undefined",
-      newCompleted: !currentCompletedStatus,
-    });
-
-    await fetchProjects();
-  }
-
-  async function updateIssueGroupFinalStatus(isFinal: boolean) {
-    if (issueGroupIdBeingUpdated) {
-      await updateIssueGroupFinalStatusService.updateIssueGroupFinalStatus({
-        issueGroupId: issueGroupIdBeingUpdated,
-        newIsFinal: isFinal,
-      });
-
-      setIssueGroupIdBeingUpdated(undefined);
-      await fetchProjects();
-    }
-  }
-
   useEffect(() => {
     const body = document.querySelector("body");
 
@@ -199,18 +139,14 @@ export default function List(): React.ReactElement {
 
     function onClick() {
       if (issueGroupIdBeingUpdated) {
-        setIssueGroupIdBeingUpdated(undefined);
+        setIssueGroupIdBeingUpdated(null);
       }
     }
 
     body.addEventListener("click", onClick);
 
     return () => body.removeEventListener("click", onClick);
-  }, [issueGroupIdBeingUpdated]);
-
-  if (!project) {
-    return <h1>Projeto não encontrado!</h1>;
-  }
+  }, [issueGroupIdBeingUpdated, setIssueGroupIdBeingUpdated]);
 
   return (
     <>
@@ -283,12 +219,7 @@ export default function List(): React.ReactElement {
                     />
                   </button>
                   <button
-                    onClick={() =>
-                      setUpdateIssueModalConfig({
-                        shown: true,
-                        issue,
-                      })
-                    }
+                    onClick={() => setIssueBeingUpdated(issue)}
                     type="button"
                     key={issue.issueId}
                     className={styles.issue}
@@ -371,16 +302,11 @@ export default function List(): React.ReactElement {
       ))}
 
       <UpdateIssueModal
-        shown={issueModalConfig.shown}
-        issue={issueModalConfig.issue as FormattedIssue}
+        shown={!!issueBeingUpdated}
+        issue={issueBeingUpdated as FormattedIssue}
         issueGroups={project.issueGroups}
         participants={project.participants}
-        closeModal={() =>
-          setUpdateIssueModalConfig({
-            shown: false,
-            issue: null,
-          })
-        }
+        closeModal={() => setIssueBeingUpdated(null)}
       />
     </>
   );

@@ -1,19 +1,8 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FiPlusCircle, FiCheckCircle } from "react-icons/fi";
-import { useParams } from "react-router-dom";
 
 import styles from "./Kanban.module.scss";
 
-import { useAPIService } from "../../../../../contexts/APIServiceContext";
-import { useProjects } from "../../../../../contexts/ProjectsContext";
-
-import showToast from "../../../../../utils/showToast";
 import UpdateIssueModal from "../../../../../components/UpdateIssueModal";
 
 import IssueGroupOptionsButton from "../IssueGroupOptionsButton";
@@ -21,100 +10,75 @@ import IssueGroupOptionsButton from "../IssueGroupOptionsButton";
 import {
   FormattedIssue,
   FormattedIssueGroup,
+  FormattedProject,
 } from "../../../../../services/type-defs/FormattedProject";
+import { useViewsState } from "../../../../../contexts/ViewsContext";
 
-type UpdateIssueModalConfig = {
-  shown: boolean;
-  issue: FormattedIssue | null;
+type KanbanProps = {
+  project: FormattedProject;
 };
 
-export default function Kanban(): React.ReactElement {
-  const params = useParams<{ projectId: string }>();
+export default function Kanban({ project }: KanbanProps): React.ReactElement {
   const {
-    createIssueService,
-    createIssueGroupService,
-    moveIssueService,
-    updateIssueGroupFinalStatusService,
-  } = useAPIService();
-  const { getProjectById, fetchProjects } = useProjects();
-
-  const [
+    issueBeingUpdated,
+    setIssueBeingUpdated,
+    issueGroupIdBeingUpdated,
+    setIssueGroupIdBeingUpdated,
     isCreatingNewIssueForIssueGroupId,
     setIsCreatingNewIssueForIssueGroupId,
-  ] = useState<string | null>(null);
-  const [isCreatingNewIssueGroup, setIsCreatingNewIssueGroup] =
-    useState<boolean>(false);
+    isCreatingNewIssueGroup,
+    setIsCreatingNewIssueGroup,
+    createIssue,
+    createIssueGroup,
+    moveIssue,
+    updateIssueGroupFinalStatus,
+  } = useViewsState();
+
   const [newIssueTitle, setNewIssueTitle] = useState("");
   const [newIssueGroupTitle, setNewIssueGroupTitle] = useState("");
-  const [issueModalConfig, setUpdateIssueModalConfig] =
-    useState<UpdateIssueModalConfig>({
-      shown: false,
-      issue: null,
-    });
-  const [issueGroupIdBeingUpdated, setIssueGroupIdBeingUpdated] = useState<
-    string | undefined
-  >(undefined);
 
   const newIssueTitleInputRef = useRef<HTMLInputElement>(null);
   const newIssueGroupTitleInputRef = useRef<HTMLInputElement>(null);
 
-  function closeIssueCreationInput() {
+  const closeIssueCreationInput = useCallback(() => {
     setIsCreatingNewIssueForIssueGroupId(null);
     setNewIssueTitle("");
-  }
+  }, [setIsCreatingNewIssueForIssueGroupId]);
 
-  function closeIssueGroupCreationInput() {
+  const closeIssueGroupCreationInput = useCallback(async () => {
     setIsCreatingNewIssueGroup(false);
     setNewIssueGroupTitle("");
-  }
-
-  const project = useMemo(
-    () => getProjectById(params.projectId),
-    [params, getProjectById]
-  );
+  }, [setIsCreatingNewIssueGroup]);
 
   const handleIssueSubmit = useCallback(async () => {
     if (!isCreatingNewIssueForIssueGroupId) return;
     closeIssueCreationInput();
 
-    const response = await createIssueService.createIssue({
+    await createIssue({
       title: newIssueTitle,
-      description: " ",
       issueGroupId: isCreatingNewIssueForIssueGroupId,
     });
-
-    const toastMsg = response.userFriendlyMessage;
-    if (toastMsg) showToast(toastMsg, response.error);
-    if (!response.error) {
-      await fetchProjects();
-    }
   }, [
     isCreatingNewIssueForIssueGroupId,
-    createIssueService,
-    fetchProjects,
+    closeIssueCreationInput,
+    createIssue,
     newIssueTitle,
   ]);
 
   const handleIssueGroupSubmit = useCallback(async () => {
     if (!isCreatingNewIssueGroup) return;
-    closeIssueCreationInput();
+    closeIssueGroupCreationInput();
 
-    const response = await createIssueGroupService.createIssueGroup({
+    await createIssueGroup({
       title: newIssueGroupTitle,
-      projectId: project!.projectId,
+      projectId: project.projectId,
     });
-
-    const toastMsg = response.userFriendlyMessage;
-    if (toastMsg) showToast(toastMsg, response.error);
-    if (!response.error) {
-      await fetchProjects();
-    }
   }, [
-    isCreatingNewIssueGroup,
-    createIssueGroupService,
-    fetchProjects,
+    closeIssueGroupCreationInput,
     newIssueGroupTitle,
     project,
+    createIssueGroup,
+    isCreatingNewIssueGroup,
   ]);
 
   useEffect(() => {
@@ -128,7 +92,7 @@ export default function Kanban(): React.ReactElement {
         elem.removeEventListener("blur", closeIssueCreationInput);
       };
     }
-  }, [isCreatingNewIssueForIssueGroupId]);
+  }, [isCreatingNewIssueForIssueGroupId, closeIssueCreationInput]);
 
   useEffect(() => {
     if (newIssueGroupTitleInputRef.current) {
@@ -141,7 +105,7 @@ export default function Kanban(): React.ReactElement {
         elem.removeEventListener("blur", closeIssueGroupCreationInput);
       };
     }
-  }, [isCreatingNewIssueGroup]);
+  }, [isCreatingNewIssueGroup, closeIssueGroupCreationInput]);
 
   useEffect(() => {
     const cards = document.querySelectorAll(`.${styles.issueCard}`);
@@ -204,18 +168,12 @@ export default function Kanban(): React.ReactElement {
 
       const issueId = e.dataTransfer.getData("issueId");
 
-      const response = await moveIssueService.moveIssue({
+      await moveIssue({
         issueId,
         moveToIssueGroupId: e.currentTarget.dataset.issueGroupId,
       });
-
-      const toastMsg = response.userFriendlyMessage;
-      if (toastMsg) showToast(toastMsg, response.error);
-      if (!response.error) {
-        await fetchProjects();
-      }
     }
-  }, [fetchProjects, moveIssueService]);
+  }, [moveIssue]);
 
   useEffect(() => {
     const body = document.querySelector("body");
@@ -226,28 +184,14 @@ export default function Kanban(): React.ReactElement {
 
     function onClick() {
       if (issueGroupIdBeingUpdated) {
-        setIssueGroupIdBeingUpdated(undefined);
+        setIssueGroupIdBeingUpdated(null);
       }
     }
 
     body.addEventListener("click", onClick);
 
     return () => body.removeEventListener("click", onClick);
-  }, [issueGroupIdBeingUpdated]);
-
-  async function updateIssueGroupFinalStatus(isFinal: boolean) {
-    if (issueGroupIdBeingUpdated) {
-      await updateIssueGroupFinalStatusService.updateIssueGroupFinalStatus({
-        issueGroupId: issueGroupIdBeingUpdated,
-        newIsFinal: isFinal,
-      });
-
-      setIssueGroupIdBeingUpdated(undefined);
-      await fetchProjects();
-    }
-  }
-
-  if (!project) return <h1>Projeto não encontrado</h1>;
+  }, [issueGroupIdBeingUpdated, setIssueGroupIdBeingUpdated]);
 
   return (
     <>
@@ -295,12 +239,7 @@ export default function Kanban(): React.ReactElement {
                     <button
                       type="button"
                       className={styles.issueCardWrapper}
-                      onClick={() =>
-                        setUpdateIssueModalConfig({
-                          shown: true,
-                          issue,
-                        })
-                      }
+                      onClick={() => setIssueBeingUpdated(issue)}
                     >
                       <div
                         className={styles.issueCard}
@@ -397,16 +336,11 @@ export default function Kanban(): React.ReactElement {
         </div>
       </div>
       <UpdateIssueModal
-        shown={issueModalConfig.shown}
-        issue={issueModalConfig.issue as FormattedIssue}
+        shown={!!issueBeingUpdated}
+        issue={issueBeingUpdated as FormattedIssue}
         issueGroups={project.issueGroups}
         participants={project.participants}
-        closeModal={() =>
-          setUpdateIssueModalConfig({
-            shown: false,
-            issue: null,
-          })
-        }
+        closeModal={() => setIssueBeingUpdated(null)}
       />
     </>
   );
