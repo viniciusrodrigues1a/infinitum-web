@@ -126,6 +126,8 @@ export const enUS: Language = {
       viewOptionKanban: "Kanban",
       updateIssueGroupInputText: "Mark all tickets moved here as completed?",
       membersButtonText: "Members",
+      projectNotFoundText: "This project couldn't be found",
+      projectNotFoundButtonText: "Go back to my projects",
       createIssueModal: {
         title: "Ticket creation",
         subtitle: "Fill in the necessary information to create a ticket",

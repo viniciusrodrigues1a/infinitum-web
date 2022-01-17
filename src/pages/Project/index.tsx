@@ -1,7 +1,10 @@
-import React, { useMemo, useState } from "react";
+import React, { SVGProps, useMemo, useState } from "react";
 import { FiList, FiLayout, FiSettings } from "react-icons/fi";
 
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
+
+import RoutesEnum from "../../routes/type-defs/RoutesEnum";
+
 import styles from "./Project.module.scss";
 
 import CreateButton from "../../components/CreateButton";
@@ -10,7 +13,9 @@ import View from "./components/View";
 import CreateIssueModal from "../../components/CreateIssueModal";
 import UpdateProjectModal from "../../components/UpdateProjectModal";
 import ManageParticipantsModal from "../../components/ManageParticipantsModal";
-import Loader from "../../components/Loader";
+import EmptyList from "../../components/EmptyList";
+
+import { ReactComponent as ProjectNotFoundSvg } from "../../assets/project-not-found.svg";
 
 import { ViewsProvider } from "../../contexts/ViewsContext";
 import { useSidebar } from "../../contexts/SidebarContext";
@@ -18,7 +23,9 @@ import { useProjects } from "../../contexts/ProjectsContext";
 import { useLanguage } from "../../contexts/LanguageContext";
 
 export default function Project(): React.ReactElement {
+  const history = useHistory();
   const params = useParams<{ projectId: string }>();
+
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
   const { getProjectById } = useProjects();
   const {
@@ -39,13 +46,21 @@ export default function Project(): React.ReactElement {
 
   if (!project) {
     return (
-      <div
-        style={{
-          marginTop: "5rem",
-        }}
-      >
-        <Loader />
-      </div>
+      <EmptyList
+        text={projectLanguage.projectNotFoundText}
+        svg={(props: SVGProps<SVGSVGElement>) => (
+          <ProjectNotFoundSvg {...props} />
+        )}
+        buttonComponent={() => (
+          <button
+            type="button"
+            id={styles.emptyListButton}
+            onClick={() => history.push(RoutesEnum.PROJECTS)}
+          >
+            {projectLanguage.projectNotFoundButtonText}
+          </button>
+        )}
+      />
     );
   }
 

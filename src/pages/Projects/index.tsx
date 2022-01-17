@@ -1,11 +1,5 @@
-import React, { useState } from "react";
-import {
-  FiTriangle,
-  FiClipboard,
-  FiPercent,
-  FiShield,
-  FiCalendar,
-} from "react-icons/fi";
+import React, { SVGProps, useState } from "react";
+import { FiClipboard, FiPercent, FiShield, FiCalendar } from "react-icons/fi";
 import { IconBaseProps } from "react-icons/lib";
 
 import { useHistory } from "react-router-dom";
@@ -15,13 +9,14 @@ import { useSidebar } from "../../contexts/SidebarContext";
 import { useLanguage } from "../../contexts/LanguageContext";
 
 import Header from "../../components/Header";
-import EmptyProjects from "./components/EmptyProjects";
 import CreateButton from "../../components/CreateButton";
+import EmptyList from "../../components/EmptyList";
 import Table from "../../components/Table";
 import CreateProjectModal from "../../components/CreateProjectModal";
 import Loader from "../../components/Loader";
 
 import { ReactComponent as UserOwnerSvg } from "../../assets/user-owner.svg";
+import { ReactComponent as EmptyProjectsSvg } from "../../assets/empty-projects-svg.svg";
 import { useProjects } from "../../contexts/ProjectsContext";
 
 export default function Projects(): React.ReactElement {
@@ -63,8 +58,17 @@ export default function Projects(): React.ReactElement {
                 <Loader />
               </div>
             ) : projects.length === 0 ? (
-              <EmptyProjects
-                onButtonClick={() => setIsCreationModalOpen(true)}
+              <EmptyList
+                text={projectsLanguage.emptyProjectsText}
+                buttonComponent={() => (
+                  <CreateButton
+                    title={projectsLanguage.buttonText}
+                    onClick={() => setIsCreationModalOpen(true)}
+                  />
+                )}
+                svg={(props: SVGProps<SVGSVGElement>) => (
+                  <EmptyProjectsSvg {...props} />
+                )}
               />
             ) : (
               <div id={styles.tableWrapper}>

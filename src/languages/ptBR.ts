@@ -127,6 +127,8 @@ export const ptBR: Language = {
       updateIssueGroupInputText:
         "Marcar todos tickets movido para cá como concluido?",
       membersButtonText: "Membros",
+      projectNotFoundText: "Este projeto não foi encontrado",
+      projectNotFoundButtonText: "Voltar à minha list de projetos",
       createIssueModal: {
         title: "Criação de ticket",
         subtitle: "Adicione as informações do seu ticket",

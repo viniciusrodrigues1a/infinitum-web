@@ -131,6 +131,8 @@ export const esEs: Language = {
       updateIssueGroupInputText:
         "Marcar todos entradas movido para cá como concluido?",
       membersButtonText: "Miembros",
+      projectNotFoundText: "Este proyecto no fue encontrado",
+      projectNotFoundButtonText: "Volver a mi lista de proyectos",
       createIssueModal: {
         title: "Creación de tickets",
         subtitle: "Complete la información necesaria para crear un ticket",

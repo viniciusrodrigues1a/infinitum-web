@@ -75,6 +75,40 @@
   cursor: pointer;
 }
 
+#emptyListButton {
+  color: #4376d8;
+  font-size: 1.15rem;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+#emptyListButton::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background-color: #4376d8;
+  position: absolute;
+  bottom: 0;
+  left: -100%;
+  transition-property: all;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-out;
+}
+
+#emptyListButton:hover::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background-color: #4376d8;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
 /* 996px */
 @media (min-width: 62.25rem) {
   #headerOptions {

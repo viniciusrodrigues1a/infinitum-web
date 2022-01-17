@@ -8,6 +8,10 @@ export type ProjectLanguage = {
 
   membersButtonText: string;
 
+  projectNotFoundText: string;
+
+  projectNotFoundButtonText: string;
+
   createIssueModal: {
     title: string;
     subtitle: string;
