@@ -84,7 +84,7 @@ export const APIServiceContext = createContext({} as APIServiceContextData);
 export const APIServiceProvider = ({
   children,
 }: APIServiceProviderProps): React.ReactElement => {
-  const { sessionToken, isSignedIn, loadSession } = useSession();
+  const { sessionToken, isSignedIn, loadSession, setReady } = useSession();
   const { isoCode, language } = useLanguage();
   const [isReadyForAuthRequests, setIsReadyForAuthRequests] = useState(false);
 
@@ -131,17 +131,21 @@ export const APIServiceProvider = ({
   }, [sessionToken, isSignedIn]);
 
   useEffect(() => {
-    (async () => {
-      const { data: isJWTValid } =
-        await services.validateJWTService.validateJWT({
-          jwt: sessionToken || "",
-        });
+    if (!isSignedIn()) {
+      (async () => {
+        const { data: isJWTValid } =
+          await services.validateJWTService.validateJWT({
+            jwt: localStorage.getItem("jwtToken") || "",
+          });
 
-      if (isJWTValid) {
-        loadSession();
-      }
-    })();
-  }, [sessionToken, services, loadSession]);
+        if (isJWTValid) {
+          loadSession();
+        }
+
+        setReady();
+      })();
+    }
+  }, [sessionToken, services, loadSession, isSignedIn, setReady]);
 
   return (
     <APIServiceContext.Provider value={{ ...services, isReadyForAuthRequests }}>

@@ -5,6 +5,7 @@ type SessionContextData = {
   clearSession: () => void;
   storeSession: (token: string) => void;
   loadSession: () => void;
+  setReady: () => void;
   sessionToken: string | null | undefined;
   isReady: boolean;
 };
@@ -40,6 +41,9 @@ export function SessionProvider({
     if (storedToken) {
       storeSession(storedToken);
     }
+  }
+
+  function setReady() {
     setIsReady(true);
   }
 
@@ -50,6 +54,7 @@ export function SessionProvider({
         storeSession,
         clearSession,
         loadSession,
+        setReady,
         sessionToken,
         isReady,
       }}

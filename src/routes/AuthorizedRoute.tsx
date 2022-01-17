@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Redirect, Route, RouteProps } from "react-router-dom";
 import { SessionContext } from "../contexts/SessionContext";
 import AuthenticatedLayout from "../layouts/AuthenticatedLayout";
@@ -23,6 +23,13 @@ export default function AuthorizedRoute({
   ...rest
 }: RouteProps & AuthorizedRouteProps): React.ReactElement {
   const session = useContext(SessionContext);
+
+  useEffect(() => {
+    console.log("Ready: ", session.isReady);
+    console.log("isSignedIn: ", session.isReady);
+    console.log("isPrivate: ", isPrivate);
+    console.log("");
+  }, [session, isPrivate]);
 
   if (session.isReady && session.isSignedIn() && !isPrivate) {
     return <Redirect to={RoutesEnum.DASHBOARD} />;
