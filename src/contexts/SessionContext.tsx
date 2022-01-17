@@ -4,6 +4,7 @@ type SessionContextData = {
   isSignedIn: () => boolean;
   clearSession: () => void;
   storeSession: (token: string) => void;
+  loadSession: () => void;
   sessionToken: string | null | undefined;
   isReady: boolean;
 };
@@ -34,17 +35,24 @@ export function SessionProvider({
     localStorage.setItem("jwtToken", token);
   }
 
-  useEffect(() => {
+  function loadSession() {
     const storedToken = localStorage.getItem("jwtToken");
     if (storedToken) {
       storeSession(storedToken);
     }
     setIsReady(true);
-  }, []);
+  }
 
   return (
     <SessionContext.Provider
-      value={{ isSignedIn, storeSession, clearSession, sessionToken, isReady }}
+      value={{
+        isSignedIn,
+        storeSession,
+        clearSession,
+        loadSession,
+        sessionToken,
+        isReady,
+      }}
     >
       {children}
     </SessionContext.Provider>

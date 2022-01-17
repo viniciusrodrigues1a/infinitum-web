@@ -15,3 +15,4 @@ export * from "./IUpdateIssueService";
 export * from "./IDeleteIssueService";
 export * from "./IAcceptInvitationService";
 export * from "./IUpdateIssueGroupFinalStatusService";
+export * from "./IValidateJWTService";
