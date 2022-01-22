@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding: 0.3rem;
+}
+
+.color:first-child {
+  margin-left: 0;
+}
+
+.color:last-child {
+  margin-right: 0;
+}
+
+.color {
+  background: none;
+  border: none;
+  border-radius: 2px;
+  width: 24px;
+  height: 24px;
+  margin: 0.3rem;
+}

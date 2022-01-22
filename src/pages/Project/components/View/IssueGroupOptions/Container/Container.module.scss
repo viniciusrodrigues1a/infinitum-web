@@ -16,14 +16,5 @@
     top: 2.75rem;
     right: 0;
     transform: translateX(50%);
-
-    span {
-      pointer-events: none;
-      font-family: var(--text);
-    }
-
-    input {
-      margin-left: 0.75rem;
-    }
   }
 }

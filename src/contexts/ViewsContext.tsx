@@ -30,6 +30,7 @@ type ViewsContextData = {
   moveIssue: (request: MoveIssueServiceRequest) => Promise<void>;
   updateIssueCompletedStatus: (id: string, status: boolean) => Promise<void>;
   updateIssueGroupFinalStatus: (isFinal: boolean) => Promise<void>;
+  updateIssueGroupColor: (color: string) => Promise<void>;
 };
 
 type ViewsProviderProps = {
@@ -47,6 +48,7 @@ export function ViewsProvider({
     updateIssueService,
     updateIssueGroupFinalStatusService,
     moveIssueService,
+    updateIssueGroupColorService,
   } = useAPIService();
   const { fetchProjects } = useProjects();
 
@@ -120,6 +122,21 @@ export function ViewsProvider({
     ]
   );
 
+  const updateIssueGroupColor = useCallback(
+    async (color: string) => {
+      if (issueGroupIdBeingUpdated) {
+        await updateIssueGroupColorService.updateIssueGroupColor({
+          issueGroupId: issueGroupIdBeingUpdated,
+          newColor: color,
+        });
+
+        setIssueGroupIdBeingUpdated(null);
+        await fetchProjects();
+      }
+    },
+    [fetchProjects, issueGroupIdBeingUpdated, updateIssueGroupColorService]
+  );
+
   const moveIssue = useCallback(
     async (request) => {
       const response = await moveIssueService.moveIssue(request);
@@ -149,6 +166,7 @@ export function ViewsProvider({
         moveIssue,
         updateIssueCompletedStatus,
         updateIssueGroupFinalStatus,
+        updateIssueGroupColor,
       }}
     >
       {children}

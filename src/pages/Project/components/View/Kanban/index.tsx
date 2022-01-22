@@ -5,7 +5,7 @@ import styles from "./Kanban.module.scss";
 
 import UpdateIssueModal from "../../../../../components/UpdateIssueModal";
 
-import IssueGroupOptionsButton from "../IssueGroupOptionsButton";
+import IssueGroupOptions from "../IssueGroupOptions";
 
 import {
   FormattedIssue,
@@ -32,6 +32,7 @@ export default function Kanban({ project }: KanbanProps): React.ReactElement {
     createIssueGroup,
     moveIssue,
     updateIssueGroupFinalStatus,
+    updateIssueGroupColor,
   } = useViewsState();
 
   const [newIssueTitle, setNewIssueTitle] = useState("");
@@ -193,6 +194,11 @@ export default function Kanban({ project }: KanbanProps): React.ReactElement {
     return () => body.removeEventListener("click", onClick);
   }, [issueGroupIdBeingUpdated, setIssueGroupIdBeingUpdated]);
 
+  async function onColorChange(color: string) {
+    const sanitizedColor = color.replace("#", "");
+    await updateIssueGroupColor(sanitizedColor);
+  }
+
   return (
     <>
       <div id={styles.containerGrid}>
@@ -201,6 +207,11 @@ export default function Kanban({ project }: KanbanProps): React.ReactElement {
             {project.issueGroups.map((issueGroup: FormattedIssueGroup) => (
               <div className={styles.issueSectionContainer}>
                 <div className={styles.issueSectionHeader}>
+                  <div
+                    className={styles.issueSectionHeaderColor}
+                    style={{ backgroundColor: `#${issueGroup.color}` }}
+                  />
+
                   <span>{issueGroup.title}</span>
 
                   <div className={styles.issueSectionHeaderButtons}>
@@ -216,18 +227,29 @@ export default function Kanban({ project }: KanbanProps): React.ReactElement {
                       <FiPlusCircle color="var(--dark)" size={20} />
                     </button>
 
-                    <IssueGroupOptionsButton
+                    <IssueGroupOptions.Container
                       isDropdownShown={
                         issueGroupIdBeingUpdated === issueGroup.issueGroupId
                       }
-                      defaultChecked={issueGroup.shouldUpdateIssuesToCompleted}
                       onClick={() =>
                         setIssueGroupIdBeingUpdated(issueGroup.issueGroupId)
                       }
-                      onChange={(e) =>
-                        updateIssueGroupFinalStatus(e.target.checked)
-                      }
-                    />
+                    >
+                      <>
+                        <IssueGroupOptions.UpdateColorOption
+                          onColorChange={onColorChange}
+                        />
+                        <IssueGroupOptions.Separator />
+                        <IssueGroupOptions.UpdateIsFinalOption
+                          defaultChecked={
+                            issueGroup.shouldUpdateIssuesToCompleted
+                          }
+                          onChange={(e) =>
+                            updateIssueGroupFinalStatus(e.target.checked)
+                          }
+                        />
+                      </>
+                    </IssueGroupOptions.Container>
                   </div>
                 </div>
 
@@ -300,6 +322,10 @@ export default function Kanban({ project }: KanbanProps): React.ReactElement {
               className={`${styles.issueSectionContainer} ${styles.skeletonIssueGroup}`}
             >
               <div className={styles.issueSectionHeader}>
+                <div
+                  className={styles.issueSectionHeaderColor}
+                  style={{ backgroundColor: "rgba(68, 68, 68, 0.5)" }}
+                />
                 {isCreatingNewIssueGroup ? (
                   <form
                     onSubmit={(e) => {

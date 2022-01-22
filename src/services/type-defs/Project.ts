@@ -13,6 +13,7 @@ export type IssueGroup = {
   title: string;
   issues: Issue[];
   shouldUpdateIssuesToCompleted: boolean;
+  color: string;
 };
 
 export type Participant = {

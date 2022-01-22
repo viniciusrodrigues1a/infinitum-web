@@ -16,3 +16,4 @@ export * from "./IDeleteIssueService";
 export * from "./IAcceptInvitationService";
 export * from "./IUpdateIssueGroupFinalStatusService";
 export * from "./IValidateJWTService";
+export * from "./IUpdateIssueGroupColorService";

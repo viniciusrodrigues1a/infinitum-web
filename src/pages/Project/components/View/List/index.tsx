@@ -16,7 +16,7 @@ import {
 } from "../../../../../services/type-defs/FormattedProject";
 
 import UpdateIssueModal from "../../../../../components/UpdateIssueModal";
-import IssueGroupOptionsButton from "../IssueGroupOptionsButton";
+import IssueGroupOptions from "../IssueGroupOptions";
 
 import { useViewsState } from "../../../../../contexts/ViewsContext";
 
@@ -186,16 +186,19 @@ export default function List({ project }: ListProps): React.ReactElement {
               <h1>{issueGroup.title}</h1>
             </div>
 
-            <IssueGroupOptionsButton
+            <IssueGroupOptions.Container
               isDropdownShown={
                 issueGroupIdBeingUpdated === issueGroup.issueGroupId
               }
-              defaultChecked={issueGroup.shouldUpdateIssuesToCompleted}
               onClick={() =>
                 setIssueGroupIdBeingUpdated(issueGroup.issueGroupId)
               }
-              onChange={(e) => updateIssueGroupFinalStatus(e.target.checked)}
-            />
+            >
+              <IssueGroupOptions.UpdateIsFinalOption
+                defaultChecked={issueGroup.shouldUpdateIssuesToCompleted}
+                onChange={(e) => updateIssueGroupFinalStatus(e.target.checked)}
+              />
+            </IssueGroupOptions.Container>
           </div>
 
           {!isSectionCollapsed(issueGroup.issueGroupId) && (

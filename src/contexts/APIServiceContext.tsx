@@ -27,6 +27,7 @@ import {
   ILoginService,
   IMoveIssueService,
   IRegisterService,
+  IUpdateIssueGroupColorService,
   IUpdateIssueGroupFinalStatusService,
   IUpdateIssueService,
   IUpdateProjectImageService,
@@ -42,6 +43,7 @@ import ListProjectsService from "../services/ListProjectsService";
 import LoginService from "../services/LoginService";
 import MoveIssueService from "../services/MoveIssueService";
 import RegisterService from "../services/RegisterService";
+import UpdateIssueGroupColorService from "../services/UpdateIssueGroupColorService";
 import UpdateIssueGroupFinalStatusService from "../services/UpdateIssueGroupFinalStatusService";
 import UpdateIssueService from "../services/UpdateIssueService";
 import UpdateProjectImageService from "../services/UpdateProjectImageService";
@@ -73,6 +75,7 @@ type APIServiceContextData = {
   acceptInvitationService: IAcceptInvitationService;
   updateIssueGroupFinalStatusService: IUpdateIssueGroupFinalStatusService;
   validateJWTService: IValidateJWTService;
+  updateIssueGroupColorService: IUpdateIssueGroupColorService;
 };
 
 type APIServiceProviderProps = {
@@ -113,6 +116,7 @@ export const APIServiceProvider = ({
       updateIssueGroupFinalStatusService:
         new UpdateIssueGroupFinalStatusService(api, lang),
       validateJWTService: new ValidateJWTService(api, lang),
+      updateIssueGroupColorService: new UpdateIssueGroupColorService(api, lang),
     } as Omit<APIServiceContextData, "isReadyForAuthRequests">;
   }, [language]);
 
