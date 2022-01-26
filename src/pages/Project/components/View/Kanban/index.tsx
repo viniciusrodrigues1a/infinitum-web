@@ -347,7 +347,7 @@ export default function Kanban({ project }: KanbanProps): React.ReactElement {
                 ) : (
                   <button
                     type="button"
-                    className={styles.addIssueButton}
+                    className={styles.newSectionButton}
                     onClick={() => setIsCreatingNewIssueGroup(true)}
                   >
                     <FiPlusCircle color="#888888" size={24} />

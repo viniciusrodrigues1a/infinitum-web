@@ -133,6 +133,7 @@
 
         > span {
           color: #888888;
+          font-weight: 500;
           margin-left: 0.625rem;
         }
       }
@@ -151,7 +152,7 @@
       width: 100%;
     }
 
-    > button {
+    > .newSectionButton {
       background: none;
       border: none;
       display: flex;
@@ -161,6 +162,7 @@
 
       > span {
         font-size: 1.15rem;
+        font-weight: 500;
         font-family: var(--text);
         color: #888888;
         margin-left: 0.625rem;
