@@ -14,15 +14,19 @@ import DeleteProjectModal from "../DeleteProjectModal";
 import { useAPIService } from "../../contexts/APIServiceContext";
 import { useProjects } from "../../contexts/ProjectsContext";
 import showToast from "../../utils/showToast";
+import { useLanguage } from "../../contexts/LanguageContext";
+import { FormattedProject } from "../../services/type-defs/FormattedProject";
 
 export type UpdateProjectModalProps = {
   shown: boolean;
   closeModal: () => void;
+  project: FormattedProject;
 };
 
 export default function UpdateProjectModal({
   shown,
   closeModal,
+  project,
 }: UpdateProjectModalProps): React.ReactElement {
   const params = useParams<{ projectId: string }>();
   const {
@@ -30,7 +34,13 @@ export default function UpdateProjectModal({
     updateProjectImageService,
     findProjectImageService,
   } = useAPIService();
-  const { getProjectById, fetchProjects } = useProjects();
+  const { fetchProjects } = useProjects();
+  const {
+    language: {
+      components: { updateProjectModal: updateProjectModalLanguage },
+      pages: { projects: projectsLanguage },
+    },
+  } = useLanguage();
 
   const [imagePreview, setImagePreview] = useState("");
   const [newImageFile, setNewImageFile] = useState<File | null>(null);
@@ -42,8 +52,6 @@ export default function UpdateProjectModal({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   useEffect(() => {
-    const project = getProjectById(params.projectId);
-
     if (project) {
       setTitle(project.name);
       setDescription(project.description);
@@ -56,7 +64,7 @@ export default function UpdateProjectModal({
       setStartDate(sanitizedStartDate);
       setEndDate(sanitizedEndDate);
     }
-  }, [getProjectById, params, shown]);
+  }, [project, params, shown]);
 
   useEffect(() => {
     (async () => {
@@ -152,9 +160,9 @@ export default function UpdateProjectModal({
 
             <div id={styles.contentHeader}>
               <div id={styles.contentHeaderTitleWrapper}>
-                <Title>Configuração do seu projeto</Title>
+                <Title>{updateProjectModalLanguage.title}</Title>
                 <div id={styles.subtitleWrapper}>
-                  <Subtitle>Atualize as informações do seu projeto</Subtitle>
+                  <Subtitle>{updateProjectModalLanguage.subtitle}</Subtitle>
                 </div>
               </div>
 
@@ -180,12 +188,16 @@ export default function UpdateProjectModal({
                 <Form.InputWrapper>
                   <Form.Label
                     htmlFor="title"
-                    titleLabel="Título"
-                    descriptionLabel="Este é o nome usado para se referir ao seu projeto"
+                    titleLabel={projectsLanguage.createModal.titleInputLabel}
+                    descriptionLabel={
+                      projectsLanguage.createModal.titleInputDescription
+                    }
                   />
                   <Form.Input
                     id="title"
-                    placeholder="Título"
+                    placeholder={
+                      projectsLanguage.createModal.titleInputPlaceholder
+                    }
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                   />
@@ -194,21 +206,21 @@ export default function UpdateProjectModal({
                 <Form.InputWrapper>
                   <Form.Label
                     htmlFor="dates"
-                    titleLabel="Data de início e término"
-                    descriptionLabel="O tempo de vida do seu projeto"
+                    titleLabel={projectsLanguage.createModal.dateInputLabel}
+                    descriptionLabel={
+                      projectsLanguage.createModal.dateInputDescription
+                    }
                   />
                   <div className={styles.dateInputsContainer}>
                     <Form.Input
                       id="start-date"
                       type="date"
-                      placeholder="Data de início"
                       value={startDate}
                       onChange={(e) => setStartDate(e.target.value)}
                     />
                     <Form.Input
                       id="end-date"
                       type="date"
-                      placeholder="Data de término"
                       value={endDate}
                       onChange={(e) => setEndDate(e.target.value)}
                     />
@@ -219,12 +231,18 @@ export default function UpdateProjectModal({
                   <Form.InputWrapper>
                     <Form.Label
                       htmlFor="description"
-                      titleLabel="Descrição"
-                      descriptionLabel="Dê uma breve descrição de seu projeto"
+                      titleLabel={
+                        projectsLanguage.createModal.descriptionInputLabel
+                      }
+                      descriptionLabel={
+                        projectsLanguage.createModal.descriptionInputDescription
+                      }
                     />
                     <Form.TextArea
                       id="description"
-                      placeholder="Descrição"
+                      placeholder={
+                        projectsLanguage.createModal.descriptionInputPlaceholder
+                      }
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
                     />
@@ -235,7 +253,7 @@ export default function UpdateProjectModal({
 
             <div>
               <CreateButton
-                title="Atualizar"
+                title={updateProjectModalLanguage.updateButtonText}
                 id={styles.submitButton}
                 onClick={handleSubmit}
                 icon={FiEdit3}
@@ -247,6 +265,7 @@ export default function UpdateProjectModal({
         <DeleteProjectModal
           shown={isDeleteModalOpen}
           closeModal={() => setIsDeleteModalOpen(false)}
+          project={project}
         />
       </>
     </Modal.Container>

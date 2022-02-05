@@ -13,6 +13,7 @@ import { useAPIService } from "../../contexts/APIServiceContext";
 import { useProjects } from "../../contexts/ProjectsContext";
 import { FormattedProject } from "../../services/type-defs/FormattedProject";
 import showToast from "../../utils/showToast";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 type AddParticipantsModalProps = {
   closeModal: () => void;
@@ -27,6 +28,11 @@ export default function AddParticipantsModal({
 }: AddParticipantsModalProps): React.ReactElement {
   const { inviteToProjectService } = useAPIService();
   const { fetchProjects } = useProjects();
+  const {
+    language: {
+      components: { addParticipantsModal: addParticipantsModalLanguage },
+    },
+  } = useLanguage();
 
   const [tags, setTags] = useState<Array<string>>([]);
 
@@ -133,8 +139,8 @@ export default function AddParticipantsModal({
             <Modal.CloseButton closeModal={handleCloseModal} />
           </div>
 
-          <Title>Convide usuários</Title>
-          <Subtitle>Convide usuários para seu projeto</Subtitle>
+          <Title>{addParticipantsModalLanguage.title}</Title>
+          <Subtitle>{addParticipantsModalLanguage.subtitle}</Subtitle>
 
           <form id={styles.formWrapper} onSubmit={(e) => e.preventDefault()}>
             <button
@@ -157,7 +163,7 @@ export default function AddParticipantsModal({
               <input
                 ref={inputRef}
                 type="text"
-                placeholder="E-mail do usuário"
+                placeholder={addParticipantsModalLanguage.inputPlaceholder}
                 onKeyUp={addTag}
               />
             </button>
@@ -165,7 +171,7 @@ export default function AddParticipantsModal({
             <div>
               <CreateButton
                 id={styles.submitButton}
-                title="Enviar convite"
+                title={addParticipantsModalLanguage.buttonText}
                 icon={FiSend}
                 onClick={handleSubmit}
               />

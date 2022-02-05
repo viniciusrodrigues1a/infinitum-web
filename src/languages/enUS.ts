@@ -122,8 +122,6 @@ export const enUS: Language = {
     },
     project: {
       newCardButtonText: "New card",
-      viewOptionList: "List",
-      viewOptionKanban: "Kanban",
       updateIssueGroupInputText: "Mark all tickets moved here as completed?",
       membersButtonText: "Members",
       projectNotFoundText: "This project couldn't be found",
@@ -159,6 +157,20 @@ export const enUS: Language = {
         assignedInputLabel: "Assigned to participant",
         assignedInputPlaceholder: "Assigned to",
       },
+      views: {
+        list: {
+          option: "List",
+          titleTableHeader: "Title",
+          conclusionDateTableHeader: "End date",
+          newIssue: "Add new ticket...",
+          newSection: "Add new section...",
+        },
+        kanban: {
+          option: "Kanban",
+          newIssue: "New card",
+          newSection: "New section",
+        },
+      },
     },
     acceptInvitation: {
       title: "Invitation accepted!",
@@ -171,6 +183,45 @@ export const enUS: Language = {
       homeItemName: "Home",
       projectsItemName: "Projects",
       settingsItemName: "Settings",
+    },
+    updateProjectModal: {
+      title: "Your project's configuration",
+      subtitle: "Update your project information",
+      updateButtonText: "Update",
+    },
+    deleteProjectModal: {
+      title: "Project deletion",
+      warningText: "This action cannot be undone",
+      description: (projectName: string) =>
+        `This will permanently delete the project <strong>${projectName}</strong>, tickets created within that project, and remove all memberships from participating members.`,
+      inputConfirmationText: "Type <span>delete</span> to confirm:",
+      inputPlaceholder: "delete",
+      cancelButtonText: "Cancel",
+      deleteButtonText: "Delete",
+    },
+    manageParticipantsModal: {
+      title: "Members management",
+      subtitle: "Manage the permissions of your project members",
+      userTableHeader: "Participant",
+      roleTableHeader: "Role",
+      espectatorRole: "Espectator",
+      memberRole: "Member",
+      adminRole: "Admin",
+      ownerRole: "Owner",
+      inviteMembersButtonText: "Invite other users",
+    },
+    deleteParticipantConfirmationModal: {
+      title: "Remove participant from project?",
+      subtitle: (email: string) =>
+        `The user <span>${email}</span> will be removed from the project`,
+      cancelButtonText: "Cancel",
+      deleteParticipantButtonText: "Remove",
+    },
+    addParticipantsModal: {
+      title: "Invite users",
+      subtitle: "Invite users to your project",
+      inputPlaceholder: "User email",
+      buttonText: "Send invitations",
     },
   },
   validation: {

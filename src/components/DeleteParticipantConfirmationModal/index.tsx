@@ -5,6 +5,7 @@ import styles from "./DeleteParticipantConfirmationModal.module.scss";
 import Modal from "../Modal";
 import Title from "../Title";
 import Subtitle from "../Subtitle";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 type DeleteParticipantConfirmationModalProps = {
   shown: boolean;
@@ -19,6 +20,15 @@ export default function DeleteParticipantConfirmationModal({
   closeModal,
   accountEmail,
 }: DeleteParticipantConfirmationModalProps): React.ReactElement {
+  const {
+    language: {
+      components: {
+        deleteParticipantConfirmationModal:
+          deleteParticipantConfirmationModalLanguage,
+      },
+    },
+  } = useLanguage();
+
   return (
     <Modal.Container shown={shown} closeModal={closeModal} changeScroll={false}>
       <div id={styles.wrapper}>
@@ -27,18 +37,27 @@ export default function DeleteParticipantConfirmationModal({
             <Modal.CloseButton closeModal={closeModal} />
           </div>
 
-          <Title>Remover usuário do projeto?</Title>
+          <Title>{deleteParticipantConfirmationModalLanguage.title}</Title>
           <Subtitle>
-            O usuário <span id={styles.emailText}>{accountEmail}</span> será
-            removido do projeto
+            <span
+              id={styles.emailTextWrapper}
+              dangerouslySetInnerHTML={{
+                __html:
+                  deleteParticipantConfirmationModalLanguage.subtitle(
+                    accountEmail
+                  ),
+              }}
+            />
           </Subtitle>
 
           <div id={styles.buttonsContainer}>
             <button type="button" id={styles.cancelButton} onClick={closeModal}>
-              Cancelar
+              {deleteParticipantConfirmationModalLanguage.cancelButtonText}
             </button>
             <button type="button" id={styles.deleteButton} onClick={onConfirm}>
-              Excluir
+              {
+                deleteParticipantConfirmationModalLanguage.deleteParticipantButtonText
+              }
             </button>
           </div>
         </div>

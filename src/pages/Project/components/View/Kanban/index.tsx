@@ -13,12 +13,18 @@ import {
   FormattedProject,
 } from "../../../../../services/type-defs/FormattedProject";
 import { useViewsState } from "../../../../../contexts/ViewsContext";
+import { useLanguage } from "../../../../../contexts/LanguageContext";
 
 type KanbanProps = {
   project: FormattedProject;
 };
 
 export default function Kanban({ project }: KanbanProps): React.ReactElement {
+  const {
+    language: {
+      pages: { project: projectLanguage },
+    },
+  } = useLanguage();
   const {
     issueBeingUpdated,
     setIssueBeingUpdated,
@@ -311,7 +317,7 @@ export default function Kanban({ project }: KanbanProps): React.ReactElement {
                       }
                     >
                       <FiPlusCircle color="#888888" size={20} />
-                      <span>Novo card</span>
+                      <span>{projectLanguage.views.kanban.newIssue}</span>
                     </button>
                   )}
                 </div>
@@ -351,7 +357,7 @@ export default function Kanban({ project }: KanbanProps): React.ReactElement {
                     onClick={() => setIsCreatingNewIssueGroup(true)}
                   >
                     <FiPlusCircle color="#888888" size={24} />
-                    <span>Nova seção</span>
+                    <span>{projectLanguage.views.kanban.newSection}</span>
                   </button>
                 )}
               </div>

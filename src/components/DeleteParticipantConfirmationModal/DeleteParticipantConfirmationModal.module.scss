@@ -52,8 +52,10 @@
   right: 1rem;
 }
 
-#emailText {
-  color: #666666;
+#emailTextWrapper {
+  span {
+    color: #666666;
+  }
 }
 
 #buttonsContainer {

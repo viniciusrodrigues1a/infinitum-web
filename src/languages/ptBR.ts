@@ -122,8 +122,6 @@ export const ptBR: Language = {
     },
     project: {
       newCardButtonText: "Novo card",
-      viewOptionList: "Lista",
-      viewOptionKanban: "Kanban",
       updateIssueGroupInputText:
         "Marcar todos tickets movido para cá como concluido?",
       membersButtonText: "Membros",
@@ -160,6 +158,20 @@ export const ptBR: Language = {
         assignedInputLabel: "Participante responsável",
         assignedInputPlaceholder: "Responsável",
       },
+      views: {
+        list: {
+          option: "Lista",
+          titleTableHeader: "Título",
+          conclusionDateTableHeader: "Data de conclusão",
+          newIssue: "Adicionar nova tarefa...",
+          newSection: "Adicionar nova seção...",
+        },
+        kanban: {
+          option: "Kanban",
+          newIssue: "Novo card",
+          newSection: "Nova seção",
+        },
+      },
     },
     acceptInvitation: {
       title: "Convite aceito!",
@@ -172,6 +184,45 @@ export const ptBR: Language = {
       homeItemName: "Início",
       projectsItemName: "Projetos",
       settingsItemName: "Configurações",
+    },
+    updateProjectModal: {
+      title: "Configuração do seu projeto",
+      subtitle: "Atualize as informações do seu projeto",
+      updateButtonText: "Atualizar",
+    },
+    deleteProjectModal: {
+      title: "Exclusão do projeto",
+      warningText: "Esta ação não pode ser desfeita",
+      description: (projectName: string) =>
+        `Isso excluirá permanentemente o projeto <strong>${projectName}</strong>, tickets criados dentro desse projeto, e removerá todas as associações de membros participantes.`,
+      inputConfirmationText: "Digite <span>excluir</span> para confirmar:",
+      inputPlaceholder: "excluir",
+      cancelButtonText: "Cancelar",
+      deleteButtonText: "Excluir",
+    },
+    manageParticipantsModal: {
+      title: "Gerenciamento de membros",
+      subtitle: "Gerencie as permissões dos membros do seu projeto",
+      userTableHeader: "Participante",
+      roleTableHeader: "Função",
+      espectatorRole: "Espectador",
+      memberRole: "Membro",
+      adminRole: "Admin",
+      ownerRole: "Dono",
+      inviteMembersButtonText: "Convidar outros usuários",
+    },
+    deleteParticipantConfirmationModal: {
+      title: "Remover participante do projeto?",
+      subtitle: (email: string) =>
+        `O usuário <span>${email}</span> será removido do projeto`,
+      cancelButtonText: "Cancelar",
+      deleteParticipantButtonText: "Remover",
+    },
+    addParticipantsModal: {
+      title: "Convide usuários",
+      subtitle: "Convide usuários para seu projeto",
+      inputPlaceholder: "E-mail do usuário",
+      buttonText: "Enviar convites",
     },
   },
   validation: {

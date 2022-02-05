@@ -15,6 +15,7 @@ import { FormattedProject } from "../../services/type-defs/FormattedProject";
 import showToast from "../../utils/showToast";
 import { useProjects } from "../../contexts/ProjectsContext";
 import DeleteParticipantConfirmationModal from "../DeleteParticipantConfirmationModal";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 export type ManageParticipantsModalProps = {
   shown: boolean;
@@ -34,6 +35,11 @@ export default function ManageParticipantsModal({
 }: ManageParticipantsModalProps): React.ReactElement {
   const { kickParticipantService, updateRoleService } = useAPIService();
   const { fetchProjects } = useProjects();
+  const {
+    language: {
+      components: { manageParticipantsModal: manageParticipantsModalLanguage },
+    },
+  } = useLanguage();
 
   const [isAddParticipantsModalOpen, setIsAddParticipantsModalOpen] =
     useState(false);
@@ -89,18 +95,20 @@ export default function ManageParticipantsModal({
               <Modal.CloseButton closeModal={handleCloseModal} />
             </div>
 
-            <Title>Gerenciamento de membros</Title>
-            <Subtitle>
-              Gerencie as permissões dos membros do seu projeto
-            </Subtitle>
+            <Title>{manageParticipantsModalLanguage.title}</Title>
+            <Subtitle>{manageParticipantsModalLanguage.subtitle}</Subtitle>
 
             <div id={styles.participantsList}>
               <div id={styles.listHeaderContainer}>
                 <div className={styles.listColumn}>
-                  <span className={styles.listTextHeader}>Usuário</span>
+                  <span className={styles.listTextHeader}>
+                    {manageParticipantsModalLanguage.userTableHeader}
+                  </span>
                 </div>
                 <div className={styles.listColumn}>
-                  <span className={styles.listTextHeader}>Função</span>
+                  <span className={styles.listTextHeader}>
+                    {manageParticipantsModalLanguage.roleTableHeader}
+                  </span>
                 </div>
                 <div className={styles.listColumn} />
               </div>
@@ -126,7 +134,9 @@ export default function ManageParticipantsModal({
                   <div className={styles.listColumn}>
                     <div className={styles.participantRoleContainer}>
                       {participant.role.name.value === "owner" ? (
-                        <span className={styles.participantRole}>Dono</span>
+                        <span className={styles.participantRole}>
+                          {manageParticipantsModalLanguage.ownerRole}
+                        </span>
                       ) : (
                         <select
                           className={styles.participantRole}
@@ -135,9 +145,15 @@ export default function ManageParticipantsModal({
                             handleSelectOnChange(e, participant.account.email)
                           }
                         >
-                          <option value="espectator">Espectador</option>
-                          <option value="member">Membro</option>
-                          <option value="admin">Admin</option>
+                          <option value="espectator">
+                            {manageParticipantsModalLanguage.espectatorRole}
+                          </option>
+                          <option value="member">
+                            {manageParticipantsModalLanguage.memberRole}
+                          </option>
+                          <option value="admin">
+                            {manageParticipantsModalLanguage.adminRole}
+                          </option>
                         </select>
                       )}
                     </div>
@@ -163,7 +179,7 @@ export default function ManageParticipantsModal({
             <div>
               <CreateButton
                 id={styles.submitButton}
-                title="Convidar outros usuários"
+                title={manageParticipantsModalLanguage.inviteMembersButtonText}
                 onClick={() => setIsAddParticipantsModalOpen(true)}
               />
             </div>

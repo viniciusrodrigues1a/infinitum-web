@@ -1,9 +1,6 @@
 export type ProjectLanguage = {
   newCardButtonText: string;
 
-  viewOptionList: string;
-  viewOptionKanban: string;
-
   updateIssueGroupInputText: string;
 
   membersButtonText: string;
@@ -43,5 +40,20 @@ export type ProjectLanguage = {
 
     cancelButtonText: string;
     updateButtonText: string;
+  };
+
+  views: {
+    list: {
+      titleTableHeader: string;
+      conclusionDateTableHeader: string;
+      option: string;
+      newIssue: string;
+      newSection: string;
+    };
+    kanban: {
+      option: string;
+      newIssue: string;
+      newSection: string;
+    };
   };
 };

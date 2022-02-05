@@ -19,12 +19,18 @@ import UpdateIssueModal from "../../../../../components/UpdateIssueModal";
 import IssueGroupOptions from "../IssueGroupOptions";
 
 import { useViewsState } from "../../../../../contexts/ViewsContext";
+import { useLanguage } from "../../../../../contexts/LanguageContext";
 
 type ListProps = {
   project: FormattedProject;
 };
 
 export default function List({ project }: ListProps): React.ReactElement {
+  const {
+    language: {
+      pages: { project: projectLanguage },
+    },
+  } = useLanguage();
   const {
     issueBeingUpdated,
     setIssueBeingUpdated,
@@ -153,11 +159,11 @@ export default function List({ project }: ListProps): React.ReactElement {
       <div id={styles.infoHeadContainer}>
         <div>
           <FiAlignLeft color="#999999" size={20} />
-          <span>Título</span>
+          <span>{projectLanguage.views.list.titleTableHeader}</span>
         </div>
         <div>
           <FiCalendar color="#999999" size={20} />
-          <span>Data de conclusão</span>
+          <span>{projectLanguage.views.list.conclusionDateTableHeader}</span>
         </div>
       </div>
 
@@ -263,7 +269,7 @@ export default function List({ project }: ListProps): React.ReactElement {
                   }
                 >
                   <FiPlusCircle size={18} color="#888888" />
-                  <span>Adicionar nova tarefa...</span>
+                  <span>{projectLanguage.views.list.newIssue}</span>
                 </button>
               )}
             </div>
@@ -296,7 +302,7 @@ export default function List({ project }: ListProps): React.ReactElement {
                   onClick={() => setIsCreatingNewIssueGroup(true)}
                 >
                   <FiPlusCircle size={20} color="#888888" />
-                  <span>Adicionar seção...</span>
+                  <span>{projectLanguage.views.list.newSection}</span>
                 </button>
               )}
             </>

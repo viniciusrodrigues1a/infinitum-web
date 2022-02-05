@@ -91,13 +91,13 @@ export default function Project(): React.ReactElement {
 
             <div id={styles.viewOptionsContainer}>
               <View.Option
-                text={projectLanguage.viewOptionList}
+                text={projectLanguage.views.list.option}
                 icon={FiList}
                 active={activeView === "list"}
                 onClick={() => setActiveView("list")}
               />
               <View.Option
-                text={projectLanguage.viewOptionKanban}
+                text={projectLanguage.views.kanban.option}
                 icon={FiLayout}
                 active={activeView === "kanban"}
                 onClick={() => setActiveView("kanban")}
@@ -129,6 +129,7 @@ export default function Project(): React.ReactElement {
       <UpdateProjectModal
         shown={isUpdateModalOpen}
         closeModal={() => setIsUpdateModalOpen(false)}
+        project={project}
       />
       <ManageParticipantsModal
         shown={isParticipantsModalOpen}
