@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "./Input.module.css";
+import styles from "../_shared/Input.module.css";
 
 export type SelectProps = {
   id: string;
