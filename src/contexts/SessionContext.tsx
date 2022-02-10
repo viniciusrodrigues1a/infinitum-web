@@ -1,12 +1,18 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useRef, useState } from "react";
+
+type Session = {
+  email: string;
+  token: string;
+};
 
 type SessionContextData = {
   isSignedIn: () => boolean;
   clearSession: () => void;
-  storeSession: (token: string) => void;
+  storeSession: (email: string, token: string) => void;
   loadSession: () => void;
+  getSessionFromLocalStorage: () => Session | null;
   setReady: () => void;
-  sessionToken: string | null | undefined;
+  session: Session | null;
   isReady: boolean;
 };
 
@@ -19,28 +25,40 @@ export const SessionContext = createContext({} as SessionContextData);
 export function SessionProvider({
   children,
 }: SessionProviderProps): React.ReactElement {
-  const [sessionToken, setSessionToken] = useState<string | null>(null);
+  const localStorageKey = useRef("@infinitum/session");
+  const [session, setSession] = useState<Session | null>(null);
   const [isReady, setIsReady] = useState<boolean>(false);
 
   function isSignedIn() {
-    return sessionToken !== null;
+    return !!(session && session.token);
   }
 
   function clearSession() {
-    setSessionToken(null);
-    localStorage.removeItem("jwtToken");
+    setSession(null);
+    localStorage.removeItem(localStorageKey.current);
   }
 
-  function storeSession(token: string) {
-    setSessionToken(token);
-    localStorage.setItem("jwtToken", token);
+  function storeSession(email: string, token: string) {
+    const session = { email, token };
+    setSession(session);
+    localStorage.setItem(localStorageKey.current, JSON.stringify(session));
   }
 
   function loadSession() {
-    const storedToken = localStorage.getItem("jwtToken");
-    if (storedToken) {
-      storeSession(storedToken);
+    const storedSession = getSessionFromLocalStorage();
+
+    if (storedSession) {
+      const { email, token } = storedSession;
+      storeSession(email, token);
     }
+  }
+
+  function getSessionFromLocalStorage() {
+    const storedItem = localStorage.getItem(localStorageKey.current);
+
+    if (!storedItem) return null;
+
+    return JSON.parse(storedItem);
   }
 
   function setReady() {
@@ -55,8 +73,9 @@ export function SessionProvider({
         clearSession,
         loadSession,
         setReady,
-        sessionToken,
+        session,
         isReady,
+        getSessionFromLocalStorage,
       }}
     >
       {children}

@@ -87,7 +87,13 @@ export const APIServiceContext = createContext({} as APIServiceContextData);
 export const APIServiceProvider = ({
   children,
 }: APIServiceProviderProps): React.ReactElement => {
-  const { sessionToken, isSignedIn, loadSession, setReady } = useSession();
+  const {
+    session,
+    isSignedIn,
+    loadSession,
+    getSessionFromLocalStorage,
+    setReady,
+  } = useSession();
   const { isoCode, language } = useLanguage();
   const [isReadyForAuthRequests, setIsReadyForAuthRequests] = useState(false);
 
@@ -126,20 +132,21 @@ export const APIServiceProvider = ({
 
   useEffect(() => {
     if (isSignedIn()) {
-      api.defaults.headers.common.Authorization = `Bearer ${sessionToken}`;
+      api.defaults.headers.common.Authorization = `Bearer ${session!.token}`;
       setIsReadyForAuthRequests(true);
     } else {
       api.defaults.headers.common.Authorization = "";
       setIsReadyForAuthRequests(false);
     }
-  }, [sessionToken, isSignedIn]);
+  }, [session, isSignedIn]);
 
   useEffect(() => {
     if (!isSignedIn()) {
       (async () => {
+        const session = getSessionFromLocalStorage();
         const { data: isJWTValid } =
           await services.validateJWTService.validateJWT({
-            jwt: localStorage.getItem("jwtToken") || "",
+            jwt: (session && session.token) || "",
           });
 
         if (isJWTValid) {
@@ -149,7 +156,14 @@ export const APIServiceProvider = ({
         setReady();
       })();
     }
-  }, [sessionToken, services, loadSession, isSignedIn, setReady]);
+  }, [
+    session,
+    services,
+    loadSession,
+    getSessionFromLocalStorage,
+    isSignedIn,
+    setReady,
+  ]);
 
   return (
     <APIServiceContext.Provider value={{ ...services, isReadyForAuthRequests }}>

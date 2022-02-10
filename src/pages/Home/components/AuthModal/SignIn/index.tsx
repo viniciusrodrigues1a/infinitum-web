@@ -44,7 +44,7 @@ export default function SignIn({
 
     const toastMsg = response.userFriendlyMessage;
     if (toastMsg) showToast(toastMsg, response.error);
-    if (response.data) session.storeSession(response.data.token);
+    if (response.data) session.storeSession(email!, response.data.token);
   }
 
   return (
