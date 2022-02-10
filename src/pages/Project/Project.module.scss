@@ -60,10 +60,13 @@
   align-items: center;
 }
 
+#createButtonWrapper {
+  margin-right: 5rem;
+}
+
 #viewOptionsContainer {
   display: flex;
   align-items: center;
-  margin-left: 5rem;
 
   > *:nth-child(even) {
     margin-left: 2.875rem;

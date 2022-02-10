@@ -21,23 +21,30 @@ import { ViewsProvider } from "../../contexts/ViewsContext";
 import { useSidebar } from "../../contexts/SidebarContext";
 import { useProjects } from "../../contexts/ProjectsContext";
 import { useLanguage } from "../../contexts/LanguageContext";
+import { ParticipantRoleValue } from "../../services/type-defs/Project";
 
 export default function Project(): React.ReactElement {
   const history = useHistory();
   const params = useParams<{ projectId: string }>();
 
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
-  const { getProjectById } = useProjects();
+  const { getProjectById, getLoggedInUserRoleInProject } = useProjects();
   const {
     language: {
       pages: { project: projectLanguage },
     },
   } = useLanguage();
 
-  const project = useMemo(
-    () => getProjectById(params.projectId),
-    [getProjectById, params]
-  );
+  const [project, loggedInUserRole] = useMemo(() => {
+    const project = getProjectById(params.projectId);
+    if (project) {
+      const loggedInUserRole = getLoggedInUserRoleInProject(
+        project
+      ) as ParticipantRoleValue;
+      return [project, loggedInUserRole];
+    }
+    return [project, "espectator" as ParticipantRoleValue];
+  }, [getProjectById, getLoggedInUserRoleInProject, params]);
 
   const [isCreationModalOpen, setIsCreationModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
@@ -73,21 +80,30 @@ export default function Project(): React.ReactElement {
           closeSidebar={() => setIsSidebarOpen(false)}
           isSidebarOpen={isSidebarOpen}
           rightSideComponent={() => (
-            <button
-              id={styles.membersButton}
-              type="button"
-              onClick={() => setIsParticipantsModalOpen(true)}
-            >
-              {projectLanguage.membersButtonText}
-            </button>
+            <>
+              {(loggedInUserRole === "owner" ||
+                loggedInUserRole === "admin") && (
+                <button
+                  id={styles.membersButton}
+                  type="button"
+                  onClick={() => setIsParticipantsModalOpen(true)}
+                >
+                  {projectLanguage.membersButtonText}
+                </button>
+              )}
+            </>
           )}
         />
         <div id={styles.headerOptions}>
           <div id={styles.optionsContainer}>
-            <CreateButton
-              title={projectLanguage.newCardButtonText}
-              onClick={() => setIsCreationModalOpen(true)}
-            />
+            {loggedInUserRole !== "espectator" && (
+              <div id={styles.createButtonWrapper}>
+                <CreateButton
+                  title={projectLanguage.newCardButtonText}
+                  onClick={() => setIsCreationModalOpen(true)}
+                />
+              </div>
+            )}
 
             <div id={styles.viewOptionsContainer}>
               <View.Option
@@ -105,37 +121,53 @@ export default function Project(): React.ReactElement {
             </div>
           </div>
 
-          <button
-            id={styles.updateButton}
-            type="button"
-            onClick={() => setIsUpdateModalOpen(true)}
-          >
-            <FiSettings color="var(--dark)" size={20} />
-          </button>
+          {(loggedInUserRole === "owner" || loggedInUserRole === "admin") && (
+            <button
+              id={styles.updateButton}
+              type="button"
+              onClick={() => setIsUpdateModalOpen(true)}
+            >
+              <FiSettings color="var(--dark)" size={20} />
+            </button>
+          )}
         </div>
       </div>
 
       <main role="main">
         <ViewsProvider>
-          {activeView === "list" && <View.List project={project} />}
-          {activeView === "kanban" && <View.Kanban project={project} />}
+          {activeView === "list" && (
+            <View.List project={project} loggedInUserRole={loggedInUserRole} />
+          )}
+          {activeView === "kanban" && (
+            <View.Kanban
+              project={project}
+              loggedInUserRole={loggedInUserRole}
+            />
+          )}
         </ViewsProvider>
       </main>
 
-      <CreateIssueModal
-        shown={isCreationModalOpen}
-        closeModal={() => setIsCreationModalOpen(false)}
-      />
-      <UpdateProjectModal
-        shown={isUpdateModalOpen}
-        closeModal={() => setIsUpdateModalOpen(false)}
-        project={project}
-      />
-      <ManageParticipantsModal
-        shown={isParticipantsModalOpen}
-        closeModal={() => setIsParticipantsModalOpen(false)}
-        project={project}
-      />
+      {loggedInUserRole !== "espectator" && (
+        <CreateIssueModal
+          shown={isCreationModalOpen}
+          closeModal={() => setIsCreationModalOpen(false)}
+        />
+      )}
+
+      {(loggedInUserRole === "owner" || loggedInUserRole === "admin") && (
+        <>
+          <UpdateProjectModal
+            shown={isUpdateModalOpen}
+            closeModal={() => setIsUpdateModalOpen(false)}
+            project={project}
+          />
+          <ManageParticipantsModal
+            shown={isParticipantsModalOpen}
+            closeModal={() => setIsParticipantsModalOpen(false)}
+            project={project}
+          />
+        </>
+      )}
     </div>
   );
 }

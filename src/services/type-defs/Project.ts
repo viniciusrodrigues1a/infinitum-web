@@ -16,6 +16,8 @@ export type IssueGroup = {
   color: string;
 };
 
+export type ParticipantRoleValue = "owner" | "admin" | "member" | "espectator";
+
 export type Participant = {
   account: {
     name: string;
@@ -23,7 +25,7 @@ export type Participant = {
   };
   role: {
     name: {
-      value: string;
+      value: ParticipantRoleValue;
     };
   };
 };

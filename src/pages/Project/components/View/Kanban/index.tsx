@@ -14,12 +14,17 @@ import {
 } from "../../../../../services/type-defs/FormattedProject";
 import { useViewsState } from "../../../../../contexts/ViewsContext";
 import { useLanguage } from "../../../../../contexts/LanguageContext";
+import { ParticipantRoleValue } from "../../../../../services/type-defs/Project";
 
 type KanbanProps = {
   project: FormattedProject;
+  loggedInUserRole: ParticipantRoleValue;
 };
 
-export default function Kanban({ project }: KanbanProps): React.ReactElement {
+export default function Kanban({
+  project,
+  loggedInUserRole,
+}: KanbanProps): React.ReactElement {
   const {
     language: {
       pages: { project: projectLanguage },
@@ -115,6 +120,7 @@ export default function Kanban({ project }: KanbanProps): React.ReactElement {
   }, [isCreatingNewIssueGroup, closeIssueGroupCreationInput]);
 
   useEffect(() => {
+    if (loggedInUserRole === "espectator") return;
     const cards = document.querySelectorAll(`.${styles.issueCard}`);
     const dropzones = document.querySelectorAll(`.${styles.issueSectionBody}`);
 
@@ -221,41 +227,45 @@ export default function Kanban({ project }: KanbanProps): React.ReactElement {
                   <span>{issueGroup.title}</span>
 
                   <div className={styles.issueSectionHeaderButtons}>
-                    <button
-                      type="button"
-                      className={styles.addIssueButton}
-                      onClick={() =>
-                        setIsCreatingNewIssueForIssueGroupId(
-                          issueGroup.issueGroupId
-                        )
-                      }
-                    >
-                      <FiPlusCircle color="var(--dark)" size={20} />
-                    </button>
-
-                    <IssueGroupOptions.Container
-                      isDropdownShown={
-                        issueGroupIdBeingUpdated === issueGroup.issueGroupId
-                      }
-                      onClick={() =>
-                        setIssueGroupIdBeingUpdated(issueGroup.issueGroupId)
-                      }
-                    >
+                    {loggedInUserRole !== "espectator" && (
                       <>
-                        <IssueGroupOptions.UpdateColorOption
-                          onColorChange={onColorChange}
-                        />
-                        <IssueGroupOptions.Separator />
-                        <IssueGroupOptions.UpdateIsFinalOption
-                          defaultChecked={
-                            issueGroup.shouldUpdateIssuesToCompleted
+                        <button
+                          type="button"
+                          className={styles.addIssueButton}
+                          onClick={() =>
+                            setIsCreatingNewIssueForIssueGroupId(
+                              issueGroup.issueGroupId
+                            )
                           }
-                          onChange={(e) =>
-                            updateIssueGroupFinalStatus(e.target.checked)
+                        >
+                          <FiPlusCircle color="var(--dark)" size={20} />
+                        </button>
+
+                        <IssueGroupOptions.Container
+                          isDropdownShown={
+                            issueGroupIdBeingUpdated === issueGroup.issueGroupId
                           }
-                        />
+                          onClick={() =>
+                            setIssueGroupIdBeingUpdated(issueGroup.issueGroupId)
+                          }
+                        >
+                          <>
+                            <IssueGroupOptions.UpdateColorOption
+                              onColorChange={onColorChange}
+                            />
+                            <IssueGroupOptions.Separator />
+                            <IssueGroupOptions.UpdateIsFinalOption
+                              defaultChecked={
+                                issueGroup.shouldUpdateIssuesToCompleted
+                              }
+                              onChange={(e) =>
+                                updateIssueGroupFinalStatus(e.target.checked)
+                              }
+                            />
+                          </>
+                        </IssueGroupOptions.Container>
                       </>
-                    </IssueGroupOptions.Container>
+                    )}
                   </div>
                 </div>
 
@@ -276,11 +286,13 @@ export default function Kanban({ project }: KanbanProps): React.ReactElement {
                       >
                         <strong>{issue.title}</strong>
 
-                        <FiCheckCircle
-                          className={styles.completedIcon}
-                          size={16}
-                          color={issue.completed ? "#359e76" : "#999999"}
-                        />
+                        {loggedInUserRole !== "espectator" && (
+                          <FiCheckCircle
+                            className={styles.completedIcon}
+                            size={16}
+                            color={issue.completed ? "#359e76" : "#999999"}
+                          />
+                        )}
                       </div>
                     </button>
                   ))}
@@ -306,64 +318,70 @@ export default function Kanban({ project }: KanbanProps): React.ReactElement {
                       />
                     </form>
                   ) : (
-                    <button
-                      type="button"
-                      className={styles.addCardButton}
-                      disabled={!!isCreatingNewIssueForIssueGroupId}
-                      onClick={() =>
-                        setIsCreatingNewIssueForIssueGroupId(
-                          issueGroup.issueGroupId
-                        )
-                      }
-                    >
-                      <FiPlusCircle color="#888888" size={20} />
-                      <span>{projectLanguage.views.kanban.newIssue}</span>
-                    </button>
+                    <>
+                      {loggedInUserRole !== "espectator" && (
+                        <button
+                          type="button"
+                          className={styles.addCardButton}
+                          disabled={!!isCreatingNewIssueForIssueGroupId}
+                          onClick={() =>
+                            setIsCreatingNewIssueForIssueGroupId(
+                              issueGroup.issueGroupId
+                            )
+                          }
+                        >
+                          <FiPlusCircle color="#888888" size={20} />
+                          <span>{projectLanguage.views.kanban.newIssue}</span>
+                        </button>
+                      )}
+                    </>
                   )}
                 </div>
               </div>
             ))}
 
-            <div
-              className={`${styles.issueSectionContainer} ${styles.skeletonIssueGroup}`}
-            >
-              <div className={styles.issueSectionHeader}>
-                <div
-                  className={styles.issueSectionHeaderColor}
-                  style={{ backgroundColor: "rgba(68, 68, 68, 0.5)" }}
-                />
-                {isCreatingNewIssueGroup ? (
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      handleIssueGroupSubmit();
-                    }}
-                  >
-                    <input
-                      ref={newIssueGroupTitleInputRef}
-                      className={styles.issueGroupInput}
-                      type="text"
-                      name="issue-group-title"
-                      id="issue-group-title"
-                      placeholder="Título da seção"
-                      value={newIssueGroupTitle}
-                      onChange={(e) => setNewIssueGroupTitle(e.target.value)}
-                    />
-                  </form>
-                ) : (
-                  <button
-                    type="button"
-                    className={styles.newSectionButton}
-                    onClick={() => setIsCreatingNewIssueGroup(true)}
-                  >
-                    <FiPlusCircle color="#888888" size={24} />
-                    <span>{projectLanguage.views.kanban.newSection}</span>
-                  </button>
-                )}
-              </div>
+            {loggedInUserRole !== "espectator" && (
+              <div
+                className={`${styles.issueSectionContainer} ${styles.skeletonIssueGroup}`}
+              >
+                <div className={styles.issueSectionHeader}>
+                  <div
+                    className={styles.issueSectionHeaderColor}
+                    style={{ backgroundColor: "rgba(68, 68, 68, 0.5)" }}
+                  />
+                  {isCreatingNewIssueGroup ? (
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        handleIssueGroupSubmit();
+                      }}
+                    >
+                      <input
+                        ref={newIssueGroupTitleInputRef}
+                        className={styles.issueGroupInput}
+                        type="text"
+                        name="issue-group-title"
+                        id="issue-group-title"
+                        placeholder="Título da seção"
+                        value={newIssueGroupTitle}
+                        onChange={(e) => setNewIssueGroupTitle(e.target.value)}
+                      />
+                    </form>
+                  ) : (
+                    <button
+                      type="button"
+                      className={styles.newSectionButton}
+                      onClick={() => setIsCreatingNewIssueGroup(true)}
+                    >
+                      <FiPlusCircle color="#888888" size={24} />
+                      <span>{projectLanguage.views.kanban.newSection}</span>
+                    </button>
+                  )}
+                </div>
 
-              <div className={styles.issueSectionBody} />
-            </div>
+                <div className={styles.issueSectionBody} />
+              </div>
+            )}
           </div>
         </div>
       </div>

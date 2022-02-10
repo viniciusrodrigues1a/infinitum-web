@@ -8,15 +8,24 @@ import React, {
 import { ListProjectsServiceResponse } from "../services/interfaces";
 
 import { FormattedProject } from "../services/type-defs/FormattedProject";
-import { Issue, IssueGroup, Project } from "../services/type-defs/Project";
+import {
+  Issue,
+  IssueGroup,
+  ParticipantRoleValue,
+  Project,
+} from "../services/type-defs/Project";
 import { useAPIService } from "./APIServiceContext";
 import { useDateFormatter } from "./DateFormatterContext";
+import { useSession } from "./SessionContext";
 
 type ProjectsContextData = {
   projects: FormattedProject[];
   loading: boolean;
   fetchProjects: () => Promise<void>;
   getProjectById: (id: string) => FormattedProject | undefined;
+  getLoggedInUserRoleInProject: (
+    project: Project
+  ) => ParticipantRoleValue | null;
 };
 
 export const ProjectsContext = createContext({} as ProjectsContextData);
@@ -28,9 +37,9 @@ type ProjectsProviderProps = {
 export function ProjectsProvider({
   children,
 }: ProjectsProviderProps): React.ReactElement {
-  const { isReadyForAuthRequests } = useAPIService();
-  const { listProjectsService } = useAPIService();
+  const { isReadyForAuthRequests, listProjectsService } = useAPIService();
   const { formatToFullDate } = useDateFormatter();
+  const { session } = useSession();
 
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -111,6 +120,18 @@ export function ProjectsProvider({
     return projects.find((p) => p.projectId === id);
   }
 
+  function getLoggedInUserRoleInProject(
+    project: Project
+  ): ParticipantRoleValue | null {
+    const participant = project.participants.find(
+      (p) => p.account.email === session!.email
+    );
+
+    if (!participant) return null;
+
+    return participant.role.name.value;
+  }
+
   return (
     <ProjectsContext.Provider
       value={{
@@ -118,6 +139,7 @@ export function ProjectsProvider({
         loading,
         fetchProjects: updateProjectsState,
         getProjectById,
+        getLoggedInUserRoleInProject,
       }}
     >
       {children}

@@ -20,12 +20,17 @@ import IssueGroupOptions from "../IssueGroupOptions";
 
 import { useViewsState } from "../../../../../contexts/ViewsContext";
 import { useLanguage } from "../../../../../contexts/LanguageContext";
+import { ParticipantRoleValue } from "../../../../../services/type-defs/Project";
 
 type ListProps = {
   project: FormattedProject;
+  loggedInUserRole: ParticipantRoleValue;
 };
 
-export default function List({ project }: ListProps): React.ReactElement {
+export default function List({
+  project,
+  loggedInUserRole,
+}: ListProps): React.ReactElement {
   const {
     language: {
       pages: { project: projectLanguage },
@@ -192,41 +197,50 @@ export default function List({ project }: ListProps): React.ReactElement {
               <h1>{issueGroup.title}</h1>
             </div>
 
-            <IssueGroupOptions.Container
-              isDropdownShown={
-                issueGroupIdBeingUpdated === issueGroup.issueGroupId
-              }
-              onClick={() =>
-                setIssueGroupIdBeingUpdated(issueGroup.issueGroupId)
-              }
-            >
-              <IssueGroupOptions.UpdateIsFinalOption
-                defaultChecked={issueGroup.shouldUpdateIssuesToCompleted}
-                onChange={(e) => updateIssueGroupFinalStatus(e.target.checked)}
-              />
-            </IssueGroupOptions.Container>
+            {(loggedInUserRole === "owner" || loggedInUserRole === "admin") && (
+              <IssueGroupOptions.Container
+                isDropdownShown={
+                  issueGroupIdBeingUpdated === issueGroup.issueGroupId
+                }
+                onClick={() =>
+                  setIssueGroupIdBeingUpdated(issueGroup.issueGroupId)
+                }
+              >
+                <IssueGroupOptions.UpdateIsFinalOption
+                  defaultChecked={issueGroup.shouldUpdateIssuesToCompleted}
+                  onChange={(e) =>
+                    updateIssueGroupFinalStatus(e.target.checked)
+                  }
+                />
+              </IssueGroupOptions.Container>
+            )}
           </div>
 
           {!isSectionCollapsed(issueGroup.issueGroupId) && (
             <div className={styles.issues}>
               {issueGroup.issues.map((issue) => (
                 <div className={styles.issueWrapper}>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      updateIssueCompletedStatus(issue.issueId, issue.completed)
-                    }
-                  >
-                    <FiCheckCircle
-                      className={
-                        issue.completed
-                          ? styles.checkCircleIconCompleted
-                          : styles.checkCircleIcon
+                  {loggedInUserRole !== "espectator" && (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        updateIssueCompletedStatus(
+                          issue.issueId,
+                          issue.completed
+                        )
                       }
-                      color={issue.completed ? "#359e76" : "#999999"}
-                      size={20}
-                    />
-                  </button>
+                    >
+                      <FiCheckCircle
+                        className={
+                          issue.completed
+                            ? styles.checkCircleIconCompleted
+                            : styles.checkCircleIcon
+                        }
+                        color={issue.completed ? "#359e76" : "#999999"}
+                        size={20}
+                      />
+                    </button>
+                  )}
                   <button
                     onClick={() => setIssueBeingUpdated(issue)}
                     type="button"
@@ -259,18 +273,22 @@ export default function List({ project }: ListProps): React.ReactElement {
                   </form>
                 </div>
               ) : (
-                <button
-                  type="button"
-                  className={styles.newIssueButton}
-                  onClick={() =>
-                    setIsCreatingNewIssueForIssueGroupId(
-                      issueGroup.issueGroupId
-                    )
-                  }
-                >
-                  <FiPlusCircle size={18} color="#888888" />
-                  <span>{projectLanguage.views.list.newIssue}</span>
-                </button>
+                <>
+                  {loggedInUserRole !== "espectator" && (
+                    <button
+                      type="button"
+                      className={styles.newIssueButton}
+                      onClick={() =>
+                        setIsCreatingNewIssueForIssueGroupId(
+                          issueGroup.issueGroupId
+                        )
+                      }
+                    >
+                      <FiPlusCircle size={18} color="#888888" />
+                      <span>{projectLanguage.views.list.newIssue}</span>
+                    </button>
+                  )}
+                </>
               )}
             </div>
           )}
@@ -296,14 +314,18 @@ export default function List({ project }: ListProps): React.ReactElement {
                   />
                 </form>
               ) : (
-                <button
-                  type="button"
-                  className={styles.newSectionButton}
-                  onClick={() => setIsCreatingNewIssueGroup(true)}
-                >
-                  <FiPlusCircle size={20} color="#888888" />
-                  <span>{projectLanguage.views.list.newSection}</span>
-                </button>
+                <>
+                  {loggedInUserRole !== "espectator" && (
+                    <button
+                      type="button"
+                      className={styles.newSectionButton}
+                      onClick={() => setIsCreatingNewIssueGroup(true)}
+                    >
+                      <FiPlusCircle size={20} color="#888888" />
+                      <span>{projectLanguage.views.list.newSection}</span>
+                    </button>
+                  )}
+                </>
               )}
             </>
           )}
