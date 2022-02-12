@@ -9,6 +9,7 @@ export type TextAreaProps = {
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   rows?: number;
   cols?: number;
+  disabled?: boolean;
 };
 
 TextArea.defaultProps = {
@@ -17,6 +18,7 @@ TextArea.defaultProps = {
   onChange: () => null,
   rows: 5,
   cols: 30,
+  disabled: false,
 };
 
 export default function TextArea({
@@ -26,6 +28,7 @@ export default function TextArea({
   onChange,
   rows,
   cols,
+  disabled,
 }: TextAreaProps): React.ReactElement {
   return (
     <>
@@ -38,6 +41,7 @@ export default function TextArea({
         placeholder={placeholder}
         rows={rows}
         cols={cols}
+        disabled={disabled}
       />
     </>
   );

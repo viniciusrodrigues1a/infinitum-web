@@ -342,6 +342,7 @@ export default function List({
         issueGroups={project.issueGroups}
         participants={project.participants}
         closeModal={() => setIssueBeingUpdated(null)}
+        readonly={loggedInUserRole === "espectator"}
       />
     </>
   );

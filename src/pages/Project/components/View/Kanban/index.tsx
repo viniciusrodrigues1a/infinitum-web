@@ -395,6 +395,7 @@ export default function Kanban({
         issueGroups={project.issueGroups}
         participants={project.participants}
         closeModal={() => setIssueBeingUpdated(null)}
+        readonly={loggedInUserRole === "espectator"}
       />
     </>
   );

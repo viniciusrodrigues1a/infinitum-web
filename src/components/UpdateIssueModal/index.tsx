@@ -25,6 +25,11 @@ type UpdateIssueModalProps = {
   issue: FormattedIssue;
   issueGroups: FormattedIssueGroup[];
   participants: Participant[];
+  readonly?: boolean;
+};
+
+UpdateIssueModal.defaultProps = {
+  readonly: false,
 };
 
 export default function UpdateIssueModal({
@@ -33,6 +38,7 @@ export default function UpdateIssueModal({
   issue,
   issueGroups,
   participants,
+  readonly,
 }: UpdateIssueModalProps): React.ReactElement {
   const {
     language: {
@@ -160,6 +166,7 @@ export default function UpdateIssueModal({
               }
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              disabled={readonly}
             />
 
             <div className={styles.assignedInputWrapper}>
@@ -178,14 +185,17 @@ export default function UpdateIssueModal({
                   }))}
                   value={assignedToEmail || undefined}
                   onChange={(e) => setAssignedToEmail(e.target.value)}
+                  disabled={readonly}
                 />
-                <button
-                  type="button"
-                  className={styles.cancelAssignedInputButton}
-                  onClick={() => setAssignedToEmail(undefined)}
-                >
-                  <FiXCircle color="var(--dark)" size={20} />
-                </button>
+                {!readonly && (
+                  <button
+                    type="button"
+                    className={styles.cancelAssignedInputButton}
+                    onClick={() => setAssignedToEmail(undefined)}
+                  >
+                    <FiXCircle color="var(--dark)" size={20} />
+                  </button>
+                )}
               </div>
             </div>
 
@@ -200,6 +210,7 @@ export default function UpdateIssueModal({
                 onChange={(e) => {
                   setExpirationDate(e.target.value);
                 }}
+                disabled={readonly}
               />
             </div>
 
@@ -218,6 +229,7 @@ export default function UpdateIssueModal({
                 }))}
                 value={issueGroupId}
                 onChange={(e) => setIssueGroupId(e.target.value)}
+                disabled={readonly}
               />
             </div>
 
@@ -237,24 +249,27 @@ export default function UpdateIssueModal({
                   }
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
+                  disabled={readonly}
                 />
               </Form.InputWrapper>
             </div>
 
-            <div id={styles.buttonsWrapper}>
-              <CreateButton
-                id={styles.cancelButton}
-                icon={FiTrash2}
-                title={projectLanguage.issueModal.cancelButtonText}
-                onClick={deleteIssue}
-              />
+            {!readonly && (
+              <div id={styles.buttonsWrapper}>
+                <CreateButton
+                  id={styles.cancelButton}
+                  icon={FiTrash2}
+                  title={projectLanguage.issueModal.cancelButtonText}
+                  onClick={deleteIssue}
+                />
 
-              <CreateButton
-                icon={FiEdit3}
-                title={projectLanguage.issueModal.updateButtonText}
-                onClick={handleSubmit}
-              />
-            </div>
+                <CreateButton
+                  icon={FiEdit3}
+                  title={projectLanguage.issueModal.updateButtonText}
+                  onClick={handleSubmit}
+                />
+              </div>
+            )}
           </Form.Container>
         </div>
       </div>
