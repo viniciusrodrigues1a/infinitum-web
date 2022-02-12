@@ -266,7 +266,9 @@ export default function List({
                       type="text"
                       name="issue-title"
                       id="issue-title"
-                      placeholder="Título do ticket"
+                      placeholder={
+                        projectLanguage.views.list.newIssuePlaceholder
+                      }
                       value={newIssueTitle}
                       onChange={(e) => setNewIssueTitle(e.target.value)}
                     />
@@ -308,7 +310,9 @@ export default function List({
                     type="text"
                     name="issue-group-title"
                     id="issue-group-title"
-                    placeholder="Título da seção"
+                    placeholder={
+                      projectLanguage.views.list.newSectionPlaceholder
+                    }
                     value={newIssueGroupTitle}
                     onChange={(e) => setNewIssueGroupTitle(e.target.value)}
                   />

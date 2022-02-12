@@ -49,11 +49,15 @@ export type ProjectLanguage = {
       option: string;
       newIssue: string;
       newSection: string;
+      newIssuePlaceholder: string;
+      newSectionPlaceholder: string;
     };
     kanban: {
       option: string;
       newIssue: string;
       newSection: string;
+      newIssuePlaceholder: string;
+      newSectionPlaceholder: string;
     };
   };
 };

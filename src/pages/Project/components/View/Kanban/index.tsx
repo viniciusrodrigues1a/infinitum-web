@@ -313,7 +313,9 @@ export default function Kanban({
                         id="card-title"
                         value={newIssueTitle}
                         onChange={(e) => setNewIssueTitle(e.target.value)}
-                        placeholder="Título"
+                        placeholder={
+                          projectLanguage.views.kanban.newIssuePlaceholder
+                        }
                         className={styles.issueCardInput}
                       />
                     </form>
@@ -362,7 +364,9 @@ export default function Kanban({
                         type="text"
                         name="issue-group-title"
                         id="issue-group-title"
-                        placeholder="Título da seção"
+                        placeholder={
+                          projectLanguage.views.kanban.newSectionPlaceholder
+                        }
                         value={newIssueGroupTitle}
                         onChange={(e) => setNewIssueGroupTitle(e.target.value)}
                       />
