@@ -4,6 +4,7 @@ import { IconBaseProps } from "react-icons/lib";
 
 import { useHistory } from "react-router-dom";
 import styles from "./Projects.module.css";
+import "./Projects_EmptyProjectsSvg.css";
 
 import { useSidebar } from "../../contexts/SidebarContext";
 import { useLanguage } from "../../contexts/LanguageContext";
