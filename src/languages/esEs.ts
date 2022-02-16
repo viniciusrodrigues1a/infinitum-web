@@ -187,8 +187,22 @@ export const esEs: Language = {
       subtitle: "Redirigiendo en",
       goBackLink: "Regrese al inicio ahora",
     },
+    profile: {
+      nameInputPlaceholder: "Nombre",
+      oldPasswordPlaceholder: "Tu contraseña actual",
+      newPasswordPlaceholder: "Tu nueva contraseña",
+      confirmNewPasswordPlaceholder: "Confirma tu nueva contraseña",
+      updateButtonText: "Actualizar perfil",
+      logoutButtonText: "Cerrar sesión",
+      successMessage: "Perfil actualizado con éxito",
+      failureMessage: "No se pudo actualizar tu perfil",
+    },
   },
   components: {
+    header: {
+      logoutText: "Cerrar sesión",
+      myProfileText: "Mi perfil",
+    },
     sidebar: {
       homeItemName: "Inicio",
       projectsItemName: "Proyectos",

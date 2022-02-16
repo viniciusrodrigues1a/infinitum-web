@@ -12,6 +12,7 @@ import CreateIssueService from "../services/CreateIssueService";
 import CreateProjectService from "../services/CreateProjectService";
 import DeleteIssueService from "../services/DeleteIssueService";
 import DeleteProjectService from "../services/DeleteProjectService";
+import FindOneAccountService from "../services/FindOneAccountService";
 import FindProjectImageService from "../services/FindProjectImageService";
 import GetIssuesOverviewService from "../services/GetIssuesOverviewService";
 import {
@@ -19,14 +20,17 @@ import {
   ICreateIssueGroupService,
   ICreateProjectService,
   IDeleteIssueService,
+  IFindOneAccountService,
   IFindProjectImageService,
   IGetIssuesOverviewService,
   IInviteToProjectService,
   IKickParticipantService,
+  IListLanguagesService,
   IListProjectsService,
   ILoginService,
   IMoveIssueService,
   IRegisterService,
+  IUpdateAccountService,
   IUpdateIssueGroupColorService,
   IUpdateIssueGroupFinalStatusService,
   IUpdateIssueService,
@@ -39,10 +43,12 @@ import { IDeleteProjectService } from "../services/interfaces/IDeleteProjectServ
 import { IUpdateProjectService } from "../services/interfaces/IUpdateProjectService";
 import InviteToProjectService from "../services/InviteToProjectService";
 import KickParticipantService from "../services/KickParticipantService";
+import ListLanguagesService from "../services/ListLanguages";
 import ListProjectsService from "../services/ListProjectsService";
 import LoginService from "../services/LoginService";
 import MoveIssueService from "../services/MoveIssueService";
 import RegisterService from "../services/RegisterService";
+import UpdateAccountService from "../services/UpdateAccountService";
 import UpdateIssueGroupColorService from "../services/UpdateIssueGroupColorService";
 import UpdateIssueGroupFinalStatusService from "../services/UpdateIssueGroupFinalStatusService";
 import UpdateIssueService from "../services/UpdateIssueService";
@@ -76,6 +82,9 @@ type APIServiceContextData = {
   updateIssueGroupFinalStatusService: IUpdateIssueGroupFinalStatusService;
   validateJWTService: IValidateJWTService;
   updateIssueGroupColorService: IUpdateIssueGroupColorService;
+  listLanguagesService: IListLanguagesService;
+  findOneAccountService: IFindOneAccountService;
+  updateAccountService: IUpdateAccountService;
 };
 
 type APIServiceProviderProps = {
@@ -123,6 +132,9 @@ export const APIServiceProvider = ({
         new UpdateIssueGroupFinalStatusService(api, lang),
       validateJWTService: new ValidateJWTService(api, lang),
       updateIssueGroupColorService: new UpdateIssueGroupColorService(api, lang),
+      listLanguagesService: new ListLanguagesService(api),
+      findOneAccountService: new FindOneAccountService(api, lang),
+      updateAccountService: new UpdateAccountService(api),
     } as Omit<APIServiceContextData, "isReadyForAuthRequests">;
   }, [language]);
 

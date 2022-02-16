@@ -181,8 +181,22 @@ export const enUS: Language = {
       subtitle: "Redirecting in",
       goBackLink: "Go back to the Dashboard now",
     },
+    profile: {
+      nameInputPlaceholder: "Name",
+      oldPasswordPlaceholder: "Your current password",
+      newPasswordPlaceholder: "Your new password",
+      confirmNewPasswordPlaceholder: "Confirm your new password",
+      updateButtonText: "Update profile",
+      logoutButtonText: "Logout",
+      successMessage: "Profile updated succesfully",
+      failureMessage: "Your profile couldn't be updated",
+    },
   },
   components: {
+    header: {
+      logoutText: "Logout",
+      myProfileText: "My profile",
+    },
     sidebar: {
       homeItemName: "Home",
       projectsItemName: "Projects",

@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { FiUser } from "react-icons/fi";
+import { useHistory } from "react-router-dom";
+
+import styles from "./Header.module.css";
 
 import { useSession } from "../../contexts/SessionContext";
+
 import ExpandableHamburger from "../ExpandableHamburger";
-import styles from "./Header.module.css";
+import AccountAvatar from "../AccountAvatar";
+import RoutesEnum from "../../routes/type-defs/RoutesEnum";
+import { useAccount } from "../../contexts/AccountContext";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 type HeaderProps = {
   openSidebar: () => void;
@@ -24,7 +31,14 @@ export default function Header({
   title,
   rightSideComponent: RightSideComponent,
 }: HeaderProps): React.ReactElement {
+  const history = useHistory();
   const { clearSession } = useSession();
+  const { account } = useAccount();
+  const {
+    language: {
+      components: { header: headerLanguage },
+    },
+  } = useLanguage();
 
   const [isDropdownShown, setIsDropdownShown] = useState(false);
 
@@ -44,6 +58,10 @@ export default function Header({
 
     return () => body.removeEventListener("click", onClick);
   }, [isDropdownShown]);
+
+  function navigateToProfilePage() {
+    history.push(RoutesEnum.PROFILE);
+  }
 
   return (
     <div id={styles.container}>
@@ -69,20 +87,45 @@ export default function Header({
         {RightSideComponent && <RightSideComponent />}
 
         <div id={styles.userAvatarWrapper}>
-          <button
-            aria-label="More options"
-            type="button"
-            id={styles.userAvatar}
+          <AccountAvatar
+            name={account.name}
+            image={account.image}
             onClick={() => setIsDropdownShown(!isDropdownShown)}
-          >
-            <FiUser color="var(--light)" size={28} />
-          </button>
+          />
 
           {isDropdownShown && (
             <div id={styles.headerDropdown}>
-              <button type="button" onClick={clearSession}>
-                Encerrar sessão
-              </button>
+              <div id={styles.userInfo}>
+                <div id={styles.userInfoText}>
+                  <strong>{account.name}</strong>
+                  <span>{account.email}</span>
+                </div>
+
+                <AccountAvatar
+                  name={account.name}
+                  image={account.image}
+                  onClick={navigateToProfilePage}
+                />
+              </div>
+
+              <div className={styles.separator} />
+
+              <div>
+                <button
+                  type="button"
+                  className={styles.dropdownButton}
+                  onClick={navigateToProfilePage}
+                >
+                  {headerLanguage.myProfileText}
+                </button>
+                <button
+                  type="button"
+                  className={styles.dropdownButton}
+                  onClick={clearSession}
+                >
+                  {headerLanguage.logoutText}
+                </button>
+              </div>
             </div>
           )}
         </div>

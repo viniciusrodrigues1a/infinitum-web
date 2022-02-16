@@ -1,6 +1,7 @@
 import { AcceptInvitationLanguage } from "./AcceptInvitationLanguage";
 import { DashboardLanguage } from "./DashboardLanguage";
 import { HomeLanguage } from "./HomeLanguage";
+import { ProfileLanguage } from "./ProfileLanguage";
 import { ProjectLanguage } from "./ProjectLanguage";
 import { ProjectsLanguage } from "./ProjectsLanguage";
 
@@ -10,4 +11,5 @@ export type PagesLanguage = {
   projects: ProjectsLanguage;
   project: ProjectLanguage;
   acceptInvitation: AcceptInvitationLanguage;
+  profile: ProfileLanguage;
 };

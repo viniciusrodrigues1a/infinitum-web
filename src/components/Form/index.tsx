@@ -5,6 +5,7 @@ import Label from "./Label";
 import TextArea from "./TextArea";
 import ImageInput from "./ImageInput";
 import Select from "./Select";
+import CustomSelect from "./CustomSelect";
 
 const Form = {
   Container,
@@ -14,6 +15,7 @@ const Form = {
   TextArea,
   ImageInput,
   Select,
+  CustomSelect,
 };
 
 export default Form;

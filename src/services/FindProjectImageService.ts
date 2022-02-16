@@ -1,5 +1,4 @@
 import { AxiosInstance } from "axios";
-import { AxiosLanguage } from "../languages/types/libs";
 import {
   FindProjectImageServiceResponse,
   IFindProjectImageService,

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { FiEdit3, FiTrash2 } from "react-icons/fi";
+import { FiEdit3, FiTrash2, FiUploadCloud } from "react-icons/fi";
 
 import { useParams } from "react-router-dom";
 import styles from "./UpdateProjectModal.module.scss";
@@ -182,6 +182,17 @@ export default function UpdateProjectModal({
                     src={imagePreview}
                     id="project-image"
                     onChange={handleOnImageInputChange}
+                    width="6rem"
+                    height="6rem"
+                    component={() => (
+                      <div id={styles.imageInput}>
+                        <FiUploadCloud
+                          className={styles.icon}
+                          size={24}
+                          color="var(--dark)"
+                        />
+                      </div>
+                    )}
                   />
                 </div>
 

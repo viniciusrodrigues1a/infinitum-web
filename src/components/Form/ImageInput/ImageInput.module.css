@@ -1,32 +1,9 @@
-.container {
-  position: relative;
-  background-color: rgba(67, 118, 216, 0.4);
-  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='100' ry='100' stroke='%234376D8FF' stroke-width='4' stroke-dasharray='10%2c 9' stroke-dashoffset='86' stroke-linecap='butt'/%3e%3c/svg%3e");
-  width: 6rem;
-  height: 6rem;
-}
-
 .imgShown {
   background: none;
 }
 
-.img {
-  width: 6rem;
-  height: 6rem;
-}
-
-.icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  z-index: 1;
-}
-
 .input {
   position: absolute;
-  width: 6rem;
-  height: 6rem;
   top: 0;
   left: 0;
   z-index: 2;

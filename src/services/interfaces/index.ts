@@ -17,3 +17,6 @@ export * from "./IAcceptInvitationService";
 export * from "./IUpdateIssueGroupFinalStatusService";
 export * from "./IValidateJWTService";
 export * from "./IUpdateIssueGroupColorService";
+export * from "./IListLanguagesService";
+export * from "./IFindOneAccountService";
+export * from "./IUpdateAccountService";

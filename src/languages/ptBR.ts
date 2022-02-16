@@ -182,8 +182,22 @@ export const ptBR: Language = {
       subtitle: "Redirecionando em",
       goBackLink: "Voltar à página inicial agora",
     },
+    profile: {
+      nameInputPlaceholder: "Nome",
+      oldPasswordPlaceholder: "Sua senha atual",
+      newPasswordPlaceholder: "Sua nova senha",
+      confirmNewPasswordPlaceholder: "Confirme sua nova senha",
+      updateButtonText: "Atualizar perfil",
+      logoutButtonText: "Encerrar sessão",
+      successMessage: "Perfil atualizado com sucesso",
+      failureMessage: "Não foi possível atualizar seu perfil",
+    },
   },
   components: {
+    header: {
+      logoutText: "Encerrar sessão",
+      myProfileText: "Meu perfil",
+    },
     sidebar: {
       homeItemName: "Início",
       projectsItemName: "Projetos",

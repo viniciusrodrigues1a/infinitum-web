@@ -11,6 +11,10 @@
   cursor: pointer;
 }
 
+.newProjectButton[disabled] {
+  cursor: not-allowed;
+}
+
 .buttonIcon {
   display: none;
 }

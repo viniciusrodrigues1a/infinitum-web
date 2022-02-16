@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { FiUploadCloud } from "react-icons/fi";
 
 import styles from "./ImageInput.module.css";
 
 export type ImageInputProps = {
   id: string;
+  component: () => React.ReactElement;
+  width: string;
+  height: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<any>) => void;
   src?: any;
@@ -22,11 +24,14 @@ export default function ImageInput({
   value,
   onChange,
   src,
+  component: Component,
+  width,
+  height,
 }: ImageInputProps): React.ReactElement {
   const [isImgShown, setIsImgShown] = useState(!!src);
 
   useEffect(() => {
-    setIsImgShown(true);
+    setIsImgShown(!!src);
   }, [src]);
 
   function handleOnError(e: any) {
@@ -35,13 +40,20 @@ export default function ImageInput({
   }
 
   return (
-    <div className={`${styles.container} ${isImgShown ? styles.imgShown : ""}`}>
+    <div
+      style={{ width, height, position: "relative" }}
+      className={isImgShown ? styles.imgShown : ""}
+    >
       {isImgShown && (
-        <img className={styles.img} src={src} alt="" onError={handleOnError} />
+        <img
+          className={styles.img}
+          src={src}
+          alt=""
+          onError={handleOnError}
+          style={{ width, height }}
+        />
       )}
-      {!isImgShown && (
-        <FiUploadCloud className={styles.icon} size={24} color="var(--dark)" />
-      )}
+      {!isImgShown && <Component />}
       <input
         className={styles.input}
         type="file"
@@ -50,6 +62,7 @@ export default function ImageInput({
         id={id}
         value={value}
         onChange={onChange}
+        style={{ width, height }}
       />
     </div>
   );

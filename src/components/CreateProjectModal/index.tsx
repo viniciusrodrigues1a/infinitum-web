@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 
+import { FiUploadCloud } from "react-icons/fi";
 import styles from "./CreateProjectModal.module.css";
 
 import CreateButton from "../CreateButton";
@@ -131,6 +132,17 @@ export default function CreateProjectModal({
                   src={imagePreview}
                   id="project-image"
                   onChange={handleOnImageInputChange}
+                  width="6rem"
+                  height="6rem"
+                  component={() => (
+                    <div id={styles.imageInput}>
+                      <FiUploadCloud
+                        className={styles.icon}
+                        size={24}
+                        color="var(--dark)"
+                      />
+                    </div>
+                  )}
                 />
               </div>
 

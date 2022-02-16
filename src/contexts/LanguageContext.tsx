@@ -4,7 +4,7 @@ import { languages, Language, SupportedLanguages } from "../languages";
 type LanguageContextData = {
   language: Language;
   isoCode: string;
-  changeLanguageTo(language: keyof typeof languages): void;
+  changeLanguageTo(isoCode: string): void;
 };
 
 type LanguageProviderProps = {
@@ -44,9 +44,11 @@ export const LanguageProvider = ({
     setLanguageIfSupported(browserLanguage);
   }, []);
 
-  function changeLanguageTo(language: SupportedLanguages) {
-    setIsoCode(language);
-    setLanguage(languages[language].content);
+  function changeLanguageTo(isoCode: string) {
+    if (isoCode in languages) {
+      setIsoCode(isoCode);
+      setLanguage(languages[isoCode as SupportedLanguages].content);
+    }
   }
 
   return (

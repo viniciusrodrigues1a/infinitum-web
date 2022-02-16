@@ -1,0 +1,33 @@
+@import "../_shared/Input.variables.scss";
+
+.container {
+  position: relative;
+}
+
+.button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: normal;
+}
+
+.optionsDropdown {
+  position: absolute;
+  width: 100%;
+  background-color: #efefef;
+  margin-top: 0.5rem;
+  padding: $inputPadding;
+  border-radius: 4px;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.15);
+  border: 1px solid #c0c0c0;
+}
+
+.itemButtonWrapper {
+  display: block;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
