@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { FiClipboard, FiAlignLeft } from "react-icons/fi";
+
 import Header from "../../components/Header";
 import { useLanguage } from "../../contexts/LanguageContext";
 import { useSidebar } from "../../contexts/SidebarContext";

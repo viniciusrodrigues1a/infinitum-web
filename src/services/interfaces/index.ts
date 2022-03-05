@@ -20,3 +20,5 @@ export * from "./IUpdateIssueGroupColorService";
 export * from "./IListLanguagesService";
 export * from "./IFindOneAccountService";
 export * from "./IUpdateAccountService";
+export * from "./IMarkNotificationAsReadService";
+export * from "./IMarkAllNotificationsAsReadService";

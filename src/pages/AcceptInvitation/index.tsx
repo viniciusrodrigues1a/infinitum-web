@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 
 import styles from "./AcceptInvitation.module.scss";
@@ -30,8 +30,17 @@ export default function AcceptInvitation(): React.ReactElement {
   );
   const [countdown, setCountdown] = useState(3);
 
+  const hasRunRef = useRef(false);
+
   const acceptInvitation = useCallback(async () => {
     if (!isReadyForAuthRequests) return;
+
+    if (!hasRunRef.current) {
+      // TODO REFACTOR
+      hasRunRef.current = true;
+    } else {
+      return;
+    }
 
     const response = await acceptInvitationService.acceptInvitation({
       invitationToken: params.invitationToken,

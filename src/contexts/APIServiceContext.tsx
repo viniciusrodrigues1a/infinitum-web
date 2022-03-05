@@ -28,6 +28,8 @@ import {
   IListLanguagesService,
   IListProjectsService,
   ILoginService,
+  IMarkAllNotificationsAsReadService,
+  IMarkNotificationAsReadService,
   IMoveIssueService,
   IRegisterService,
   IUpdateAccountService,
@@ -46,6 +48,8 @@ import KickParticipantService from "../services/KickParticipantService";
 import ListLanguagesService from "../services/ListLanguages";
 import ListProjectsService from "../services/ListProjectsService";
 import LoginService from "../services/LoginService";
+import MarkAllNotificationsAsReadService from "../services/MarkAllNotificationsAsReadService";
+import MarkNotificationAsReadService from "../services/MarkNotificationAsReadService";
 import MoveIssueService from "../services/MoveIssueService";
 import RegisterService from "../services/RegisterService";
 import UpdateAccountService from "../services/UpdateAccountService";
@@ -85,6 +89,8 @@ type APIServiceContextData = {
   listLanguagesService: IListLanguagesService;
   findOneAccountService: IFindOneAccountService;
   updateAccountService: IUpdateAccountService;
+  markNotificationAsReadService: IMarkNotificationAsReadService;
+  markAllNotificationsAsReadService: IMarkAllNotificationsAsReadService;
 };
 
 type APIServiceProviderProps = {
@@ -135,6 +141,14 @@ export const APIServiceProvider = ({
       listLanguagesService: new ListLanguagesService(api),
       findOneAccountService: new FindOneAccountService(api, lang),
       updateAccountService: new UpdateAccountService(api),
+      markNotificationAsReadService: new MarkNotificationAsReadService(
+        api,
+        lang
+      ),
+      markAllNotificationsAsReadService: new MarkAllNotificationsAsReadService(
+        api,
+        lang
+      ),
     } as Omit<APIServiceContextData, "isReadyForAuthRequests">;
   }, [language]);
 

@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { FiUser } from "react-icons/fi";
+import React, { useEffect, useRef, useState } from "react";
+import { FiBell } from "react-icons/fi";
+import { RiCheckDoubleFill } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
 
 import styles from "./Header.module.css";
 
 import { useSession } from "../../contexts/SessionContext";
 
+import Notification from "../Notification";
 import ExpandableHamburger from "../ExpandableHamburger";
 import AccountAvatar from "../AccountAvatar";
+
 import RoutesEnum from "../../routes/type-defs/RoutesEnum";
 import { useAccount } from "../../contexts/AccountContext";
 import { useLanguage } from "../../contexts/LanguageContext";
+import { useNotifications } from "../../contexts/NotificationsContext";
+import { useAPIService } from "../../contexts/APIServiceContext";
 
 type HeaderProps = {
   openSidebar: () => void;
@@ -39,8 +44,14 @@ export default function Header({
       components: { header: headerLanguage },
     },
   } = useLanguage();
+  const { markAllNotificationsAsReadService } = useAPIService();
+  const { notifications, unreadNotificationsAmount } = useNotifications();
 
   const [isDropdownShown, setIsDropdownShown] = useState(false);
+  const [isNotificationsDropdownShown, setIsNotificationsDropdownShown] =
+    useState(false);
+
+  const notificationsDropdownDivRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const body = document.querySelector("body");
@@ -48,16 +59,25 @@ export default function Header({
       return;
     }
 
-    function onClick() {
+    function onClick(e: MouseEvent) {
       if (isDropdownShown) {
         setIsDropdownShown(false);
+      }
+
+      let clickedInsideNotificationsDropdown = false;
+      if (notificationsDropdownDivRef.current) {
+        clickedInsideNotificationsDropdown =
+          notificationsDropdownDivRef.current.contains(e.target as Node);
+      }
+      if (isNotificationsDropdownShown && !clickedInsideNotificationsDropdown) {
+        setIsNotificationsDropdownShown(false);
       }
     }
 
     body.addEventListener("click", onClick);
 
     return () => body.removeEventListener("click", onClick);
-  }, [isDropdownShown]);
+  }, [isDropdownShown, isNotificationsDropdownShown]);
 
   function navigateToProfilePage() {
     history.push(RoutesEnum.PROFILE);
@@ -87,6 +107,55 @@ export default function Header({
         {RightSideComponent && <RightSideComponent />}
 
         <div id={styles.userAvatarWrapper}>
+          <div id={styles.notificationsWrapper}>
+            <button
+              type="button"
+              id={styles.notificationsBellWrapper}
+              onClick={() =>
+                setIsNotificationsDropdownShown(!isNotificationsDropdownShown)
+              }
+            >
+              <FiBell
+                color="var(--dark)"
+                size={28}
+                fill={unreadNotificationsAmount > 0 ? "var(--dark)" : "none"}
+              />
+
+              {unreadNotificationsAmount > 0 && (
+                <div id={styles.notificationCount}>
+                  <span>{unreadNotificationsAmount}</span>
+                </div>
+              )}
+            </button>
+
+            {isNotificationsDropdownShown && (
+              <div
+                ref={notificationsDropdownDivRef}
+                id={styles.notificationsDropdown}
+              >
+                <div id={styles.notificationsDropdownHeader}>
+                  <strong id={styles.notificationsDropdownTitle}>
+                    Notifications
+                  </strong>
+
+                  <button
+                    id={styles.markAllAsReadButton}
+                    type="button"
+                    onClick={() =>
+                      markAllNotificationsAsReadService.markAllNotificationsAsRead()
+                    }
+                  >
+                    <RiCheckDoubleFill color="#4376d8" size={24} />
+                    <span>Mark all as read</span>
+                  </button>
+                </div>
+                {notifications.map((n, index) => (
+                  <Notification notification={n} key={index.toString()} />
+                ))}
+              </div>
+            )}
+          </div>
+
           <AccountAvatar
             name={account.name}
             image={account.image}
