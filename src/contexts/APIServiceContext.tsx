@@ -36,6 +36,7 @@ import {
   IUpdateIssueGroupColorService,
   IUpdateIssueGroupFinalStatusService,
   IUpdateIssueService,
+  IUpdateNotificationSettingsService,
   IUpdateProjectImageService,
   IUpdateRoleService,
   IValidateJWTService,
@@ -56,6 +57,7 @@ import UpdateAccountService from "../services/UpdateAccountService";
 import UpdateIssueGroupColorService from "../services/UpdateIssueGroupColorService";
 import UpdateIssueGroupFinalStatusService from "../services/UpdateIssueGroupFinalStatusService";
 import UpdateIssueService from "../services/UpdateIssueService";
+import UpdateNotificationSettingsService from "../services/UpdateNotificationSettingsService";
 import UpdateProjectImageService from "../services/UpdateProjectImageService";
 import UpdateProjectService from "../services/UpdateProjectService";
 import UpdateRoleService from "../services/UpdateRoleService";
@@ -91,6 +93,7 @@ type APIServiceContextData = {
   updateAccountService: IUpdateAccountService;
   markNotificationAsReadService: IMarkNotificationAsReadService;
   markAllNotificationsAsReadService: IMarkAllNotificationsAsReadService;
+  updateNotificationSettingsService: IUpdateNotificationSettingsService;
 };
 
 type APIServiceProviderProps = {
@@ -146,6 +149,10 @@ export const APIServiceProvider = ({
         lang
       ),
       markAllNotificationsAsReadService: new MarkAllNotificationsAsReadService(
+        api,
+        lang
+      ),
+      updateNotificationSettingsService: new UpdateNotificationSettingsService(
         api,
         lang
       ),

@@ -6,24 +6,21 @@ import Title from "../../components/Title";
 import Subtitle from "../../components/Subtitle";
 import CreateButton from "../../components/CreateButton";
 import NotificationPreference from "./components/NotificationPreference";
+import { useAPIService } from "../../contexts/APIServiceContext";
+import showToast from "../../utils/showToast";
+import { UpdateNotificationSettingsServiceRequest } from "../../services/interfaces";
 
-type SettingsMethods = {
-  push: boolean;
-  email: boolean;
-};
-
-type Settings = {
-  invitation: SettingsMethods;
-  kicked: SettingsMethods;
-  roleUpdated: SettingsMethods;
-};
+type Settings = UpdateNotificationSettingsServiceRequest["settings"];
 
 export default function NotificationSettings(): React.ReactElement {
+  const { updateNotificationSettingsService } = useAPIService();
+
   const [settings, setSettings] = useState<Settings>({
     invitation: { email: false, push: false },
     kicked: { email: false, push: false },
     roleUpdated: { email: false, push: false },
   });
+  const [loading, setLoading] = useState(false);
 
   /*
    * Example: setSettingsEntry("invitation.push")(true);
@@ -33,7 +30,7 @@ export default function NotificationSettings(): React.ReactElement {
     return (val: boolean) => {
       const [key, innerKey] = entry.split(".") as [
         keyof Settings,
-        keyof SettingsMethods
+        "email" | "push"
       ];
 
       setSettings((s) => {
@@ -45,7 +42,22 @@ export default function NotificationSettings(): React.ReactElement {
     };
   }
 
-  useEffect(() => console.log(settings), [settings]);
+  async function handleSubmit() {
+    setLoading(true);
+
+    const response =
+      await updateNotificationSettingsService.updateNotificationSettings({
+        settings,
+      });
+
+    if (response.error) {
+      showToast("Error", response.error);
+    } else {
+      showToast("Success");
+    }
+
+    setLoading(false);
+  }
 
   return (
     <div id={styles.container}>
@@ -72,11 +84,15 @@ export default function NotificationSettings(): React.ReactElement {
         />
       </div>
 
-      <CreateButton
-        title="Atualizar preferências"
-        id={styles.submitButton}
-        icon={() => <></>}
-      />
+      <div style={{ opacity: loading ? 0.7 : 1 }}>
+        <CreateButton
+          title="Atualizar preferências"
+          disabled={loading}
+          id={styles.submitButton}
+          icon={() => <></>}
+          onClick={handleSubmit}
+        />
+      </div>
     </div>
   );
 }
