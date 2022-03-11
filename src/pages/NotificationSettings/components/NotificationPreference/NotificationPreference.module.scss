@@ -1,0 +1,36 @@
+.preference {
+  display: flex;
+  align-items: center;
+
+  & + & {
+    margin-top: 1.5rem;
+  }
+
+  span {
+    font-weight: normal;
+    font-family: var(--text);
+    color: var(--dark);
+    width: 30rem;
+  }
+
+  .preferenceButtons {
+    margin-left: 2rem;
+
+    .preferenceButton {
+      background: none;
+      background-color: #f9f9f9;
+      border: none;
+      border: 1px solid #d1d1d1;
+      cursor: pointer;
+      padding: 0.4rem 1rem;
+      font-weight: normal;
+      font-family: var(--text);
+
+      &:first-child {
+        border-right: 1px solid transparent;
+        margin-right: -1px;
+      }
+    }
+  }
+}
+

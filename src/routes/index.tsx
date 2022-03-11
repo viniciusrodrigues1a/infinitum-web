@@ -10,6 +10,7 @@ import Projects from "../pages/Projects";
 import Project from "../pages/Project";
 import AcceptInvitation from "../pages/AcceptInvitation";
 import Profile from "../pages/Profile";
+import NotificationSettings from "../pages/NotificationSettings";
 
 import { LanguageProvider } from "../contexts/LanguageContext";
 import { SessionProvider } from "../contexts/SessionContext";
@@ -66,6 +67,12 @@ export default function Routes(): React.ReactElement {
                           exact
                           path={RoutesEnum.PROFILE}
                           component={Profile}
+                          isPrivate
+                        />
+                        <AuthorizedRoute
+                          exact
+                          path={RoutesEnum.NOTIFICATION_PREFERENCES}
+                          component={NotificationSettings}
                           isPrivate
                         />
                         <AuthorizedRoute

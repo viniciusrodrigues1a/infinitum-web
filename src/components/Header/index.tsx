@@ -251,6 +251,15 @@ export default function Header({
                 <button
                   type="button"
                   className={styles.dropdownButton}
+                  onClick={() =>
+                    history.push(RoutesEnum.NOTIFICATION_PREFERENCES)
+                  }
+                >
+                  Notifications
+                </button>
+                <button
+                  type="button"
+                  className={styles.dropdownButton}
                   onClick={clearSession}
                 >
                   {headerLanguage.logoutText}
