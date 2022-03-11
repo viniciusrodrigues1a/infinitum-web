@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FiBell } from "react-icons/fi";
+import { FiBell, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { RiCheckDoubleFill } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
 
@@ -50,6 +50,10 @@ export default function Header({
   const [isDropdownShown, setIsDropdownShown] = useState(false);
   const [isNotificationsDropdownShown, setIsNotificationsDropdownShown] =
     useState(false);
+  const [notificationPageRange, setNotificationPageRange] = useState<
+    Array<number>
+  >([0, 3]);
+  const [pageNumber, setPageNumber] = useState(1);
 
   const notificationsDropdownDivRef = useRef<HTMLDivElement>(null);
 
@@ -78,6 +82,35 @@ export default function Header({
 
     return () => body.removeEventListener("click", onClick);
   }, [isDropdownShown, isNotificationsDropdownShown]);
+
+  function prevPage(offset: number) {
+    return () => {
+      let start = notificationPageRange[0] - offset;
+      let end = notificationPageRange[1] - offset;
+      if (start < 0) {
+        start = notifications.length - 1;
+        end = notifications.length - 1 + offset;
+      }
+
+      setPageNumber(Math.floor(end / 3));
+      setNotificationPageRange([start, end]);
+    };
+  }
+
+  function nextPage(offset: number) {
+    return () => {
+      let start = notificationPageRange[0] + offset;
+      let end = notificationPageRange[1] + offset;
+      if (start > notifications.length) {
+        start = 0;
+        end = offset;
+        setPageNumber(1);
+      }
+
+      setPageNumber(Math.floor(end / 3));
+      setNotificationPageRange([start, end]);
+    };
+  }
 
   function navigateToProfilePage() {
     history.push(RoutesEnum.PROFILE);
@@ -138,20 +171,48 @@ export default function Header({
                     Notifications
                   </strong>
 
-                  <button
-                    id={styles.markAllAsReadButton}
-                    type="button"
-                    onClick={() =>
-                      markAllNotificationsAsReadService.markAllNotificationsAsRead()
-                    }
-                  >
-                    <RiCheckDoubleFill color="#4376d8" size={24} />
-                    <span>Mark all as read</span>
-                  </button>
+                  {notifications.length > 0 && (
+                    <button
+                      id={styles.markAllAsReadButton}
+                      type="button"
+                      onClick={() =>
+                        markAllNotificationsAsReadService.markAllNotificationsAsRead()
+                      }
+                    >
+                      <RiCheckDoubleFill color="#4376d8" size={24} />
+                      <span>Mark all as read</span>
+                    </button>
+                  )}
                 </div>
-                {notifications.map((n, index) => (
-                  <Notification notification={n} key={index.toString()} />
-                ))}
+                <>
+                  {notifications
+                    .slice(notificationPageRange[0], notificationPageRange[1])
+                    .map((n, index) => (
+                      <Notification notification={n} key={index.toString()} />
+                    ))}
+
+                  {notifications.length === 0 && (
+                    <div className={styles.notificationsEmpty}>
+                      <div className={styles.notificationsEmptyIcon}>
+                        <FiBell color="#909090" size={76} />
+                        <div className={styles.notificationsEmptyIconLine} />
+                      </div>
+                      <span>Oops. There are no notifications here.</span>
+                    </div>
+                  )}
+
+                  {notifications.length > 0 && (
+                    <div className={styles.paginationButtons}>
+                      <button type="button" onClick={prevPage(3)}>
+                        <FiChevronLeft color="var(--dark)" size={28} />
+                      </button>
+                      <strong>{pageNumber}</strong>
+                      <button type="button" onClick={nextPage(3)}>
+                        <FiChevronRight color="var(--dark)" size={28} />
+                      </button>
+                    </div>
+                  )}
+                </>
               </div>
             )}
           </div>

@@ -121,6 +121,59 @@
   transition: all 0.1s;
 }
 
+.notificationsEmpty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.notificationsEmptyIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.notificationsEmptyIconLine {
+  width: 8rem;
+  height: 4px;
+  transform: rotate(-45deg);
+  background-color: #909090;
+  position: absolute;
+}
+
+.notificationsEmpty span {
+  font-family: var(--text);
+  font-weight: normal;
+  margin-top: 1.5rem;
+  color: var(--dark);
+}
+
+#notificationsDropdown .paginationButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#notificationsDropdown .paginationButtons button {
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+#notificationsDropdown .paginationButtons strong {
+  font-family: var(--text);
+  font-weight: bold;
+  color: var(--dark);
+  margin: 0 2rem;
+}
+
 #markAllAsReadButton:hover {
   color: #4376d8;
   opacity: 0.8;

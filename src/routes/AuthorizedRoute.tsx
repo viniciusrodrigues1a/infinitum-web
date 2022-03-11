@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { Redirect, Route, RouteProps } from "react-router-dom";
 import { SessionContext } from "../contexts/SessionContext";
 import AuthenticatedLayout from "../layouts/AuthenticatedLayout";
+import Loader from "../components/Loader";
 import RoutesEnum from "./type-defs/RoutesEnum";
 
 type AuthorizedRouteProps = {
