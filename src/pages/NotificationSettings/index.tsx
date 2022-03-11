@@ -9,11 +9,17 @@ import NotificationPreference from "./components/NotificationPreference";
 import { useAPIService } from "../../contexts/APIServiceContext";
 import showToast from "../../utils/showToast";
 import { UpdateNotificationSettingsServiceRequest } from "../../services/interfaces";
+import { useEffectOnce } from "../../hooks";
+import { useSession } from "../../contexts/SessionContext";
 
 type Settings = UpdateNotificationSettingsServiceRequest["settings"];
 
 export default function NotificationSettings(): React.ReactElement {
-  const { updateNotificationSettingsService } = useAPIService();
+  const { isReady } = useSession();
+  const {
+    updateNotificationSettingsService,
+    findOneNotificationSettingsService,
+  } = useAPIService();
 
   const [settings, setSettings] = useState<Settings>({
     invitation: { email: false, push: false },
@@ -21,6 +27,15 @@ export default function NotificationSettings(): React.ReactElement {
     roleUpdated: { email: false, push: false },
   });
   const [loading, setLoading] = useState(false);
+
+  useEffectOnce(() => {
+    (async () => {
+      const response =
+        await findOneNotificationSettingsService.findOneNotificationSettings();
+
+      if (!response.error && response.data) setSettings(response.data);
+    })();
+  }, isReady);
 
   /*
    * Example: setSettingsEntry("invitation.push")(true);
@@ -68,16 +83,19 @@ export default function NotificationSettings(): React.ReactElement {
 
       <div id={styles.preferences}>
         <NotificationPreference
+          initialState={settings.invitation}
           description="Sou convidado para um projeto"
           onPushOptionChange={setSettingsEntry("invitation.push")}
           onEmailOptionChange={setSettingsEntry("invitation.email")}
         />
         <NotificationPreference
+          initialState={settings.kicked}
           description="Sou removido de um projeto"
           onPushOptionChange={setSettingsEntry("kicked.push")}
           onEmailOptionChange={setSettingsEntry("kicked.email")}
         />
         <NotificationPreference
+          initialState={settings.roleUpdated}
           description="Minha função em um projeto é atualizada"
           onPushOptionChange={setSettingsEntry("roleUpdated.push")}
           onEmailOptionChange={setSettingsEntry("roleUpdated.email")}

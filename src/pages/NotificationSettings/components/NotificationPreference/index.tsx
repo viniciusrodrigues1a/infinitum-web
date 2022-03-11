@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./NotificationPreference.module.scss";
 
@@ -6,15 +6,22 @@ type NotificationPreferenceProps = {
   description: string;
   onPushOptionChange: (b: boolean) => void;
   onEmailOptionChange: (b: boolean) => void;
+  initialState: { email: boolean; push: boolean };
 };
 
 export default function NotificationPreference({
   description,
   onPushOptionChange,
   onEmailOptionChange,
+  initialState,
 }: NotificationPreferenceProps): React.ReactElement {
-  const [isPushActive, setIsPushActive] = useState(false);
-  const [isEmailActive, setIsEmailActive] = useState(false);
+  const [isPushActive, setIsPushActive] = useState(initialState.push);
+  const [isEmailActive, setIsEmailActive] = useState(initialState.email);
+
+  useEffect(() => {
+    setIsPushActive(initialState.push);
+    setIsEmailActive(initialState.email);
+  }, [initialState]);
 
   function onPushClick() {
     onPushOptionChange(!isPushActive);

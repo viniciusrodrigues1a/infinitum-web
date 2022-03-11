@@ -23,3 +23,4 @@ export * from "./IUpdateAccountService";
 export * from "./IMarkNotificationAsReadService";
 export * from "./IMarkAllNotificationsAsReadService";
 export * from "./IUpdateNotificationSettingsService";
+export * from "./IFindOneNotificationSettingsService";

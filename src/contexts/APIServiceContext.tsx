@@ -13,6 +13,7 @@ import CreateProjectService from "../services/CreateProjectService";
 import DeleteIssueService from "../services/DeleteIssueService";
 import DeleteProjectService from "../services/DeleteProjectService";
 import FindOneAccountService from "../services/FindOneAccountService";
+import FindOneNotificationSettingsService from "../services/FindOneNotificationSettingsService";
 import FindProjectImageService from "../services/FindProjectImageService";
 import GetIssuesOverviewService from "../services/GetIssuesOverviewService";
 import {
@@ -21,6 +22,7 @@ import {
   ICreateProjectService,
   IDeleteIssueService,
   IFindOneAccountService,
+  IFindOneNotificationSettingsService,
   IFindProjectImageService,
   IGetIssuesOverviewService,
   IInviteToProjectService,
@@ -94,6 +96,7 @@ type APIServiceContextData = {
   markNotificationAsReadService: IMarkNotificationAsReadService;
   markAllNotificationsAsReadService: IMarkAllNotificationsAsReadService;
   updateNotificationSettingsService: IUpdateNotificationSettingsService;
+  findOneNotificationSettingsService: IFindOneNotificationSettingsService;
 };
 
 type APIServiceProviderProps = {
@@ -156,6 +159,8 @@ export const APIServiceProvider = ({
         api,
         lang
       ),
+      findOneNotificationSettingsService:
+        new FindOneNotificationSettingsService(api, lang),
     } as Omit<APIServiceContextData, "isReadyForAuthRequests">;
   }, [language]);
 
