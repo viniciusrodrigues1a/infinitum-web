@@ -197,6 +197,19 @@ export const esEs: Language = {
       successMessage: "Perfil actualizado con éxito",
       failureMessage: "No se pudo actualizar tu perfil",
     },
+    notificationSettings: {
+      title: "Configuración de las notificaciones",
+      subtitle:
+        "Cambie su configuración y la forma en que prefiere recibir sus notificaciones",
+      preferences: {
+        invitation: "Me invitan a un proyecto",
+        kicked: "Me expulsan de un proyecto",
+        roleUpdated: "Se actualiza mi función en un proyecto",
+      },
+      updateButtonText: "Actualiza tus preferencias",
+      successMessage: "Configuración actualizada con éxito",
+      failureMessage: "No se pudo actualizar la configuración",
+    },
   },
   components: {
     header: {

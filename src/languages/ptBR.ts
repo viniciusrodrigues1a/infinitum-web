@@ -192,6 +192,19 @@ export const ptBR: Language = {
       successMessage: "Perfil atualizado com sucesso",
       failureMessage: "Não foi possível atualizar seu perfil",
     },
+    notificationSettings: {
+      title: "Configuração de notificações",
+      subtitle:
+        "Configure suas configurações e a forma como prefere receber suas notificações",
+      preferences: {
+        invitation: "Sou convidado para um projeto",
+        kicked: "Sou removido de um projeto",
+        roleUpdated: "Minha função em um projeto é atualizada",
+      },
+      updateButtonText: "Atualizar preferências",
+      successMessage: "Configurações atualizadas com sucesso",
+      failureMessage: "Não foi possível atualizar suas configurações",
+    },
   },
   components: {
     header: {

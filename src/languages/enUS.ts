@@ -191,6 +191,19 @@ export const enUS: Language = {
       successMessage: "Profile updated succesfully",
       failureMessage: "Your profile couldn't be updated",
     },
+    notificationSettings: {
+      title: "Notification settings",
+      subtitle:
+        "Change your settings and the way you'd rather receive your notifications",
+      preferences: {
+        invitation: "I'm invited to a project",
+        kicked: "I'm kicked out of a project",
+        roleUpdated: "My role in a project is updated",
+      },
+      updateButtonText: "Update your preferences",
+      successMessage: "Settings updated sucessfully",
+      failureMessage: "Couldn't update your settings",
+    },
   },
   components: {
     header: {

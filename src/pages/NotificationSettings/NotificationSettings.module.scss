@@ -26,3 +26,30 @@
     margin-top: 4rem;
   }
 }
+
+#hamburgerWrapper {
+  width: 2.75rem;
+  height: 1.625rem;
+  position: absolute;
+  left: 1.5rem;
+  top: 1.5rem;
+  display: initial;
+
+  /* 996px */
+  @media (min-width: 62.25rem) {
+    display: none;
+  }
+}
+
+.hamburger {
+  left: 1.5rem;
+}
+
+.animatedHamburger {
+  position: fixed !important;
+  z-index: 10;
+  left: 60%;
+  transform: translateX(-200%);
+  transition: all 0.2s;
+  transition-timing-function: ease-in;
+}

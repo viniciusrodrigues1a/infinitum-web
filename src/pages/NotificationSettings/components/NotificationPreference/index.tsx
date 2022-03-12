@@ -35,7 +35,7 @@ export default function NotificationPreference({
 
   return (
     <div className={styles.preference}>
-      <span>{description}</span>
+      <span className={styles.description}>{description}</span>
       <div className={styles.preferenceButtons}>
         <button
           type="button"

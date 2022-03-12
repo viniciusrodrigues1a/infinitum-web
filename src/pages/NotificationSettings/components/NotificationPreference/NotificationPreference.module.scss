@@ -1,20 +1,41 @@
 .preference {
   display: flex;
-  align-items: center;
+  flex-direction: column;
 
   & + & {
-    margin-top: 1.5rem;
+    margin-top: 3.5rem;
+
+    /* 700px */
+    @media (min-width: 43.75rem) {
+      margin-top: 1.5rem;
+    }
   }
 
-  span {
+  /* 700px */
+  @media (min-width: 43.75rem) {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .description {
     font-weight: normal;
     font-family: var(--text);
     color: var(--dark);
-    width: 30rem;
+
+    /* 700px */
+    @media (min-width: 43.75rem) {
+      width: 30rem;
+    }
   }
 
   .preferenceButtons {
-    margin-left: 2rem;
+    margin-top: 1rem;
+
+    /* 700px */
+    @media (min-width: 43.75rem) {
+      margin-top: 0;
+      margin-left: 2rem;
+    }
 
     .preferenceButton {
       background: none;
@@ -33,4 +54,3 @@
     }
   }
 }
-
