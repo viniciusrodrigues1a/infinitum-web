@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./NotificationSettings.module.scss";
 
@@ -10,7 +10,6 @@ import ExpandableHamburger from "../../components/ExpandableHamburger";
 
 import { useAPIService } from "../../contexts/APIServiceContext";
 import { useSession } from "../../contexts/SessionContext";
-import { useEffectOnce } from "../../hooks";
 import showToast from "../../utils/showToast";
 import { UpdateNotificationSettingsServiceRequest } from "../../services/interfaces";
 import { useSidebar } from "../../contexts/SidebarContext";
@@ -38,14 +37,16 @@ export default function NotificationSettings(): React.ReactElement {
   });
   const [loading, setLoading] = useState(false);
 
-  useEffectOnce(() => {
+  useEffect(() => {
+    if (!isReady) return;
+
     (async () => {
       const response =
         await findOneNotificationSettingsService.findOneNotificationSettings();
 
       if (!response.error && response.data) setSettings(response.data);
     })();
-  }, isReady);
+  }, [isReady, findOneNotificationSettingsService]);
 
   /*
    * Example: setSettingsEntry("invitation.push")(true);
