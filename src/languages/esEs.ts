@@ -205,6 +205,7 @@ export const esEs: Language = {
         invitation: "Me invitan a un proyecto",
         kicked: "Me expulsan de un proyecto",
         roleUpdated: "Se actualiza mi función en un proyecto",
+        issueAssigned: "Me asignan un problema",
       },
       updateButtonText: "Actualiza tus preferencias",
       successMessage: "Configuración actualizada con éxito",

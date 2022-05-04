@@ -6,6 +6,7 @@ export type NotificationSettingsLanguage = {
     invitation: string;
     kicked: string;
     roleUpdated: string;
+    issueAssigned: string;
   };
 
   updateButtonText: string;

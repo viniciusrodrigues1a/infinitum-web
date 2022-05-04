@@ -199,6 +199,7 @@ export const enUS: Language = {
         invitation: "I'm invited to a project",
         kicked: "I'm kicked out of a project",
         roleUpdated: "My role in a project is updated",
+        issueAssigned: "I'm assigned an issue",
       },
       updateButtonText: "Update your preferences",
       successMessage: "Settings updated sucessfully",

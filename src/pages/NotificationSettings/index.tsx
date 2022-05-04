@@ -34,6 +34,7 @@ export default function NotificationSettings(): React.ReactElement {
     invitation: { email: false, push: false },
     kicked: { email: false, push: false },
     roleUpdated: { email: false, push: false },
+    issueAssigned: { email: false, push: false },
   });
   const [loading, setLoading] = useState(false);
 
@@ -123,6 +124,12 @@ export default function NotificationSettings(): React.ReactElement {
           description={notificationSettingsLanguage.preferences.roleUpdated}
           onPushOptionChange={setSettingsEntry("roleUpdated.push")}
           onEmailOptionChange={setSettingsEntry("roleUpdated.email")}
+        />
+        <NotificationPreference
+          initialState={settings.issueAssigned}
+          description={notificationSettingsLanguage.preferences.roleUpdated}
+          onPushOptionChange={setSettingsEntry("issueAssigned.push")}
+          onEmailOptionChange={setSettingsEntry("issueAssigned.email")}
         />
       </div>
 

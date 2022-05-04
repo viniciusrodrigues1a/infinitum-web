@@ -200,6 +200,7 @@ export const ptBR: Language = {
         invitation: "Sou convidado para um projeto",
         kicked: "Sou removido de um projeto",
         roleUpdated: "Minha função em um projeto é atualizada",
+        issueAssigned: "Sou atribuído a um ticket",
       },
       updateButtonText: "Atualizar preferências",
       successMessage: "Configurações atualizadas com sucesso",
