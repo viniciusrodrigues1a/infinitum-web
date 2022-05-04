@@ -1,9 +1,11 @@
 import { AxiosInstance } from "axios";
 import { AxiosLanguage } from "../languages/types/libs";
-import { IUpdateIssueService, UpdateIssueServiceRequest } from "./interfaces";
+import { IAssignIssueToAccountService } from "./interfaces";
 import { APIResponse } from "./type-defs/APIResponse";
 
-export default class UpdateIssueService implements IUpdateIssueService {
+export default class AssignIssueToAccountService
+  implements IAssignIssueToAccountService
+{
   private readonly axiosInstance: AxiosInstance;
 
   private readonly language: AxiosLanguage;
@@ -13,21 +15,11 @@ export default class UpdateIssueService implements IUpdateIssueService {
     this.language = language;
   }
 
-  async updateIssue({
-    issueId,
-    newTitle,
-    newCompleted,
-    newDescription,
-    newExpiresAt,
-  }: UpdateIssueServiceRequest): Promise<APIResponse<null>> {
+  async assignIssueToAccount(
+    body: Partial<{ issueId: string; assignedToEmail: string }>
+  ): Promise<APIResponse<null>> {
     try {
-      const body = {
-        newTitle,
-        newCompleted,
-        newExpiresAt,
-        newDescription,
-      };
-      await this.axiosInstance.put(`/issues/${issueId}`, body);
+      await this.axiosInstance.patch(`/issues/${body.issueId}/assign`, body);
 
       return { data: null, error: false };
     } catch (err) {

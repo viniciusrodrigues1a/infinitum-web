@@ -45,8 +45,12 @@ export default function UpdateIssueModal({
       pages: { project: projectLanguage },
     },
   } = useLanguage();
-  const { updateIssueService, moveIssueService, deleteIssueService } =
-    useAPIService();
+  const {
+    updateIssueService,
+    moveIssueService,
+    deleteIssueService,
+    assignIssueToAccountService,
+  } = useAPIService();
   const { fetchProjects } = useProjects();
 
   const [title, setTitle] = useState("");
@@ -92,6 +96,7 @@ export default function UpdateIssueModal({
 
   async function handleSubmit() {
     await updateIssue();
+    await assignIssueToAccount();
     await moveIssue();
     handleCloseModal();
     await fetchProjects();
@@ -112,7 +117,16 @@ export default function UpdateIssueModal({
       newDescription: description,
       newExpiresAt: date,
       newCompleted: issue.completed,
-      newAssignedToEmail: assignedToEmail,
+    });
+
+    const toastMsg = response.userFriendlyMessage;
+    if (toastMsg) showToast(toastMsg, response.error);
+  }
+
+  async function assignIssueToAccount() {
+    const response = await assignIssueToAccountService.assignIssueToAccount({
+      issueId: issue.issueId,
+      assignedToEmail: assignedToEmail || null,
     });
 
     const toastMsg = response.userFriendlyMessage;
@@ -181,7 +195,7 @@ export default function UpdateIssueModal({
                   }
                   options={participants.map((participant) => ({
                     value: participant.account.email,
-                    text: participant.account.name,
+                    text: `${participant.account.name} (${participant.account.email})`,
                   }))}
                   value={assignedToEmail || undefined}
                   onChange={(e) => setAssignedToEmail(e.target.value)}

@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import AcceptInvitationService from "../services/AcceptInvitationService";
 import api from "../services/api";
+import AssignIssueToAccountService from "../services/AssignIssueToAccountService";
 import CreateIssueGroupService from "../services/CreateIssueGroupService";
 import CreateIssueService from "../services/CreateIssueService";
 import CreateProjectService from "../services/CreateProjectService";
@@ -18,6 +19,7 @@ import FindProjectImageService from "../services/FindProjectImageService";
 import GetIssuesOverviewService from "../services/GetIssuesOverviewService";
 import {
   IAcceptInvitationService,
+  IAssignIssueToAccountService,
   ICreateIssueGroupService,
   ICreateProjectService,
   IDeleteIssueService,
@@ -97,6 +99,7 @@ type APIServiceContextData = {
   markAllNotificationsAsReadService: IMarkAllNotificationsAsReadService;
   updateNotificationSettingsService: IUpdateNotificationSettingsService;
   findOneNotificationSettingsService: IFindOneNotificationSettingsService;
+  assignIssueToAccountService: IAssignIssueToAccountService;
 };
 
 type APIServiceProviderProps = {
@@ -161,6 +164,7 @@ export const APIServiceProvider = ({
       ),
       findOneNotificationSettingsService:
         new FindOneNotificationSettingsService(api, lang),
+      assignIssueToAccountService: new AssignIssueToAccountService(api, lang),
     } as Omit<APIServiceContextData, "isReadyForAuthRequests">;
   }, [language]);
 
