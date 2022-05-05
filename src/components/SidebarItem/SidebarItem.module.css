@@ -132,9 +132,8 @@
   visibility: hidden;
   opacity: 0;
   position: absolute;
-  top: 50%;
+  top: 17px;
   right: -11.25rem;
-  transform: translateY(-50%);
 }
 
 .container:not(.collapsed) .sidebarActiveItemOverlaySvgWrapper {
