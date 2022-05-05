@@ -1,6 +1,7 @@
 import React, {
   createContext,
   useContext,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -44,10 +45,18 @@ export function NotificationsProvider({
     [notifications]
   );
 
-  useEffectOnce(() => {
-    socket.emit("newUser", session!.email);
-    setIsReady(true);
-  }, isSignedIn());
+  useEffect(() => {
+    if (session === null) {
+      setNotifications([]);
+    }
+  }, [session]);
+
+  useEffect(() => {
+    if (isSignedIn()) {
+      socket.emit("newUser", session!.email);
+      setIsReady(true);
+    }
+  }, [session, isSignedIn, socket]);
 
   useEffectOnce(() => {
     socket.on("loadNotifications", (notifications) => {
