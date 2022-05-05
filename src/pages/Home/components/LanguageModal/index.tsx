@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
 
 import styles from "./languageModal.module.css";
 import "./languageModal.css";

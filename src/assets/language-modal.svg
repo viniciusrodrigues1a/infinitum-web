@@ -2,12 +2,12 @@
 <g id="svg">
 <path id="background" d="M95.7797 3.5C99.2974 0 104.279 0 104.279 0H543.727C543.727 0 547.726 0 551.226 4C554.725 8 554.225 11 554.225 11V373.5C554.225 373.5 554.225 377.621 551.226 381C548.226 384.379 542.727 385 542.727 385H103.779C103.779 385 98.8245 385 95.2798 381C91.7351 377 92.2802 373.078 92.2802 373.078V11C92.2802 11 92.2621 7 95.7797 3.5Z" fill="#B6BCF0"/>
 <g id="layout">
-<g id="Vector" filter="url(#filter0_d)">
+<g id="Vector" filter="url(#filter0_d_331_313)">
 <path d="M363 78.7501H51.5C26.9233 78.7501 7 98.6734 7 123.25V434.75C7 459.327 26.9233 479.25 51.5 479.25H363C387.577 479.25 407.5 459.327 407.5 434.75V123.25C407.5 98.6734 387.577 78.7501 363 78.7501Z" fill="#F5F5F5"/>
-<path d="M363 78.7501H51.5C26.9233 78.7501 7 98.6734 7 123.25V434.75C7 459.327 26.9233 479.25 51.5 479.25H363C387.577 479.25 407.5 459.327 407.5 434.75V123.25C407.5 98.6734 387.577 78.7501 363 78.7501Z" stroke="#303030" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M363 78.7501H51.5C26.9233 78.7501 7 98.6734 7 123.25V434.75C7 459.327 26.9233 479.25 51.5 479.25H363C387.577 479.25 407.5 459.327 407.5 434.75V123.25C407.5 98.6734 387.577 78.7501 363 78.7501Z" stroke="#2B2B2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
-<path id="Vector_2" d="M7.25 157H407.75" stroke="#303030" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_3" d="M140.492 479L140.25 157" stroke="#303030" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M7.25 157H407.75" stroke="#2B2B2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M140.492 479L140.25 157" stroke="#2B2B2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <g id="text">
 <path id="Vector_4" d="M290.25 268H170.25" stroke="#ACACAC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -26,20 +26,20 @@
 <path id="Vector_17" d="M282.25 321H195.25" stroke="#ACACAC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <g id="textCloud2">
-<path id="Vector 9" d="M225.236 309.5C227.88 308.034 232.739 307 232.739 307H497.106C497.106 307 515 307.97 515 324.5C515 338 497.106 341 497.106 341H256.983L234.471 363V341C234.471 341 226.63 339.72 222.927 337C218.003 333.384 216.005 329.591 216 324C215.994 317.533 218.947 312.986 225.236 309.5Z" fill="#5A979B"/>
-<text id="infinitumText" fill="#EEEEEE" xml:space="preserve" style="white-space: pre" font-family="Lato" font-size="16" font-weight="500" letter-spacing="0px"><tspan x="233.25" y="329.692">Use o Infinitum onde estiver!</tspan></text>
+<path id="Vector 9" d="M225.359 304.723C228.039 303.127 232.963 302 232.963 302H500.867C500.867 302 519 303.056 519 321.062C519 335.768 500.867 339.036 500.867 339.036H257.531L234.718 363V339.036C234.718 339.036 226.773 337.641 223.019 334.679C218.03 330.74 216.006 326.609 216 320.518C215.994 313.473 218.986 308.52 225.359 304.723Z" fill="#5A979B"/>
+<text id="infinitumText" fill="#E5E5E5" xml:space="preserve" style="white-space: pre" font-family="Lato" font-size="15" font-weight="500" letter-spacing="0px"><tspan x="233" y="325.692">Use o Infinitum onde estiver!</tspan></text>
 </g>
 <g id="textCloud1">
-<path id="Vector 10" d="M168.384 208.92C169.926 207.794 172.759 207 172.759 207H247.449C247.449 207 257 208.834 257 221.527C257 231.893 247.449 233.107 247.449 233.107H186.893L173.769 250V233.107C173.769 233.107 169.198 232.124 167.038 230.036C164.168 227.259 163.003 224.347 163 220.054C162.996 215.088 164.718 211.596 168.384 208.92Z" fill="#9B5A78"/>
-<text id="welcomeText" fill="#EEEEEE" xml:space="preserve" style="white-space: pre" font-family="Lato" font-size="16" font-weight="500" letter-spacing="0px"><tspan x="172" y="224.692">Bem vindo</tspan></text>
+<path id="Vector 10" d="M169.644 206.054C171.547 204.85 175.043 204 175.043 204H267.214C267.214 204 279 205.962 279 219.541C279 230.63 267.214 231.929 267.214 231.929H192.485L176.289 250V231.929C176.289 231.929 170.648 230.877 167.983 228.643C164.441 225.673 163.004 222.557 163 217.964C162.995 212.652 165.12 208.917 169.644 206.054Z" fill="#9B5A78"/>
+<text id="welcomeText" fill="#E5E5E5" xml:space="preserve" style="white-space: pre" font-family="Lato" font-size="15" font-weight="500" letter-spacing="0px"><tspan x="172" y="223.692">Bem vindo</tspan></text>
 </g>
 <g id="menu">
-<path id="Vector_18" d="M376.25 179H394.25" stroke="#303030" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_19" d="M376.25 173H394.25" stroke="#303030" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_20" d="M376.25 185H394.25" stroke="#303030" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_18" d="M376.25 179H394.25" stroke="#2B2B2B" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_19" d="M376.25 173H394.25" stroke="#2B2B2B" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_20" d="M376.25 185H394.25" stroke="#2B2B2B" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <g id="layoutItem3">
-<path id="Vector 6" d="M119.318 259.17C117.544 255.343 23.5718 255.343 17.0696 257.257C15.8886 261.084 15.4177 267.218 17.0696 272.565C19.4331 274.478 111.634 274.478 119.318 272.565C119.908 267.781 120.499 264.911 119.318 259.17Z" stroke="#303030"/>
+<path id="Vector 6" d="M119.318 259.17C117.544 255.343 23.5718 255.343 17.0696 257.257C15.8886 261.084 15.4177 267.218 17.0696 272.565C19.4331 274.478 111.634 274.478 119.318 272.565C119.908 267.781 120.499 264.911 119.318 259.17Z" stroke="#2B2B2B"/>
 <path id="Vector_21" d="M112.928 265.567L42 265" stroke="#468888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 <g id="clock 1">
 <path id="Vector_22" d="M27.9993 270.833C31.221 270.833 33.8327 268.222 33.8327 265C33.8327 261.778 31.221 259.167 27.9993 259.167C24.7777 259.167 22.166 261.778 22.166 265C22.166 268.222 24.7777 270.833 27.9993 270.833Z" stroke="black" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
@@ -47,20 +47,20 @@
 </g>
 </g>
 <g id="layoutItem2">
-<path id="Vector 6_2" d="M119.318 223.17C117.544 219.343 23.5718 219.343 17.0696 221.257C15.8886 225.084 15.4177 231.218 17.0696 236.565C19.4331 238.478 111.634 238.478 119.318 236.565C119.908 231.781 120.499 228.911 119.318 223.17Z" stroke="#303030"/>
+<path id="Vector 6_2" d="M119.318 223.17C117.544 219.343 23.5718 219.343 17.0696 221.257C15.8886 225.084 15.4177 231.218 17.0696 236.565C19.4331 238.478 111.634 238.478 119.318 236.565C119.908 231.781 120.499 228.911 119.318 223.17Z" stroke="#2B2B2B"/>
 <path id="Vector_24" d="M112.928 229.567L41 229" stroke="#884646" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 <g id="alert-circle 1">
-<path id="Vector_25" d="M27.9994 234.833C31.221 234.833 33.8327 232.222 33.8327 229C33.8327 225.778 31.221 223.167 27.9994 223.167C24.7777 223.167 22.166 225.778 22.166 229C22.166 232.222 24.7777 234.833 27.9994 234.833Z" stroke="#303030" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_26" d="M28 226.667V229" stroke="#303030" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_27" d="M28 231.333H28.0072" stroke="#303030" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_25" d="M27.9994 234.833C31.221 234.833 33.8327 232.222 33.8327 229C33.8327 225.778 31.221 223.167 27.9994 223.167C24.7777 223.167 22.166 225.778 22.166 229C22.166 232.222 24.7777 234.833 27.9994 234.833Z" stroke="#2B2B2B" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_26" d="M28 226.667V229" stroke="#2B2B2B" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_27" d="M28 231.333H28.0072" stroke="#2B2B2B" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 </g>
 <g id="layoutItem1">
-<path id="Vector 6_3" d="M119.318 186.17C117.544 182.343 23.5718 182.343 17.0696 184.257C15.8886 188.084 15.4177 194.218 17.0696 199.565C19.4331 201.478 111.634 201.478 119.318 199.565C119.908 194.781 120.499 191.911 119.318 186.17Z" stroke="#303030"/>
+<path id="Vector 6_3" d="M119.318 186.17C117.544 182.343 23.5718 182.343 17.0696 184.257C15.8886 188.084 15.4177 194.218 17.0696 199.565C19.4331 201.478 111.634 201.478 119.318 199.565C119.908 194.781 120.499 191.911 119.318 186.17Z" stroke="#2B2B2B"/>
 <path id="Vector_28" d="M112.929 192.567L43 193" stroke="#678846" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 <g id="check-circle">
-<path id="Vector_29" d="M33.8327 191.463V192C33.832 193.258 33.4246 194.482 32.6715 195.489C31.9183 196.497 30.8596 197.234 29.6533 197.591C28.447 197.947 27.1578 197.904 25.9778 197.469C24.7978 197.033 23.7904 196.227 23.1057 195.172C22.4211 194.116 22.0959 192.868 22.1787 191.613C22.2614 190.358 22.7477 189.163 23.565 188.207C24.3823 187.25 25.4868 186.584 26.7138 186.307C27.9408 186.03 29.2245 186.156 30.3735 186.668" stroke="#303030" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_30" d="M33.8333 187.333L28 193.172L26.25 191.422" stroke="#303030" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_29" d="M33.8327 191.463V192C33.832 193.258 33.4246 194.482 32.6715 195.489C31.9183 196.497 30.8596 197.234 29.6533 197.591C28.447 197.947 27.1578 197.904 25.9778 197.469C24.7978 197.033 23.7904 196.227 23.1057 195.172C22.4211 194.116 22.0959 192.868 22.1787 191.613C22.2614 190.358 22.7477 189.163 23.565 188.207C24.3823 187.25 25.4868 186.584 26.7138 186.307C27.9408 186.03 29.2245 186.156 30.3735 186.668" stroke="#2B2B2B" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_30" d="M33.8333 187.333L28 193.172L26.25 191.422" stroke="#2B2B2B" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 </g>
 <g id="Resizing buttons">
@@ -70,15 +70,15 @@
 </g>
 </g>
 <defs>
-<filter id="filter0_d" x="0" y="73.7501" width="418.5" height="418.5" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<filter id="filter0_d_331_313" x="0" y="73.7501" width="418.5" height="418.5" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
 <feOffset dx="2" dy="4"/>
 <feGaussianBlur stdDeviation="4"/>
 <feComposite in2="hardAlpha" operator="out"/>
 <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_331_313"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_331_313" result="shape"/>
 </filter>
 </defs>
 </svg>
