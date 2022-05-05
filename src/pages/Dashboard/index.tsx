@@ -33,7 +33,18 @@ export default function Dashboard(): React.ReactElement {
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
 
   const [error, setError] = useState<boolean>(false);
-  const [overview, setOverview] = useState<GetIssuesOverviewServiceResponse>();
+  const [overview, setOverview] = useState<GetIssuesOverviewServiceResponse>({
+    expiredIssues: { amount: 0, issues: [] },
+    issuesForToday: { percentageCompleted: 0, issues: [] },
+    allIssues: {
+      percentageCompleted: 0,
+      leftUncompleted: 0,
+      total: 0,
+      issues: [],
+    },
+    issuesWeeklyOverview: [],
+    issuesMonthlyOverview: [],
+  });
   const [chartDataConfig, setChartDataConfig] = useState<ChartDataConfig>({
     type: "WEEK",
     data: [],
@@ -62,14 +73,6 @@ export default function Dashboard(): React.ReactElement {
   useEffect(() => {
     fetchIssuesOverview();
   }, [fetchIssuesOverview]);
-
-  if (!overview) {
-    return (
-      <div id={styles.loaderContainer}>
-        <Loader />
-      </div>
-    );
-  }
 
   return (
     <>
