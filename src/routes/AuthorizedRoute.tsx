@@ -25,6 +25,14 @@ export default function AuthorizedRoute({
 }: RouteProps & AuthorizedRouteProps): React.ReactElement {
   const session = useContext(SessionContext);
 
+  if (!session.isReady) {
+    return (
+      <div style={{ marginTop: "5rem" }}>
+        <Loader />;
+      </div>
+    );
+  }
+
   if (session.isReady && session.isSignedIn() && !isPrivate) {
     return <Redirect to={RoutesEnum.DASHBOARD} />;
   }
