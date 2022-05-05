@@ -29,8 +29,7 @@ export const esEs: Language = {
           "Realice un seguimiento de su esfuerzo con diferentes",
           "vistas",
         ],
-        description:
-          "Ver datos como mapa, calendario, línea de tiempo, kanban y más.",
+        description: "Ver datos como lista, kanban y más.",
       },
       footer: {
         modal: {

@@ -26,8 +26,7 @@ export const ptBR: Language = {
       },
       views: {
         title: ["Acompanhe seu esforço com diferentes", "visualizações"],
-        description:
-          "Visualize os dados como mapa, calendário, linha do tempo, kanban e muito mais.",
+        description: "Visualize os dados como lista, kanban e muito mais.",
       },
       footer: {
         modal: {

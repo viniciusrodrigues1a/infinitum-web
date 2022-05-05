@@ -26,8 +26,7 @@ export const enUS: Language = {
       },
       views: {
         title: ["Track your effort with different", "views"],
-        description:
-          "View data as a map, calendar, timeline, kanban, and more.",
+        description: "View data as a list, kanban, and more.",
       },
       footer: {
         modal: {
