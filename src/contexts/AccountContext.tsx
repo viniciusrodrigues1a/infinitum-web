@@ -35,7 +35,6 @@ type AccountProviderProps = {
 export function AccountProvider({
   children,
 }: AccountProviderProps): React.ReactElement {
-  const hasUseEffectRun = useRef<boolean>(false);
   const [hasFetchedAccount, setHasFetchedAccount] = useState<boolean>(false);
   const [languages, setLanguages] = useState<ListLanguagesServiceResponse>([]);
   const [account, setAccount] = useState<FindOneAccountServiceResponse>({
@@ -52,6 +51,17 @@ export function AccountProvider({
     isReadyForAuthRequests,
   } = useAPIService();
   const { changeLanguageTo } = useLanguage();
+
+  useEffect(() => {
+    if (session === null) {
+      setAccount({
+        name: "",
+        email: "",
+        image: "",
+        languageId: "",
+      });
+    }
+  }, [session]);
 
   useEffect(() => {
     (async () => {
@@ -76,7 +86,6 @@ export function AccountProvider({
 
   useEffect(() => {
     (async () => {
-      if (hasUseEffectRun.current) return;
       if (!isReady || !isReadyForAuthRequests || !session || !languages) return;
 
       const response = await findOneAccountService.findOneAccount(
@@ -85,7 +94,6 @@ export function AccountProvider({
 
       if (!response.data) return;
 
-      hasUseEffectRun.current = true;
       setAccount(response.data);
       changeLanguage(response.data.languageId);
       setTimeout(() => {
