@@ -107,7 +107,7 @@ export default function NotificationSettings(): React.ReactElement {
       </div>
 
       <Title>{notificationSettingsLanguage.title}</Title>
-      <Subtitle>{notificationSettingsLanguage.title}</Subtitle>
+      <Subtitle>{notificationSettingsLanguage.subtitle}</Subtitle>
 
       <div id={styles.preferences}>
         <NotificationPreference
