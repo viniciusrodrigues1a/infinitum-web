@@ -181,6 +181,11 @@ export const ptBR: Language = {
       subtitle: "Redirecionando em",
       goBackLink: "Voltar à página inicial agora",
     },
+    revokeInvitation: {
+      title: "Convite recusado!",
+      subtitle: "Redirecionando em",
+      goBackLink: "Voltar à página inicial agora",
+    },
     profile: {
       nameInputPlaceholder: "Nome",
       oldPasswordPlaceholder: "Sua senha atual",

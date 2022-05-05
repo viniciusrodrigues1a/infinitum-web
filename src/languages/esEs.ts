@@ -186,6 +186,11 @@ export const esEs: Language = {
       subtitle: "Redirigiendo en",
       goBackLink: "Regrese al inicio ahora",
     },
+    revokeInvitation: {
+      title: "Invitación revocada!",
+      subtitle: "Redirigiendo en",
+      goBackLink: "Regrese al inicio ahora",
+    },
     profile: {
       nameInputPlaceholder: "Nombre",
       oldPasswordPlaceholder: "Tu contraseña actual",

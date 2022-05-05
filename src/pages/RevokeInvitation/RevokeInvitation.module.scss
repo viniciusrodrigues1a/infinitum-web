@@ -1,0 +1,49 @@
+#container {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  #logo {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+  }
+
+  #title,
+  #subtitle {
+    text-align: center;
+  }
+
+  #title {
+    font-family: var(--title);
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--dark);
+  }
+
+  #subtitle,
+  #link {
+    font-family: var(--text);
+    color: #555555;
+  }
+
+  #subtitle {
+    font-size: 1.15rem;
+    font-weight: normal;
+    margin-top: 0.5rem;
+  }
+
+  #link {
+    font-size: 0.9rem;
+    font-weight: normal;
+    margin-top: 1.5rem;
+    text-decoration: none;
+    color: #4376d8;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

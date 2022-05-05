@@ -36,6 +36,7 @@ import {
   IMarkNotificationAsReadService,
   IMoveIssueService,
   IRegisterService,
+  IRevokeInvitationService,
   IUpdateAccountService,
   IUpdateIssueGroupColorService,
   IUpdateIssueGroupFinalStatusService,
@@ -57,6 +58,7 @@ import MarkAllNotificationsAsReadService from "../services/MarkAllNotificationsA
 import MarkNotificationAsReadService from "../services/MarkNotificationAsReadService";
 import MoveIssueService from "../services/MoveIssueService";
 import RegisterService from "../services/RegisterService";
+import RevokeInvitationService from "../services/RevokeInvitationService";
 import UpdateAccountService from "../services/UpdateAccountService";
 import UpdateIssueGroupColorService from "../services/UpdateIssueGroupColorService";
 import UpdateIssueGroupFinalStatusService from "../services/UpdateIssueGroupFinalStatusService";
@@ -100,6 +102,7 @@ type APIServiceContextData = {
   updateNotificationSettingsService: IUpdateNotificationSettingsService;
   findOneNotificationSettingsService: IFindOneNotificationSettingsService;
   assignIssueToAccountService: IAssignIssueToAccountService;
+  revokeInvitationService: IRevokeInvitationService;
 };
 
 type APIServiceProviderProps = {
@@ -165,6 +168,7 @@ export const APIServiceProvider = ({
       findOneNotificationSettingsService:
         new FindOneNotificationSettingsService(api, lang),
       assignIssueToAccountService: new AssignIssueToAccountService(api, lang),
+      revokeInvitationService: new RevokeInvitationService(api, lang),
     } as Omit<APIServiceContextData, "isReadyForAuthRequests">;
   }, [language]);
 

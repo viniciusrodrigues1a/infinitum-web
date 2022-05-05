@@ -25,3 +25,4 @@ export * from "./IMarkAllNotificationsAsReadService";
 export * from "./IUpdateNotificationSettingsService";
 export * from "./IFindOneNotificationSettingsService";
 export * from "./IAssignIssueToAccountService";
+export * from "./IRevokeInvitationService";

@@ -180,6 +180,11 @@ export const enUS: Language = {
       subtitle: "Redirecting in",
       goBackLink: "Go back to the Dashboard now",
     },
+    revokeInvitation: {
+      title: "Invitation revoked!",
+      subtitle: "Redirecting in",
+      goBackLink: "Go back to the Dashboard now",
+    },
     profile: {
       nameInputPlaceholder: "Name",
       oldPasswordPlaceholder: "Your current password",

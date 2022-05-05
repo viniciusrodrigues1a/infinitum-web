@@ -9,6 +9,7 @@ import Dashboard from "../pages/Dashboard";
 import Projects from "../pages/Projects";
 import Project from "../pages/Project";
 import AcceptInvitation from "../pages/AcceptInvitation";
+import RevokeInvitation from "../pages/RevokeInvitation";
 import Profile from "../pages/Profile";
 import NotificationSettings from "../pages/NotificationSettings";
 
@@ -60,6 +61,13 @@ export default function Routes(): React.ReactElement {
                           exact
                           path={RoutesEnum.ACCEPT_INVITATION}
                           component={AcceptInvitation}
+                          showAuthorizedLayout={false}
+                          isPrivate
+                        />
+                        <AuthorizedRoute
+                          exact
+                          path={RoutesEnum.REVOKE_INVITATION}
+                          component={RevokeInvitation}
                           showAuthorizedLayout={false}
                           isPrivate
                         />
