@@ -83,6 +83,10 @@
   animation: ease-in;
 }
 
+.languageButtonContainer > button {
+  background-color: transparent;
+}
+
 .languageButton:hover:after {
   content: "";
   position: absolute;

@@ -22,7 +22,11 @@ type AlternativeAuthSpanProps = {
 function AlternativeAuthSpan({ title, onClick }: AlternativeAuthSpanProps) {
   if (typeof title === "string") {
     return (
-      <button type="button" onClick={onClick}>
+      <button
+        className={styles.alternativeButton}
+        type="button"
+        onClick={onClick}
+      >
         <strong>{title}</strong>
       </button>
     );
@@ -31,7 +35,11 @@ function AlternativeAuthSpan({ title, onClick }: AlternativeAuthSpanProps) {
   return (
     <span>
       {title[0]}{" "}
-      <button type="button" onClick={onClick}>
+      <button
+        className={styles.alternativeSpanButton}
+        type="button"
+        onClick={onClick}
+      >
         <strong>{title[1]}</strong>
       </button>
     </span>
