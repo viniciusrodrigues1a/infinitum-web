@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Redirect, Route, RouteProps } from "react-router-dom";
 import { SessionContext } from "../contexts/SessionContext";
 import AuthenticatedLayout from "../layouts/AuthenticatedLayout";
@@ -27,7 +27,15 @@ export default function AuthorizedRoute({
   const session = useContext(SessionContext);
   const { hasFetchedAccount } = useAccount();
 
-  if (!session.isReady || !hasFetchedAccount) {
+  if (!session.isReady) {
+    return (
+      <div style={{ marginTop: "5rem" }}>
+        <Loader />;
+      </div>
+    );
+  }
+
+  if (session.isReady && session.isSignedIn() && !hasFetchedAccount) {
     return (
       <div style={{ marginTop: "5rem" }}>
         <Loader />;
