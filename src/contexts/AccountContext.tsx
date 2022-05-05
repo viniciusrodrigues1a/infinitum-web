@@ -1,4 +1,12 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { useEffectOnce } from "../hooks";
 
 import {
   FindOneAccountServiceResponse,
@@ -15,6 +23,7 @@ type AccountContextData = {
   updateAccount: (
     data: UpdateAccountServiceRequest
   ) => Promise<APIResponse<null>>;
+  hasFetchedAccount: boolean;
 };
 
 const AccountContext = createContext({} as AccountContextData);
@@ -26,6 +35,8 @@ type AccountProviderProps = {
 export function AccountProvider({
   children,
 }: AccountProviderProps): React.ReactElement {
+  const hasUseEffectRun = useRef<boolean>(false);
+  const [hasFetchedAccount, setHasFetchedAccount] = useState<boolean>(false);
   const [languages, setLanguages] = useState<ListLanguagesServiceResponse>([]);
   const [account, setAccount] = useState<FindOneAccountServiceResponse>({
     name: "",
@@ -50,9 +61,23 @@ export function AccountProvider({
     })();
   }, [listLanguagesService]);
 
+  const changeLanguage = useCallback(
+    (languageId: string | undefined) => {
+      if (!languageId) return;
+
+      const language = languages.find((l) => l.id === languageId);
+
+      if (!language) return;
+
+      changeLanguageTo(language.isoCode);
+    },
+    [changeLanguageTo, languages]
+  );
+
   useEffect(() => {
     (async () => {
-      if (!isReady || !isReadyForAuthRequests || !session) return;
+      if (hasUseEffectRun.current) return;
+      if (!isReady || !isReadyForAuthRequests || !session || !languages) return;
 
       const response = await findOneAccountService.findOneAccount(
         session.email
@@ -60,10 +85,21 @@ export function AccountProvider({
 
       if (!response.data) return;
 
+      hasUseEffectRun.current = true;
       setAccount(response.data);
       changeLanguage(response.data.languageId);
+      setTimeout(() => {
+        setHasFetchedAccount(true);
+      }, 50);
     })();
-  }, [isReady, isReadyForAuthRequests]);
+  }, [
+    isReady,
+    isReadyForAuthRequests,
+    languages,
+    changeLanguage,
+    findOneAccountService,
+    session,
+  ]);
 
   async function updateAccount({
     file,
@@ -89,18 +125,10 @@ export function AccountProvider({
     return response;
   }
 
-  function changeLanguage(languageId: string | undefined) {
-    if (!languageId) return;
-
-    const language = languages.find((l) => l.id === languageId);
-
-    if (!language) return;
-
-    changeLanguageTo(language.isoCode);
-  }
-
   return (
-    <AccountContext.Provider value={{ account, updateAccount }}>
+    <AccountContext.Provider
+      value={{ account, updateAccount, hasFetchedAccount }}
+    >
       {children}
     </AccountContext.Provider>
   );

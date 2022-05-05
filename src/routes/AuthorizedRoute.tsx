@@ -5,6 +5,7 @@ import { SessionContext } from "../contexts/SessionContext";
 import AuthenticatedLayout from "../layouts/AuthenticatedLayout";
 import Loader from "../components/Loader";
 import RoutesEnum from "./type-defs/RoutesEnum";
+import { useAccount } from "../contexts/AccountContext";
 
 type AuthorizedRouteProps = {
   isPrivate?: boolean;
@@ -24,8 +25,9 @@ export default function AuthorizedRoute({
   ...rest
 }: RouteProps & AuthorizedRouteProps): React.ReactElement {
   const session = useContext(SessionContext);
+  const { hasFetchedAccount } = useAccount();
 
-  if (!session.isReady) {
+  if (!session.isReady || !hasFetchedAccount) {
     return (
       <div style={{ marginTop: "5rem" }}>
         <Loader />;
