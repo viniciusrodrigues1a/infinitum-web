@@ -17,9 +17,10 @@ export default class RegisterService implements IRegisterService {
     name,
     email,
     password,
+    languageIsoCode,
   }: RegisterServiceRequest): Promise<APIResponse<null>> {
     try {
-      const body = { name, email, password };
+      const body = { name, email, password, languageIsoCode };
       await this.axiosInstance.post("/auth/register", body);
 
       return { data: null, error: false };

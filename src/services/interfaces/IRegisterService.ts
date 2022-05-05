@@ -4,6 +4,7 @@ export type RegisterServiceRequest = {
   name: string;
   email: string;
   password: string;
+  languageIsoCode: string;
 };
 
 export interface IRegisterService {

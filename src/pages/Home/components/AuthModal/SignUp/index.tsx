@@ -23,6 +23,7 @@ export default function SignUp({
       pages: { home: homeLanguage },
       validation: validationLanguage,
     },
+    isoCode,
   } = useLanguage();
 
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -35,7 +36,13 @@ export default function SignUp({
     const email = emailInputRef.current?.value;
     const password = passwordInputRef.current?.value;
     const passwordConfirmation = passwordConfirmationInputRef.current?.value;
-    const body = { name, email, password, passwordConfirmation };
+    const body = {
+      name,
+      email,
+      password,
+      languageIsoCode: isoCode,
+      passwordConfirmation,
+    };
 
     if (!registerValidation.validateFields(body)) {
       toast.error(validationLanguage.emptyFields);
