@@ -6,6 +6,9 @@ export type UpdateNotificationSettingsServiceRequest = {
     kicked: { email: boolean; push: boolean };
     roleUpdated: { email: boolean; push: boolean };
     issueAssigned: { email: boolean; push: boolean };
+    projectDeleted: { email: boolean; push: boolean };
+    kickedAdmin: { email: boolean; push: boolean };
+    roleUpdatedAdmin: { email: boolean; push: boolean };
   };
 };
 

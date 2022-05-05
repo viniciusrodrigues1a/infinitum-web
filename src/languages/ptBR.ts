@@ -201,6 +201,10 @@ export const ptBR: Language = {
         kicked: "Sou removido de um projeto",
         roleUpdated: "Minha função em um projeto é atualizada",
         issueAssigned: "Sou atribuído a um ticket",
+        projectDeleted: "Um projeto do qual faço parte é excluído",
+        kickedAdmin: "Um usuário é expulso de um projeto do qual eu administro",
+        roleUpdatedAdmin:
+          "A função de um usuário é alterada em um projeto do qual eu administro",
       },
       updateButtonText: "Atualizar preferências",
       successMessage: "Configurações atualizadas com sucesso",

@@ -7,6 +7,9 @@ export type NotificationSettingsLanguage = {
     kicked: string;
     roleUpdated: string;
     issueAssigned: string;
+    projectDeleted: string;
+    roleUpdatedAdmin: string;
+    kickedAdmin: string;
   };
 
   updateButtonText: string;

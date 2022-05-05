@@ -35,6 +35,9 @@ export default function NotificationSettings(): React.ReactElement {
     kicked: { email: false, push: false },
     roleUpdated: { email: false, push: false },
     issueAssigned: { email: false, push: false },
+    projectDeleted: { email: false, push: false },
+    kickedAdmin: { email: false, push: false },
+    roleUpdatedAdmin: { email: false, push: false },
   });
   const [loading, setLoading] = useState(false);
 
@@ -127,9 +130,29 @@ export default function NotificationSettings(): React.ReactElement {
         />
         <NotificationPreference
           initialState={settings.issueAssigned}
-          description={notificationSettingsLanguage.preferences.roleUpdated}
+          description={notificationSettingsLanguage.preferences.issueAssigned}
           onPushOptionChange={setSettingsEntry("issueAssigned.push")}
           onEmailOptionChange={setSettingsEntry("issueAssigned.email")}
+        />
+        <NotificationPreference
+          initialState={settings.projectDeleted}
+          description={notificationSettingsLanguage.preferences.projectDeleted}
+          onPushOptionChange={setSettingsEntry("projectDeleted.push")}
+          onEmailOptionChange={setSettingsEntry("projectDeleted.email")}
+        />
+        <NotificationPreference
+          initialState={settings.kickedAdmin}
+          description={notificationSettingsLanguage.preferences.kickedAdmin}
+          onPushOptionChange={setSettingsEntry("kickedAdmin.push")}
+          onEmailOptionChange={setSettingsEntry("kickedAdmin.email")}
+        />
+        <NotificationPreference
+          initialState={settings.roleUpdatedAdmin}
+          description={
+            notificationSettingsLanguage.preferences.roleUpdatedAdmin
+          }
+          onPushOptionChange={setSettingsEntry("roleUpdatedAdmin.push")}
+          onEmailOptionChange={setSettingsEntry("roleUpdatedAdmin.email")}
         />
       </div>
 

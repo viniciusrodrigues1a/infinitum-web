@@ -206,6 +206,10 @@ export const esEs: Language = {
         kicked: "Me expulsan de un proyecto",
         roleUpdated: "Se actualiza mi función en un proyecto",
         issueAssigned: "Me asignan un problema",
+        projectDeleted: "Se elimina un proyecto en el que participo",
+        kickedAdmin: "Un usuario es expulsado de un proyecto que administro",
+        roleUpdatedAdmin:
+          "El función de un usuario se actualiza en un proyecto que administro",
       },
       updateButtonText: "Actualiza tus preferencias",
       successMessage: "Configuración actualizada con éxito",
