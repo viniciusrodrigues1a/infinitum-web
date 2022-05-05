@@ -21,7 +21,7 @@ export type CreateButtonProps = {
 
 CreateButton.defaultProps = {
   onClick: () => null,
-  leftIcon: null,
+  icon: null,
   isSubmitButton: false,
   id: "",
   disabled: false,

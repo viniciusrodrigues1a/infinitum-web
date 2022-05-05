@@ -67,7 +67,22 @@
 #submitButton {
   margin-top: 3.5rem;
   padding: 1.875rem 4.375rem;
-  width: 100%;
+}
+
+.loadingSpinner {
+  animation-name: rotating;
+  animation-timing-function: ease-in-out;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* 600px */

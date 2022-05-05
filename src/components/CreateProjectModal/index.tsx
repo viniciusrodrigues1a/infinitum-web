@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 
-import { FiUploadCloud } from "react-icons/fi";
+import { FiLoader, FiUploadCloud } from "react-icons/fi";
 import styles from "./CreateProjectModal.module.css";
 
 import CreateButton from "../CreateButton";
@@ -38,6 +38,9 @@ export default function CreateProjectModal({
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
+  const [hasButtonBeenClicked, setHasButtonBeenClicked] =
+    useState<boolean>(false);
+
   const clearInputs = useCallback(() => {
     setTitle("");
     setStartDate("");
@@ -51,7 +54,7 @@ export default function CreateProjectModal({
   }, [closeModal, clearInputs]);
 
   async function handleSubmit() {
-    const projectId = await updateProject();
+    const projectId = await createProject();
     if (!projectId) return;
 
     await updateProjectImage(projectId);
@@ -60,7 +63,7 @@ export default function CreateProjectModal({
     await fetchProjects();
   }
 
-  async function updateProject(): Promise<string | undefined> {
+  async function createProject(): Promise<string | undefined> {
     let beginsAt: Date | undefined;
     if (startDate) {
       const [year, month, day] = startDate.split("-").map((e) => Number(e));
@@ -212,11 +215,31 @@ export default function CreateProjectModal({
             </Form.Container>
           </div>
 
-          <div>
+          <div id={styles.submitButtonContainer}>
             <CreateButton
-              title={projectsLanguage.createModal.submitButtonText}
+              disabled={hasButtonBeenClicked}
+              title={
+                hasButtonBeenClicked
+                  ? ""
+                  : projectsLanguage.createModal.submitButtonText
+              }
+              icon={
+                hasButtonBeenClicked
+                  ? () => (
+                      <FiLoader
+                        size={18}
+                        color="black"
+                        className={styles.loadingSpinner}
+                      />
+                    )
+                  : undefined
+              }
               id={styles.submitButton}
-              onClick={handleSubmit}
+              onClick={async () => {
+                setHasButtonBeenClicked(true);
+                await handleSubmit();
+                setHasButtonBeenClicked(false);
+              }}
             />
           </div>
         </div>
