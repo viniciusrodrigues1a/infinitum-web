@@ -1,5 +1,4 @@
-import React, { useCallback, useState } from "react";
-import { FiXCircle, FiUser } from "react-icons/fi";
+import React, { useCallback, useEffect, useState } from "react";
 
 import styles from "./ManageParticipantsModal.module.scss";
 
@@ -16,6 +15,8 @@ import showToast from "../../utils/showToast";
 import { useProjects } from "../../contexts/ProjectsContext";
 import DeleteParticipantConfirmationModal from "../DeleteParticipantConfirmationModal";
 import { useLanguage } from "../../contexts/LanguageContext";
+import { ListParticipantsInvitedToProjectServiceResponse } from "../../services/interfaces";
+import Participant from "./Participant";
 
 export type ManageParticipantsModalProps = {
   shown: boolean;
@@ -33,7 +34,11 @@ export default function ManageParticipantsModal({
   shown,
   project,
 }: ManageParticipantsModalProps): React.ReactElement {
-  const { kickParticipantService, updateRoleService } = useAPIService();
+  const {
+    kickParticipantService,
+    updateRoleService,
+    listParticipantsInvitedToProjectService,
+  } = useAPIService();
   const { fetchProjects } = useProjects();
   const {
     language: {
@@ -47,6 +52,21 @@ export default function ManageParticipantsModal({
     deleteParticipantConfirmationModalConfig,
     setDeleteParticipantConfirmationModalConfig,
   ] = useState<DeleteParticipantConfirmationModalConfig>({ shown: false });
+
+  const [pendingInvitations, setPendingInvitations] =
+    useState<ListParticipantsInvitedToProjectServiceResponse>([]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await listParticipantsInvitedToProjectService.list({
+        projectId: project.projectId,
+      });
+
+      if (response.data) {
+        setPendingInvitations(response.data);
+      }
+    })();
+  }, [listParticipantsInvitedToProjectService, project.projectId]);
 
   const handleCloseModal = useCallback(() => {
     closeModal();
@@ -114,65 +134,40 @@ export default function ManageParticipantsModal({
               </div>
 
               {project.participants.map((participant) => (
-                <div
-                  className={styles.participantContainer}
-                  key={participant.account.email}
-                >
-                  <div className={styles.listColumn}>
-                    <div className={styles.participantImg}>
-                      <FiUser color="var(--light)" size={22} />
-                    </div>
-                    <div className={styles.participantInfo}>
-                      <span className={styles.participantName}>
-                        {participant.account.name}
-                      </span>
-                      <span className={styles.participantEmail}>
-                        {participant.account.email}
-                      </span>
-                    </div>
-                  </div>
-                  <div className={styles.listColumn}>
-                    <div className={styles.participantRoleContainer}>
-                      {participant.role.name.value === "owner" ? (
-                        <span className={styles.participantRole}>
-                          {manageParticipantsModalLanguage.ownerRole}
-                        </span>
-                      ) : (
-                        <select
-                          className={styles.participantRole}
-                          value={participant.role.name.value}
-                          onChange={(e) =>
-                            handleSelectOnChange(e, participant.account.email)
-                          }
-                        >
-                          <option value="espectator">
-                            {manageParticipantsModalLanguage.espectatorRole}
-                          </option>
-                          <option value="member">
-                            {manageParticipantsModalLanguage.memberRole}
-                          </option>
-                          <option value="admin">
-                            {manageParticipantsModalLanguage.adminRole}
-                          </option>
-                        </select>
-                      )}
-                    </div>
-                  </div>
-                  <div className={styles.listColumn}>
-                    <button
-                      className={styles.kickButton}
-                      type="button"
-                      onClick={() =>
-                        setDeleteParticipantConfirmationModalConfig({
-                          shown: true,
-                          accountEmail: participant.account.email,
-                        })
-                      }
-                    >
-                      <FiXCircle color="var(--dark)" size={22} />
-                    </button>
-                  </div>
-                </div>
+                <Participant.Container key={participant.account.email}>
+                  <Participant.Info
+                    name={participant.account.name}
+                    email={participant.account.email}
+                  />
+                  <Participant.RoleSelect
+                    email={participant.account.email}
+                    roleName={participant.role.name.value}
+                    onChange={(e) =>
+                      handleSelectOnChange(e, participant.account.email)
+                    }
+                  />
+                  <Participant.KickButton
+                    onClick={() =>
+                      setDeleteParticipantConfirmationModalConfig({
+                        shown: true,
+                        accountEmail: participant.account.email,
+                      })
+                    }
+                  />
+                </Participant.Container>
+              ))}
+
+              <div className={styles.separator} />
+
+              {pendingInvitations.map((invitation) => (
+                <Participant.Container key={invitation.email}>
+                  <Participant.Info
+                    name={invitation.name}
+                    email={invitation.email}
+                  />
+                  <div className={styles.listColumn}>pending...</div>
+                  <Participant.KickButton onClick={() => {}} />
+                </Participant.Container>
               ))}
             </div>
 

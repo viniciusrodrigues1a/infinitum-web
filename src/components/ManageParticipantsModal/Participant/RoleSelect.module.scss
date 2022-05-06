@@ -1,0 +1,27 @@
+.listColumn {
+  width: 60%;
+  display: flex;
+  justify-content: flex-end;
+
+  /* 414px */
+  @media (min-width: 25.875rem) {
+    display: initial;
+  }
+}
+
+.participantRoleContainer {
+  display: inline-block;
+}
+
+.participantRole {
+  background: none;
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+  color: #444444;
+  font-family: var(--text);
+  display: inline-flex;
+  align-items: center;
+}

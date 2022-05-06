@@ -1,0 +1,16 @@
+.listColumn {
+  display: none;
+
+  /* 414px */
+  @media (min-width: 25.875rem) {
+    width: 3rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.kickButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+}

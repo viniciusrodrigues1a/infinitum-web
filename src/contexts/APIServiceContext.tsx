@@ -30,6 +30,7 @@ import {
   IInviteToProjectService,
   IKickParticipantService,
   IListLanguagesService,
+  IListParticipantsInvitedToProjectService,
   IListProjectsService,
   ILoginService,
   IMarkAllNotificationsAsReadService,
@@ -52,6 +53,7 @@ import { IUpdateProjectService } from "../services/interfaces/IUpdateProjectServ
 import InviteToProjectService from "../services/InviteToProjectService";
 import KickParticipantService from "../services/KickParticipantService";
 import ListLanguagesService from "../services/ListLanguages";
+import ListParticipantsInvitedToProjectService from "../services/ListParticipantsInvitedToProjectService";
 import ListProjectsService from "../services/ListProjectsService";
 import LoginService from "../services/LoginService";
 import MarkAllNotificationsAsReadService from "../services/MarkAllNotificationsAsReadService";
@@ -103,6 +105,7 @@ type APIServiceContextData = {
   findOneNotificationSettingsService: IFindOneNotificationSettingsService;
   assignIssueToAccountService: IAssignIssueToAccountService;
   revokeInvitationService: IRevokeInvitationService;
+  listParticipantsInvitedToProjectService: IListParticipantsInvitedToProjectService;
 };
 
 type APIServiceProviderProps = {
@@ -169,6 +172,8 @@ export const APIServiceProvider = ({
         new FindOneNotificationSettingsService(api, lang),
       assignIssueToAccountService: new AssignIssueToAccountService(api, lang),
       revokeInvitationService: new RevokeInvitationService(api, lang),
+      listParticipantsInvitedToProjectService:
+        new ListParticipantsInvitedToProjectService(api, lang),
     } as Omit<APIServiceContextData, "isReadyForAuthRequests">;
   }, [language]);
 
