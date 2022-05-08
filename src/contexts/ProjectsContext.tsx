@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { useEffectOnce } from "../hooks";
 import { ListProjectsServiceResponse } from "../services/interfaces";
 
 import { FormattedProject } from "../services/type-defs/FormattedProject";
@@ -17,6 +18,7 @@ import {
 import { useAPIService } from "./APIServiceContext";
 import { useDateFormatter } from "./DateFormatterContext";
 import { useSession } from "./SessionContext";
+import { useSocket } from "./SocketContext";
 
 type ProjectsContextData = {
   projects: FormattedProject[];
@@ -40,6 +42,7 @@ export function ProjectsProvider({
   const { isReadyForAuthRequests, listProjectsService } = useAPIService();
   const { formatToFullDate } = useDateFormatter();
   const { session } = useSession();
+  const { socket, isSocketReady } = useSocket();
 
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -109,6 +112,13 @@ export function ProjectsProvider({
 
     setLoading(false);
   }, [listProjectsService, formatProjects, projects]);
+
+  useEffectOnce(() => {
+    socket.on("loadProject", (project) => {
+      const formattedProjects = formatProjects([project]);
+      setProjects(formattedProjects);
+    });
+  }, isSocketReady);
 
   useEffect(() => {
     if (isReadyForAuthRequests) {

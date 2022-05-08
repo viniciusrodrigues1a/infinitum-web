@@ -3,13 +3,12 @@ import React, {
   useContext,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from "react";
-import { io, Socket } from "socket.io-client";
 import { useEffectOnce } from "../hooks";
 
 import { useSession } from "./SessionContext";
+import { useSocket } from "./SocketContext";
 
 export type NotificationType = {
   _id: string;
@@ -34,10 +33,8 @@ type NotificationsProviderProps = {
 export function NotificationsProvider({
   children,
 }: NotificationsProviderProps): React.ReactElement {
-  const { isSignedIn, session } = useSession();
-
-  const { current: socket } = useRef<Socket>(io("http://localhost:3333"));
-  const [isReady, setIsReady] = useState<boolean>(false);
+  const { session } = useSession();
+  const { socket, isSocketReady } = useSocket();
   const [notifications, setNotifications] = useState<NotificationType[]>([]);
 
   const unreadNotificationsAmount = useMemo(
@@ -51,13 +48,6 @@ export function NotificationsProvider({
     }
   }, [session]);
 
-  useEffect(() => {
-    if (isSignedIn()) {
-      socket.emit("newUser", session!.email);
-      setIsReady(true);
-    }
-  }, [session, isSignedIn, socket]);
-
   useEffectOnce(() => {
     socket.on("loadNotifications", (notifications) => {
       setNotifications(notifications);
@@ -66,7 +56,7 @@ export function NotificationsProvider({
     socket.on("newNotification", (msg) => {
       setNotifications((prev) => [msg, ...prev]);
     });
-  }, isReady);
+  }, isSocketReady);
 
   return (
     <NotificationsContext.Provider

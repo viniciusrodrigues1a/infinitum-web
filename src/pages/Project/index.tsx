@@ -1,4 +1,4 @@
-import React, { SVGProps, useMemo, useState } from "react";
+import React, { SVGProps, useEffect, useMemo, useState } from "react";
 import { FiList, FiLayout, FiSettings } from "react-icons/fi";
 
 import { useParams, useHistory } from "react-router-dom";
@@ -21,12 +21,16 @@ import { ViewsProvider } from "../../contexts/ViewsContext";
 import { useSidebar } from "../../contexts/SidebarContext";
 import { useProjects } from "../../contexts/ProjectsContext";
 import { useLanguage } from "../../contexts/LanguageContext";
+import { useSocket } from "../../contexts/SocketContext";
+import { useSession } from "../../contexts/SessionContext";
 import { ParticipantRoleValue } from "../../services/type-defs/Project";
 
 export default function Project(): React.ReactElement {
   const history = useHistory();
   const params = useParams<{ projectId: string }>();
 
+  const { session } = useSession();
+  const { socket, isSocketReady } = useSocket();
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
   const { getProjectById, getLoggedInUserRoleInProject } = useProjects();
   const {
@@ -50,6 +54,22 @@ export default function Project(): React.ReactElement {
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [isParticipantsModalOpen, setIsParticipantsModalOpen] = useState(false);
   const [activeView, setActiveView] = useState<"list" | "kanban">("list");
+
+  useEffect(() => {
+    if (!isSocketReady || !project || !session) return;
+
+    socket.emit("addUserToProjectListener", {
+      email: session.email,
+      projectId: project.projectId,
+    });
+
+    return () => {
+      socket.emit("removeUserFromProjectListener", {
+        email: session.email,
+        projectId: project.projectId,
+      });
+    };
+  }, [isSocketReady, project, session, socket]);
 
   if (!project) {
     return (
