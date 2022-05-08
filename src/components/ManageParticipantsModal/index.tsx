@@ -177,7 +177,9 @@ export default function ManageParticipantsModal({
                 </Participant.Container>
               ))}
 
-              <div className={styles.separator} />
+              {pendingInvitations.length > 0 && (
+                <div className={styles.separator} />
+              )}
 
               {pendingInvitations.map((invitation) => (
                 <Participant.Container key={invitation.email}>
