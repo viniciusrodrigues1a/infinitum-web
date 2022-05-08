@@ -254,6 +254,7 @@ export const esEs: Language = {
       memberRole: "Miembro",
       adminRole: "Admin",
       ownerRole: "Dueño",
+      pendingText: "Pendiente",
       inviteMembersButtonText: "Invitar a otros usuarios",
     },
     deleteParticipantConfirmationModal: {

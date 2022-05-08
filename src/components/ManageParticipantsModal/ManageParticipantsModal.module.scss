@@ -73,6 +73,11 @@
   }
 }
 
+.pendingText {
+  font-family: var(--text);
+  color: var(--dark);
+}
+
 .separator {
   width: 100%;
   height: 1px;

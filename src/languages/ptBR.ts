@@ -249,6 +249,7 @@ export const ptBR: Language = {
       memberRole: "Membro",
       adminRole: "Admin",
       ownerRole: "Dono",
+      pendingText: "Pendente",
       inviteMembersButtonText: "Convidar outros usuários",
     },
     deleteParticipantConfirmationModal: {

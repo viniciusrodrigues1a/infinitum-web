@@ -10,5 +10,7 @@ export type ManageParticipantsModalLanguage = {
   adminRole: string;
   ownerRole: string;
 
+  pendingText: string;
+
   inviteMembersButtonText: string;
 };

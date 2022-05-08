@@ -247,6 +247,7 @@ export const enUS: Language = {
       memberRole: "Member",
       adminRole: "Admin",
       ownerRole: "Owner",
+      pendingText: "Pending",
       inviteMembersButtonText: "Invite other users",
     },
     deleteParticipantConfirmationModal: {

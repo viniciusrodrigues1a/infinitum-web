@@ -39,6 +39,7 @@ export default function ManageParticipantsModal({
     kickParticipantService,
     updateRoleService,
     listParticipantsInvitedToProjectService,
+    revokeInvitationService,
   } = useAPIService();
   const { fetchProjects } = useProjects();
   const {
@@ -57,16 +58,18 @@ export default function ManageParticipantsModal({
   const [pendingInvitations, setPendingInvitations] =
     useState<ListParticipantsInvitedToProjectServiceResponse>([]);
 
-  useEffect(() => {
-    (async () => {
-      const response = await listParticipantsInvitedToProjectService.list({
-        projectId: project.projectId,
-      });
+  async function fetchPendingInvitations() {
+    const response = await listParticipantsInvitedToProjectService.list({
+      projectId: project.projectId,
+    });
 
-      if (response.data) {
-        setPendingInvitations(response.data);
-      }
-    })();
+    if (response.data) {
+      setPendingInvitations(response.data);
+    }
+  }
+
+  useEffect(() => {
+    fetchPendingInvitations();
   }, [listParticipantsInvitedToProjectService, project.projectId]);
 
   const handleCloseModal = useCallback(() => {
@@ -104,6 +107,21 @@ export default function ManageParticipantsModal({
     if (toastMsg) showToast(toastMsg, response.error);
     if (!response.error) {
       await fetchProjects();
+    }
+  }
+
+  async function revokeInvitation(email: string) {
+    const response = await revokeInvitationService.revokeInvitation({
+      accountEmail: email,
+      projectId: project.projectId,
+    });
+
+    const toastMsg = response.userFriendlyMessage;
+    if (response.error && toastMsg) {
+      showToast(toastMsg, response.error);
+    }
+    if (!response.error) {
+      fetchPendingInvitations();
     }
   }
 
@@ -169,11 +187,13 @@ export default function ManageParticipantsModal({
                     image={invitation.image}
                   />
                   <div className={styles.listColumn}>
-                    <div className={styles.pendingIcon}>
-                      <FiMoreHorizontal color="#888888" size={28} />
-                    </div>
+                    <span className={styles.pendingText}>
+                      {manageParticipantsModalLanguage.pendingText}
+                    </span>
                   </div>
-                  <Participant.KickButton onClick={() => {}} />
+                  <Participant.KickButton
+                    onClick={() => revokeInvitation(invitation.email)}
+                  />
                 </Participant.Container>
               ))}
             </div>
