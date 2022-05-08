@@ -22,6 +22,7 @@ export type Participant = {
   account: {
     name: string;
     email: string;
+    image: string;
   };
   role: {
     name: {

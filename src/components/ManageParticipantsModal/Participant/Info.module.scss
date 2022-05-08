@@ -4,13 +4,16 @@
   align-items: center;
 }
 
-.participantImg {
-  width: 3rem;
-  height: 3rem;
-  background-color: #be6767;
-  border-radius: 50%;
+.participantImgContainer {
   margin-right: 0.75rem;
   display: none;
+
+  img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 1px solid #cdcdcd;
+  }
 
   /* 414px */
   @media (min-width: 25.875rem) {

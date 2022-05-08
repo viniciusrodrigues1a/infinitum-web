@@ -1,18 +1,27 @@
 import React from "react";
-import { FiUser } from "react-icons/fi";
+import AccountAvatar from "../../AccountAvatar";
 
 import styles from "./Info.module.scss";
 
 type InfoProps = {
   name: string;
   email: string;
+  image: string;
 };
 
-export default function Info({ name, email }: InfoProps): React.ReactElement {
+export default function Info({
+  name,
+  email,
+  image,
+}: InfoProps): React.ReactElement {
   return (
     <div className={styles.listColumn}>
-      <div className={styles.participantImg}>
-        <FiUser color="var(--light)" size={22} />
+      <div className={styles.participantImgContainer}>
+        {image ? (
+          <img src={image} />
+        ) : (
+          <AccountAvatar size="3rem" name={name} />
+        )}
       </div>
       <div className={styles.participantInfo}>
         <span className={styles.participantName}>{name}</span>

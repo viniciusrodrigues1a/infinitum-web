@@ -67,6 +67,16 @@ export default function AccountAvatar({
     return color;
   }
 
+  const nameInitials = useMemo(() => {
+    const splitted = name.split(" ");
+
+    if (splitted.length > 1) {
+      return splitted[0][0] + splitted[1][0];
+    }
+
+    return splitted[0][0];
+  }, [name]);
+
   return (
     <button
       type="button"
@@ -89,7 +99,7 @@ export default function AccountAvatar({
             color,
           }}
         >
-          JG
+          {nameInitials}
         </span>
       )}
     </button>

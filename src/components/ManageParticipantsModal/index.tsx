@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { FiMoreHorizontal } from "react-icons/fi";
 
 import styles from "./ManageParticipantsModal.module.scss";
 
@@ -138,6 +139,7 @@ export default function ManageParticipantsModal({
                   <Participant.Info
                     name={participant.account.name}
                     email={participant.account.email}
+                    image={participant.account.image}
                   />
                   <Participant.RoleSelect
                     email={participant.account.email}
@@ -164,8 +166,13 @@ export default function ManageParticipantsModal({
                   <Participant.Info
                     name={invitation.name}
                     email={invitation.email}
+                    image={invitation.image}
                   />
-                  <div className={styles.listColumn}>pending...</div>
+                  <div className={styles.listColumn}>
+                    <div className={styles.pendingIcon}>
+                      <FiMoreHorizontal color="#888888" size={28} />
+                    </div>
+                  </div>
                   <Participant.KickButton onClick={() => {}} />
                 </Participant.Container>
               ))}
