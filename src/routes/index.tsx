@@ -25,16 +25,16 @@ import SocketProvider from "../contexts/SocketContext";
 
 export default function Routes(): React.ReactElement {
   return (
-    <LanguageProvider>
-      <DateFormatterProvider>
-        <SessionProvider>
-          <SocketProvider>
-            <APIServiceProvider>
-              <SidebarProvider>
-                <ProjectsProvider>
-                  <AccountProvider>
-                    <NotificationsProvider>
-                      <BrowserRouter>
+    <BrowserRouter>
+      <LanguageProvider>
+        <DateFormatterProvider>
+          <SessionProvider>
+            <SocketProvider>
+              <APIServiceProvider>
+                <SidebarProvider>
+                  <ProjectsProvider>
+                    <AccountProvider>
+                      <NotificationsProvider>
                         <Switch>
                           <AuthorizedRoute
                             exact
@@ -89,15 +89,15 @@ export default function Routes(): React.ReactElement {
                             component={() => <Redirect to="/" />}
                           />
                         </Switch>
-                      </BrowserRouter>
-                    </NotificationsProvider>
-                  </AccountProvider>
-                </ProjectsProvider>
-              </SidebarProvider>
-            </APIServiceProvider>
-          </SocketProvider>
-        </SessionProvider>
-      </DateFormatterProvider>
-    </LanguageProvider>
+                      </NotificationsProvider>
+                    </AccountProvider>
+                  </ProjectsProvider>
+                </SidebarProvider>
+              </APIServiceProvider>
+            </SocketProvider>
+          </SessionProvider>
+        </DateFormatterProvider>
+      </LanguageProvider>
+    </BrowserRouter>
   );
 }

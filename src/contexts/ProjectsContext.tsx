@@ -5,7 +5,9 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { useHistory } from "react-router-dom";
 import { useEffectOnce } from "../hooks";
+import RoutesEnum from "../routes/type-defs/RoutesEnum";
 import { ListProjectsServiceResponse } from "../services/interfaces";
 
 import { FormattedProject } from "../services/type-defs/FormattedProject";
@@ -39,6 +41,7 @@ type ProjectsProviderProps = {
 export function ProjectsProvider({
   children,
 }: ProjectsProviderProps): React.ReactElement {
+  const history = useHistory();
   const { isReadyForAuthRequests, listProjectsService } = useAPIService();
   const { formatToFullDate } = useDateFormatter();
   const { session } = useSession();
@@ -117,6 +120,11 @@ export function ProjectsProvider({
     socket.on("loadProject", (project) => {
       const formattedProjects = formatProjects([project]);
       setProjects(formattedProjects);
+    });
+
+    socket.on("removeProject", (projectId) => {
+      history.push(RoutesEnum.PROJECTS);
+      setProjects(projects.filter((p) => p.projectId !== projectId));
     });
   }, isSocketReady);
 

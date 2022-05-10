@@ -23,11 +23,8 @@ export default class UpdateIssueGroupColorService
     newColor,
   }: UpdateIssueGroupColorServiceRequest): Promise<APIResponse<null>> {
     try {
-      const body = { newColor };
-      await this.axiosInstance.patch(
-        `/issueGroups/${issueGroupId}/color`,
-        body
-      );
+      const body = { newColor, issueGroupId };
+      await this.axiosInstance.patch("/issueGroups/color/", body);
 
       return { data: null, error: false };
     } catch (err) {
