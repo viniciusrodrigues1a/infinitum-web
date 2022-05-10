@@ -122,7 +122,9 @@ export default function Kanban({
   useEffect(() => {
     if (loggedInUserRole === "espectator") return;
     const cards = document.querySelectorAll(`.${styles.issueCard}`);
-    const dropzones = document.querySelectorAll(`.${styles.issueSectionBody}`);
+    const dropzones = document.querySelectorAll(
+      `.${styles.issueSectionBody}:not(.issue-section-placeholder)`
+    );
 
     cards.forEach((card) => {
       card.addEventListener("dragstart", onDragStart);
@@ -383,7 +385,9 @@ export default function Kanban({
                   )}
                 </div>
 
-                <div className={styles.issueSectionBody} />
+                <div
+                  className={`${styles.issueSectionBody} issue-section-placeholder`}
+                />
               </div>
             )}
           </div>
