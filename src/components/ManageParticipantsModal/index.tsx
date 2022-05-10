@@ -212,14 +212,17 @@ export default function ManageParticipantsModal({
 
         <AddParticipantsModal
           shown={isAddParticipantsModalOpen}
-          closeModal={() => setIsAddParticipantsModalOpen(false)}
+          closeModal={() => {
+            setIsAddParticipantsModalOpen(false);
+            fetchPendingInvitations();
+          }}
           project={project}
         />
         <DeleteParticipantConfirmationModal
           shown={deleteParticipantConfirmationModalConfig.shown}
-          closeModal={() =>
-            setDeleteParticipantConfirmationModalConfig({ shown: false })
-          }
+          closeModal={() => {
+            setDeleteParticipantConfirmationModalConfig({ shown: false });
+          }}
           accountEmail={
             deleteParticipantConfirmationModalConfig.accountEmail as string
           }
