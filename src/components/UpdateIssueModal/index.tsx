@@ -84,7 +84,7 @@ export default function UpdateIssueModal({
       })
     );
     setIssueGroupId(igId);
-  }, [shown, issue, issueGroups]);
+  }, [shown, issue]);
 
   function handleCloseModal() {
     setTitle("");
@@ -103,7 +103,7 @@ export default function UpdateIssueModal({
   }
 
   async function updateIssue() {
-    let date: Date | undefined;
+    let date: Date | null = null;
     if (expirationDate) {
       const [year, month, day] = expirationDate
         .split("-")
