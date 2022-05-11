@@ -119,14 +119,20 @@ export function ProjectsProvider({
   useEffectOnce(() => {
     socket.on("loadProject", (project) => {
       const formattedProjects = formatProjects([project]);
-      setProjects(formattedProjects);
+      setProjects((prev) =>
+        prev.map((p) => {
+          if (p.projectId === project.projectId) return formattedProjects[0];
+
+          return p;
+        })
+      );
     });
 
     socket.on("removeProject", (projectId) => {
       history.push(RoutesEnum.PROJECTS);
       setProjects(projects.filter((p) => p.projectId !== projectId));
     });
-  }, isSocketReady);
+  }, isReadyForAuthRequests);
 
   useEffect(() => {
     if (isReadyForAuthRequests) {

@@ -69,7 +69,7 @@ export default function Project(): React.ReactElement {
         projectId: project.projectId,
       });
     };
-  }, [isSocketReady, project, session, socket]);
+  }, [isSocketReady, session, socket]);
 
   if (!project) {
     return (
