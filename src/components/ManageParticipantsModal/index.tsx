@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { FiMoreHorizontal } from "react-icons/fi";
+import React, { useCallback, useState } from "react";
 
 import styles from "./ManageParticipantsModal.module.scss";
 
@@ -16,7 +15,6 @@ import showToast from "../../utils/showToast";
 import { useProjects } from "../../contexts/ProjectsContext";
 import DeleteParticipantConfirmationModal from "../DeleteParticipantConfirmationModal";
 import { useLanguage } from "../../contexts/LanguageContext";
-import { ListParticipantsInvitedToProjectServiceResponse } from "../../services/interfaces";
 import Participant from "./Participant";
 
 export type ManageParticipantsModalProps = {
@@ -35,12 +33,8 @@ export default function ManageParticipantsModal({
   shown,
   project,
 }: ManageParticipantsModalProps): React.ReactElement {
-  const {
-    kickParticipantService,
-    updateRoleService,
-    listParticipantsInvitedToProjectService,
-    revokeInvitationService,
-  } = useAPIService();
+  const { kickParticipantService, updateRoleService, revokeInvitationService } =
+    useAPIService();
   const { fetchProjects } = useProjects();
   const {
     language: {
@@ -54,23 +48,6 @@ export default function ManageParticipantsModal({
     deleteParticipantConfirmationModalConfig,
     setDeleteParticipantConfirmationModalConfig,
   ] = useState<DeleteParticipantConfirmationModalConfig>({ shown: false });
-
-  const [pendingInvitations, setPendingInvitations] =
-    useState<ListParticipantsInvitedToProjectServiceResponse>([]);
-
-  async function fetchPendingInvitations() {
-    const response = await listParticipantsInvitedToProjectService.list({
-      projectId: project.projectId,
-    });
-
-    if (response.data) {
-      setPendingInvitations(response.data);
-    }
-  }
-
-  useEffect(() => {
-    fetchPendingInvitations();
-  }, [listParticipantsInvitedToProjectService, project.projectId]);
 
   const handleCloseModal = useCallback(() => {
     closeModal();
@@ -119,9 +96,6 @@ export default function ManageParticipantsModal({
     const toastMsg = response.userFriendlyMessage;
     if (response.error && toastMsg) {
       showToast(toastMsg, response.error);
-    }
-    if (!response.error) {
-      fetchPendingInvitations();
     }
   }
 
@@ -177,11 +151,11 @@ export default function ManageParticipantsModal({
                 </Participant.Container>
               ))}
 
-              {pendingInvitations.length > 0 && (
+              {project.pendingInvitations.length > 0 && (
                 <div className={styles.separator} />
               )}
 
-              {pendingInvitations.map((invitation) => (
+              {project.pendingInvitations.map((invitation) => (
                 <Participant.Container key={invitation.email}>
                   <Participant.Info
                     name={invitation.name}
@@ -214,7 +188,6 @@ export default function ManageParticipantsModal({
           shown={isAddParticipantsModalOpen}
           closeModal={() => {
             setIsAddParticipantsModalOpen(false);
-            fetchPendingInvitations();
           }}
           project={project}
         />

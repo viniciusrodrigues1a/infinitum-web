@@ -41,4 +41,5 @@ export type Project = {
   archived: boolean | null;
   participants: Participant[];
   issueGroups: IssueGroup[];
+  pendingInvitations: { name: string; email: string; image: string }[];
 };
