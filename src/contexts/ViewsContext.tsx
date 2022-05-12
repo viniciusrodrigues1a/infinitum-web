@@ -31,6 +31,7 @@ type ViewsContextData = {
   updateIssueCompletedStatus: (id: string, status: boolean) => Promise<void>;
   updateIssueGroupFinalStatus: (isFinal: boolean) => Promise<void>;
   updateIssueGroupColor: (color: string) => Promise<void>;
+  deleteIssueGroup: (issueGroupId: string) => Promise<void>;
 };
 
 type ViewsProviderProps = {
@@ -49,6 +50,7 @@ export function ViewsProvider({
     updateIssueGroupFinalStatusService,
     moveIssueService,
     updateIssueGroupColorService,
+    deleteIssueGroupService,
   } = useAPIService();
   const { fetchProjects } = useProjects();
 
@@ -150,6 +152,19 @@ export function ViewsProvider({
     [fetchProjects, moveIssueService]
   );
 
+  const deleteIssueGroup = useCallback(
+    async (issueGroupId: string) => {
+      const response = await deleteIssueGroupService.deleteIssueGroup({
+        issueGroupId,
+      });
+
+      if (!response.error) {
+        await fetchProjects();
+      }
+    },
+    [fetchProjects, deleteIssueGroupService]
+  );
+
   return (
     <ViewsContext.Provider
       value={{
@@ -167,6 +182,7 @@ export function ViewsProvider({
         updateIssueCompletedStatus,
         updateIssueGroupFinalStatus,
         updateIssueGroupColor,
+        deleteIssueGroup,
       }}
     >
       {children}

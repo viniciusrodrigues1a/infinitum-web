@@ -49,6 +49,7 @@ export default function List({
     createIssueGroup,
     updateIssueCompletedStatus,
     updateIssueGroupFinalStatus,
+    deleteIssueGroup,
   } = useViewsState();
 
   const [collapsedSections, setCollapsedSections] = useState<Array<string>>([]);
@@ -206,12 +207,19 @@ export default function List({
                   setIssueGroupIdBeingUpdated(issueGroup.issueGroupId)
                 }
               >
-                <IssueGroupOptions.UpdateIsFinalOption
-                  defaultChecked={issueGroup.shouldUpdateIssuesToCompleted}
-                  onChange={(e) =>
-                    updateIssueGroupFinalStatus(e.target.checked)
-                  }
-                />
+                <IssueGroupOptions.FlexContainer>
+                  <IssueGroupOptions.UpdateIsFinalOption
+                    defaultChecked={issueGroup.shouldUpdateIssuesToCompleted}
+                    onChange={(e) =>
+                      updateIssueGroupFinalStatus(e.target.checked)
+                    }
+                  />
+                  <IssueGroupOptions.DeleteButton
+                    loggedInUserRole={loggedInUserRole}
+                    style={{ marginLeft: "0.75rem" }}
+                    onClick={() => deleteIssueGroup(issueGroup.issueGroupId)}
+                  />
+                </IssueGroupOptions.FlexContainer>
               </IssueGroupOptions.Container>
             )}
           </div>

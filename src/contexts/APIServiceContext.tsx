@@ -11,6 +11,7 @@ import AssignIssueToAccountService from "../services/AssignIssueToAccountService
 import CreateIssueGroupService from "../services/CreateIssueGroupService";
 import CreateIssueService from "../services/CreateIssueService";
 import CreateProjectService from "../services/CreateProjectService";
+import DeleteIssueGroupService from "../services/DeleteIssueGroupService";
 import DeleteIssueService from "../services/DeleteIssueService";
 import DeleteProjectService from "../services/DeleteProjectService";
 import FindOneAccountService from "../services/FindOneAccountService";
@@ -48,6 +49,7 @@ import {
   IValidateJWTService,
 } from "../services/interfaces";
 import { ICreateIssueService } from "../services/interfaces/ICreateIssueService";
+import { IDeleteIssueGroupService } from "../services/interfaces/IDeleteIssueGroupService";
 import { IDeleteProjectService } from "../services/interfaces/IDeleteProjectService";
 import { IUpdateProjectService } from "../services/interfaces/IUpdateProjectService";
 import InviteToProjectService from "../services/InviteToProjectService";
@@ -106,6 +108,7 @@ type APIServiceContextData = {
   assignIssueToAccountService: IAssignIssueToAccountService;
   revokeInvitationService: IRevokeInvitationService;
   listParticipantsInvitedToProjectService: IListParticipantsInvitedToProjectService;
+  deleteIssueGroupService: IDeleteIssueGroupService;
 };
 
 type APIServiceProviderProps = {
@@ -174,6 +177,7 @@ export const APIServiceProvider = ({
       revokeInvitationService: new RevokeInvitationService(api, lang),
       listParticipantsInvitedToProjectService:
         new ListParticipantsInvitedToProjectService(api, lang),
+      deleteIssueGroupService: new DeleteIssueGroupService(api, lang),
     } as Omit<APIServiceContextData, "isReadyForAuthRequests">;
   }, [language]);
 

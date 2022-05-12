@@ -44,6 +44,7 @@ export default function Kanban({
     moveIssue,
     updateIssueGroupFinalStatus,
     updateIssueGroupColor,
+    deleteIssueGroup,
   } = useViewsState();
 
   const [newIssueTitle, setNewIssueTitle] = useState("");
@@ -251,20 +252,28 @@ export default function Kanban({
                             setIssueGroupIdBeingUpdated(issueGroup.issueGroupId)
                           }
                         >
-                          <>
-                            <IssueGroupOptions.UpdateColorOption
-                              onColorChange={onColorChange}
-                            />
-                            <IssueGroupOptions.Separator />
-                            <IssueGroupOptions.UpdateIsFinalOption
-                              defaultChecked={
-                                issueGroup.shouldUpdateIssuesToCompleted
-                              }
-                              onChange={(e) =>
-                                updateIssueGroupFinalStatus(e.target.checked)
-                              }
-                            />
-                          </>
+                          <IssueGroupOptions.UpdateColorOption
+                            onColorChange={onColorChange}
+                          />
+                          <IssueGroupOptions.Separator />
+                          <IssueGroupOptions.UpdateIsFinalOption
+                            defaultChecked={
+                              issueGroup.shouldUpdateIssuesToCompleted
+                            }
+                            onChange={(e) =>
+                              updateIssueGroupFinalStatus(e.target.checked)
+                            }
+                          />
+                          <IssueGroupOptions.DeleteButton
+                            style={{
+                              marginTop: "1.5rem",
+                              width: "100%",
+                            }}
+                            onClick={() =>
+                              deleteIssueGroup(issueGroup.issueGroupId)
+                            }
+                            loggedInUserRole={loggedInUserRole}
+                          />
                         </IssueGroupOptions.Container>
                       </>
                     )}

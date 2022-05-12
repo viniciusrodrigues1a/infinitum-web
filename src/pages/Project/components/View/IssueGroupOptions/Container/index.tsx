@@ -6,7 +6,7 @@ import styles from "./Container.module.scss";
 type ContainerProps = {
   isDropdownShown: boolean;
   onClick: (e: React.MouseEvent) => void;
-  children: React.ReactElement;
+  children: React.ReactNode;
 };
 
 export default function Container({
