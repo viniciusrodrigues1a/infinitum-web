@@ -3,6 +3,7 @@ import { Issue, IssueGroup, Project } from "./Project";
 export type FormattedIssue = Issue & {
   createdAtFullDate: string;
   expiresAtFullDate: string;
+  order: string;
 };
 
 export type FormattedIssueGroup = Omit<IssueGroup, "issues"> & {

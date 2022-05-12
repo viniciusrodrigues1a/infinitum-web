@@ -16,9 +16,11 @@ export default class MoveIssueService implements IMoveIssueService {
   async moveIssue({
     issueId,
     moveToIssueGroupId,
+    orderBefore,
+    orderAfter,
   }: MoveIssueServiceRequest): Promise<APIResponse<null>> {
     try {
-      const body = { moveToIssueGroupId };
+      const body = { moveToIssueGroupId, orderBefore, orderAfter };
       await this.axiosInstance.patch(`/issues/${issueId}/move`, body);
 
       return { data: null, error: false };

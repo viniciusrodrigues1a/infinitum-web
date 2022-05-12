@@ -122,7 +122,7 @@ export default function Kanban({
 
   useEffect(() => {
     if (loggedInUserRole === "espectator") return;
-    const cards = document.querySelectorAll(`.${styles.issueCard}`);
+    const cards = document.querySelectorAll(`.${styles.issueCardWrapper}`);
     const dropzones = document.querySelectorAll(
       `.${styles.issueSectionBody}:not(.issue-section-placeholder)`
     );
@@ -169,6 +169,34 @@ export default function Kanban({
       }
     }
 
+    function getDraggableElementsInBetween(container: any, y: any) {
+      const elems = [
+        ...container.querySelectorAll(
+          `.${styles.issueCardWrapper}:not(.${styles.cardIsBeingDragged})`
+        ),
+      ];
+
+      const reduced = elems.reduce(
+        (closest, elem) => {
+          const box = elem.getBoundingClientRect();
+          const offset = y - box.top - box.height / 2;
+          if (offset < 0 && offset > closest.nextOffset) {
+            return { ...closest, nextOffset: offset, nextElement: elem };
+          }
+          if (offset > 0 && offset < closest.prevOffset) {
+            return { ...closest, prevOffset: offset, prevElement: elem };
+          }
+          return closest;
+        },
+        {
+          nextOffset: Number.NEGATIVE_INFINITY,
+          prevOffset: Number.POSITIVE_INFINITY,
+        }
+      );
+
+      return { next: reduced.nextElement, prev: reduced.prevElement };
+    }
+
     function onDragLeave(e: any) {
       if (e.target.classList) {
         e.currentTarget.classList.remove(styles.dropzoneDragOver);
@@ -182,14 +210,30 @@ export default function Kanban({
         e.currentTarget.classList.remove(styles.dropzoneDragOver);
       }
 
+      const elemsInBetween = getDraggableElementsInBetween(
+        e.currentTarget,
+        e.clientY
+      );
+
       const issueId = e.dataTransfer.getData("issueId");
+      let orderBefore: string | undefined;
+      let orderAfter: string | undefined;
+
+      if (elemsInBetween.prev) {
+        orderBefore = elemsInBetween.prev.dataset.order;
+      }
+      if (elemsInBetween.next) {
+        orderAfter = elemsInBetween.next.dataset.order;
+      }
 
       await moveIssue({
         issueId,
         moveToIssueGroupId: e.currentTarget.dataset.issueGroupId,
+        orderBefore,
+        orderAfter,
       });
     }
-  }, [moveIssue]);
+  }, [moveIssue, loggedInUserRole]);
 
   useEffect(() => {
     const body = document.querySelector("body");
@@ -289,12 +333,11 @@ export default function Kanban({
                       type="button"
                       className={styles.issueCardWrapper}
                       onClick={() => setIssueBeingUpdated(issue)}
+                      data-issue-id={issue.issueId}
+                      data-order={issue.order}
+                      draggable
                     >
-                      <div
-                        className={styles.issueCard}
-                        data-issue-id={issue.issueId}
-                        draggable
-                      >
+                      <div className={styles.issueCard}>
                         <strong>{issue.title}</strong>
 
                         {loggedInUserRole !== "espectator" && (
