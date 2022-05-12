@@ -21,12 +21,14 @@ export type UpdateProjectModalProps = {
   shown: boolean;
   closeModal: () => void;
   project: FormattedProject;
+  loggedInUserRole: string;
 };
 
 export default function UpdateProjectModal({
   shown,
   closeModal,
   project,
+  loggedInUserRole,
 }: UpdateProjectModalProps): React.ReactElement {
   const params = useParams<{ projectId: string }>();
   const {
@@ -166,13 +168,15 @@ export default function UpdateProjectModal({
                 </div>
               </div>
 
-              <button
-                type="button"
-                id={styles.deleteButton}
-                onClick={() => setIsDeleteModalOpen(true)}
-              >
-                <FiTrash2 color="#D85C43" size={24} />
-              </button>
+              {loggedInUserRole === "owner" && (
+                <button
+                  type="button"
+                  id={styles.deleteButton}
+                  onClick={() => setIsDeleteModalOpen(true)}
+                >
+                  <FiTrash2 color="#D85C43" size={24} />
+                </button>
+              )}
             </div>
 
             <div id={styles.formWrapper}>

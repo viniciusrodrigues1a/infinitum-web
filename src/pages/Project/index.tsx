@@ -180,6 +180,7 @@ export default function Project(): React.ReactElement {
             shown={isUpdateModalOpen}
             closeModal={() => setIsUpdateModalOpen(false)}
             project={project}
+            loggedInUserRole={loggedInUserRole}
           />
           <ManageParticipantsModal
             shown={isParticipantsModalOpen}
