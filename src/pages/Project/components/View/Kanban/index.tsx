@@ -15,6 +15,7 @@ import {
 import { useViewsState } from "../../../../../contexts/ViewsContext";
 import { useLanguage } from "../../../../../contexts/LanguageContext";
 import { ParticipantRoleValue } from "../../../../../services/type-defs/Project";
+import getDraggableElementsInBetween from "../getDraggableElementsInBetween";
 
 type KanbanProps = {
   project: FormattedProject;
@@ -188,10 +189,12 @@ export default function Kanban({
         e.currentTarget.classList.remove(styles.dropzoneDragOver);
       }
 
-      const elemsInBetween = getDraggableElementsInBetween(
-        e.currentTarget,
-        e.clientY
-      );
+      const elems = [
+        ...e.currentTarget.querySelectorAll(
+          `.${styles.issueCardWrapper}:not(.${styles.cardIsBeingDragged})`
+        ),
+      ];
+      const elemsInBetween = getDraggableElementsInBetween(elems, e.clientY);
 
       const issueId = e.dataTransfer.getData("issueId");
       let orderBefore: string | undefined;
@@ -212,35 +215,6 @@ export default function Kanban({
       });
     }
   }, [moveIssue, loggedInUserRole, project]);
-
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  function getDraggableElementsInBetween(container: any, y: any) {
-    const elems = [
-      ...container.querySelectorAll(
-        `.${styles.issueCardWrapper}:not(.${styles.cardIsBeingDragged})`
-      ),
-    ];
-
-    const reduced = elems.reduce(
-      (closest, elem) => {
-        const box = elem.getBoundingClientRect();
-        const offset = y - box.top - box.height / 2;
-        if (offset < 0 && offset > closest.nextOffset) {
-          return { ...closest, nextOffset: offset, nextElement: elem };
-        }
-        if (offset > 0 && offset < closest.prevOffset) {
-          return { ...closest, prevOffset: offset, prevElement: elem };
-        }
-        return closest;
-      },
-      {
-        nextOffset: Number.NEGATIVE_INFINITY,
-        prevOffset: Number.POSITIVE_INFINITY,
-      }
-    );
-
-    return { next: reduced.nextElement, prev: reduced.prevElement };
-  }
 
   useEffect(() => {
     const body = document.querySelector("body");
