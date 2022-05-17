@@ -132,6 +132,7 @@ export default function Kanban({
       card.addEventListener("dragend", onDragEnd);
     });
 
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     function onDragStart(e: any) {
       dropzones.forEach((dropzone) =>
         dropzone.classList.add(styles.dropzoneHighlight)
@@ -144,6 +145,7 @@ export default function Kanban({
       e.dataTransfer.setData("issueId", e.target.dataset.issueId);
     }
 
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     function onDragEnd(e: any) {
       if (e.target.classList) {
         e.target.classList.remove(styles.cardIsBeingDragged);
@@ -157,10 +159,12 @@ export default function Kanban({
       dropzone.addEventListener("drop", onDrop);
     });
 
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     function onDragEnter(e: any) {
       e.preventDefault();
     }
 
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     function onDragOver(e: any) {
       e.preventDefault();
 
@@ -169,6 +173,7 @@ export default function Kanban({
       }
     }
 
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     function getDraggableElementsInBetween(container: any, y: any) {
       const elems = [
         ...container.querySelectorAll(
@@ -197,12 +202,14 @@ export default function Kanban({
       return { next: reduced.nextElement, prev: reduced.prevElement };
     }
 
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     function onDragLeave(e: any) {
       if (e.target.classList) {
         e.currentTarget.classList.remove(styles.dropzoneDragOver);
       }
     }
 
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     async function onDrop(e: any) {
       e.stopImmediatePropagation();
 
@@ -264,7 +271,10 @@ export default function Kanban({
         <div id={styles.containerWrapper}>
           <div id={styles.container}>
             {project.issueGroups.map((issueGroup: FormattedIssueGroup) => (
-              <div className={styles.issueSectionContainer}>
+              <div
+                className={styles.issueSectionContainer}
+                key={issueGroup.issueGroupId}
+              >
                 <div className={styles.issueSectionHeader}>
                   <div
                     className={styles.issueSectionHeaderColor}
@@ -331,6 +341,7 @@ export default function Kanban({
                   {issueGroup.issues.map((issue) => (
                     <button
                       type="button"
+                      key={issue.issueId}
                       className={styles.issueCardWrapper}
                       onClick={() => setIssueBeingUpdated(issue)}
                       data-issue-id={issue.issueId}

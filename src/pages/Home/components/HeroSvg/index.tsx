@@ -100,7 +100,7 @@ export default function HeroSvg(): React.ReactElement {
           width="366"
           height="265"
           fill="#9DE258"
-          fill-opacity="0.05"
+          fillOpacity="0.05"
         />
         <path
           id="Vector_17"
@@ -150,7 +150,7 @@ export default function HeroSvg(): React.ReactElement {
           width="366"
           height="265"
           fill="#68943D"
-          fill-opacity="0.05"
+          fillOpacity="0.05"
         />
         <path
           id="Vector_26"

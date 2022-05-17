@@ -74,6 +74,7 @@ export default function DeleteProjectModal({
 
           <p
             id={styles.description}
+            /* eslint-disable-next-line react/no-danger */
             dangerouslySetInnerHTML={{
               __html: deleteProjectModalLanguage.description(project.name),
             }}
@@ -82,6 +83,7 @@ export default function DeleteProjectModal({
           <div id={styles.inputContainer}>
             <label htmlFor="deletion-confirmation">
               <div
+                /* eslint-disable-next-line react/no-danger */
                 dangerouslySetInnerHTML={{
                   __html: deleteProjectModalLanguage.inputConfirmationText,
                 }}

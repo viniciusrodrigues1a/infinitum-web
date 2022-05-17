@@ -25,6 +25,7 @@ export default class LoginService implements ILoginService {
       const body = { email, password };
       const response = await this.axiosInstance.post("/auth/login", body);
 
+      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
       return { data: { token: (response.data as any).token }, error: false };
     } catch (err) {
       if (err.response) {

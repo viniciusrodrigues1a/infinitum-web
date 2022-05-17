@@ -45,9 +45,8 @@ export function ProjectsProvider({
   const { isReadyForAuthRequests, listProjectsService } = useAPIService();
   const { formatToFullDate } = useDateFormatter();
   const { session } = useSession();
-  const { socket, isSocketReady } = useSocket();
+  const { socket } = useSocket();
 
-  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [projects, setProjects] = useState<FormattedProject[]>([]);
 
@@ -104,7 +103,7 @@ export function ProjectsProvider({
   );
 
   const updateProjectsState = useCallback(async () => {
-    if (projects.length === 0) setLoading(true);
+    setLoading(true);
 
     const response = await listProjectsService.list();
 
@@ -114,7 +113,7 @@ export function ProjectsProvider({
     }
 
     setLoading(false);
-  }, [listProjectsService, formatProjects, projects]);
+  }, [listProjectsService, formatProjects]);
 
   useEffectOnce(() => {
     socket.on("loadProject", (project) => {
@@ -138,7 +137,7 @@ export function ProjectsProvider({
     if (isReadyForAuthRequests) {
       updateProjectsState();
     }
-  }, [isReadyForAuthRequests]); // adding updateProjectsState to the deps array is going to make it run forever
+  }, [isReadyForAuthRequests, updateProjectsState]); // adding updateProjectsState to the deps array is going to make it run forever
 
   function getProjectById(id: string): FormattedProject | undefined {
     return projects.find((p) => p.projectId === id);

@@ -15,6 +15,7 @@ export type NotificationType = {
   message: string;
   type: string;
   read: boolean;
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   metadata: Record<any, any>;
   createdAt: number;
 };

@@ -41,6 +41,7 @@ export default function DeleteParticipantConfirmationModal({
           <Subtitle>
             <span
               id={styles.emailTextWrapper}
+              /* eslint-disable-next-line react/no-danger */
               dangerouslySetInnerHTML={{
                 __html:
                   deleteParticipantConfirmationModalLanguage.subtitle(

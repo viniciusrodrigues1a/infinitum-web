@@ -6,6 +6,7 @@ import styles from "./DeleteButton.module.scss";
 type DeleteButtonProps = {
   onClick: () => void;
   loggedInUserRole: string;
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   [key: string]: any;
 };
 

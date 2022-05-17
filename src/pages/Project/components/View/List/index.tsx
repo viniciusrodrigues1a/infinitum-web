@@ -227,7 +227,7 @@ export default function List({
           {!isSectionCollapsed(issueGroup.issueGroupId) && (
             <div className={styles.issues}>
               {issueGroup.issues.map((issue) => (
-                <div className={styles.issueWrapper}>
+                <div className={styles.issueWrapper} key={issue.issueId}>
                   {loggedInUserRole !== "espectator" && (
                     <button
                       type="button"

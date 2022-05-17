@@ -84,7 +84,7 @@ export default function UpdateIssueModal({
       })
     );
     setIssueGroupId(igId);
-  }, [shown, issue]);
+  }, [shown, issue, issueGroups]);
 
   function handleCloseModal() {
     setTitle("");

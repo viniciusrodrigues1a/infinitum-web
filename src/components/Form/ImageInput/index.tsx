@@ -8,8 +8,8 @@ export type ImageInputProps = {
   width: string;
   height: string;
   value?: string;
-  onChange?: (e: React.ChangeEvent<any>) => void;
-  src?: any;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  src?: string;
 };
 
 ImageInput.defaultProps = {
@@ -34,6 +34,7 @@ export default function ImageInput({
     setIsImgShown(!!src);
   }, [src]);
 
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   function handleOnError(e: any) {
     e.target.src = null;
     setIsImgShown(false);

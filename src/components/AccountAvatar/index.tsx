@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { darken, lighten, setLightness, setSaturation } from "polished";
+import React, { useMemo } from "react";
+import { darken, setLightness, setSaturation } from "polished";
 
 import styles from "./AccountAvatar.module.scss";
 
@@ -57,10 +57,12 @@ export default function AccountAvatar({
   function stringToColor(s: string) {
     let hash = 0;
     for (let i = 0; i < s.length; i++) {
+      /* eslint-disable-next-line no-bitwise */
       hash = s.charCodeAt(i) + ((hash << 5) - hash);
     }
     let color = "#";
     for (let i = 0; i < 3; i++) {
+      /* eslint-disable-next-line no-bitwise */
       const value = (hash >> (i * 8)) & 0xff;
       color += `00${value.toString(16)}`.substr(-2);
     }

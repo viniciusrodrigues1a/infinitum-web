@@ -117,6 +117,7 @@ export default function Projects(): React.ReactElement {
                             history.push(`/project/${p.projectId}`)
                           }
                           style={{ cursor: "pointer" }}
+                          key={p.projectId}
                         >
                           <Table.Td>{p.name}</Table.Td>
                           <Table.Td align="center">

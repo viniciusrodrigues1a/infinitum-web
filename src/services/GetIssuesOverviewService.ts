@@ -24,6 +24,7 @@ export default class GetIssuesOverviewService
     try {
       const response = await this.axiosInstance.get("/issues/overview");
 
+      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
       return { data: response.data as any, error: false };
     } catch (err) {
       if (err.response) {

@@ -28,4 +28,3 @@ export default class ListLanguagesService implements IListLanguagesService {
     }
   }
 }
-

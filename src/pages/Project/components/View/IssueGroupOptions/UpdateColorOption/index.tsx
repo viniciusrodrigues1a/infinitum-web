@@ -6,7 +6,6 @@ type UpdateColorOptionProps = {
   onColorChange: (color: string) => void;
 };
 
-/* eslint-disable jsx-a11y/control-has-associated-label */
 export default function UpdateColorOption({
   onColorChange,
 }: UpdateColorOptionProps): React.ReactElement {
@@ -22,6 +21,7 @@ export default function UpdateColorOption({
   return (
     <div className={styles.container}>
       {colors.current.map((color) => (
+        /* eslint-disable-next-line jsx-a11y/control-has-associated-label */
         <button
           key={color}
           type="button"

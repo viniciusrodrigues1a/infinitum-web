@@ -20,6 +20,7 @@ export default class ListProjectsService implements IListProjectsService {
     try {
       const response = await this.axiosInstance.get("/projects/");
 
+      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
       return { data: response.data as any, error: false };
     } catch (err) {
       if (err.response) {

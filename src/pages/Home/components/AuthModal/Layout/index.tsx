@@ -7,7 +7,6 @@ type AuthModalLayoutProps = Pick<ModalProps, "closeModal"> & {
   title: string;
   buttonTitle: string;
   onButtonClick: () => void;
-  onGoogleButtonClick: () => void;
   alternativeTitle: string[] | string;
   onAlternativeClick: () => void;
   formComponent: () => React.ReactElement;
@@ -51,7 +50,6 @@ export default function AuthModalLayout({
   title,
   buttonTitle,
   onButtonClick,
-  onGoogleButtonClick,
   alternativeTitle,
   onAlternativeClick,
   formComponent: FormComponent,

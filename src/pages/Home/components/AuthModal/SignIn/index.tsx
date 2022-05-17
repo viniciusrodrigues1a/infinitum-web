@@ -53,7 +53,6 @@ export default function SignIn({
       buttonTitle={homeLanguage.signInModal.buttonTitle}
       alternativeTitle={homeLanguage.signInModal.alternativeTitle}
       onButtonClick={handleButtonClick}
-      onGoogleButtonClick={() => {}}
       onAlternativeClick={openAlternativeModal}
       closeModal={closeModal}
       asideImageSrc={asideImage}

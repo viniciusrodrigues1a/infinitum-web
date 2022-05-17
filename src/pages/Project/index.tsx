@@ -69,7 +69,8 @@ export default function Project(): React.ReactElement {
         projectId: project.projectId,
       });
     };
-  }, [isSocketReady, session, socket]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [isSocketReady, session, socket]); // emitting socket events will change the `project` variable and will make this useEffect run forever if added to the deps array
 
   if (!project) {
     return (

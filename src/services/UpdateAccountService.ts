@@ -38,6 +38,7 @@ export default class UpdateAccountService implements IUpdateAccountService {
     }
   }
 
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   private appendToFormDataIfNotFalsy(key: string, val: any, fd: FormData) {
     if (val) {
       fd.append(key, val);

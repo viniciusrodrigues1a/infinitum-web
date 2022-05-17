@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 
-/* eslint-disable import/prefer-default-export */
+/* eslint-disable-next-line import/prefer-default-export */
 export function useEffectOnce(cb: () => void, condition: boolean): void {
   const hasBeenCalledRef = useRef<boolean>(false);
 

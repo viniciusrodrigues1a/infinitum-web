@@ -8,7 +8,6 @@ import { useSidebar } from "../../contexts/SidebarContext";
 import Chart from "./components/Chart";
 import Title from "../../components/Title";
 import Subtitle from "../../components/Subtitle";
-import Loader from "../../components/Loader";
 
 import styles from "./Dashboard.module.css";
 import { useAPIService } from "../../contexts/APIServiceContext";
@@ -18,6 +17,7 @@ import IssueListModal from "../../components/IssueListModal";
 
 type ChartDataConfig = {
   type: "WEEK" | "MONTH";
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   data: any;
 };
 

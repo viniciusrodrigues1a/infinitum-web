@@ -18,7 +18,7 @@ export default function Info({
     <div className={styles.listColumn}>
       <div className={styles.participantImgContainer}>
         {image ? (
-          <img src={image} />
+          <img src={image} alt="Participant's profile" />
         ) : (
           <AccountAvatar size="3rem" name={name} />
         )}

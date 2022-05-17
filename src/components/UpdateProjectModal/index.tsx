@@ -78,7 +78,7 @@ export default function UpdateProjectModal({
         setImagePreview(response.data.dataURL);
       }
     })();
-  }, [findProjectImageService, params, shown]);
+  }, [findProjectImageService, params]);
 
   const clearInputs = useCallback(() => {
     setTitle("");

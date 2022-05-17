@@ -23,6 +23,7 @@ type LanguageRoulette = {
   currentLanguage: SVGLanguage;
 };
 
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 let svgInterval: any = null;
 
 export default function LanguageModal({

@@ -48,6 +48,7 @@ function Row({
 }
 
 function eitherProp(one: string, another: string) {
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   return (props: any, _propName: string, componentName: string) => {
     if (!props[one] && !props[another]) {
       return new Error(

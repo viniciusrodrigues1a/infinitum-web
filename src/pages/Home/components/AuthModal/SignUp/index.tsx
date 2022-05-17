@@ -68,7 +68,6 @@ export default function SignUp({
       buttonTitle={homeLanguage.signUpModal.buttonTitle}
       alternativeTitle={homeLanguage.signUpModal.alternativeTitle}
       onButtonClick={handleButtonClick}
-      onGoogleButtonClick={() => {}}
       onAlternativeClick={openAlternativeModal}
       closeModal={closeModal}
       asideImageSrc={asideImage}

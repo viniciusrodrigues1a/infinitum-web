@@ -33,6 +33,7 @@
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx"] }],
     "react/jsx-props-no-spreading": "off",
+    "class-methods-use-this": "off",
     "no-use-before-define": "off",
     "no-nested-ternary": "off",
     "@typescript-eslint/no-use-before-define": ["off"],

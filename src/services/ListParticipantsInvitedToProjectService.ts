@@ -29,6 +29,7 @@ export default class ListParticipantsInvitedToProjectService
         `/projects/invitedParticipants/${projectId}`
       );
 
+      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
       return { data: response.data as any, error: false };
     } catch (err) {
       if (err.response) {

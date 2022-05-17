@@ -44,6 +44,7 @@ type RechartsMouseMoveEvent = {
   isTooltipActive: boolean;
 };
 
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 export default function Chart({ data }: { data: any }): React.ReactElement {
   const [mousePos, setMousePos] = useState<MousePos | null>(null);
 

@@ -1,6 +1,6 @@
-/* eslint-disable import/prefer-default-export */
 import Language from "./types";
 
+/* eslint-disable-next-line import/prefer-default-export */
 export const ptBR: Language = {
   libs: {
     axios: {

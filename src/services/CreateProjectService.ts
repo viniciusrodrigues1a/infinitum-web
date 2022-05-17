@@ -28,6 +28,7 @@ export default class CreateProjectService implements ICreateProjectService {
       const body = { name, description, beginsAt, finishesAt };
       const response = await this.axiosInstance.post("/projects/", body);
 
+      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
       return { data: (response.data as any).id, error: false };
     } catch (err) {
       if (err.response) {
