@@ -179,3 +179,21 @@ $issueFieldWidth: 50%;
   justify-content: flex-start;
   margin-top: 1.125rem;
 }
+
+.issueIsBeingDragged {
+  cursor: grabbing !important;
+}
+
+.dropzoneDragOver {
+  background: rgba(118, 200, 147, 0.1) !important;
+}
+
+.draggableIndicator {
+  width: 100%;
+  height: 2px;
+  background: rgba(118, 200, 147, 1) !important;
+}
+
+.displayNone {
+  display: none;
+}

@@ -21,6 +21,7 @@ import IssueGroupOptions from "../IssueGroupOptions";
 import { useViewsState } from "../../../../../contexts/ViewsContext";
 import { useLanguage } from "../../../../../contexts/LanguageContext";
 import { ParticipantRoleValue } from "../../../../../services/type-defs/Project";
+import getDraggableElementsInBetween from "../getDraggableElementsInBetween";
 
 type ListProps = {
   project: FormattedProject;
@@ -50,11 +51,14 @@ export default function List({
     updateIssueCompletedStatus,
     updateIssueGroupFinalStatus,
     deleteIssueGroup,
+    moveIssue,
   } = useViewsState();
 
   const [collapsedSections, setCollapsedSections] = useState<Array<string>>([]);
   const [newIssueTitle, setNewIssueTitle] = useState("");
   const [newIssueGroupTitle, setNewIssueGroupTitle] = useState("");
+
+  const newIssueButtonRef = useRef<HTMLButtonElement>(null);
 
   const newIssueTitleInputRef = useRef<HTMLInputElement>(null);
   const newIssueGroupTitleInputRef = useRef<HTMLInputElement>(null);
@@ -160,8 +164,148 @@ export default function List({
     return () => body.removeEventListener("click", onClick);
   }, [issueGroupIdBeingUpdated, setIssueGroupIdBeingUpdated]);
 
+  const draggableIndicator = useRef<HTMLDivElement>(null);
+  const clonedDraggableIndicator = useRef<any>(null);
+
+  useEffect(() => {
+    if (loggedInUserRole === "espectator") return;
+    const issues = document.querySelectorAll(
+      `.${styles.issueWrapper}:not(${styles.issueWrapperPlaceholder})`
+    );
+    const dropzones = document.querySelectorAll(`.${styles.issues}`);
+
+    issues.forEach((issue) => {
+      issue.addEventListener("dragstart", onDragStart);
+      issue.addEventListener("dragend", onDragEnd);
+    });
+
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+    function onDragStart(e: any) {
+      dropzones.forEach((dropzone) =>
+        dropzone.classList.add(styles.dropzoneHighlight)
+      );
+
+      if (e.target.classList) {
+        e.target.classList.add(styles.issueIsBeingDragged);
+      }
+
+      e.dataTransfer.setData("issueId", e.target.dataset.issueId);
+    }
+
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+    function onDragEnd(e: any) {
+      if (e.target.classList) {
+        e.target.classList.remove(styles.issueIsBeingDragged);
+      }
+    }
+
+    dropzones.forEach((dropzone) => {
+      dropzone.addEventListener("dragenter", onDragEnter);
+      dropzone.addEventListener("dragover", onDragOver);
+      dropzone.addEventListener("dragleave", onDragLeave);
+      dropzone.addEventListener("drop", onDragDrop);
+    });
+
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+    function onDragEnter(e: any) {
+      e.preventDefault();
+    }
+
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+    function onDragOver(e: any) {
+      e.preventDefault();
+
+      if (e.target.classList) {
+        e.currentTarget.classList.add(styles.dropzoneDragOver);
+      }
+
+      const elems = [
+        ...e.currentTarget.querySelectorAll(
+          `.${styles.issueWrapper}:not(.${styles.issueIsBeingDragged})`
+        ),
+      ];
+      const elemsInBetween = getDraggableElementsInBetween(elems, e.clientY);
+
+      const draggable = document.querySelector(
+        `.${styles.issueIsBeingDragged}`
+      );
+      const indicator = document.querySelector(`.${styles.draggableIndicator}`);
+
+      if (!clonedDraggableIndicator.current) {
+        clonedDraggableIndicator.current = draggableIndicator.current;
+        return;
+      }
+
+      const containerChildren = e.currentTarget.children;
+      const lastButOneChildren =
+        containerChildren[containerChildren.length - 2];
+      if (!elemsInBetween.next && lastButOneChildren !== draggable) {
+        indicator?.classList.remove(styles.displayNone);
+        e.currentTarget.insertBefore(
+          clonedDraggableIndicator.current,
+          e.currentTarget.lastChild
+        );
+      } else if (
+        elemsInBetween.next &&
+        draggable?.nextSibling !== elemsInBetween.next
+      ) {
+        indicator?.classList.remove(styles.displayNone);
+        e.currentTarget.insertBefore(
+          clonedDraggableIndicator.current,
+          elemsInBetween.next
+        );
+      } else {
+        indicator?.classList.add(styles.displayNone);
+      }
+    }
+
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+    function onDragLeave(e: any) {
+      if (e.target.classList) {
+        e.currentTarget.classList.remove(styles.dropzoneDragOver);
+      }
+    }
+
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+    async function onDragDrop(e: any) {
+      e.stopImmediatePropagation();
+
+      if (e.target.classList) {
+        e.currentTarget.classList.remove(styles.dropzoneDragOver);
+      }
+
+      const elems = [
+        ...e.currentTarget.querySelectorAll(
+          `.${styles.issueWrapper}:not(.${styles.issueIsBeingDragged})`
+        ),
+      ];
+      const elemsInBetween = getDraggableElementsInBetween(elems, e.clientY);
+
+      const issueId = e.dataTransfer.getData("issueId");
+      let orderBefore: string | undefined;
+      let orderAfter: string | undefined;
+
+      if (elemsInBetween.prev) {
+        orderBefore = elemsInBetween.prev.dataset.order;
+      }
+      if (elemsInBetween.next) {
+        orderAfter = elemsInBetween.next.dataset.order;
+      }
+
+      const indicator = document.querySelector(`.${styles.draggableIndicator}`);
+      indicator?.classList.add(styles.displayNone);
+
+      await moveIssue({
+        issueId,
+        moveToIssueGroupId: e.currentTarget.dataset.issueGroupId,
+        orderBefore,
+        orderAfter,
+      });
+    }
+  }, [loggedInUserRole, moveIssue, project]);
+
   return (
-    <>
+    <div id={styles.container}>
       <div id={styles.infoHeadContainer}>
         <div>
           <FiAlignLeft color="#999999" size={20} />
@@ -225,9 +369,18 @@ export default function List({
           </div>
 
           {!isSectionCollapsed(issueGroup.issueGroupId) && (
-            <div className={styles.issues}>
+            <div
+              className={styles.issues}
+              data-issue-group-id={issueGroup.issueGroupId}
+            >
               {issueGroup.issues.map((issue) => (
-                <div className={styles.issueWrapper} key={issue.issueId}>
+                <div
+                  className={styles.issueWrapper}
+                  key={issue.issueId}
+                  data-issue-id={issue.issueId}
+                  data-order={issue.order}
+                  draggable
+                >
                   {loggedInUserRole !== "espectator" && (
                     <button
                       type="button"
@@ -286,6 +439,7 @@ export default function List({
                 <>
                   {loggedInUserRole !== "espectator" && (
                     <button
+                      ref={newIssueButtonRef}
                       type="button"
                       className={styles.newIssueButton}
                       onClick={() =>
@@ -352,6 +506,11 @@ export default function List({
         closeModal={() => setIssueBeingUpdated(null)}
         readonly={loggedInUserRole === "espectator"}
       />
-    </>
+
+      <div
+        ref={draggableIndicator}
+        className={`${styles.draggableIndicator} ${styles.displayNone}`}
+      />
+    </div>
   );
 }
