@@ -1,4 +1,5 @@
 import { AxiosInstance } from "axios";
+import moment from "moment";
 import { AxiosLanguage } from "../languages/types/libs";
 import {
   GetIssuesOverviewServiceResponse,
@@ -22,7 +23,10 @@ export default class GetIssuesOverviewService
     APIResponse<GetIssuesOverviewServiceResponse>
   > {
     try {
-      const response = await this.axiosInstance.get("/issues/overview");
+      const date = moment().format("YYYY-MM-DD");
+      const response = await this.axiosInstance.get(
+        `/issues/overview?date=${date}`
+      );
 
       /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
       return { data: response.data as any, error: false };
