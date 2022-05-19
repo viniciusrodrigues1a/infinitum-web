@@ -7,6 +7,7 @@ import Sidebar from "../../components/Sidebar";
 import DrawerMenu from "../../components/DrawerMenu";
 import { useSidebar } from "../../contexts/SidebarContext";
 import RoutesEnum from "../../routes/type-defs/RoutesEnum";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 type AuthenticatedLayoutProps = {
   children: React.ReactNode;
@@ -17,6 +18,11 @@ export default function AuthenticatedLayout({
 }: AuthenticatedLayoutProps): React.ReactElement {
   const history = useHistory();
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
+  const {
+    language: {
+      components: { sidebar: sidebarLanguage },
+    },
+  } = useLanguage();
 
   return (
     <>
@@ -43,7 +49,7 @@ export default function AuthenticatedLayout({
                 history.push(RoutesEnum.DASHBOARD);
               }}
             >
-              Início
+              {sidebarLanguage.homeItemName}
             </button>
             <button
               type="button"
@@ -53,7 +59,7 @@ export default function AuthenticatedLayout({
                 history.push(RoutesEnum.PROJECTS);
               }}
             >
-              Projetos
+              {sidebarLanguage.projectsItemName}
             </button>
           </div>
         </DrawerMenu.Item>

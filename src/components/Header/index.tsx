@@ -197,7 +197,7 @@ export default function Header({
                         <FiBell color="#909090" size={76} />
                         <div className={styles.notificationsEmptyIconLine} />
                       </div>
-                      <span>Oops. There are no notifications here.</span>
+                      <span>{headerLanguage.noNotificationsText}</span>
                     </div>
                   )}
 

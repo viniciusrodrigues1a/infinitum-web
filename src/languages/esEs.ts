@@ -224,6 +224,7 @@ export const esEs: Language = {
     header: {
       logoutText: "Cerrar sesión",
       myProfileText: "Mi perfil",
+      noNotificationsText: "Ups. No hay notificaciones aquí.",
     },
     sidebar: {
       homeItemName: "Inicio",

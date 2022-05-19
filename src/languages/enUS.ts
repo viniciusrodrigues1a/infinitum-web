@@ -217,6 +217,7 @@ export const enUS: Language = {
     header: {
       logoutText: "Logout",
       myProfileText: "My profile",
+      noNotificationsText: "Oops. There are no notifications here.",
     },
     sidebar: {
       homeItemName: "Home",

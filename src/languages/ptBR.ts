@@ -219,6 +219,7 @@ export const ptBR: Language = {
     header: {
       logoutText: "Encerrar sessão",
       myProfileText: "Meu perfil",
+      noNotificationsText: "Opa. Não há notificações aqui.",
     },
     sidebar: {
       homeItemName: "Início",
