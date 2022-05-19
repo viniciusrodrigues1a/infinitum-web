@@ -130,6 +130,15 @@ $issueFieldWidth: 50%;
   }
 }
 
+.issueWrapper.issueIsBeingDragged {
+  background-color: #e8e8e8;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+
+  .issue:hover {
+    background-color: transparent;
+  }
+}
+
 .newIssueButton,
 .newSectionButton {
   border: none;
