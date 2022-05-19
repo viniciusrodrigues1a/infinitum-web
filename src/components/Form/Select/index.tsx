@@ -42,7 +42,9 @@ export default function Select({
         )}
 
         {options.map((o) => (
-          <option value={o.value}>{o.text}</option>
+          <option key={String(o.value)} value={o.value}>
+            {o.text}
+          </option>
         ))}
       </select>
     </>

@@ -188,7 +188,7 @@ export default function Dashboard(): React.ReactElement {
                   {overview.issuesForToday.issues.map((issue, index) => {
                     if (index > 1) return null;
                     return (
-                      <div className={styles.cardTicket}>
+                      <div className={styles.cardTicket} key={issue.issueId}>
                         <div className={styles.cardTicketInfo}>
                           <FiAlignLeft color="var(--dark)" size={14} />
                           <strong>{issue.title}</strong>
@@ -246,7 +246,7 @@ export default function Dashboard(): React.ReactElement {
                   {overview.expiredIssues.issues.map((issue, index) => {
                     if (index > 1) return null;
                     return (
-                      <div className={styles.cardTicket}>
+                      <div className={styles.cardTicket} key={issue.issueId}>
                         <div className={styles.cardTicketInfo}>
                           <FiAlignLeft color="var(--dark)" size={14} />
                           <strong>{issue.title}</strong>
