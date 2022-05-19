@@ -6,6 +6,7 @@ export type Issue = {
   createdAt: string | null;
   completed: boolean;
   assignedToEmail: string;
+  assignedToParticipant: Participant | undefined;
   order: string;
 };
 

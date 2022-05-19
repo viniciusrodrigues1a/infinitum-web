@@ -4,6 +4,7 @@ import { FiPlusCircle, FiCheckCircle } from "react-icons/fi";
 import styles from "./Kanban.module.scss";
 
 import UpdateIssueModal from "../../../../../components/UpdateIssueModal";
+import AccountAvatar from "../../../../../components/AccountAvatar";
 
 import IssueGroupOptions from "../IssueGroupOptions";
 
@@ -324,6 +325,16 @@ export default function Kanban({
                     >
                       <div className={styles.issueCard}>
                         <strong>{issue.title}</strong>
+
+                        {issue.assignedToParticipant && (
+                          <div style={{ marginTop: "1.5rem" }}>
+                            <AccountAvatar
+                              size="2.75rem"
+                              name={issue.assignedToParticipant.account.name}
+                              image={issue.assignedToParticipant.account.image}
+                            />
+                          </div>
+                        )}
 
                         {loggedInUserRole !== "espectator" && (
                           <FiCheckCircle

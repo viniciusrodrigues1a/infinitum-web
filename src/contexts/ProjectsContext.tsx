@@ -96,6 +96,9 @@ export function ProjectsProvider({
             ...i,
             createdAtFullDate: getFormattedDate(i.createdAt),
             expiresAtFullDate: getFormattedDate(i.expiresAt),
+            assignedToParticipant: p.participants.find(
+              (e) => e.account.email === i.assignedToEmail
+            ),
           })),
         })),
       })),

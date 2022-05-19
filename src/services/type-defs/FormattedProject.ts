@@ -1,6 +1,7 @@
-import { Issue, IssueGroup, Project } from "./Project";
+import { Issue, IssueGroup, Participant, Project } from "./Project";
 
 export type FormattedIssue = Issue & {
+  assignedToParticipant: Participant | undefined;
   createdAtFullDate: string;
   expiresAtFullDate: string;
   order: string;
