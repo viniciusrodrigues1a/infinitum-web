@@ -97,6 +97,9 @@ export default function ManageParticipantsModal({
     if (response.error && toastMsg) {
       showToast(toastMsg, response.error);
     }
+    if (!response.error) {
+      await fetchProjects();
+    }
   }
 
   return (
