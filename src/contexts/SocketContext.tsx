@@ -25,17 +25,23 @@ export default function SocketProvider({
 }: SocketProviderProps): React.ReactElement {
   const { isSignedIn, session } = useSession();
   const [isReady, setIsReady] = useState<boolean>(false);
-  const { current: socket } = useRef<Socket>(io("http://localhost:3333"));
+  const socketRef = useRef<Socket | null>(null);
 
   useEffect(() => {
+    if (socketRef.current) return;
+
     if (isSignedIn()) {
-      socket.emit("newUser", session!.email);
+      socketRef.current = io("http://localhost:3333", {
+        extraHeaders: { email: session!.email },
+      });
       setIsReady(true);
     }
-  }, [session, isSignedIn, socket]);
+  }, [session, isSignedIn]);
 
   return (
-    <SocketContext.Provider value={{ socket, isSocketReady: isReady }}>
+    <SocketContext.Provider
+      value={{ socket: socketRef.current as Socket, isSocketReady: isReady }}
+    >
       {children}
     </SocketContext.Provider>
   );
