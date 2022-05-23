@@ -27,3 +27,4 @@ export * from "./IFindOneNotificationSettingsService";
 export * from "./IAssignIssueToAccountService";
 export * from "./IRevokeInvitationService";
 export * from "./IListParticipantsInvitedToProjectService";
+export * from "./IRefreshTokenService";

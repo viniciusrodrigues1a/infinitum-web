@@ -1,13 +1,12 @@
 import { AxiosInstance } from "axios";
 import { AxiosLanguage } from "../languages/types/libs";
 import {
-  ILoginService,
-  LoginServiceRequest,
-  LoginServiceResponse,
+  IRefreshTokenService,
+  RefreshTokenServiceResponse,
 } from "./interfaces";
 import { APIResponse } from "./type-defs/APIResponse";
 
-export default class LoginService implements ILoginService {
+export default class RefreshTokenService implements IRefreshTokenService {
   private readonly axiosInstance: AxiosInstance;
 
   private readonly language: AxiosLanguage;
@@ -17,27 +16,25 @@ export default class LoginService implements ILoginService {
     this.language = language;
   }
 
-  async login({
-    email,
-    password,
-  }: LoginServiceRequest): Promise<APIResponse<LoginServiceResponse>> {
+  async refresh(
+    token: string
+  ): Promise<APIResponse<RefreshTokenServiceResponse>> {
     try {
-      const body = { email, password };
-      const response = await this.axiosInstance.post("/auth/login", body);
+      const response = await this.axiosInstance.post("/auth/refresh", {
+        token,
+      });
 
       /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
       const { data } = response as any;
 
       return {
-        data: { token: data.accessToken, refreshToken: data.refreshToken },
+        data: {
+          accessToken: data.accessToken,
+          refreshToken: data.refreshToken,
+        },
         error: false,
       };
     } catch (err) {
-      if (err.response) {
-        const userFriendlyMessage = err.response.data.error.message;
-        return { data: null, error: true, userFriendlyMessage };
-      }
-
       return {
         data: null,
         error: true,

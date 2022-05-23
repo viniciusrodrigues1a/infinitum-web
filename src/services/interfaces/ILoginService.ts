@@ -7,6 +7,7 @@ export type LoginServiceRequest = {
 
 export type LoginServiceResponse = {
   token: string;
+  refreshToken: string;
 };
 
 export interface ILoginService {

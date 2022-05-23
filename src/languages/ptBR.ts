@@ -5,6 +5,7 @@ export const ptBR: Language = {
   libs: {
     axios: {
       unexpectedErrorMessage: "Algo deu errado",
+      sessionExpired: "Sessão expirada",
     },
   },
   pages: {

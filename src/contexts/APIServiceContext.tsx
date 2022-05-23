@@ -37,6 +37,7 @@ import {
   IMarkAllNotificationsAsReadService,
   IMarkNotificationAsReadService,
   IMoveIssueService,
+  IRefreshTokenService,
   IRegisterService,
   IRevokeInvitationService,
   IUpdateAccountService,
@@ -61,6 +62,7 @@ import LoginService from "../services/LoginService";
 import MarkAllNotificationsAsReadService from "../services/MarkAllNotificationsAsReadService";
 import MarkNotificationAsReadService from "../services/MarkNotificationAsReadService";
 import MoveIssueService from "../services/MoveIssueService";
+import RefreshTokenService from "../services/RefreshTokenService";
 import RegisterService from "../services/RegisterService";
 import RevokeInvitationService from "../services/RevokeInvitationService";
 import UpdateAccountService from "../services/UpdateAccountService";
@@ -109,6 +111,7 @@ type APIServiceContextData = {
   revokeInvitationService: IRevokeInvitationService;
   listParticipantsInvitedToProjectService: IListParticipantsInvitedToProjectService;
   deleteIssueGroupService: IDeleteIssueGroupService;
+  refreshTokenService: IRefreshTokenService;
 };
 
 type APIServiceProviderProps = {
@@ -178,6 +181,7 @@ export const APIServiceProvider = ({
       listParticipantsInvitedToProjectService:
         new ListParticipantsInvitedToProjectService(api, lang),
       deleteIssueGroupService: new DeleteIssueGroupService(api, lang),
+      refreshTokenService: new RefreshTokenService(api, lang),
     } as Omit<APIServiceContextData, "isReadyForAuthRequests">;
   }, [language]);
 
@@ -205,7 +209,7 @@ export const APIServiceProvider = ({
           });
 
         if (isJWTValid) {
-          loadSession();
+          await loadSession();
         }
 
         setReady();

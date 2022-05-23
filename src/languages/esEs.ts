@@ -5,6 +5,7 @@ export const esEs: Language = {
   libs: {
     axios: {
       unexpectedErrorMessage: "Algo salió mal",
+      sessionExpired: "Sesión expirada",
     },
   },
   pages: {

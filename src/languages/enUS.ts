@@ -5,6 +5,7 @@ export const enUS: Language = {
   libs: {
     axios: {
       unexpectedErrorMessage: "Something went wrong",
+      sessionExpired: "Session expired",
     },
   },
   pages: {
