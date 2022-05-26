@@ -324,7 +324,7 @@ export default function Kanban({
                       draggable
                     >
                       <div className={styles.issueCard}>
-                        <strong>{issue.title}</strong>
+                        <span>{issue.title}</span>
 
                         {issue.assignedToParticipant && (
                           <div style={{ marginTop: "1.5rem" }}>
