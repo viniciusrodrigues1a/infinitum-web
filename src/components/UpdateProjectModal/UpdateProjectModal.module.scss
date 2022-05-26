@@ -40,11 +40,15 @@
 #deleteButton {
   background: none;
   background-color: #dedede;
-  padding: 1.15rem;
   border: none;
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.2s;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #deleteButton:hover {
