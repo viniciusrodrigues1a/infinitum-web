@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useContext } from "react";
-import { format } from "date-fns";
+import { addMinutes, format } from "date-fns";
 import { ptBR, enUS, es } from "date-fns/locale";
 import { useLanguage } from "./LanguageContext";
 
@@ -27,10 +27,12 @@ export const DateFormatterProvider = ({
   const { isoCode } = useLanguage();
 
   const formatToFullDate = useCallback(
-    (date: string | Date) =>
-      format(new Date(date), "MMM d, y", {
+    (date: string | Date) => {
+      const d = new Date(date);
+      return format(addMinutes(d, d.getTimezoneOffset()), "MMM d, y", {
         locale: locales[isoCode as keyof typeof locales] || ptBR,
-      }),
+      });
+    },
     [isoCode]
   );
 
