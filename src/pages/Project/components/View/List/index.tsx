@@ -28,6 +28,11 @@ type ListProps = {
   loggedInUserRole: ParticipantRoleValue;
 };
 
+type IndicatorState = {
+  position: "before" | "after";
+  issueID: string;
+} | null;
+
 export default function List({
   project,
   loggedInUserRole,
@@ -57,6 +62,7 @@ export default function List({
   const [collapsedSections, setCollapsedSections] = useState<Array<string>>([]);
   const [newIssueTitle, setNewIssueTitle] = useState("");
   const [newIssueGroupTitle, setNewIssueGroupTitle] = useState("");
+  const [showIndicator, setShowIndicator] = useState<IndicatorState>(null);
 
   const newIssueButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -164,15 +170,12 @@ export default function List({
     return () => body.removeEventListener("click", onClick);
   }, [issueGroupIdBeingUpdated, setIssueGroupIdBeingUpdated]);
 
-  const draggableIndicator = useRef<HTMLDivElement>(null);
-  const clonedDraggableIndicator = useRef<any>(null);
-
   useEffect(() => {
     if (loggedInUserRole === "espectator") return;
     const issues = document.querySelectorAll(
       `.${styles.issueWrapper}:not(${styles.issueWrapperPlaceholder})`
     );
-    const dropzones = document.querySelectorAll(`.${styles.issues}`);
+    const dropzones = document.querySelectorAll(`.${styles.issuesSection}`);
 
     issues.forEach((issue) => {
       issue.addEventListener("dragstart", onDragStart);
@@ -228,39 +231,41 @@ export default function List({
 
       const draggable = document.querySelector(
         `.${styles.issueIsBeingDragged}`
-      );
-      const indicator = document.querySelector(`.${styles.draggableIndicator}`);
+      ) as HTMLElement;
 
-      if (!clonedDraggableIndicator.current) {
-        clonedDraggableIndicator.current = draggableIndicator.current;
-        return;
-      }
+      if (!draggable) return;
 
-      const containerChildren = e.currentTarget.children;
+      const issuesElem = e.currentTarget.querySelector(`.${styles.issues}`);
       const lastButOneChildren =
-        containerChildren[containerChildren.length - 2];
-      if (!elemsInBetween.next && lastButOneChildren !== draggable) {
-        indicator?.classList.remove(styles.displayNone);
-        e.currentTarget.insertBefore(
-          clonedDraggableIndicator.current,
-          e.currentTarget.lastChild
-        );
-      } else if (
-        elemsInBetween.next &&
-        draggable?.nextSibling !== elemsInBetween.next
-      ) {
-        indicator?.classList.remove(styles.displayNone);
-        e.currentTarget.insertBefore(
-          clonedDraggableIndicator.current,
-          elemsInBetween.next
-        );
+        issuesElem.children[issuesElem.children.length - 2];
+
+      const { next, prev } = elemsInBetween;
+
+      console.log(next, prev);
+      if (!prev && next && issuesElem.firstChild !== draggable) {
+        setShowIndicator({
+          issueID: next.dataset.issueId as string,
+          position: "before",
+        });
+      } else if (!next && prev && lastButOneChildren !== draggable) {
+        setShowIndicator({
+          issueID: prev.dataset.issueId as string,
+          position: "after",
+        });
+      } else if (next && prev && draggable.nextSibling !== next) {
+        setShowIndicator({
+          issueID: next.dataset.issueId as string,
+          position: "before",
+        });
       } else {
-        indicator?.classList.add(styles.displayNone);
+        setShowIndicator(null);
       }
     }
 
     /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     function onDragLeave(e: any) {
+      setShowIndicator(null);
+
       if (e.target.classList) {
         e.currentTarget.classList.remove(styles.dropzoneDragOver);
       }
@@ -292,8 +297,7 @@ export default function List({
         orderAfter = elemsInBetween.next.dataset.order;
       }
 
-      const indicator = document.querySelector(`.${styles.draggableIndicator}`);
-      indicator?.classList.add(styles.displayNone);
+      setShowIndicator(null);
 
       await moveIssue({
         issueId,
@@ -303,6 +307,20 @@ export default function List({
       });
     }
   }, [loggedInUserRole, moveIssue, project]);
+
+  const addIndicatorClassName = useCallback(
+    (issueID: string) => {
+      if (!showIndicator) return "";
+
+      if (showIndicator.issueID === issueID) {
+        if (showIndicator.position === "before") return styles.indicatorBefore;
+        if (showIndicator.position === "after") return styles.indicatorAfter;
+      }
+
+      return "";
+    },
+    [showIndicator]
+  );
 
   return (
     <div id={styles.container}>
@@ -318,7 +336,11 @@ export default function List({
       </div>
 
       {project.issueGroups.map((issueGroup: FormattedIssueGroup, index) => (
-        <div key={issueGroup.issueGroupId} className={styles.issuesSection}>
+        <div
+          key={issueGroup.issueGroupId}
+          className={styles.issuesSection}
+          data-issue-group-id={issueGroup.issueGroupId}
+        >
           <div className={styles.issuesSectionHeader}>
             <div className={styles.issueSectionHeaderTitle}>
               <button
@@ -369,14 +391,13 @@ export default function List({
           </div>
 
           {!isSectionCollapsed(issueGroup.issueGroupId) && (
-            <div
-              className={styles.issues}
-              data-issue-group-id={issueGroup.issueGroupId}
-            >
+            <div className={styles.issues}>
               {issueGroup.issues.map((issue) => (
                 <div
-                  className={styles.issueWrapper}
                   key={issue.issueId}
+                  className={`${styles.issueWrapper} ${addIndicatorClassName(
+                    issue.issueId
+                  )}`}
                   data-issue-id={issue.issueId}
                   data-order={issue.order}
                   draggable
@@ -505,11 +526,6 @@ export default function List({
         participants={project.participants}
         closeModal={() => setIssueBeingUpdated(null)}
         readonly={loggedInUserRole === "espectator"}
-      />
-
-      <div
-        ref={draggableIndicator}
-        className={`${styles.draggableIndicator} ${styles.displayNone}`}
       />
     </div>
   );
