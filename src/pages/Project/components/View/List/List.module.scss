@@ -84,12 +84,16 @@ $issueFieldWidth: 50%;
 
     > button {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       background: none;
       border: none;
       margin-right: 0.75rem;
       cursor: pointer;
+
+      @media (min-width: 43.75rem) {
+        justify-content: center;
+      }
 
       &:hover {
         .checkCircleIcon {
@@ -120,10 +124,21 @@ $issueFieldWidth: 50%;
     }
 
     span {
-      width: $issueFieldWidth;
       font-family: var(--text);
       font-size: 1.125rem;
       font-weight: normal;
+
+      @media (min-width: 43.75rem) {
+        width: $issueFieldWidth;
+      }
+    }
+
+    span:nth-child(2) {
+      display: none;
+
+      @media (min-width: 43.75rem) {
+        display: inline;
+      }
     }
   }
 
