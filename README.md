@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">
-  :rocket: Infinitum
+  Infinitum
 
 </h1>
 
