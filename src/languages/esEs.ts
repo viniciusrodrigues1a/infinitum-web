@@ -222,6 +222,10 @@ export const esEs: Language = {
     },
   },
   components: {
+    invitationNotification: {
+      acceptText: "Aceptar",
+      denyText: "Negar",
+    },
     header: {
       logoutText: "Cerrar sesión",
       myProfileText: "Mi perfil",

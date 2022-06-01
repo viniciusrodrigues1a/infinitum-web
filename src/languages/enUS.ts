@@ -215,6 +215,10 @@ export const enUS: Language = {
     },
   },
   components: {
+    invitationNotification: {
+      denyText: "Deny",
+      acceptText: "Accept",
+    },
     header: {
       logoutText: "Logout",
       myProfileText: "My profile",

@@ -217,6 +217,10 @@ export const ptBR: Language = {
     },
   },
   components: {
+    invitationNotification: {
+      denyText: "Recusar",
+      acceptText: "Aceitar",
+    },
     header: {
       logoutText: "Encerrar sessão",
       myProfileText: "Meu perfil",

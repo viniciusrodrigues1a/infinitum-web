@@ -6,6 +6,7 @@ import styles from "./Notification.module.scss";
 import { NotificationType } from "../../contexts/NotificationsContext";
 import { useAPIService } from "../../contexts/APIServiceContext";
 import { useDateFormatter } from "../../contexts/DateFormatterContext";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 type NotificationProps = {
   notification: NotificationType;
@@ -54,6 +55,11 @@ function BaseNotification({
 function InvitationNotification({
   notification,
 }: NotificationProps): React.ReactElement {
+  const {
+    language: {
+      components: { invitationNotification: i18n },
+    },
+  } = useLanguage();
   const [redirectTo, setRedirectTo] = useState<string | null>(null);
 
   const { markNotificationAsReadService } = useAPIService();
@@ -80,14 +86,14 @@ function InvitationNotification({
             className={styles.declineButton}
             onClick={handleOnClick(notification.metadata.declineInvitationLink)}
           >
-            Recusar
+            {i18n.denyText}
           </button>
           <button
             type="button"
             className={styles.acceptButton}
             onClick={handleOnClick(notification.metadata.acceptInvitationLink)}
           >
-            Aceitar
+            {i18n.acceptText}
           </button>
         </div>
       )}
