@@ -124,6 +124,8 @@ export default function UpdateIssueModal({
   }
 
   async function assignIssueToAccount() {
+    if (issue.assignedToEmail === assignedToEmail) return;
+
     const response = await assignIssueToAccountService.assignIssueToAccount({
       issueId: issue.issueId,
       assignedToEmail: assignedToEmail || null,
