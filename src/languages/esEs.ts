@@ -222,9 +222,41 @@ export const esEs: Language = {
     },
   },
   components: {
-    invitationNotification: {
-      acceptText: "Aceptar",
-      denyText: "Negar",
+    notification: {
+      invitation: {
+        acceptText: "Aceptar",
+        denyText: "Negar",
+        message: (projectName: string) =>
+          `Has sido invitado a participar en el proyecto: ${projectName}`,
+      },
+      kicked: {
+        message: (projectName: string) =>
+          `Has sido eliminado del proyecto ${projectName} y ya no podrás acceder a él en la plataforma.`,
+      },
+      kickedAdmin: {
+        message: (projectName: string, emailKicked: string) =>
+          `El participante ${emailKicked} ha sido expulsado del proyecto ${projectName}, del que eres gestor.`,
+      },
+      roleUpdated: {
+        message: (projectName: string, roleName: string) =>
+          `Su rol en el proyecto ${projectName} ha sido actualizado a ${roleName}`,
+      },
+      roleUpdatedAdmin: {
+        message: (
+          projectName: string,
+          roleName: string,
+          emailWhoseRoleHasBeenUpdated: string
+        ) =>
+          `Se ha cambiado la función del participante ${emailWhoseRoleHasBeenUpdated} a ${roleName}, en el proyecto ${projectName}, del cual usted es administrador.`,
+      },
+      projectDeleted: {
+        message: (projectName: string) =>
+          `El proyecto ${projectName}, en el que participó, se eliminó.`,
+      },
+      issueAssigned: {
+        message: (issueTitle: string) =>
+          `El proyecto ${issueTitle}, en el que participó, se eliminó.`,
+      },
     },
     header: {
       logoutText: "Cerrar sesión",

@@ -12,7 +12,6 @@ import { useSocket } from "./SocketContext";
 
 export type NotificationType = {
   _id: string;
-  message: string;
   type: string;
   read: boolean;
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */

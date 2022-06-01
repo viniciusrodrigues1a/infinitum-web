@@ -217,9 +217,41 @@ export const ptBR: Language = {
     },
   },
   components: {
-    invitationNotification: {
-      denyText: "Recusar",
-      acceptText: "Aceitar",
+    notification: {
+      invitation: {
+        denyText: "Recusar",
+        acceptText: "Aceitar",
+        message: (projectName: string) =>
+          `Você foi convidado a participar do projeto: ${projectName}`,
+      },
+      kicked: {
+        message: (projectName: string) =>
+          `Você foi removido do projeto ${projectName} e portanto não pode mais acessá-lo na plataforma.`,
+      },
+      kickedAdmin: {
+        message: (projectName: string, emailKicked: string) =>
+          `O usuário ${emailKicked} foi expulso do projeto ${projectName}.`,
+      },
+      roleUpdated: {
+        message: (projectName: string, roleName: string) =>
+          `Sua função no projeto ${projectName} foi atualizada para ${roleName}`,
+      },
+      roleUpdatedAdmin: {
+        message: (
+          projectName: string,
+          roleName: string,
+          emailWhoseRoleHasBeenUpdated: string
+        ) =>
+          `O usuário ${emailWhoseRoleHasBeenUpdated} teve sua função alterada para ${roleName} no projeto ${projectName}, do qual você gerencia.`,
+      },
+      projectDeleted: {
+        message: (projectName: string) =>
+          `O projeto ${projectName}, do qual você fazia parte, foi deletado.`,
+      },
+      issueAssigned: {
+        message: (issueTitle: string) =>
+          `O ticket ${issueTitle} foi atribuído a você`,
+      },
     },
     header: {
       logoutText: "Encerrar sessão",

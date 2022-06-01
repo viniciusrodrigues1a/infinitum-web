@@ -215,9 +215,41 @@ export const enUS: Language = {
     },
   },
   components: {
-    invitationNotification: {
-      denyText: "Deny",
-      acceptText: "Accept",
+    notification: {
+      invitation: {
+        denyText: "Deny",
+        acceptText: "Accept",
+        message: (projectName: string) =>
+          `You have been invited to participate in the project: ${projectName}`,
+      },
+      kicked: {
+        message: (projectName: string) =>
+          `You have been removed from the project ${projectName} and won't be able to access it on the platform anymore.`,
+      },
+      kickedAdmin: {
+        message: (projectName: string, emailKicked: string) =>
+          `The participant ${emailKicked} has been kicked out of the project ${projectName}, of which you're a manager.`,
+      },
+      roleUpdated: {
+        message: (projectName: string, roleName: string) =>
+          `Your role in project ${projectName} has been updated to ${roleName}`,
+      },
+      roleUpdatedAdmin: {
+        message: (
+          projectName: string,
+          roleName: string,
+          emailWhoseRoleHasBeenUpdated: string
+        ) =>
+          `The participant ${emailWhoseRoleHasBeenUpdated} has had their role changed to ${roleName}, in the project ${projectName}, of which you're a manager.`,
+      },
+      projectDeleted: {
+        message: (projectName: string) =>
+          `The project ${projectName}, that you were a participant in, has been deleted.`,
+      },
+      issueAssigned: {
+        message: (issueTitle: string) =>
+          `You have been assigned the issue ${issueTitle}`,
+      },
     },
     header: {
       logoutText: "Logout",
