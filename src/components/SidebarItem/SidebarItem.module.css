@@ -160,6 +160,7 @@
   .sidebarActiveItemOverlaySvgWrapper {
     width: 12.6rem;
     height: 14rem;
+    top: -34px;
     right: -14.125rem;
   }
 
